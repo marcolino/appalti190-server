@@ -1,9 +1,10 @@
 SERVICE:
  - refresh token
- - i18n
+ - i18n (?)
  - whitelisting domain
  - roles
  - backoffice (revokeToken, ...)
+ - add a check environment expected vars are set (in production, but also dev)
 
 CLIENT:
  - autodetect auth expired

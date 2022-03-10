@@ -1,3 +1,4 @@
+// TODO: put in config.js
 const cloudinary = require("cloudinary").v2;
 
 cloudinary.config({

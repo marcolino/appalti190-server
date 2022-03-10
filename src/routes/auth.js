@@ -1,16 +1,15 @@
 const express = require("express");
-const {check} = require("express-validator");
+const { oneOf, check } = require("express-validator");
 const passport = require("passport");
-//const url = require("url");
 const Auth = require("../controllers/auth");
-const Password = require("../controllers/password");
+//Password = require("../controllers/password");
 const validate = require("../middlewares/validate");
+const config = require("../config");
 
 const router = express.Router();
 
 router.get("/", (req, res, next) => {
-  res.status(200).json({ message: "Welcome to the Quiccasa auth API" }); // TODO: quiccasa should be a variable
-  //next();
+  res.status(200).json({ message: `Welcome to ${config.APIname} auth API` });
 });
 
 router.post("/register", [
@@ -21,21 +20,28 @@ router.post("/register", [
 ], validate, Auth.register);
 
 // registration confirmation verification
-router.get("/verify/:token", Auth.verify);
-// token resend
-router.post("/resend", Auth.resendToken);
+router.get("/verify/:code", Auth.verify);
+
+// code resend
+router.post("/resend", Auth.resendCode);
 
 // password recover
 router.post("/recover", [
   check("email").isEmail().withMessage("Enter a valid email address"),
-], validate, Password.recover);
+],/*, validate*/ Auth.recoverPassword);
 
-router.get("/reset/:token", Password.reset);
+router.get("/reset/:code", Auth.resetPassword);
 
-router.post("/reset/:token", [
-  check("password").not().isEmpty().isLength({min: 6}).withMessage("Password must be at least 6 chars long"),
-  check("confirmPassword", "Passwords do not match").custom((value, {req}) => (value === req.body.password)),
-], validate, Password.resetPassword);
+router.post("/reset", oneOf([
+  //check("password").not().isEmpty().isLength({min: 6}).withMessage("Password must be at least 6 chars long"),
+  //check("passwordConfirmed", "Passwords do not match").custom((value, {req}) => { console.log("BODY:", req.body, value); return(value === req.body.password)}),
+  check(
+    "passwordConfirmed",
+    "Password confirmation does not match",
+  )
+  .exists()
+  .custom((value, { req }) => value === req.body.password),
+]),/*, validate*/ Auth.resetPassword);
 
 router.post("/login", (req, res, next) => {console.log("*** login"); next();}, [
   check("email").isEmail().withMessage("Enter a valid email address"),

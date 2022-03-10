@@ -12,7 +12,7 @@ const errorHandler = require("./middlewares/error-handler");
 const User = require("./models/user");
 
 
-console.log("ENV:", process.env.NODE_ENV);
+//console.log("ENV:", process.env.NODE_ENV);
 
 // use environment configuration
 if (process.env.NODE_ENV !== "production") { // load environment variables from .env file in non production environments
@@ -24,7 +24,6 @@ const connUri = (process.env.NODE_ENV !== "production") ?
   process.env.MONGO_LOCAL_CONN_URL :
   `${process.env.MONGO_SCHEME}://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@${process.env.MONGO_URL}/${process.env.MONGO_DB}`
 ;
-console.log("MongoDB connUri:", connUri);
 
 // set up port
 const port = process.env.PORT || 3000;
@@ -62,7 +61,7 @@ const whitelist = process.env.WHITELISTED_DOMAINS ?
 ;
 const corsOptions = {
   origin: (origin, callback) => {
-    console.log("/server.js - cors whitelisting:", origin);
+    if (origin) console.log("/server.js - cors whitelisting:", origin);
     if (!origin || whitelist.indexOf(origin) !== -1) {
       callback(null, true);
     } else {

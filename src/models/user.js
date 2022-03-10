@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
-const Token = require("../models/token");
+const Code = require("../models/code");
 //const { secondsUpToNextDays } = require("../utils");
 
 
@@ -62,7 +62,7 @@ const UserSchema = new mongoose.Schema({
     default: false
   },
 
-  resetPasswordToken: {
+  resetPasswordCode: {
     type: String,
     required: false
   },
@@ -137,19 +137,29 @@ UserSchema.methods.generateJWT = function() {
   return { accessToken, refreshToken };
 };
 
-UserSchema.methods.generatePasswordReset = function() {
-  this.resetPasswordToken = crypto.randomBytes(20).toString("hex");
-  this.resetPasswordExpires = Date.now() + (3600 * 1000); // expires in an hour
+UserSchema.methods.generatePasswordResetCode = function() {
+  const maxDigits = 6;
+  const expirySeconds = 60 * 60; // 1 hour
+
+  this.resetPasswordCode = generateRandomCode(maxDigits); //crypto.randomBytes(20).toString("hex");
+  this.resetPasswordExpires = Date.now() + (expirySeconds * 1000);
 };
 
-UserSchema.methods.generateVerificationToken = function() {
+UserSchema.methods.generateVerificationCode = function() {
+  const maxDigits = 6;
+
   let payload = {
     userId: this._id,
     //token: crypto.randomBytes(20).toString("hex")
-    token: Math.floor(Math.random(1000000) * 1000000),
+    code: generateRandomCode(maxDigits),
   };
 
-  return new Token(payload);
+  return new Code(payload);
 };
+
+function generateRandomCode(maxDigits) {
+  const maxValue = Math.pow(10, maxDigits);
+  return Math.floor(Math.random(maxValue) * maxValue);
+}
 
 module.exports = mongoose.model("Users", UserSchema);
