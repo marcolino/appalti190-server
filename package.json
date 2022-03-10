@@ -1,6 +1,6 @@
 {
   "name": "appalti190",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Servizio per l'assolvimento degli obblighi di pubblicazione delle informazioni all’Autorità Nazionale AntiCorruzione, ai sensi della legge n. 190/2012",
   "main": "index.js",
   "homepage": "https://appalti190.herokuapp.com/",
