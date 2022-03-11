@@ -18,6 +18,7 @@ const User = require("./models/user");
 // use environment configuration
 if (process.env.NODE_ENV !== "production") { // load environment variables from .env file in non production environments
   require('dotenv').config({ path: path.resolve(__dirname, "../.env") }) // TODO: test if we need this...
+console.log("load environment variables from .env file in non production environments", process.env.SENDGRID_API_KEY);
 }
 
 // set up database connection uri
