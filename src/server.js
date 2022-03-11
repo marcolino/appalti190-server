@@ -7,6 +7,7 @@ const cors = require("cors");
 const passport = require("passport");
 const path = require("path");
 const errorHandler = require("./middlewares/error-handler");
+const assertEnvironment = require("./helpers/environment");
 // const cookieSession = require("cookie-session");
 // const cookieParser = require("cookie-parser");
 const User = require("./models/user");
@@ -16,7 +17,7 @@ const User = require("./models/user");
 
 // use environment configuration
 if (process.env.NODE_ENV !== "production") { // load environment variables from .env file in non production environments
-  require('dotenv').config({ path: path.resolve(__dirname, "../.env") })
+  require('dotenv').config({ path: path.resolve(__dirname, "../.env") }) // TODO: test if we need this...
 }
 
 // set up database connection uri
@@ -24,6 +25,8 @@ const connUri = (process.env.NODE_ENV !== "production") ?
   process.env.MONGO_LOCAL_CONN_URL :
   `${process.env.MONGO_SCHEME}://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@${process.env.MONGO_URL}/${process.env.MONGO_DB}`
 ;
+
+assertEnvironment();
 
 // set up port
 const port = process.env.PORT || 3000;
