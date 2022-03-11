@@ -20,4 +20,4 @@ const assertEnvironment = () => {
   return true;
 }
 
-export { assertEnvironment };
+module.exports = { assertEnvironment };
