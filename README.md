@@ -1,51 +1,81 @@
-# Node.js Authentication and CRUD API
-Node.js Authentication and CRUD API with Email Verification, Image Upload and Password Reset Using JWT, Passport.js and Sendgrid.
+Server, see: https://www.bezkoder.com/jwt-refresh-token-node-js-mongodb/
+React client, see: https://github.com/bezkoder/react-refresh-token-hooks
 
-**This Branch** <br/>
-Email Verification
+# Node.js JWT Refresh Token with MongoDB example
+JWT Refresh Token Implementation with Node.js Express and MongoDB. You can know how to expire the JWT, then renew the Access Token with Refresh Token.
 
-**Other Branch** <br/>
-<a href="https://github.com/MosesEsan/mesan-nodejs-auth-crud-api/tree/auth_no_verification" target="_blank">No Email Verification</a>
+For instruction, please visit:
+> [Node.js JWT Refresh Token with MongoDB example](https://bezkoder.com/jwt-refresh-token-node-js-mongodb/)
 
-**Tutorial** <br/>
-Tutorial available <a href="https://medium.com/swlh/how-to-build-a-node-js-authentication-api-with-email-verification-image-upload-and-password-reset-95e35fd46be1" target="_blank">here</a>.
+The code in this post bases on previous article that you need to read first:
+> [Node.js + MongoDB: User Authentication & Authorization with JWT](https://bezkoder.com/node-js-mongodb-auth-jwt/)
 
-## Testing
-Use <a href="https://www.getpostman.com" target="_blank">Postman</a> to test.<br/>
+## User Registration, User Login and Authorization process.
 
-**Try accessing the user index route without token [GET]**<br/>
+The diagram shows flow of how we implement User Registration, User Login and Authorization process.
 
-https://mesannodejsapiwithverification.herokuapp.com/api/user<br/>
+![jwt-token-authentication-node-js-example-flow](jwt-token-authentication-node-js-example-flow.png)
 
-![User Index](https://github.com/MosesEsan/mesan-nodejs-auth-crud-api/blob/master/demo/UserIndex.gif "User Index")
+And this is for Refresh Token:
 
-**Register and Login** <br/>
-Create a POST request to /api/auth/register <br/>
-Create a POST request to /api/auth/login
+![jwt-refresh-token-node-js-example-flow](jwt-refresh-token-node-js-example-flow.png)
 
-**Make sure to enter a valid email address so you can receive the verification email.**<br/>
+## More Practice:
+> [Node.js, Express & MongoDb: Build a CRUD Rest Api example](https://bezkoder.com/node-express-mongodb-crud-rest-api/)
 
-https://mesannodejsapiwithverification.herokuapp.com/api/auth/register
-https://mesannodejsapiwithverification.herokuapp.com/api/auth/login
+> [Server side Pagination in Node.js with MongoDB and Mongoose](https://bezkoder.com/node-js-mongodb-pagination/)
 
-![Register And Login](https://github.com/MosesEsan/mesan-nodejs-auth-crud-api/blob/master/demo/RegisterandLogin.gif "Register And Login")
+Associations:
+> [MongoDB One-to-One relationship tutorial with Mongoose examples](https://bezkoder.com/mongoose-one-to-one-relationship-example/)
 
-![Verification Email](https://github.com/MosesEsan/mesan-nodejs-auth-crud-api/blob/master/demo/VerificationEmail.png "Verification Email")
+> [MongoDB One-to-Many Relationship tutorial with Mongoose examples](https://bezkoder.com/mongoose-one-to-many-relationship/)
 
-**Update User Info and Upload Profile Image** <br/>
-Try updating the user information and uploading a profile image using endpoint/api/user/[your_user_id] passing the token.
+> [MongoDB Many-to-Many Relationship with Mongoose examples](https://bezkoder.com/mongodb-many-to-many-mongoose/)
 
-https://mesannodejsapiwithverification.herokuapp.com/api/user/[user_id]
+Fullstack:
+> [Vue.js + Node.js + Express + MySQL example](https://bezkoder.com/vue-js-node-js-express-mysql-crud-example/)
 
-**Login and Recover Password** <br/>
-Create a POST request to /api/auth/recover to recover your password. An email will be sent to you.
+> [Vue.js + Node.js + Express + PostgreSQL example](https://bezkoder.com/vue-node-express-postgresql/)
 
-https://mesannodejsapiwithverification.herokuapp.com/api/auth/recover
+> [Vue.js + Node.js + Express + MongoDB example](https://bezkoder.com/vue-node-express-mongodb-mevn-crud/)
 
-![Password Recovery](https://github.com/MosesEsan/mesan-nodejs-auth-crud-api/blob/master/demo/PasswordRecovery.gif "Password Recovery")
+> [Angular 8 + Node.js + Express + MySQL example](https://bezkoder.com/angular-node-express-mysql/)
 
-**Reset Password and Login with new Password** <br/>
-Click the link in the email to reset your password. 
-Reset the password then attempt to login with your old password. This should fail. Login with your new password
+> [Angular 8 + Node.js + Express + PostgreSQL example](https://bezkoder.com/angular-node-express-postgresql/)
 
-![Password Reset](https://github.com/MosesEsan/mesan-nodejs-auth-crud-api/blob/master/demo/PasswordReset.gif "Password Reset")
+> [Angular 8 + Node.js + Express + MongoDB example](https://bezkoder.com/angular-mongodb-node-express/)
+
+> [Angular 10 + Node.js + Express + MySQL example](https://bezkoder.com/angular-10-node-js-express-mysql/)
+
+> [Angular 10 + Node.js + Express + PostgreSQL example](https://bezkoder.com/angular-10-node-express-postgresql/)
+
+> [Angular 10 + Node.js + Express + MongoDB example](https://bezkoder.com/angular-10-mongodb-node-express/)
+
+> [Angular 11 + Node.js Express + MySQL example](https://bezkoder.com/angular-11-node-js-express-mysql/)
+
+> [Angular 11 + Node.js + Express + PostgreSQL example](https://bezkoder.com/angular-11-node-js-express-postgresql/)
+
+> [Angular 11 + Node.js + Express + MongoDB example](https://bezkoder.com/angular-11-mongodb-node-js-express/)
+
+> [React + Node.js + Express + MySQL example](https://bezkoder.com/react-node-express-mysql/)
+
+> [React + Node.js + Express + PostgreSQL example](https://bezkoder.com/react-node-express-postgresql/)
+
+> [React + Node.js + Express + MongoDB example](https://bezkoder.com/react-node-express-mongodb-mern-stack/)
+
+Integration (run back-end & front-end on same server/port)
+> [Integrate React with Node.js Restful Services](https://bezkoder.com/integrate-react-express-same-server-port/)
+
+> [Integrate Angular with Node.js Restful Services](https://bezkoder.com/integrate-angular-10-node-js/)
+
+> [Integrate Vue with Node.js Restful Services](https://bezkoder.com/serve-vue-app-express/)
+
+## Project setup
+```
+npm install
+```
+
+### Run
+```
+node server.js
+```
