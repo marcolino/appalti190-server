@@ -2,6 +2,9 @@
   "name": "appalti190",
   "version": "2.0.2",
   "description": "Servizio per l'assolvimento degli obblighi di pubblicazione delle informazioni all’Autorità Nazionale AntiCorruzione, ai sensi della legge n. 190/2012",
+  "engines": {
+    "node": "14.x"
+  },
   "main": "server.js",
   "scripts": {
     "start-dev": "nodemon --ignore client/ -w '.' -w .env server.js",
@@ -11,7 +14,7 @@
     "pubdev": "yarn pub && heroku logs --tail",
     "deploy": "git push heroku master",
     "check-unused-dependencies": "depcheck",
-    "list-deadfiles": "npx deadfile ./server.js --dir app",
+    "list-deadfiles": "npx deadfile ./server.js --dir src",
     "refresh-client_DO_NOT_USE__CLIENT_WILL_COPY_HERE": "cp -a ../sistemi190-client/build client/"
   },
   "keywords": [
@@ -36,6 +39,7 @@
     "mongoose": "^5.12.10",
     "multer": "^1.4.4",
     "node-zip": "^1.1.1",
+    "stripe": "^8.214.0",
     "uuid": "^8.3.2",
     "xlsx": "^0.18.5",
     "xmlbuilder": "^15.1.1",

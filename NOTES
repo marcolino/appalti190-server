@@ -1,23 +1,46 @@
-V Node.js Authentication and CRUD API:
-  https://github.com/MosesEsan/mesan-nodejs-auth-crud-api
-V How to Build a Node.js Authentication API with Email Verification, Image Upload and Password Reset Using JWT, Passport.js and Sendgrid:
+Note tecniche:
+- Per deployare xsd-schema-validator su Heroku occorre aggiungere il buildpack jvm:
+    $ heroku buildpacks:add heroku/jvm
+    $ heroku buildpacks:add heroku/nodejs # (se non già presente)
+- Regex validity formula control in CIG/C.F./C.E. cells in ODS template:
+    AND(
+      ISERROR(REGEX(A3;"^[0-9]{11}$"));
+      ISERROR(REGEX(A3;"^[A-Za-z]{6}[0-9]{2}[A-Za-z]{1}[0-9]{2}[A-Za-z]{1}[0-9A-Za-z]{3}[A-Za-z]{1}$"));
+      ISERROR(REGEX(A3;"^[A-Za-z]{6}[0-9LMNPQRSTUV]{2}[A-Za-z]{1}[0-9LMNPQRSTUV]{2}[A-Za-z]{1}[0-9LMNPQRSTUV]{3}[A-Za-z]{1}$"))
+    )
+
+Note applicative:
+ - Email PEC per invio comunicazione:
+    - To: comunicazioni@pec.anticorruzione.it
+    - Oggetto PEC: "LG190/2012 - comunicazione di avvenuto adempimento - <codice fiscale SA>"
+    - Allegati: Modulo PDF per la comunicazione dell'URL di pubblicazione, compilato
+
+Riferimenti:
+ - Pagina ufficiale adempimenti: https://www.anticorruzione.it/-/adempimenti-legge-190/2012-art.-1-comma-32-7
+ - Specifiche open source PloneGov: https://github.com/PloneGov-IT/ospfe.singole_procedure/tree/master/ospfe/singole_procedure/browser/resources
+ - Modulo PDF per la comunicazione dell'URL di pubblicazione: https://www.anticorruzione.it/documents/91439/120345/Modulo+PDF+per+la+comunicazione+dell%E2%80%99URL+di+pubblicazione.pdf/a1b23f29-88c3-7eaf-7358-d8191dda08ae?t=1630577432137
+ - Url per la verifica dell'esito: https://dati.anticorruzione.it/#/l190
+ - Uptime robot: https://uptimerobot.com/dashboard.php#mainDashboard
+ - Node.js Authentication and CRUD API:
+     https://github.com/MosesEsan/mesan-nodejs-auth-crud-api
+ - How to Build a Node.js Authentication API with Email Verification, Image Upload and Password Reset Using JWT, Passport.js and Sendgrid:
   https://medium.com/swlh/how-to-build-a-node-js-authentication-api-with-email-verification-image-upload-and-password-reset-95e35fd46be1
 - Social login with passport tutorial:
-  https://gabrieleromanato.name/nodejs-social-login-in-expressjs-using-twitter-google-facebook-and-linkedin-with-passport
-V Deploying a React app with React-Router and an Express Backend:
-  https://dev.to/nburgess/creating-a-react-app-with-react-router-and-an-express-backend-33l3
+    https://gabrieleromanato.name/nodejs-social-login-in-expressjs-using-twitter-google-facebook-and-linkedin-with-passport
+- Deploying a React app with React-Router and an Express Backend:
+    https://dev.to/nburgess/creating-a-react-app-with-react-router-and-an-express-backend-33l3
 - Build and Deploy a Web Application With React and Node.js+Express
-  https://medium.com/geekculture/build-and-deploy-a-web-application-with-react-and-node-js-express-bce2c3cfec32
+    https://medium.com/geekculture/build-and-deploy-a-web-application-with-react-and-node-js-express-bce2c3cfec32
 - Deploy React and Express to Heroku:
-  https://daveceddia.com/deploy-react-express-app-heroku/
+    https://daveceddia.com/deploy-react-express-app-heroku/
 - How to deploy MongoDB on Heroku:
-  https://www.mongodb.com/developer/how-to/use-atlas-on-heroku/
+    https://www.mongodb.com/developer/how-to/use-atlas-on-heroku/
 - How to implement Google oauth in React and Node/express:
-  https://awadieudonne.com/blog/How-to-implement-Google-oauth-in-a-React-and-Nodeexpress
+    https://awadieudonne.com/blog/How-to-implement-Google-oauth-in-a-React-and-Nodeexpress
 - Refresh token with JWT authentication in Node.js:
-  https://www.izertis.com/en/-/refresh-token-with-jwt-authentication-in-node-js
+    https://www.izertis.com/en/-/refresh-token-with-jwt-authentication-in-node-js
 - Nodejs Authentication Using JWT and Refresh Token:
-  https://codeforgeek.com/refresh-token-jwt-nodejs-authentication/
+    https://codeforgeek.com/refresh-token-jwt-nodejs-authentication/
 
 - Services
  - Cloudinary; marcosolari+1@gmail.com / Las....0! (UNUSED ANYMORE)

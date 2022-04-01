@@ -1,9 +1,9 @@
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
-const db = require("./app/models");
-const { assertEnvironment } = require("./app/helpers/environment");
-const config = require("./app/config");
+const db = require("./src/models");
+const { assertEnvironment } = require("./src/helpers/environment");
+const config = require("./src/config");
 
 const app = express();
 
@@ -44,7 +44,7 @@ app.use((req, res, next) => {
     return true;
   });
   req.language = language;
-  console.log("LANGUAGE PREFERRED BY CLIENT:", req.language);
+  //console.log("LANGUAGE PREFERRED BY CLIENT:", req.language);
   next();
 })
 
@@ -55,16 +55,14 @@ app.use((req, res, next) => {
 if (process.env.NODE_ENV !== "production") { // load environment variables from .env file in non production environments
   require("dotenv").config({ path: path.resolve(__dirname, "./.env") }) // TODO: test if we need this...
 }
+assertEnvironment();
 
 // TODO...
 // // set up database connection uri
 // const connUri = (process.env.NODE_ENV !== "production") ?
 //   process.env.MONGO_LOCAL_CONN_URL :
 //   `${process.env.MONGO_SCHEME}://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@${process.env.MONGO_URL}/${process.env.MONGO_DB}`
-// ;
-
-assertEnvironment();
-
+//
 db.mongoose
   .connect(`mongodb://${config.db.HOST}:${config.db.PORT}/${config.db.DB}`, {
     useNewUrlParser: true,
@@ -78,7 +76,8 @@ db.mongoose
   .catch(err => {
     console.error(`MongoDB connection error: ${err}`);
     process.exit(-1);
-  });
+  })
+;
 
 // root route
 app.get("/", (req, res) => {
@@ -86,9 +85,10 @@ app.get("/", (req, res) => {
 });
 
 // routes
-require("./app/routes/auth.routes")(app);
-require("./app/routes/user.routes")(app);
-require("./app/routes/job.routes")(app);
+require("./src/routes/auth.routes")(app);
+require("./src/routes/user.routes")(app);
+require("./src/routes/job.routes")(app);
+require("./src/routes/payment.routes")(app);
 
 // set port and listen for requests
 const PORT = process.env.PORT || 8080;
