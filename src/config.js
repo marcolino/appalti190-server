@@ -14,6 +14,7 @@ const clientBaseUrl = `${process.env.NODE_ENV === "production" ?
 module.exports = {
   api: {
     name: "Appalti190",
+    port: 3000,
   },
   auth: {
     secret: "super-secret-banana-armadillo-666",
@@ -144,4 +145,4 @@ module.exports = {
     "AWS_ACCESS_KEY_ID",
     "AWS_SECRET_ACCESS_KEY",
   ],
-}
+};
