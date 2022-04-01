@@ -8,10 +8,11 @@ const config = require("./src/config");
 const app = express();
 
 let corsOptions = {
-  origin: [
-    "http://localhost:8082", // bezkoder react-refresh-token-hooks client app
-    "http://localhost:3000", // appalti190 client app (while developing, in production we are on same origin)
-  ],
+  // origin: [
+  //   "http://localhost:8082", // bezkoder react-refresh-token-hooks client app
+  //   "http://localhost:3000", // appalti190 client app (while developing, in production we are on same origin)
+  // ],
+  origin: config.corsDomains,
 };
 
 app.use(cors(corsOptions));
@@ -82,15 +83,24 @@ db.mongoose
 ;
 
 // root route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application" });
-});
+// app.get("/", (req, res) => {
+//   res.json({ message: `Welcome to ${config.api.name} application` });
+// });
 
 // routes
 require("./src/routes/auth.routes")(app);
 require("./src/routes/user.routes")(app);
 require("./src/routes/job.routes")(app);
 require("./src/routes/payment.routes")(app);
+
+// serve the static files from the client - "client" is a link to the frontend site
+const root = path.join(__dirname, 'client', 'build');
+app.use(express.static(root));
+
+// handles any requests that does not match the routes below (all routes handled by client)
+app.get("*", (req, res) => {
+  res.sendFile("index.html", { root });
+});
 
 // set port and listen for requests
 const PORT = process.env.PORT || 8080;

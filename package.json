@@ -13,8 +13,9 @@
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "pub": "git add . && git commit -m \"deploying to heroku\" && git push && yarn deploy",
-    "pubdev": "yarn pub && heroku logs --tail",
+    "pubdev": "yarn pub && yarn logs",
     "deploy": "git push heroku master",
+    "logs": "heroku logs --tail",
     "check-unused-dependencies": "depcheck",
     "list-deadfiles": "npx deadfile ./server.js --dir src",
     "refresh-client_DO_NOT_USE__CLIENT_WILL_COPY_HERE": "cp -a ../sistemi190-client/build client/"
