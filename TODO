@@ -1,1 +1,2 @@
 - gestire le traduzioni delle risposte in base a "x-user-language"
+- usare winston logger come da v1

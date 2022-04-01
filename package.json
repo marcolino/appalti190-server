@@ -3,7 +3,9 @@
   "version": "2.0.2",
   "description": "Servizio per l'assolvimento degli obblighi di pubblicazione delle informazioni all’Autorità Nazionale AntiCorruzione, ai sensi della legge n. 190/2012",
   "engines": {
-    "node": "14.x"
+    "node": "14.x",
+    "npm": "6.x",
+    "yarn": "1.x"
   },
   "main": "server.js",
   "scripts": {

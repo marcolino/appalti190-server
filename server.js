@@ -57,14 +57,16 @@ if (process.env.NODE_ENV !== "production") { // load environment variables from 
 }
 assertEnvironment();
 
-// TODO...
-// // set up database connection uri
-// const connUri = (process.env.NODE_ENV !== "production") ?
-//   process.env.MONGO_LOCAL_CONN_URL :
-//   `${process.env.MONGO_SCHEME}://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@${process.env.MONGO_URL}/${process.env.MONGO_DB}`
-//
+// set up database connection uri
+const connUri = (process.env.NODE_ENV === "production") ?
+  //process.env.MONGO_LOCAL_CONN_URL :
+  `${process.env.MONGO_SCHEME}://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@${process.env.MONGO_URL}/${process.env.MONGO_DB}` :
+  `${process.env.MONGO_SCHEME}://${process.env.MONGO_URL}/${process.env.MONGO_DB}`
+;
+
 db.mongoose
-  .connect(`mongodb://${config.db.HOST}:${config.db.PORT}/${config.db.DB}`, {
+  //.connect(`mongodb://${config.db.HOST}:${config.db.PORT}/${config.db.DB}`, {
+  .connect(connUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
