@@ -13,10 +13,8 @@ app.use(cors({
   origin: config.corsDomains,
 }));
 
-// use the logger for the production environment
-if (process.env.NODE_ENV === "production") {
-  app.use(logger("prod"));
-}
+// log for the environment type
+logger(`${process.env.NODE_ENV} environment`);
 
 // parse requests of content-type - application/json
 app.use(express.json());
