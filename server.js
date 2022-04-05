@@ -95,6 +95,6 @@ if (require.main === module) { // avoid listening while testing
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
+} else { // export app for testing
+  module.exports = app;
 }
-
-//module.exports = app; 
