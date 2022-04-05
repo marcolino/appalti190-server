@@ -146,11 +146,12 @@ const signin = async(req, res) => {
     //username: req.body.username,
     email
   })
-    .populate("plan", "-__v")
+    //.populate("plan", "-__v")
     .populate("roles", "-__v")
-    .exec(async (err, user) => {
+    .exec(async(err, user) => {
       if (err) {
-        console.error("user findone error:", err, err.message);
+        console.error("user findone err:", err.message);
+        console.error("user findone err.message:", err.message);
         return res.status(500).send({ message: err });
       }
 
