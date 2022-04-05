@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
-const logger = require("winston");
+//const logger = require("winston");
 const db = require("./src/models");
 const { assertEnvironment } = require("./src/helpers/environment");
 const config = require("./src/config");
@@ -12,9 +12,6 @@ const app = express();
 app.use(cors({
   origin: config.corsDomains,
 }));
-
-// log for the environment type
-logger(`${process.env.NODE_ENV} environment`);
 
 // parse requests of content-type - application/json
 app.use(express.json());
