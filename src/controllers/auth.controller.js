@@ -19,12 +19,15 @@ const signup = async(req, res) => {
   } catch (err) {
     return res.status(500).send({ message: err });
   }
+console.log("ROLE:", role);
+
   // get default plan
   try {
     plan = await Plan.findOne({name: "Free"});
   } catch (err) {
     return res.status(500).send({ message: err });
   }
+console.log("PLAN:", plan);
 
   const user = new User({
     //username: req.body.username,
