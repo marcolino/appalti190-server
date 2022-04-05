@@ -150,6 +150,7 @@ const signin = async(req, res) => {
     .populate("roles", "-__v")
     .exec(async (err, user) => {
       if (err) {
+        console.error("user findone error:", err, err.message);
         return res.status(500).send({ message: err });
       }
 
