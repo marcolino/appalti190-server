@@ -14,7 +14,7 @@
     "test": "mocha --exit --timeout 10000",
     "testwatch": "nodemon --exec \"mocha --recursive --timeout 10000\"",
     "pub": "git add . && git commit -m \"deploying to heroku\" && git push && yarn deploy",
-    "pubdev": "yarn pub && yarn logs",
+    "pub-dev": "yarn pub && yarn logs",
     "deploy": "git push heroku master",
     "SUSPENDED-predeploy": "yarn test",
     "logs": "heroku logs --tail",
