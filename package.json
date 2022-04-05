@@ -11,10 +11,12 @@
   "scripts": {
     "start-dev": "nodemon --ignore client/ -w '.' -w .env server.js",
     "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --exit --timeout 10000",
+    "testwatch": "nodemon --exec \"mocha --recursive --timeout 10000\"",
     "pub": "git add . && git commit -m \"deploying to heroku\" && git push && yarn deploy",
     "pubdev": "yarn pub && yarn logs",
     "deploy": "git push heroku master",
+    "predeploy": "test",
     "logs": "heroku logs --tail",
     "check-unused-dependencies": "depcheck",
     "list-deadfiles": "npx deadfile ./server.js --dir src",
@@ -42,6 +44,7 @@
     "mongoose": "^5.12.10",
     "multer": "^1.4.4",
     "node-zip": "^1.1.1",
+    "should": "^13.2.3",
     "stripe": "^8.214.0",
     "uuid": "^8.3.2",
     "xlsx": "^0.18.5",
@@ -49,7 +52,11 @@
     "xsd-schema-validator": "^0.7.0"
   },
   "devDependencies": {
+    "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
     "dotenv": "^16.0.0",
+    "mocha": "^9.2.2",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.15"
   }
 }

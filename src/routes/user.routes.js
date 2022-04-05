@@ -16,6 +16,12 @@ module.exports = app => {
     userController.adminPanel
   );
 
+  app.get(
+    "/api/user",
+    //[authJwt.verifyToken, authJwt.isAdmin], // TODO: handle auth in tests end uncomment this
+    userController.users
+  );
+
   app.get("/api/test/all", userController.allAccess);
 
   app.get("/api/test/user", [authJwt.verifyToken], userController.userBoard);

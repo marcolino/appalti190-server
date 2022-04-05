@@ -17,6 +17,17 @@ exports.moderatorBoard = (req, res) => {
   res.status(200).send("Moderator Content.");
 };
 
+exports.users = async(req, res) => {
+  let users = await User.find()
+    .select(["-password", "-__v"])
+    .populate("roles", "-__v")
+    .populate("plan", "-__v")
+    .lean()
+    .exec()
+  ;
+  res.status(200).send({users});
+};
+
 exports.adminPanel = (req, res) => {
   Promise.all([
     User.find()

@@ -37,7 +37,7 @@ const UserSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Plan"
   },
-  address: {
+  address1: {
     type: AddressSchema,
   },
   bio: {
@@ -96,11 +96,13 @@ UserSchema.methods.generatePasswordResetCode = () => {
   const maxDigits = 6;
   const expirySeconds = 60 * 60; // 1 hour
 
-  this.resetPasswordCode = generateRandomCode(maxDigits); //crypto.randomBytes(20).toString("hex");
-  this.resetPasswordExpires = Date.now() + (expirySeconds * 1000);
+  return {
+    code: generateRandomCode(maxDigits), //crypto.randomBytes(20).toString("hex")
+    expires: Date.now() + (expirySeconds * 1000),
+  };
 };
 
-UserSchema.methods.generateVerificationCode = (userId) => {
+UserSchema.methods.generateSignupVerificationCode = (userId) => {
   const maxDigits = 6;
 
   let payload = {
@@ -108,7 +110,7 @@ UserSchema.methods.generateVerificationCode = (userId) => {
     //token: crypto.randomBytes(20).toString("hex")
     code: generateRandomCode(maxDigits),
   };
-console.log("generateVerificationCode payload:", payload);
+console.log("generateSignupVerificationCode payload:", payload);
   return new VerificationCode(payload);
 };
 

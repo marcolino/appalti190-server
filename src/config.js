@@ -14,19 +14,17 @@ const clientBaseUrl = `${process.env.NODE_ENV === "production" ?
 module.exports = {
   api: {
     name: "Appalti190",
-    port: 3000,
+    port: 5000,
   },
   auth: {
     secret: "super-secret-banana-armadillo-666",
-    //jwtExpiration: 3600, // 1 hour
-    //jwtRefreshExpiration: 3600 * 24 * 30, // 1 month
-    jwtExpiration: 1200, // 20 minutes - TEST ONLY
-    jwtRefreshExpiration: 3600, // 1 hour - TEST ONLY
+    jwtExpiration: /* 3600, // 1 hour */1200, // 20 minutes - TODO: TEST ONLY
+    jwtRefreshExpiration: /* 3600 * 24 * 30, // 1 month */3600, // 1 hour - TODO: TEST ONLY
   },
   db: {
     HOST: "localhost",
     PORT: 27017,
-    DB: "bezkoder_db"
+    DB: "appalti190"
   },
   languages: [ // list of backend supported languages; the last one is the fallback, and is mandatory here
     "it",

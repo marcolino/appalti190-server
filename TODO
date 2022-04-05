@@ -1,2 +1,6 @@
-- gestire le traduzioni delle risposte in base a "x-user-language"
+- gestire le traduzioni delle risposte (in base a "x-user-language")
+- capire come salvare i files xls caricati dagli utenti (db?)
 - usare winston logger come da v1
+- impostare tests come da v1
+- rimuovere gli account non confermati, periodicamente.
+- nel signup, in caso di email already present, check if it is not verified, and tell user it is waiting for confirmation
