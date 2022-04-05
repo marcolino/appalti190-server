@@ -16,7 +16,7 @@
     "pub": "git add . && git commit -m \"deploying to heroku\" && git push && yarn deploy",
     "pubdev": "yarn pub && yarn logs",
     "deploy": "git push heroku master",
-    "predeploy": "test",
+    "predeploy": "yarn test",
     "logs": "heroku logs --tail",
     "check-unused-dependencies": "depcheck",
     "list-deadfiles": "npx deadfile ./server.js --dir src",
