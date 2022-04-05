@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
-const logger = require("morgan");
+const logger = require("winston");
 const db = require("./src/models");
 const { assertEnvironment } = require("./src/helpers/environment");
 const config = require("./src/config");
