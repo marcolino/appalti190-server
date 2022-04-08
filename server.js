@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
+//const bodyParser = require("body-parser");
 //const logger = require("winston");
 const db = require("./src/models");
 const { assertEnvironment } = require("./src/helpers/environment");
@@ -14,10 +15,23 @@ app.use(cors({
 }));
 
 // parse requests of content-type - application/json
-app.use(express.json());
+app.use(express.json({
+  limit: config.api.payloadLimit, // limit payload to avoid too much data to be uploaded
+}));
 
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
+// configure body parser
+// app.use(express.urlencoded({
+//   extended: true, // parse requests of content-type - application/x-www-form-urlencoded
+//   limit: "150mb", // allow for bigger payloads (xml's)
+// }));
+// app.use(bodyParser.json({
+//   limit: "150mb",
+//   extended: true,
+// }));
+// app.use(bodyParser.urlencoded({
+//   limit: "150mb",
+//   extended: true,
+// }));
 
 // add default headers
 app.use((req, res, next) => {
@@ -25,6 +39,13 @@ app.use((req, res, next) => {
     "Access-Control-Allow-Headers",
     "Origin, Content-Type, Accept, x-access-token, x-user-language",
   );
+  next();
+});
+
+// handle version, if needed
+app.use((req, res, next) => {
+  // req.version is used to determine the version
+  req.version = req.headers['accept-version'];
   next();
 });
 
@@ -43,8 +64,11 @@ app.use((req, res, next) => {
 })
 
 // use environment configuration
-if (process.env.NODE_ENV !== "production") { // load environment variables from .env file in non production environments
+if (!process.env.NODE_ENV) { // load environment variables from .env file in development environments
   require("dotenv").config({ path: path.resolve(__dirname, "./.env") }) // TODO: test if we need this...
+}
+if (process.env.NODE_ENV === "test") { // load environment variables from .env.test file in test environments
+  require("dotenv").config({ path: path.resolve(__dirname, "./.env.test") }) // TODO: test if we need this...
 }
 
 assertEnvironment();

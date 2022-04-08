@@ -646,11 +646,12 @@ function isEstero(codiceFiscale) {
 
 // validate XML
 const validateXml = async (req, res) => {
-  if (req.params.xmlIndice) { // a zip archive with indice and datasets inside is present
-    const xmlIndice = req.params.xmlIndice;
-    const xmls = req.params.xmls;
-    const schemaIndice = path.join(__dirname, "..", config.schemaIndiceFile);
-    const schema = path.join(__dirname, "..", config.schemaFile);
+console.log("req.body:", Object.keys(req.body.transform));
+  if (req.body.transform.xmlIndice) { // a zip archive with indice and datasets inside is present
+    const xmlIndice = req.body.transform.xmlIndice;
+    const xmls = req.body.transform.xmls;
+    const schemaIndice = path.join(__dirname, "../..", config.schemaIndiceFile);
+    const schema = path.join(__dirname, "../..", config.schemaFile);
     const promises = [];
     
     promises.push(validate(xmlIndice, schemaIndice));
@@ -659,15 +660,17 @@ const validateXml = async (req, res) => {
     }
     return Promise.all(promises);
   } else
-  if (req.params.xml) { // a single xml dataset is present
-    const xml = req.params.xml;
-    const schema = path.join(__dirname, "..", config.schemaFile);
+  if (req.body.transform.xml) { // a single xml dataset is present
+    const xml = req.body.transform.xml;
+    const schema = path.join(__dirname, "../..", config.job.schemaFile);
 
-    return validate(xml, schema);
+    //return validate(xml, schema);
+    const retval = await validate(xml, schema);
+    console.log("RETVAL:", typeof retval, retval);
+    return [null, retval]; // TODO...
+
   } else { // no other cases allowed
-    return new Promise((resolve, reject) => {
-      return reject(`[errore] Non presenti né un archivio zip né un dataset xml da validare`);
-    });
+    return [ new Error(`[errore] Non presenti né un archivio zip né un dataset xml da validare`), null ]; //.then(resolved, rejected);
   }
 };
 
@@ -681,7 +684,7 @@ async function validate(xml, schema) {
         if (!result.valid) {
           return reject(`[errore] Errore validazione XML: ${result}`);
         }
-        return resolve({});
+        return resolve(result);
       });
     } catch(err) {
       console.error("xmlvalidator.validateXML error:", err);
@@ -692,10 +695,10 @@ async function validate(xml, schema) {
 
 const outcomeCheck = async (req, res) => {
   const data = {
-    anno: req.params.anno ? req.params.anno : config.job.year,
-    codiceFiscaleAmministrazione: req.params.codiceFiscaleAmministrazione ? req.params.codiceFiscaleAmministrazione : "03717710010", // TODO!!!
-    denominazioneAmministrazione: "",
-    identificativoComunicazione: "",
+    anno: req.params.anno,
+    codiceFiscaleAmministrazione: req.params.codiceFiscaleAmministrazione,
+    denominazioneAmministrazione: "", // not handled
+    identificativoComunicazione: "", // not handled
   };
   return await axios.post(config.job.outcomeUrl, data)
     .then(response => {

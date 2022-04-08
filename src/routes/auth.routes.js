@@ -22,7 +22,7 @@ module.exports = function(app) {
 
   app.post("/api/auth/resetPasswordConfirm/:email/:password/:code", controller.resetPasswordConfirm);
 
-  app.post("/api/auth/resendPasswordResetCode", controller.resendPasswordResetCode);
+  app.post("/api/auth/resendResetPasswordCode", controller.resendResetPasswordCode);
 
   app.post("/api/auth/refreshtoken", controller.refreshToken);
 };

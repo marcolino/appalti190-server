@@ -76,17 +76,22 @@ UserSchema.pre("save", function(next) {
 
   if (!user.isModified("password")) return next();
 
-  bcrypt.genSalt(10, function(err, salt) {
+  user.hashPassword(user.password, async(err, hash) => {
     if (err) return next(err);
-
-    bcrypt.hash(user.password, salt, function(err, hash) {
-      if (err) return next(err);
-
-      user.password = hash;
-      next();
-    });
+    user.password = hash;
+    next();
   });
 });
+
+UserSchema.methods.hashPassword = async(password, callback) => {
+  bcrypt.genSalt(10, (err, salt) => {
+    if (err) return callback(err);
+      bcrypt.hash(password, salt, (err, hash) => {
+      if (err) return callback(err);
+      return callback(null, hash);
+    });
+  });
+};
 
 UserSchema.methods.comparePassword = (passwordInput, passwordUser) => {
   return bcrypt.compareSync(passwordInput, passwordUser/*this.password*/);

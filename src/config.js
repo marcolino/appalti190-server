@@ -15,11 +15,13 @@ module.exports = {
   api: {
     name: "Appalti190",
     port: 5000,
+    payloadLimit: "100mb",
   },
   auth: {
     secret: "super-secret-banana-armadillo-666",
     jwtExpiration: /* 3600, // 1 hour */1200, // 20 minutes - TODO: TEST ONLY
     jwtRefreshExpiration: /* 3600 * 24 * 30, // 1 month */3600, // 1 hour - TODO: TEST ONLY
+    codeDeliveryMedium: "email", // "email" / "sms" / ...
   },
   db: {
     HOST: "localhost",
@@ -35,6 +37,8 @@ module.exports = {
     year,
     uploadsBasePath: "./uploads",
     outputBasePath: "/public/downloads", // TODO
+    schemaFile: `./data/${year + 1}/datasetAppaltiL190.xsd`, // the xsd schema file (every new year must be manually downloaded new version from authority, and applied possible changes to code/data)
+    schemaIndiceFile: `./data/${year + 1}/datasetIndiceAppaltiL190.xsd`, // the xsd indice schema file (every new year must be manually downloaded new version from authority, and applied possible changes to code/data)
     datasetMaximumSize: 5 * (1024 * 1024), // TODO
     xsi_schemaLocation: "legge190_1_0 datasetAppaltiL190.xsd", // xsi schemaLocation attribute
     xmlns_xsi: "http://www.w3.org/2001/XMLSchema-instance", // xmlns xsi attribute

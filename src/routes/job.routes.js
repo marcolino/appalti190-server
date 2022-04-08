@@ -1,4 +1,4 @@
-const { upload, transformXls2Xml, validate, outcomeCheck, outcomeFailureDetails } = require("../controllers/job.controller");
+const { upload, transformXls2Xml, validateXml, outcomeCheck, outcomeFailureDetails } = require("../controllers/job.controller");
 
 module.exports = app => {
 
@@ -19,13 +19,13 @@ module.exports = app => {
     return err ? res.status(500).json(err) : res.status(200).json({result});
   });
 
-  app.post("/api/job/validateXml", async(req, res, next) => {
-    const [err, result] = await validate(req, res, next);
+  app.post("/api/job/validateXml/:transform", async(req, res, next) => {
+    const [err, result] = await validateXml(req, res, next);
     console.log("Result from validateXml:", err, result);
     return err ? res.status(500).json(err) : res.status(200).json({result});
   });
 
-  app.post("/api/job/outcomeCheck/:anno?/:codiceFiscaleAmministrazione?", async(req, res, next) => {
+  app.post("/api/job/outcomeCheck/:anno/:codiceFiscaleAmministrazione", async(req, res, next) => {
     const [err, result] = await outcomeCheck(req, res, next);
     console.log("Result from outcomeCheck:", err, result);
     return err ? res.status(500).json(err) : res.status(200).json({result});

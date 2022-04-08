@@ -1,5 +1,9 @@
+//const versioning = require("express-routes-versioning");
 const { authJwt } = require("../middlewares");
 const userController = require("../controllers/user.controller");
+
+// handle versioning
+//const versionRoutes = versioning();
 
 module.exports = app => {
   // app.use(function(req, res, next) {
@@ -13,12 +17,18 @@ module.exports = app => {
   app.get(
     "/api/admin/getAdminPanel",
     [authJwt.verifyToken, authJwt.isAdmin],
-    userController.adminPanel
+    userController.adminPanel // do not use versioning
+    /* to use versioning:
+    versionRoutes({
+      "^1": userController.adminPanel,
+      "^2": userController.adminPanelV2,
+    }, NoMatchFoundCallback),
+     */
   );
 
   app.get(
     "/api/user",
-    //[authJwt.verifyToken, authJwt.isAdmin], // TODO: handle auth in tests end uncomment this
+    //[authJwt.verifyToken, authJwt.isAdmin], // TODO: handle auth in controller and uncomment this
     userController.users
   );
 
