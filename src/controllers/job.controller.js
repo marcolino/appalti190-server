@@ -3,17 +3,25 @@ const fs = require("fs");
 const multer = require("multer");
 const xlsx = require("xlsx");
 const xmlBuilder = require("xmlbuilder");
-const zip = new require("node-zip")(); // TODO: nodeZip here, const zip = new nodeZip() below...
+//const nodeZip = new require("node-zip")(); // nodeZip here, const zip = new nodeZip() below...
+const nodeZip = require("node-zip"); // TODO: nodeZip here, const zip = new nodeZip() below...
 const xmlvalidator = require("xsd-schema-validator");
 const axios = require("axios");
+const db = require("../models");
+const User = db.models.user;
 const config = require("../config");
+
+const zip = new nodeZip();
 
 // multer custom file upload (folder with user name)
 const upload = multer({
   storage: multer.diskStorage({
-    destination: (req, file, cb) => {
-console.log("upload config:", config);
-      const folder = path.join(config.job.uploadsBasePath, "marco"/*TODO: RESTORE AUTH!!! req.auth.user*/);
+    destination: async(req, file, cb) => {
+console.log("upload REQ destination userid:", req.userId);
+      const user = await User.findOne({ _id: req.userId }).exec();
+console.log("upload REQ destination user:", user);
+
+      const folder = path.join(config.job.uploadsBasePath, `${user.lastName}${user.firstName}`);
       fs.mkdir(folder, (err) => {
         if (err) {
           if (err.code == "EEXIST") {
@@ -695,8 +703,8 @@ async function validate(xml, schema) {
 
 const outcomeCheck = async (req, res) => {
   const data = {
-    anno: req.params.anno,
-    codiceFiscaleAmministrazione: req.params.codiceFiscaleAmministrazione,
+    anno: req.body.anno,
+    codiceFiscaleAmministrazione: req.body.codiceFiscaleAmministrazione,
     denominazioneAmministrazione: "", // not handled
     identificativoComunicazione: "", // not handled
   };
@@ -705,7 +713,8 @@ const outcomeCheck = async (req, res) => {
       return [null, response.data.result.length ? response.data.result[0] : {}];
     })
     .catch(error => {
-      return error.message;
+      //return [error.response.data ? new Error(error.response.data) : error];
+      return [error];
     })
   ;
 };

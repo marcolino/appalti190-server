@@ -6,10 +6,10 @@ const checkDuplicateUsername = (req, res, next) => {
     username: req.body.username
   }).exec((err, user) => {
     if (err) {
-      return res.status(500).send({ message: err });
+      return res.status(500).json({ message: err });
     }
     if (user) {
-      return res.status(400).send({ message: "Username is already in use" });
+      return res.status(400).json({ message: "Username is already in use" });
     }
     next();
   });
@@ -20,7 +20,7 @@ const checkDuplicateEmail = (req, res, next) => {
     email: req.body.email
   }).exec((err, user) => {
     if (err) {
-      return res.status(500).send({ message: err });
+      return res.status(500).json({ message: err });
     }
     if (user) {
       return res.status(400).json({
@@ -37,7 +37,7 @@ const checkRolesExisted = (req, res, next) => {
     for (let i = 0; i < req.body.roles.length; i++) {
       const role = req.body.roles[i];
       if (!db.roles.includes(role)) {
-        return res.status(400).send({
+        return res.status(400).json({
           message: `Role ${role} does not exist`
         });
       }

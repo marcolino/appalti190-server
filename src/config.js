@@ -35,11 +35,11 @@ module.exports = {
   currency: "EUR", // default currency (ISO 4217:2015)
   job: {
     year,
-    uploadsBasePath: "./uploads",
-    outputBasePath: "/public/downloads", // TODO
+    uploadsBasePath: "uploads",
+    outputBasePath: "/public/downloads",
     schemaFile: `./data/${year + 1}/datasetAppaltiL190.xsd`, // the xsd schema file (every new year must be manually downloaded new version from authority, and applied possible changes to code/data)
     schemaIndiceFile: `./data/${year + 1}/datasetIndiceAppaltiL190.xsd`, // the xsd indice schema file (every new year must be manually downloaded new version from authority, and applied possible changes to code/data)
-    datasetMaximumSize: 5 * (1024 * 1024), // TODO
+    datasetMaximumSize: 5 * (1024 * 1024),
     xsi_schemaLocation: "legge190_1_0 datasetAppaltiL190.xsd", // xsi schemaLocation attribute
     xmlns_xsi: "http://www.w3.org/2001/XMLSchema-instance", // xmlns xsi attribute
     xmlns_legge190: "legge190_1_0", // xmlns legge190 attribute
@@ -77,7 +77,7 @@ module.exports = {
     outcomeUrl: "https://dati.anticorruzione.it/rest/legge190/ricerca?max=20&start=0",
     outcomeFailureDetailsBaseUrl: "https://dati.anticorruzione.it/rest/legge190/dettaglio",
   },
-  corsDomains: [ // TODO: do we need this?
+  corsDomains: [
     serverBaseUrl,
     clientBaseUrl,
   ],

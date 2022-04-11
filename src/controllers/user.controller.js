@@ -6,15 +6,15 @@ const {
 } = db.models;
 
 exports.allAccess = (req, res) => {
-  res.status(200).send("Public Content.");
+  res.status(200).json("Public Content.");
 };
 
 exports.userBoard = (req, res) => {
-  res.status(200).send("User Content.");
+  res.status(200).json("User Content.");
 };
 
 exports.moderatorBoard = (req, res) => {
-  res.status(200).send("Moderator Content.");
+  res.status(200).json("Moderator Content.");
 };
 
 exports.users = async(req, res) => {
@@ -25,7 +25,7 @@ exports.users = async(req, res) => {
     .lean()
     .exec()
   ;
-  res.status(200).send({users});
+  res.status(200).json({users});
 };
 
 exports.adminPanel = (req, res) => {
@@ -55,7 +55,7 @@ exports.adminPanel = (req, res) => {
       }
     }
     //console.log("adminPanel users with refresh tokens:", users);
-    res.status(200).send({users});
+    res.status(200).json({users});
   }).catch(function(err){
     console.log("adminPanel error:", err);
   });
@@ -63,6 +63,6 @@ exports.adminPanel = (req, res) => {
 
 exports.adminBoard = (req, res) => {
   console.log("Admin Board:", req.params, req.body);
-  res.status(200).send("Admin Board.");
+  res.status(200).json("Admin Board.");
 };
 

@@ -1,7 +1,7 @@
 const sgMail = require("@sendgrid/mail");
 const config = require("../config");
 
-const sendemail = /*async*/ (mailOptions) => {
+const sendemail = (mailOptions) => {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY); // TODO: we should call this outside this function, but outside we do not have process.env yet...
   console.log("SENDGRID_API_KEY:", process.env.SENDGRID_API_KEY);
 
@@ -22,6 +22,7 @@ const assertionsCheckFailure = async (body) => {
   const html = body;
   console.log(`sending email to: ${to} from: ${from}, subject: ${subject}, body: ${html}`);
   try {
+    console.info("sending email:", to, from, subject);
     await sendemail({to, from, subject, html});
   } catch(error) {
     console.error("Error sending email:", error, error.response.body.errors);

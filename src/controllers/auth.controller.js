@@ -17,14 +17,14 @@ const signup = async(req, res) => {
   try {
     role = await Role.findOne({name: "user"});
   } catch (err) {
-    return res.status(500).send({ message: err });
+    return res.status(500).json({ message: err });
   }
 
   // get default plan
   try {
     plan = await Plan.findOne({name: "Free"});
   } catch (err) {
-    return res.status(500).send({ message: err });
+    return res.status(500).json({ message: err });
   }
 
   const user = new User({
@@ -39,7 +39,7 @@ const signup = async(req, res) => {
 
   user.save(async(err, user) => {
     if (err) {
-      return res.status(500).send({ message: err });
+      return res.status(500).json({ message: err });
     }
 
     // send verification code
@@ -58,20 +58,19 @@ console.log("sending email - signupVerificationCode:", signupVerificationCode);
 <p>The code to confirm your registration is <b>${signupVerificationCode.code}</b>.</p>
 <p><i>If you did not request this, please ignore this email.</i></p>
       `;
-console.log("sending email:", to, from, subject, html);
+      console.info("sending email:", to, from, subject);
       await sendemail({to, from, subject, html});
+
 console.warn("CODE:", signupVerificationCode.code);
   
       res.status(200).json({ message: `A verification code has been sent to ${user.email}`, codeDeliveryMedium: config.auth.codeDeliveryMedium });
     } catch (error) {
-console.log("send email error:", error);
       res.status(error.code).json({ message: `Error sending verification code: ${error.message}` });
     }
   });
 };
 
 const resendSignUpCode = async(req, res) => {
-  // TODO...
   try {
     const { email } = req.body;
     const user = await User.findOne({ email });
@@ -79,11 +78,8 @@ const resendSignUpCode = async(req, res) => {
 
     if (user.isVerified) return res.status(400).json({ message: "This account has already been verified. You can log in."});
 
-console.log("user:", user);
     const signupVerificationCode = await user.generateSignupVerificationCode(user._id);
-console.log("signupVerificationCode:", signupVerificationCode);
     const result = await signupVerificationCode.save(); // save the verification code
-console.log("RESULT signupVerificationCode.save():", result);
 
     //// save the updated user object
     //await user.save();
@@ -100,7 +96,7 @@ console.log("RESULT signupVerificationCode.save():", result);
 <p>The code to confirm your registration is <b>${signupVerificationCode.code}</b>.</p>
 <p><i>If you did not request this, please ignore this email.</i></p>
     `;
-console.log("sending email:", to, from, subject, html);
+    console.info("sending email:", to, from, subject);
     await sendemail({to, from, subject, html});
 
     res.status(200).json({ message: `A verification code has been resent to ${user.email}.`, codeDeliveryMedium: config.auth.codeDeliveryMedium });
@@ -117,9 +113,7 @@ const signupConfirm = async(req, res) => {
 
   try {
     // find a matching code
-console.log("looking for code:", req.body.code, req.body.email);
-    const code = await VerificationCode.findOne({ code: req.body.code, /* TODO: join with user email... email: req.params.email*/ });
-console.log("result for code:", code);
+    const code = await VerificationCode.findOne({ code: req.body.code });
     if (!code) return res.status(400).json({ message: "This code is not valid, it may be expired" });
 
     // we found a code, find a matching user
@@ -147,15 +141,16 @@ const signin = async(req, res) => {
   })
     //.populate("plan", "-__v")
     .populate("roles", "-__v")
+    .populate("plan", "-__v")
     .exec(async(err, user) => {
       if (err) {
         console.error("user findone err:", err.message);
         console.error("user findone err.message:", err.message);
-        return res.status(500).send({ message: err });
+        return res.status(500).json({ message: err });
       }
 
       if (!user) {
-        return res.status(404).send({ message: "User not found" });
+        return res.status(404).json({ message: "User not found" });
       }
 
       // const passwordIsRight = bcrypt.compareSync(
@@ -168,7 +163,7 @@ const signin = async(req, res) => {
 console.log("User:", user);
 
       if (!user.comparePassword(req.body.password, user.password)) {
-        return res.status(401).send({
+        return res.status(401).json({
           accessToken: null,
           message: "Wrong password",
         });
@@ -188,14 +183,14 @@ console.log("User:", user);
         roles.push(user.roles[i].name.toUpperCase());
       }
 
-      const plan = user.plan?.name?.toUpperCase(); // TODO: remove "?", all users will have a plan...
+      const plan = user.plan?.name?.toUpperCase();
 
-      res.status(200).send({
+      res.status(200).json({
         id: user._id,
         username: user.username,
         email: user.email,
         roles,
-        plan,
+        plan: user.plan,
         accessToken: token,
         refreshToken: refreshToken,
       });
@@ -231,6 +226,7 @@ console.info("resetPassword.code:", resetPassword.code);
 <p>The code to reset your password is <b>${user.resetPasswordCode}</b>.</p>
 <p><i>If you did not request this, please ignore this email and your password will remain unchanged.</i></p>
     `;
+    console.info("sending email:", to, from, subject);
     await sendemail({to, from, subject, html});
 
     res.status(200).json({message: `A reset code has been sent to ${user.email} via ${config.auth.codeDeliveryMedium}.`, codeDeliveryMedium: config.auth.codeDeliveryMedium});
@@ -242,42 +238,32 @@ console.log("resetPassword error:", error);
 };
 
 const resetPasswordConfirm = async(req, res) => {
-  console.log("resetPasswordConfirm");
   try {
     const { email } = req.body;
     const { password } = req.body;
     const { code } = req.body;
 
-    if (!code) return res.status(400).json({message: "Password reset code not found."});
+    if (!code) return res.status(400).json({message: "Password reset code not found.", code: "code"});
+     // if we want to distinguish among invalid / expired we have to split the following query
     const user = await User.findOne({email, resetPasswordCode: code, resetPasswordExpires: {$gt: Date.now()}});
-    if (!user) return res.status(400).json({message: "Password reset code is invalid or has expired."}); // TODO: distinguish invalid/expired...
+    if (!user) return res.status(400).json({message: "Password reset code is invalid or has expired.", code: "code"});
 
-/*
+    /*
     // check if requested password is the same as the previous one (unfeasible: same password generate different hashes...)
     user.hashPassword(password, async(err, passwordHashed) => {
       if (passwordHashed === user.password) {
         return res.status(400).json({message: "Requested password is the same as the previous one."});
       }
     });
-*/
+    */
 
     // set the new password
     user.password = password;
     user.resetPasswordCode = undefined;
     user.resetPasswordExpires = undefined;
-    //user.isVerified = true; // TODO: we don't need this...
 
     // save the updated user object
     await user.save();
-
-    const subject = "Your password has been updated";
-    const to = user.email;
-    const from = process.env.FROM_EMAIL;
-    const html = `
-<p>Hi, ${user.firstName} ${user.lastName}.</p>
-<p>This is a confirmation that the password for your account ${user.email} has just been updated.</p>
-    `;
-    //await sendemail({to, from, subject, html}); // TODO: try catch
 
     res.status(200).json({message: "Your password has been updated."});
 
@@ -298,7 +284,7 @@ const resendResetPasswordCode = async(req, res) => {
     const user = await User.findOne({ email });
     if (!user) return res.status(401).json({ message: `The email address ${req.body.email} is not associated with any account. Double-check your email address and try again.`});
 
-    if (user.isVerified) return res.status(400).json({ message: "This account has already been verified. You can log in."});
+    //if (user.isVerified) return res.status(400).json({ message: "This account has already been verified. You can log in."});
 
     user.generatePasswordResetCode();
       
@@ -313,7 +299,7 @@ const resendResetPasswordCode = async(req, res) => {
 <p>The code to reset your password is <b>${user.resetPasswordCode}</b>.</p>
 <p><i>If you did not request this, please ignore this email.</i></p>
     `;
-console.log("sending email:", to, from, subject, html);
+    console.info("sending email:", to, from, subject);
     await sendemail({to, from, subject, html});
 
     res.status(200).json({ message: `A verification code has been sent to ${user.email}.`, codeDeliveryMedium: config.auth.codeDeliveryMedium });
@@ -355,7 +341,7 @@ const refreshToken = async(req, res) => {
       refreshToken: refreshToken.token,
     });
   } catch (err) {
-    return res.status(500).send({ message: err });
+    return res.status(500).json({ message: err });
   }
 };
 

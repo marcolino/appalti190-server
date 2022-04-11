@@ -19,20 +19,6 @@ app.use(express.json({
   limit: config.api.payloadLimit, // limit payload to avoid too much data to be uploaded
 }));
 
-// configure body parser
-// app.use(express.urlencoded({
-//   extended: true, // parse requests of content-type - application/x-www-form-urlencoded
-//   limit: "150mb", // allow for bigger payloads (xml's)
-// }));
-// app.use(bodyParser.json({
-//   limit: "150mb",
-//   extended: true,
-// }));
-// app.use(bodyParser.urlencoded({
-//   limit: "150mb",
-//   extended: true,
-// }));
-
 // add default headers
 app.use((req, res, next) => {
   res.header(
@@ -65,10 +51,10 @@ app.use((req, res, next) => {
 
 // use environment configuration
 if (!process.env.NODE_ENV) { // load environment variables from .env file in development environments
-  require("dotenv").config({ path: path.resolve(__dirname, "./.env") }) // TODO: test if we need this...
+  require("dotenv").config({ path: path.resolve(__dirname, "./.env") });
 }
 if (process.env.NODE_ENV === "test") { // load environment variables from .env.test file in test environments
-  require("dotenv").config({ path: path.resolve(__dirname, "./.env.test") }) // TODO: test if we need this...
+  require("dotenv").config({ path: path.resolve(__dirname, "./.env.test") });
 }
 
 assertEnvironment();

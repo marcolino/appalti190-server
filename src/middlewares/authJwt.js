@@ -6,25 +6,21 @@ const Role = db.models.role;
 
 const { TokenExpiredError } = jwt;
 
-const catchError = (err, req, res) => {
-  if (err instanceof TokenExpiredError) {
-    return res.status(401).send({ message: "Authorization was expired, please repeat login!" });
-  }
-
-  return res.sendStatus(401).send({ message: "Unauthorized!" });
-}
-
 const verifyToken = (req, res, next) => {
   let token = req.headers["x-access-token"];
 
   if (!token) {
-    return res.status(403).send({ message: "No token provided!" });
+    return res.status(403).json({ message: "You must be authenticated to access this page", code: "NoToken", reason: "No token provided" });
   }
 
   jwt.verify(token, config.auth.secret, (err, decoded) => {
     if (err) {
-      return catchError(err, req, res);
+      if (err instanceof TokenExpiredError) {
+        return res.status(401).json({ message: "You must be authorized to access this page", code: "AuthorizationExpired", reason: "Authorization was expired, please repeat login!" });
+      }
+      return res.status(401).json({ message: "You must be authorized to access this page", code: "NoAuthorization", rreason: "Unauthorized!" });
     }
+console.log("DECODED:", decoded);
     req.userId = decoded.id;
     next();
   });
@@ -33,7 +29,7 @@ const verifyToken = (req, res, next) => {
 const isAdmin = (req, res, next) => {
   User.findById(req.userId).exec((err, user) => {
     if (err) {
-      res.status(500).send({ message: err });
+      res.status(500).json({ message: err});
       return;
     }
 
@@ -43,7 +39,7 @@ const isAdmin = (req, res, next) => {
       },
       (err, roles) => {
         if (err) {
-          res.status(500).send({ message: err });
+          res.status(500).json({ message: err });
           return;
         }
 
@@ -54,7 +50,7 @@ const isAdmin = (req, res, next) => {
           }
         }
 
-        res.status(403).send({ message: "Require Admin Role!" });
+        res.status(403).json({ message: "You must have admin role to access this page", code: "MustBeAdmin", reason: "Admin role required" });
         return;
       }
     );
@@ -64,7 +60,7 @@ const isAdmin = (req, res, next) => {
 const isModerator = (req, res, next) => {
   User.findById(req.userId).exec((err, user) => {
     if (err) {
-      res.status(500).send({ message: err });
+      res.status(500).json({ message: err });
       return;
     }
 
@@ -74,7 +70,7 @@ const isModerator = (req, res, next) => {
       },
       (err, roles) => {
         if (err) {
-          res.status(500).send({ message: err });
+          res.status(500).json({ message: err });
           return;
         }
 
@@ -85,7 +81,7 @@ const isModerator = (req, res, next) => {
           }
         }
 
-        res.status(403).send({ message: "Require Moderator Role!" });
+        res.status(403).json({ message: "You must have moderator role to access this page", code: "MustBeModerator", reason: "Moderator role required" });
         return;
       }
     );
