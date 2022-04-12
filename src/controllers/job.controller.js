@@ -45,6 +45,8 @@ console.log("upload REQ destination user:", user);
 
 const transformXls2Xml = async (req, res) => {
   const retval = {
+    code: "OK",
+    message: null,
     rownum: 1, // we skip the xls header
     errors: [],
     header: null,
@@ -54,6 +56,13 @@ const transformXls2Xml = async (req, res) => {
     importoAggiudicazioneTotale: 0,
     importoSommeLiquidateTotale: 0,
   };
+
+  // get current user for administrative reasons
+  const user = await User.findOne(
+    { _id: req.userId }
+  )
+    .populate("plan", "-__v")
+  ;
 
 console.log("LLLLL", req.language);
 console.log("MMMMM", req.body);
@@ -157,6 +166,8 @@ console.log("MMMMM", req.body);
   let aggiudicatarioRaggruppamento = null; // aggiudicatarioRaggruppamento MUST be after all aggiudicatari
 
   sheetElencoGare.forEach(row => {
+  // TODO: don't use forEach, but every() + return true/false; this way we can break loop...
+
     retval.rownum++;
 
     if (retval.rownum <= config.job.sheetElencoGareHeaderRows) { // skip headers row
@@ -213,6 +224,20 @@ console.log("MMMMM", req.body);
     if ("CIG" in row) { // a CIG row
 
       retval.cigCount++;
+
+      // TODO: check if retval.cigCount exceeds user.plan.cigNumberAllowed and possibly break the process
+console.log("CIG COUNT CHECK - user:", user, user.plan.cigNumberAllowed);
+      //if (!user) ...
+      //if (!user.plan) ...
+      const cigNumberAllowed = (user.plan.cigNumberAllowed === "unlimited") ? Number.MAX_SAFE_INTEGER : user.plan.cigNumberAllowed
+console.log("CIG COUNT CHECK - cigNumberAllowed", cigNumberAllowed);
+      
+      if (retval.cigCount > cigNumberAllowed) {
+console.log("CIG COUNT CHECK - TRUNCATING");
+        retval.message = `The number of CIGs uploaded exeeds the number allowed by plan ${user.plan.name}, ${user.plan.cigNumberAllowed}.`;
+        retval.code = "TRUNCATED_DUE_TO_PLAN_LIMIT";
+        return; // TODO: how to break loop consistently ???
+      }
 
       consolidate(xmlObj, lotto, raggruppamento, partecipanti, aggiudicatarioRaggruppamento, aggiudicatari);
       raggruppamento = null;

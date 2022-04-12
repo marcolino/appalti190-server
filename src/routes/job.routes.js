@@ -15,12 +15,14 @@ console.log("route /api/job/upload upload result:", err, req.file);
     })
   });
   
-  app.post("/api/job/transformXls2Xml/:filePath", async(req, res, next) => {
+  app.post("/api/job/transformXls2Xml/:filePath", authJwt.verifyToken, async(req, res, next) => {
     const [err, result] = await transformXls2Xml(req, res, next);
     console.log("Successfully transformXls2Xml:", Object.keys(result));
     return err ? res.status(500).json(err) : res.status(200).json({result});
   });
 
+  // TODO: add authJwt.verifyToken to any route here...
+  
   app.post("/api/job/validateXml/:transform", async(req, res, next) => {
     const [err, result] = await validateXml(req, res, next);
     console.log("Result from validateXml:", err, result);
