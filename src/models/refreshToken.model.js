@@ -18,17 +18,17 @@ RefreshTokenSchema.statics.createToken = async function (user) {
     expiredAt.getSeconds() + config.auth.jwtRefreshExpiration
   );
 
-  const _token = uuidv4();
+  const token = uuidv4();
 
-  const _object = new this({
-    token: _token,
+  const object = new this({
+    token: token,
     user: user._id,
     expiryDate: expiredAt.getTime(),
   });
 
-  console.log("RefreshTokenSchema object:", _object);
+  //console.log("RefreshTokenSchema object:", object);
 
-  const refreshToken = await _object.save();
+  const refreshToken = await object.save();
 
   return refreshToken.token;
 };

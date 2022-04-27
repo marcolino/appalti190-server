@@ -20,7 +20,7 @@ const verifyToken = (req, res, next) => {
       }
       return res.status(401).json({ message: "You must be authorized to access this page", code: "NoAuthorization", rreason: "Unauthorized!" });
     }
-console.log("DECODED:", decoded);
+//console.log("TOKEN DECODED:", decoded);
     req.userId = decoded.id;
     next();
   });

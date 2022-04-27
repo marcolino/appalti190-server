@@ -39,7 +39,7 @@ db.plans = [
     priceCurrency: config.currency,
     pricePerYear: 799,
     pricePerMonth: undefined,
-    cigNumberAllowed: "unlimited",
+    cigNumberAllowed: -1, // unlimited
     supportTypes: [ "email", "phone" ],
   },
 ];

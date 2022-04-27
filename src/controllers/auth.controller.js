@@ -1,5 +1,6 @@
 const config = require("../config");
 const { sendemail } = require("../helpers/notification");
+const { normalizeEmail } = require("../helpers/misc");
 const db = require("../models");
 const jwt = require("jsonwebtoken");
 
@@ -27,12 +28,15 @@ const signup = async(req, res) => {
     return res.status(500).json({ message: err });
   }
 
-  const user = new User({
+  const email = normalizeEmail(req.body.email);
+
+  user = new User({
     //username: req.body.username,
-    email: req.body.email,
+    email,
     password: req.body.password,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
+    address: { city: "Torino" }, // TODO...
     roles: [role._id],
     plan: plan._id,
   });
@@ -72,9 +76,9 @@ console.warn("CODE:", signupVerificationCode.code);
 
 const resendSignUpCode = async(req, res) => {
   try {
-    const { email } = req.body;
+    const email = normalizeEmail(req.body.email);
     const user = await User.findOne({ email });
-    if (!user) return res.status(401).json({ message: `The email address ${req.body.email} is not associated with any account. Double-check your email address and try again.`});
+    if (!user) return res.status(401).json({ message: `The email address ${email} is not associated with any account. Double-check your email address and try again.`});
 
     if (user.isVerified) return res.status(400).json({ message: "This account has already been verified. You can log in."});
 
@@ -123,7 +127,7 @@ const signupConfirm = async(req, res) => {
 
       // verify and save the user
       user.isVerified = true;
-      user.save(function(err) {
+      user.save(err => {
         if (err) return res.status(500).json({ message: err.message });
         res.status(200).json({ message: "The account has been verified, you can now log in." });
       });
@@ -134,7 +138,8 @@ const signupConfirm = async(req, res) => {
 }
 
 const signin = async(req, res) => {
-  const { email } = req.body;
+  const email = normalizeEmail(req.body.email);
+
   User.findOne({
     //username: req.body.username,
     email
@@ -153,6 +158,8 @@ const signin = async(req, res) => {
         return res.status(404).json({ message: "User not found" });
       }
 
+      // TODO: check email is verified !!!
+
       // const passwordIsRight = bcrypt.compareSync(
       //   req.body.password,
       //   user.password
@@ -160,7 +167,8 @@ const signin = async(req, res) => {
       // const passwordIsRight = (
       //   req.body.password === user.password
       // );
-console.log("User:", user);
+//console.log("User:", user);
+//console.log("User:", Object.keys(user.toObject()));
 
       if (!user.comparePassword(req.body.password, user.password)) {
         return res.status(401).json({
@@ -169,30 +177,29 @@ console.log("User:", user);
         });
       }
 
-      const token = jwt.sign({ id: user.id }, config.auth.secret, {
+      user.accessToken = jwt.sign({ id: user.id }, config.auth.secret, {
         expiresIn: config.auth.jwtExpiration,
       });
 
-      const refreshToken = await RefreshToken.createToken(user);
+      user.refreshToken = await RefreshToken.createToken(user);
 
       const roles = [];
-      // for (let i = 0; i < user.roles.length; i++) {
-      //   roles.push("ROLE_" + user.roles[i].name.toUpperCase());
-      // }
       for (let i = 0; i < user.roles.length; i++) {
         roles.push(user.roles[i].name.toUpperCase());
       }
+//console.log("*************** roles:", roles);
 
-      const plan = user.plan?.name?.toUpperCase();
+      //user.plan = user.plan?.name?.toUpperCase();
 
       res.status(200).json({
         id: user._id,
         username: user.username,
         email: user.email,
-        roles,
+        roles: roles,
         plan: user.plan,
-        accessToken: token,
-        refreshToken: refreshToken,
+        job: user.job,
+        accessToken: user.accessToken,
+        refreshToken: user.refreshToken,
       });
     })
   ;

@@ -17,9 +17,9 @@ module.exports = {
     port: 5000,
     payloadLimit: "100mb",
   },
-  auth: {
+  auth: { // TODO: put to .env
     secret: "super-secret-banana-armadillo-666",
-    jwtExpiration: /* 3600, // 1 hour */1200, // 20 minutes - TODO: TEST ONLY
+    jwtExpiration: /* 3600, // 1 hour */300, // 5 minutes - TODO: TEST ONLY
     jwtRefreshExpiration: /* 3600 * 24 * 30, // 1 month */3600, // 1 hour - TODO: TEST ONLY
     codeDeliveryMedium: "email", // "email" / "sms" / ...
   },

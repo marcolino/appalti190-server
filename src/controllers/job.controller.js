@@ -9,17 +9,43 @@ const xmlvalidator = require("xsd-schema-validator");
 const axios = require("axios");
 const db = require("../models");
 const User = db.models.user;
+const Plan = db.models.plan;
 const config = require("../config");
 
 const zip = new nodeZip();
+
+const get = async (req, res) => {
+console.log("GET JOB.JOB - REQ.USERID:", req.userId);
+  const user = await User.findOne(
+    { _id: req.userId } // req.userId is from auth
+  );
+  if (!user) {
+    return [ null, { tabId: 0 } ]; // only navigation;
+  }
+console.log("GET JOB.JOB - USER.JOB:", user.job);
+  return [ null, user.job ];
+};
+
+const set = async (req, res) => {
+//console.log("**** SET JOB - REQ.JOB:", req.body.job);
+  const user = await User.findByIdAndUpdate(
+    req.userId,
+    { job: req.body.job },
+  );
+//console.log("SET JOB - USER:", user);
+  if (!user) {
+    return [ null, { tabId: 0 } ]; // only navigation;
+  }
+  return [ null, user.job ];
+};
 
 // multer custom file upload (folder with user name)
 const upload = multer({
   storage: multer.diskStorage({
     destination: async(req, file, cb) => {
-console.log("upload REQ destination userid:", req.userId);
+//console.log("upload REQ destination userid:", req.userId);
       const user = await User.findOne({ _id: req.userId }).exec();
-console.log("upload REQ destination user:", user);
+//console.log("upload REQ destination user:", user);
 
       const folder = path.join(config.job.uploadsBasePath, `${user.lastName}${user.firstName}`);
       fs.mkdir(folder, (err) => {
@@ -63,9 +89,19 @@ const transformXls2Xml = async (req, res) => {
   )
     .populate("plan", "-__v")
   ;
+  if (!user) {
+    retval.message = `The user must be authenticated.`;
+    retval.code = "ABORTED_DUE_TO_MISSING_AUTHENTICATION";
+    return [null, retval]; // TODO: handle errors like this in the first return var...
+  }
+  if (!user.plan) {
+    retval.message = `The user must have a plan.`;
+    retval.code = "ABORTED_DUE_TO_MISSING_PLAN";
+    return [null, retval];
+  }
 
-console.log("LLLLL", req.language);
-console.log("MMMMM", req.body);
+//console.log("LLLLL", req.language);
+//console.log("MMMMM", req.body);
   // read input xls file into workbook
   const input = req.body.filePath;
   //const input = "uploads/marco/2022-03-14_18:48:06.xls";
@@ -166,8 +202,6 @@ console.log("MMMMM", req.body);
   let aggiudicatarioRaggruppamento = null; // aggiudicatarioRaggruppamento MUST be after all aggiudicatari
 
   sheetElencoGare.forEach(row => {
-  // TODO: don't use forEach, but every() + return true/false; this way we can break loop...
-
     retval.rownum++;
 
     if (retval.rownum <= config.job.sheetElencoGareHeaderRows) { // skip headers row
@@ -225,18 +259,10 @@ console.log("MMMMM", req.body);
 
       retval.cigCount++;
 
-      // TODO: check if retval.cigCount exceeds user.plan.cigNumberAllowed and possibly break the process
-console.log("CIG COUNT CHECK - user:", user, user.plan.cigNumberAllowed);
-      //if (!user) ...
-      //if (!user.plan) ...
-      const cigNumberAllowed = (user.plan.cigNumberAllowed === "unlimited") ? Number.MAX_SAFE_INTEGER : user.plan.cigNumberAllowed
-console.log("CIG COUNT CHECK - cigNumberAllowed", cigNumberAllowed);
-      
-      if (retval.cigCount > cigNumberAllowed) {
-console.log("CIG COUNT CHECK - TRUNCATING");
-        retval.message = `The number of CIGs uploaded exeeds the number allowed by plan ${user.plan.name}, ${user.plan.cigNumberAllowed}.`;
-        retval.code = "TRUNCATED_DUE_TO_PLAN_LIMIT";
-        return; // TODO: how to break loop consistently ???
+      // check if user's plan allows this many CIGs
+      if (retval.cigCount > user.plan.cigNumberAllowed) {
+//console.log("CIG COUNT CHECK - TRUNCATING - user.plan.cigNumberAllowed:", user.plan.cigNumberAllowed);
+        return; // continue, do not break, to count rows and CIGs
       }
 
       consolidate(xmlObj, lotto, raggruppamento, partecipanti, aggiudicatarioRaggruppamento, aggiudicatari);
@@ -473,6 +499,18 @@ console.log("CIG COUNT CHECK - TRUNCATING");
 
     }
   });
+
+  if (retval.cigCount > user.plan.cigNumberAllowed) {
+    retval.message = `The number of CIGs uploaded exeeds the number allowed by plan ${user.plan.name}, ${user.plan.cigNumberAllowed}.`;
+    retval.code = "TRUNCATED_DUE_TO_PLAN_LIMIT";
+console.log("*********************** USER.PLAN:", user.plan)
+    retval.planCurrent = user.plan;
+
+    // calculate minimum required plan
+    const plans = await Plan.find().lean();
+    retval.planRequired = plans.find(plan => plan.cigNumberAllowed >= retval.cigCount);
+  }
+
   consolidate(xmlObj, lotto, raggruppamento, partecipanti, aggiudicatarioRaggruppamento, aggiudicatari);
 
   // round totals to 2 decimal positons (currency)
@@ -561,7 +599,7 @@ console.log("SLICESIZE", sliceSize);
     let [error, outputFile] = serializeArchive(folderName, fileName, zip);
     if (error) {
       retval.errors.push(`[errore] ${error}`);
-      return retval;
+      return [null, retval];
     }
     retval.xmls = xmls;
     retval.xmlIndice = xmlIndice;
@@ -581,10 +619,14 @@ console.log("SLICESIZE ELSE", sliceSize);
     if (error) {
       retval.errors.push(`[errore] ${error}`);
 console.log("ERROR1", error);
-      return retval;
+      return [null, retval];
     }
-
+    /**
+     * While developing, truncate xml to ease debug...
+     */
     retval.xml = xml;
+    //retval.xml = (process.env.NODE_ENV !== "production") ? xml.substring(0, 256) : xml;
+
     retval.outputFile = outputFile;
 //retval.outputFile = "downloads/marco/dataset-2021.xml";
 
@@ -597,8 +639,17 @@ console.log("ERROR1", error);
     // }
   }
 
-console.log("RETURN");
-  return [null, retval];
+  // TODO: should return only here!
+
+/*
+  // save job status to user
+  //const user = await User.findOne({ _id: req.userId }).exec();
+  user.job = {}; // TODO; job could exist...
+  user.job.transform = retval;
+  await user.save();
+*/
+
+  return [null, retval]; // TODO: we never use the first element of return array (error), change return type to object...
 };
 
 function createXML(xmlObj) {
@@ -679,7 +730,7 @@ function isEstero(codiceFiscale) {
 
 // validate XML
 const validateXml = async (req, res) => {
-console.log("req.body:", Object.keys(req.body.transform));
+//console.log("req.body:", Object.keys(req.body.transform));
   if (req.body.transform.xmlIndice) { // a zip archive with indice and datasets inside is present
     const xmlIndice = req.body.transform.xmlIndice;
     const xmls = req.body.transform.xmls;
@@ -697,32 +748,35 @@ console.log("req.body:", Object.keys(req.body.transform));
     const xml = req.body.transform.xml;
     const schema = path.join(__dirname, "../..", config.job.schemaFile);
 
-    //return validate(xml, schema);
-    const retval = await validate(xml, schema);
-    console.log("RETVAL:", typeof retval, retval);
-    return [null, retval]; // TODO...
+    // try {
+    return validate(xml, schema);
+    // } catch (err) {
+    //   console.error("validate error:", err);
+    // }
+
+    // //return validate(xml, schema);
+    // const retval = await validate(xml, schema);
+    // //console.log("RETVAL:", typeof retval, retval);
+    // return [null, retval]; // TODO...
 
   } else { // no other cases allowed
-    return [ new Error(`[errore] Non presenti né un archivio zip né un dataset xml da validare`), null ]; //.then(resolved, rejected);
+    //return [ new Error(`[errore] Non presenti né un archivio zip né un dataset xml da validare`), null ]; //.then(resolved, rejected);
+    return [`[errore] Non presenti né un archivio zip né un dataset xml da validare`]; //.then(resolved, rejected);
   }
 };
 
 async function validate(xml, schema) {
-  return new Promise((resolve, reject) => {
-    try { 
-      xmlvalidator.validateXML(xml/*{ file: xml }*/, schema, (err, result) => {
-        if (err) {
-          return reject(`[errore] Errore validazione XML: ${err.message}`);
-        }
-        if (!result.valid) {
-          return reject(`[errore] Errore validazione XML: ${result}`);
-        }
-        return resolve(result);
-      });
-    } catch(err) {
-      console.error("xmlvalidator.validateXML error:", err);
-      reject(`[errore] Problema nella validazione xml: ${JSON.stringify(err)}`);
-    }
+  return new Promise((resolve) => {
+    xmlvalidator.validateXML(xml, schema, (err, result) => {
+      if (err) {
+        return resolve({error: {message: "Errore validazione XML", reason: err.message}});
+      }
+      if (!result.valid) {
+console.warn("xmlvalidator.validateXML NOT VALID:", result);
+        return resolve({error: {message: "Errore validità XML", reason: result.message}});
+      }
+      return resolve(true);
+    });
   });
 };
 
@@ -733,13 +787,16 @@ const outcomeCheck = async (req, res) => {
     denominazioneAmministrazione: "", // not handled
     identificativoComunicazione: "", // not handled
   };
+console.log("OUTCOMECHECK - config.job.outcomeUrl:", config.job.outcomeUrl);
   return await axios.post(config.job.outcomeUrl, data)
     .then(response => {
-      return [null, response.data.result.length ? response.data.result[0] : {}];
+console.log("OUTCOMECHECK - OK response:", response.data);
+      return response?.data?.result?.length ? response.data.result[0] : {};
     })
     .catch(error => {
+console.log("OUTCOMECHECK - KO error:", error?.message, error?.response?.data?.message);
       //return [error.response.data ? new Error(error.response.data) : error];
-      return [error];
+      return {error: error?.message, reason: error?.response?.data?.message};
     })
   ;
 };
@@ -757,6 +814,8 @@ const outcomeFailureDetails = async (req, res) => {
 };
 
 module.exports = {
+  get,
+  set,
   upload,
   transformXls2Xml,
   validateXml,

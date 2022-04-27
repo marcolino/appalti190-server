@@ -7,10 +7,11 @@ const VerificationCode = require("./verificationCode.model");
 // Address schema
 const AddressSchema = mongoose.Schema({
   street: String,
-  houseNumber: String,
+  streetNo: String,
   city: String,
-  state: String, // (state or province)
+  province: String, // (state or province)
   zip: String,
+  country: String,
 });
 
 const UserSchema = mongoose.Schema({
@@ -37,17 +38,20 @@ const UserSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Plan"
   },
-  address1: {
+  job: Object,
+  address: {
     type: AddressSchema,
+  },
+  fiscalCode: {
+    type: String,
+    max: 16,
   },
   bio: {
     type: String,
-    required: false,
     max: 255
   },
   profileImage: {
     type: String,
-    required: false,
     max: 255
   },
   isVerified: {

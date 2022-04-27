@@ -14,6 +14,10 @@ module.exports = app => {
   //   next();
   // });
 
+  app.get("/api/user/getProfile", authJwt.verifyToken, userController.getProfile);
+
+  app.post("/api/user/updateProfile", authJwt.verifyToken, userController.updateProfile);
+
   app.get(
     "/api/admin/getAdminPanel",
     [authJwt.verifyToken, authJwt.isAdmin],

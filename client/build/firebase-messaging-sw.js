@@ -1,10 +1,11 @@
 // scripts for firebase and firebase messaging
+
 // NOTE: be sure to import the same version of the scripts as firebase version in package.json dependency
 importScripts("https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js");
 importScripts("https://www.gstatic.com/firebasejs/8.2.1/firebase-messaging.js");
 
 // initialize the Firebase app in the service worker by passing the generated config
-const firebaseConfig = { // TODO: appalti190...
+const firebaseConfig = { // register current project
   apiKey: "AIzaSyAN-T9JMI8W5oF2Gip2Pcu-E_xtXBB2gE0",
   authDomain: "sistemisolari-quiccasa.firebaseapp.com",
   projectId: "sistemisolari-quiccasa",
@@ -75,14 +76,14 @@ messaging.onBackgroundMessage(function(payload) {
     //   var db_op_req = messagesStore.add(message);
 
     //   db_op_req.onsuccess = function(event) {
-    //     console.log('added:', event.target.result == message.id); // true
+    //     console.log('added:', event.target.result == message.id);
     //   }
     // //});
     var message = {id: 7, name: payload.notification.body};
     var db_op_req = messagesStore.add(message);
   
     db_op_req.onsuccess = function(event) {
-      console.log('added:', event.target.result == message.id); // true
+      console.log('added:', event.target.result == message.id);
     }
   
     // count number of objects in store
@@ -109,7 +110,7 @@ messaging.onBackgroundMessage(function(payload) {
   };
 
   request.onerror = function(event) {
-    console.log('[onerror]', request.error);
+    console.error('[onerror]', request.error);
   };
 
   request.onupgradeneeded = function(event) {

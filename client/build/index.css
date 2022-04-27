@@ -56,7 +56,7 @@ input::-webkit-inner-spin-button {
 }
 .Toastify__toast--warning {
   /* background: #B85500 !important; */
-  background: orange !important; /* TODO: lighthouse does not like low contrast styles... */
+  background: orange !important; /* lighthouse does not like low contrast styles... */
 }
 .Toastify__toast--error {
   background: #921014 !important;
@@ -131,3 +131,11 @@ input::-webkit-inner-spin-button {
   display: inline-block;
   margin-top: 1em;
 } */
+
+.dropzone-div {
+  text-align: center;
+  padding: 20px;
+  border: 3px purple dashed;
+  width: 60%;
+  margin: auto;
+}

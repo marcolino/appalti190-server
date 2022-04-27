@@ -68,6 +68,7 @@ const connUri = (process.env.NODE_ENV === "production") ?
 // connect to database
 db.mongoose
   .connect(connUri, {
+    useFindAndModify: false,
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
@@ -108,3 +109,30 @@ if (require.main === module) { // avoid listening while testing
 } else { // export app for testing
   module.exports = app;
 }
+
+// // change console.log, to truncate BIG fields
+// (() => {
+//   const consoleOriginal = console.log;
+//   const big = 256;
+//   console.log = function() {
+//     const argumentsCloned = JSON.parse(JSON.stringify(arguments));
+//     const argumentsTruncated = objectTruncateBigValues(argumentsCloned, big);
+//     consoleOriginal.apply(this, argumentsTruncated);
+//   }
+//   function objectTruncateBigValues(obj, big) {
+//     if (typeof obj === "object") {
+//       for (const key in obj) {
+//         if (typeof obj[key] === "object") {
+//           objectTruncateBigValues(obj[key], big)
+//         } else {
+//           //if (typeof obj[key] === "string") { // truncate all string properties
+//           if (key === "xml") { // truncate only "xml" properties
+//             const val = obj[key].substring(0, big);
+//             obj[key] = val;
+//           }
+//         }
+//       }
+//     }
+//     return obj;
+//   }
+// })();
