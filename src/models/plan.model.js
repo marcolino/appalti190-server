@@ -1,7 +1,12 @@
 const mongoose = require("mongoose");
 
 const PlanSchema = mongoose.Schema({
-  name: String,
+  name:  [
+    {
+      type: String,
+      enum : [ "free", "standard", "unlimited" ],
+    }
+  ],
   priceCurrency: String,
   pricePerYear: Number,
   pricePerMonth: Number,

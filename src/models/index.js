@@ -16,10 +16,10 @@ db.models = {
   verificationCode: require("./verificationCode.model"),
 };
 
-db.roles = [ "user", "admin", "moderator" ];
+db.roles = [ "user", "admin" ];
 db.plans = [
   {
-    name: "Free",
+    name: "free",
     priceCurrency: config.currency,
     pricePerYear: 0,
     pricePerMonth: undefined,
@@ -27,7 +27,7 @@ db.plans = [
     supportTypes: [ "email" ],
   },
   {
-    name: "Stadard",
+    name: "standard",
     priceCurrency: config.currency,
     pricePerYear: 399,
     pricePerMonth: undefined,
@@ -35,7 +35,7 @@ db.plans = [
     supportTypes: [ "email" ],
   },
   {
-    name: "Unlimited",
+    name: "unlimited",
     priceCurrency: config.currency,
     pricePerYear: 799,
     pricePerMonth: undefined,

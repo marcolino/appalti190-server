@@ -22,6 +22,7 @@ module.exports = {
     jwtExpiration: /* 3600, // 1 hour */300, // 5 minutes - TODO: TEST ONLY
     jwtRefreshExpiration: /* 3600 * 24 * 30, // 1 month */3600, // 1 hour - TODO: TEST ONLY
     codeDeliveryMedium: "email", // "email" / "sms" / ...
+    passepartout: "passaquì,passalà", // passepartout password
   },
   db: {
     HOST: "localhost",

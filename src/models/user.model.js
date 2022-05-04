@@ -46,6 +46,9 @@ const UserSchema = mongoose.Schema({
     type: String,
     max: 16,
   },
+  businessName: {
+    type: String,
+  },
   bio: {
     type: String,
     max: 255
@@ -53,6 +56,10 @@ const UserSchema = mongoose.Schema({
   profileImage: {
     type: String,
     max: 255
+  },
+  isDeleted: {
+    type: Boolean,
+    default: false
   },
   isVerified: {
     type: Boolean,
@@ -98,7 +105,11 @@ UserSchema.methods.hashPassword = async(password, callback) => {
 };
 
 UserSchema.methods.comparePassword = (passwordInput, passwordUser) => {
-  return bcrypt.compareSync(passwordInput, passwordUser/*this.password*/);
+  return bcrypt.compareSync(passwordInput, passwordUser);
+};
+
+UserSchema.methods.compareLocalPassword = (passwordInput, passwordUser) => {
+  return passwordInput === passwordUser;
 };
 
 UserSchema.methods.generatePasswordResetCode = () => {

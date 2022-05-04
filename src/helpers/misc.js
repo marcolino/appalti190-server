@@ -2,6 +2,7 @@ const url = require("url");
 //const punycode = require("punycode");
 
 module.exports = {
+
   sanitizeJob: (job) => {
     if (!job?.transform?.xml) {
       return job;
@@ -10,6 +11,11 @@ module.exports = {
     j.transform.xml = "…";
     return j;
   },
+
+  // validateEmail: (email) => {
+  //   return false;
+  // },
+
   normalizeEmail: (email) => {
     //return email.toLowercase();
     email = email.trim().toLowerCase();

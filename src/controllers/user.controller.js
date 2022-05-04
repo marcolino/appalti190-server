@@ -1,54 +1,84 @@
 const db = require("../models");
+const validateEmail = require("email-validator");
 const { normalizeEmail } = require("../helpers/misc");
 
 const {
   user: User,
+  plan: Plan,
+  role: Role,
   refreshToken: RefreshToken,
 } = db.models;
 
 exports.getProfile = async(req, res) => {
-  console.info("getProfile");
-
   if (!req.userId) return res.status(400).json({message: "User must be authenticated"});
 
-  //try {
-    // find current user
-    User.findOne({ _id: req.userId }, async (err, user) => { // TODO: remove try/catch from findOne (returns err...)
-      if (err) return res.status(500).json({ message: "We could not find user", reason: errorMessage(err) });
-      if (!user) return res.status(400).json({ message: "We were unable to find this user" });
-
-      res.status(200).json({user});
-    });
-  //} catch (error) {
-  //  res.status(500).json({message: error.message})
-  //}
+  User.findOne({
+    _id: req.userId
+  })
+  .populate("roles", "-__v")
+  .populate("plan", "-__v")
+  .exec(async(err, user) => {
+    if (err) return res.status(500).json({ message: "We could not find user", reason: errorMessage(err) });
+    if (!user) return res.status(400).json({ message: "We were unable to find this user" });
+console.log("getProfile - user.roles:", user.roles);
+    res.status(200).json({user});
+  });
 };
 
 exports.updateProfile = async(req, res) => {
-  console.info("updateProfile - address:", req.body.address);
-
+console.log("UpdateProfile, body:", req.body);
   if (!req.userId) return res.status(400).json({message: "User must be authenticated"});
   if (!req.body.email) return res.status(400).json({message: "Email is mandatory"});
 
-  //try {
-    // find current user
-    User.findOne({ _id: req.userId }, async (err, user) => { // TODO: remove try/catch from findOne (returns err...)
-      if (err) return res.status(500).json({ message: "We could not find user", reason: errorMessage(err) });
-      if (!user) return res.status(400).json({ message: "We were unable to find this user" });
+  User.findOne({ _id: req.userId }, async (err, user) => {
+    if (err) return res.status(500).json({ message: "We could not find user", reason: errorMessage(err) });
+    if (!user) return res.status(400).json({ message: "We were unable to find this user" });
 
-      // be sure email - if changed - is not taken already
-      if (normalizeEmail(req.body.email) !== normalizeEmail(user.email)) {
-        const check = await User.findOne({ email: req.body.email });
-        if (check) return res.status(400).json({ message: "This email is already taken, sorry." });
-      }
-  
-      // TODO: check requires fields are present and valid...
+    // validate and normalize email
+    let email = req.body.email;
+    if (!validateEmail.validate(email)) {
+      return res.status(400).json({ message: "Please supply a valid email" });
+    } 
+    email = normalizeEmail(email);
 
-      user.email = req.body.email;
-      user.firstName = req.body.firstName;
-      user.lastName = req.body.lastName;
-      user.address = req.body.address;
-      user.fiscalCode = req.body.fiscalCode;
+    // be sure email - if changed - is not taken already
+    if (normalizeEmail(email) !== normalizeEmail(user.email)) {
+      const check = await User.findOne({ email });
+      if (check) return res.status(400).json({ message: "This email is already taken, sorry." });
+    }
+
+    user.email = email;
+    user.firstName = req.body.firstName;
+    user.lastName = req.body.lastName;
+    user.fiscalCode = req.body.fiscalCode;
+    user.businessName = req.body.businessName;
+    user.address = req.body.address;
+
+    // verify and save the user
+    user.save(err => {
+      if (err) return res.status(500).json({ message: err.message });
+      res.status(200).json({ message: "The profile has been updated." });
+    });
+  });
+}
+
+exports.updateRoles = async(req, res) => {
+  console.log("UpdateRoles, body:", req.body);
+  if (!req.userId) return res.status(400).json({message: "User must be authenticated"});
+
+  User.findOne({ _id: req.userId }, async (err, user) => {
+    if (err) return res.status(500).json({ message: "We could not find user", reason: errorMessage(err) });
+    if (!user) return res.status(400).json({ message: "We were unable to find this user" });
+
+    // get roles ids, here we only have the names...
+    Role.find({
+      "name": { $in: req.body.roles }
+    }, (err, docs) => {
+      if (err) return res.status(500).json({ message: err.message });
+      console.log("user old roles:", user.roles);
+      console.log("Roles docs:", docs);
+      user.roles = docs.map(doc => doc._id);
+      console.log("user new roles:", user.roles);
 
       // verify and save the user
       user.save(err => {
@@ -56,9 +86,32 @@ exports.updateProfile = async(req, res) => {
         res.status(200).json({ message: "The profile has been updated." });
       });
     });
-  //} catch (error) {
-  //  res.status(500).json({message: error.message})
-  //}
+  });
+}
+  
+exports.updatePlan = async(req, res) => {
+  if (!req.userId) return res.status(400).json({message: "User must be authenticated"});
+  if (!req.body.plan) return res.status(400).json({message: "Plan is mandatory"});
+  // plan value correctness is enforced by database model
+
+  User.findOne({ _id: req.userId }, async (err, user) => {
+    if (err) return res.status(500).json({ message: "We could not find user", reason: errorMessage(err) });
+    if (!user) return res.status(400).json({ message: "We were unable to find this user" });
+
+    // search plan
+    Plan.findOne({
+      "name": { $in: req.body.plan }
+    }, (err, doc) => {
+      if (err) return res.status(500).json({ message: err.message });
+      user.plan = doc;
+
+      // verify and save the user
+      user.save(err => {
+        if (err) return res.status(500).json({ message: err.message });
+        res.status(200).json({ message: "The plan has been updated." });
+      });
+    });
+  });
 }
 
 exports.allAccess = (req, res) => {
@@ -67,10 +120,6 @@ exports.allAccess = (req, res) => {
 
 exports.userBoard = (req, res) => {
   res.status(200).json("User Content.");
-};
-
-exports.moderatorBoard = (req, res) => {
-  res.status(200).json("Moderator Content.");
 };
 
 exports.users = async(req, res) => {
@@ -86,7 +135,11 @@ exports.users = async(req, res) => {
 
 exports.adminPanel = (req, res) => {
   Promise.all([
-    User.find()
+    User.find({
+      // we comment next row just waiting to add isDeleted property to current db...
+      //isDeleted: false, // TODO: add isDeleted condition everywhere?
+      isVerified: true, // TODO: add isVerified condition everywhere?
+    })
     .select(["-password", "-__v"])
     .populate("roles", "-__v")
     .populate("plan", "-__v")

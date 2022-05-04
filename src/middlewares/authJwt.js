@@ -57,40 +57,8 @@ const isAdmin = (req, res, next) => {
   });
 };
 
-const isModerator = (req, res, next) => {
-  User.findById(req.userId).exec((err, user) => {
-    if (err) {
-      res.status(500).json({ message: err });
-      return;
-    }
-
-    Role.find(
-      {
-        _id: { $in: user.roles }
-      },
-      (err, roles) => {
-        if (err) {
-          res.status(500).json({ message: err });
-          return;
-        }
-
-        for (let i = 0; i < roles.length; i++) {
-          if (roles[i].name === "moderator") {
-            next();
-            return;
-          }
-        }
-
-        res.status(403).json({ message: "You must have moderator role to access this page", code: "MustBeModerator", reason: "Moderator role required" });
-        return;
-      }
-    );
-  });
-};
-
 const authJwt = {
   verifyToken,
   isAdmin,
-  isModerator
 };
 module.exports = authJwt;

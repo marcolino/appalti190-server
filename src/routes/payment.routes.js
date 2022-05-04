@@ -6,6 +6,7 @@ const stripe = stripeModule(
     process.env.STRIPE_API_KEY_DEV
   )
 ;
+const config = require("../config");
 
 module.exports = app => {
   app.post("/create-checkout-session", async (req, res, next) => {

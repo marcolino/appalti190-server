@@ -18,6 +18,12 @@ module.exports = app => {
 
   app.post("/api/user/updateProfile", authJwt.verifyToken, userController.updateProfile);
 
+//  app.get("/api/user/getPlan", authJwt.verifyToken, userController.getPlan);
+
+  app.post("/api/user/updateRoles", [authJwt.verifyToken, authJwt.isAdmin], userController.updateRoles);
+
+  app.post("/api/user/updatePlan", [authJwt.verifyToken, authJwt.isAdmin], userController.updatePlan);
+
   app.get(
     "/api/admin/getAdminPanel",
     [authJwt.verifyToken, authJwt.isAdmin],
@@ -39,12 +45,6 @@ module.exports = app => {
   app.get("/api/test/all", userController.allAccess);
 
   app.get("/api/test/user", [authJwt.verifyToken], userController.userBoard);
-
-  app.get(
-    "/api/test/mod",
-    [authJwt.verifyToken, authJwt.isModerator],
-    userController.moderatorBoard
-  );
 
   app.get(
     "/api/test/admin",

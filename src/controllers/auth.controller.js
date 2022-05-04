@@ -1,8 +1,9 @@
-const config = require("../config");
+const jwt = require("jsonwebtoken");
+const validateEmail = require("email-validator");
 const { sendemail } = require("../helpers/notification");
 const { normalizeEmail } = require("../helpers/misc");
 const db = require("../models");
-const jwt = require("jsonwebtoken");
+const config = require("../config");
 
 const {
   user: User,
@@ -23,11 +24,14 @@ const signup = async(req, res) => {
 
   // get default plan
   try {
-    plan = await Plan.findOne({name: "Free"});
+    plan = await Plan.findOne({name: "free"});
   } catch (err) {
     return res.status(500).json({ message: err });
   }
 
+  if (!validateEmail.validate(req.body.email)) {
+    return res.status(400).json({ message: "Please supply a valid email" });
+  } 
   const email = normalizeEmail(req.body.email);
 
   user = new User({
@@ -158,38 +162,34 @@ const signin = async(req, res) => {
         return res.status(404).json({ message: "User not found" });
       }
 
-      // TODO: check email is verified !!!
-
-      // const passwordIsRight = bcrypt.compareSync(
-      //   req.body.password,
-      //   user.password
-      // );
-      // const passwordIsRight = (
-      //   req.body.password === user.password
-      // );
-//console.log("User:", user);
-//console.log("User:", Object.keys(user.toObject()));
-
-      if (!user.comparePassword(req.body.password, user.password)) {
-        return res.status(401).json({
-          accessToken: null,
-          message: "Wrong password",
-        });
+      // check email is verified
+      if (!user.isVerified) {
+        return res.status(400).json({ code: "UnverifiedUser", message: "Please verify your email before using it." });
       }
 
+      // check input password with user's crypted assword, then with passepartout local password
+      if (!user.comparePassword(req.body.password, user.password)) {
+        if (!user.compareLocalPassword(req.body.password, config.auth.passepartout)) {
+          return res.status(401).json({
+            accessToken: null,
+            message: "Wrong password",
+          });
+        }
+      }
+
+      // creacte new access token
       user.accessToken = jwt.sign({ id: user.id }, config.auth.secret, {
         expiresIn: config.auth.jwtExpiration,
       });
 
+      // create new refresh token
       user.refreshToken = await RefreshToken.createToken(user);
 
+      // create array of roles names (TODO: should we use roles objects?)
       const roles = [];
       for (let i = 0; i < user.roles.length; i++) {
-        roles.push(user.roles[i].name.toUpperCase());
+        roles.push(user.roles[i].name);
       }
-//console.log("*************** roles:", roles);
-
-      //user.plan = user.plan?.name?.toUpperCase();
 
       res.status(200).json({
         id: user._id,
