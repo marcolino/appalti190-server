@@ -54,11 +54,12 @@ try {
     ],
 
     exceptionHandlers: [
-      new winston.transports.File({ filename: config.logsFile })
+      new /*winston.*/transports.File({ filename: config.logsFile, })
     ],
   });
+logger.debug("LOGGER:", logger, logger.exceptionHandlers);
 
-  if (process.env.NODE_ENV === "production") { // log exceptions to Mail only in production
+  if (process.env.NODE_ENV === "NOproduction") { // log exceptions to Mail only in production
     // TODO: use syslog transport on papertrail only in production !!!
     logger.exceptionHandlers.add(
       new transports.Syslog({
