@@ -54,7 +54,7 @@ try {
     ],
 
     exceptionHandlers: [
-      new /*winston.*/transports.File({ filename: config.logsFile, })
+      new winston.transports.File({ filename: config.logsFile })
     ],
   });
 
