@@ -1,2 +1,0 @@
-(this["webpackJsonpappalti190-client"]=this["webpackJsonpappalti190-client"]||[]).push([[16],{306:function(t,a,n){"use strict";n.r(a);var c=n(0),e=n.n(c),u=n(11),i=n(57),p=n(46);function o(){var t=Object(u.f)();return Object(c.useEffect)((function(){i.a.logout(),t.push("/"),p.a.dispatch("logout")}),[t]),null}a.default=e.a.memo(o)}}]);
-//# sourceMappingURL=16.cb416564.chunk.js.map
