@@ -33,7 +33,13 @@ module.exports = {
     PORT: 27017,
     DB: "appalti190"
   },
-  logsFile: "logs/appalti190.log", // logs and exceptions file
+  logs: {
+    file: "logs/appalti190.log", // logs and exceptions file
+    papertrail: {
+      host: "logs6.papertrailapp.com",
+      port: 18466,
+    },
+  },
   languages: [ // list of backend supported languages; the last one is the fallback, and is mandatory here
     "it",
     "en",

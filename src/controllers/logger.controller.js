@@ -36,7 +36,7 @@ let logger, transports, exceptionHandlers = null;
 try {
   transports = [
     new winston.transports.File({
-      filename: config.logsFile,
+      filename: config.logs.file,
       format: winston.format.combine(
         winston.format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
         winston.format.align(),
@@ -53,14 +53,14 @@ try {
   ];
 
   exceptionHandlers = [
-    new winston.transports.File({ filename: config.logsFile, })
+    new winston.transports.File({ filename: config.logs.file })
   ];
 
   if (process.env.NODE_ENV === "production") { // use syslog transport on papertrail only in production
     exceptionHandlers.push(
       new winston.transports.Syslog({
-        host: "logs6.papertrailapp.com",
-        port: 18466,
+        host: config.logs.papertrail.host,
+        port: config.logs.papertrail.port,
         app_name: config.api.name,
         localhost,
       })
@@ -93,4 +93,4 @@ try {
   console.error("Winston logger creation error:", err);
 }
 
-module.exports = {logger, colors};
+module.exports = { logger, colors };
