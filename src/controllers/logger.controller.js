@@ -32,6 +32,7 @@ const colors = {
   BgWhite: "\x1b[47m",
 };
 
+/*
 let logger, transports, exceptionHandlers = null;
 try {
   transports = [
@@ -92,5 +93,7 @@ try {
 } catch(err) {
   console.error("Winston logger creation error:", err);
 }
+*/
+  let logger = winston.createLogger();
 
 module.exports = { logger, colors };
