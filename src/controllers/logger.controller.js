@@ -1,5 +1,5 @@
 const winston = require("winston");
-const { createLogger, format, transports } = require("winston");
+//const { createLogger, format, transports } = require("winston");
 require("winston-syslog");
 //const Mail = require("winston-mail").Mail;
 //const AwsCloudWatch = require("winston-aws-cloudwatch");
@@ -32,84 +32,46 @@ const colors = {
   BgWhite: "\x1b[47m",
 };
 
-let logger = null;
+let logger, transports, exceptionHandlers = null;
 try {
-  logger = createLogger({
-    transports: [
-      new transports.File({
-        filename: config.logsFile,
-        format: format.combine(
-          format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
-          format.align(),
-          format.printf(info => `${info.level}: ${[info.timestamp]}: ${info.message}`),
-        ),
-        timestamp: true,
-        colorize: true,
-        handleExceptions: true,
-        humanReadableUnhandledException: true,
-        prettyPrint: true,
-        json: true,
-        maxsize: 5242880
-      }),
-    ],
+  transports = [
+    new winston.transports.File({
+      filename: config.logsFile,
+      format: winston.format.combine(
+        winston.format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
+        winston.format.align(),
+        winston.format.printf(info => `${info.level}: ${[info.timestamp]}: ${info.message}`),
+      ),
+      timestamp: true,
+      colorize: true,
+      handleExceptions: true,
+      humanReadableUnhandledException: true,
+      prettyPrint: true,
+      json: true,
+      maxsize: 5242880
+    }),
+  ];
 
-    exceptionHandlers: [
-      new /*winston.*/transports.File({ filename: config.logsFile, })
-    ],
-  });
-logger.debug("LOGGER:", logger, logger?.exceptionHandlers);
+  exceptionHandlers = [
+    new winston.transports.File({ filename: config.logsFile, })
+  ];
 
-  if (process.env.NODE_ENV === "NOproduction") { // log exceptions to Mail only in production
-    // TODO: use syslog transport on papertrail only in production !!!
-    logger.exceptionHandlers.add(
-      new transports.Syslog({
+  if (process.env.NODE_ENV === "production") { // use syslog transport on papertrail only in production
+    exceptionHandlers.push(
+      new winston.transports.Syslog({
         host: "logs6.papertrailapp.com",
         port: 18466,
         app_name: config.api.name,
         localhost,
       })
     );
-    
-    // TODO ....................
-    // logger.exceptionHandlers.add(
-    //   new Mail({
-    //     to: ["marcosolari@gmail.com"],
-    //     from: "appalti190mailer" + " " + "<marcosolari@gmail.com>",
-    //     subject: "Appalti190 {{level}}",
-    //     host: "smtp.gmail.com",
-    //     username: "marcosolari@gmail.com",
-    //     password: "dpevuufaijfhhqyu",
-    //     ssl: true,
-    //     prettyPrint: true,
-    //   }),
-    // );
-
-    // if we're in production then also log to the `Mail` transport
-    /*
-     * avoid logging to email...
-     *
-     * logger.add(new winston.transports.Mail(config.email));
-     */
-
-    // logger.add(new AwsCloudWatch({
-    //   logGroupName: process.env.NODE_ENV, // log group name: production / development / ...
-    //   logStreamName: "marco", // log stream name: logged user name
-    //   createLogGroup: true,
-    //   createLogStream: true,
-    //   awsConfig: {
-    //     region: process.env.AWS_REGION,
-    //     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    //     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    //   },
-    // }));
   }
 
-  if (process.env.NODE_ENV !== "production") {
-    // if we're not in production then also log to the `Console` transport
+  if (process.env.NODE_ENV !== "production") { // if we're not in production then also log to the `Console` transport
     const consoleLogFormat = winston.format.printf(info => {
       return `${info.timestamp} ${info.level}: ` + info.message;
     });
-    logger.add(new winston.transports.Console({
+    transports.push(new winston.transports.Console({
       format: winston.format.combine(winston.format.timestamp(), consoleLogFormat),
       level: 'debug',
       handleExceptions: true,
@@ -118,23 +80,17 @@ logger.debug("LOGGER:", logger, logger?.exceptionHandlers);
     }));
   }
 } catch(err) {
-  console.error("Winston logger creation error:", err);
+  console.error("Winston transports creation error:", err);
+  throw(err);
 }
 
-// loggerAddAwsCloudWatch = (logGroupName = process.env.NODE_ENV, logStreamName = "_DEFAULT_") => {
-//   logger.add(new AwsCloudWatch({
-//     logGroupName,
-//     logStreamName,
-//     createLogGroup: true,
-//     createLogStream: true,
-//     awsConfig: {
-//       region: process.env.AWS_REGION,
-//       accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-//       secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-//     },
-//   }));
-// }
-//
-// module.exports = {logger, loggerAddAwsCloudWatch};
+try {
+  logger = winston.createLogger({
+    transports,
+    exceptionHandlers
+  });
+} catch(err) {
+  console.error("Winston logger creation error:", err);
+}
 
 module.exports = {logger, colors};
