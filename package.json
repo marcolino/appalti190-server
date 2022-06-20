@@ -18,6 +18,7 @@
     "deploy": "git push heroku master",
     "SUSPENDED-predeploy": "yarn test",
     "logs": "heroku logs --tail",
+    "logspt": "heroku addons:open --app appalti190 papertrail",
     "check-unused-dependencies": "depcheck",
     "list-deadfiles": "npx deadfile ./server.js --dir src",
     "refresh-client_DO_NOT_USE__CLIENT_WILL_COPY_HERE": "cp -a ../sistemi190-client/build client/"
@@ -37,6 +38,7 @@
     "@sendgrid/mail": "^7.6.2",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
+    "codice-fiscale-js": "^2.3.18",
     "cors": "^2.8.5",
     "email-validator": "^2.0.4",
     "express": "^4.17.1",
@@ -50,6 +52,7 @@
     "stripe": "^8.214.0",
     "uuid": "^8.3.2",
     "winston": "^3.7.2",
+    "winston-syslog": "^2.5.0",
     "xlsx": "^0.18.5",
     "xmlbuilder": "^15.1.1",
     "xsd-schema-validator": "^0.7.0"

@@ -813,6 +813,15 @@ const outcomeFailureDetails = async (req, res) => {
   ;
 };
 
+const getPlans = async (req, res) => {
+  try {
+    const retval = await Plan.find().sort({pricePerYear: 1}).lean(); // TODO: sort by pricePerYear LOW->HIGH
+    return [null, retval];
+  } catch(error) {
+    return [error];
+  }
+};
+
 module.exports = {
   get,
   set,
@@ -821,4 +830,5 @@ module.exports = {
   validateXml,
   outcomeCheck,
   outcomeFailureDetails,
+  getPlans,
 };

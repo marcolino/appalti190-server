@@ -15,17 +15,21 @@ const AddressSchema = mongoose.Schema({
 });
 
 const UserSchema = mongoose.Schema({
-  username: String,
-  email: String,
+  // username:
+  //   type: String,
+  //   required: "Username is required",
+  // },
+  email: {
+    type: String,
+    required: "Email is required",
+  },
   password: String,
   firstName: {
     type: String,
-    required: "First Name is required",
     max: 100
   },
   lastName: {
     type: String,
-    required: "Last Name is required",
     max: 100
   },
   roles: [
@@ -67,11 +71,9 @@ const UserSchema = mongoose.Schema({
   },
   resetPasswordCode: {
     type: String,
-    required: false
   },
   resetPasswordExpires: {
     type: Date,
-    required: false
   },
   // googleId: { // TODO: do we need this? possibly not, we use email as id for any user
   //   profileImage: {

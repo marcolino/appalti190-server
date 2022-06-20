@@ -10,6 +10,10 @@ const clientBaseUrl = `${process.env.NODE_ENV === "production" ?
   "https://appalti190-showcase.herokuapp.com" :
   "http://localhost:8080"
 }`;
+// const stripeMode = process.env.STRIPE_MODE;
+// console.log("STRIPEMODE:", stripeMode);
+// console.log("serverBaseUrl:", serverBaseUrl);
+// console.log("process.env.NODE_ENV:", process.env.NODE_ENV); 
 
 module.exports = {
   api: {
@@ -29,6 +33,7 @@ module.exports = {
     PORT: 27017,
     DB: "appalti190"
   },
+  logsFile: "logs/appalti190.log", // logs and exceptions file
   languages: [ // list of backend supported languages; the last one is the fallback, and is mandatory here
     "it",
     "en",
@@ -82,44 +87,46 @@ module.exports = {
     serverBaseUrl,
     clientBaseUrl,
   ],
-  stripe: {
-    products: (process.env.STRIPE_MODE === "production") ? { // production
-      free: {
-        name: "Appalti190 Gratuito",
-        product_id: "prod_LC4k3rwA64D45l",
-        price_id: "price_1KVgafFZEWHriL1u8PFSvxSy",
+  payment: {
+    stripe: {
+      products: (process.env.STRIPE_MODE === "production") ? { // stripe mode is production
+        free: {
+          name: "Appalti190 Gratuito",
+          product_id: "prod_LC4k3rwA64D45l",
+          price_id: "price_1KVgafFZEWHriL1u8PFSvxSy",
+        },
+        standard: {
+          name: "Appalti190 Standard",
+          product_id: "prod_LC4lYicsBXPmIA",
+          price_id: "price_1KVgbfFZEWHriL1uR5BnWO9W",
+        },
+        unlimited: {
+          name: "Appalti190 Illimitato",
+          product_id: "prod_LC4nzqufqjsKBJ",
+          price_id: "price_1KVgdSFZEWHriL1udJubMAAn",
+        },
+      } : { // development
+        free: {
+          name: "Appalti190 Gratuito (test)",
+          product_id: "prod_LC4q54jgFITE0U",
+          price_id: "price_1KVggqFZEWHriL1uD8hlzL3S",
+        },
+        standard: {
+          name: "Appalti190 Standard (test)",
+          product_id: "prod_LC4tiakN3cKlSA",
+          price_id: "price_1KVgjRFZEWHriL1ujZm3tF2h",
+        },
+        unlimited: {
+          name: "Appalti190 Illimitato (test)",
+          product_id: "prod_LC4og5H6lpSLoK",
+          price_id: "price_1KVgfKFZEWHriL1utJyT904c",
+        },
       },
-      standard: {
-        name: "Appalti190 Standard",
-        product_id: "prod_LC4lYicsBXPmIA",
-        price_id: "price_1KVgbfFZEWHriL1uR5BnWO9W",
-      },
-      unlimited: {
-        name: "Appalti190 Illimitato",
-        product_id: "prod_LC4nzqufqjsKBJ",
-        price_id: "price_1KVgdSFZEWHriL1udJubMAAn",
-      },
-    } : { // development
-      free: {
-        name: "Appalti190 Gratuito (test)",
-        product_id: "prod_LC4q54jgFITE0U",
-        price_id: "price_1KVggqFZEWHriL1uD8hlzL3S",
-      },
-      standard: {
-        name: "Appalti190 Standard (test)",
-        product_id: "prod_LC4tiakN3cKlSA",
-        price_id: "price_1KVgjRFZEWHriL1ujZm3tF2h",
-      },
-      unlimited: {
-        name: "Appalti190 Illimitato (test)",
-        product_id: "prod_LC4og5H6lpSLoK",
-        price_id: "price_1KVgfKFZEWHriL1utJyT904c",
-      },
+      paymentSuccessUrl: `${serverBaseUrl}/payment-success`,
+      paymentCancelUrl: `${serverBaseUrl}/payment-cancel`,
+      paymentSuccessUrlClient: `${clientBaseUrl}/payment-success`,
+      paymentCancelUrlClient: `${clientBaseUrl}/payment-cancel`,
     },
-    paymentSuccessUrl: `${serverBaseUrl}/payment-success`,
-    paymentCancelUrl: `${serverBaseUrl}/payment-cancel`,
-    paymentSuccessUrlClient: `${clientBaseUrl}/payment-success`,
-    paymentCancelUrlClient: `${clientBaseUrl}/payment-cancel`,
   },
   emailAdministration: {
     from: "marcosolari+2@gmail.com",
@@ -141,11 +148,12 @@ module.exports = {
     "FACEBOOK_OAUTH_CLIENT_ID",
     "FACEBOOK_OAUTH_SECRET_KEY",
     "SENDGRID_API_KEY",
-    "STRIPE_API_KEY_DEV",
+    "STRIPE_MODE",
+    "STRIPE_API_KEY_TEST",
     "STRIPE_API_KEY_LIVE",
-    "AWS_BUCKET_NAME",
-    "AWS_REGION",
-    "AWS_ACCESS_KEY_ID",
-    "AWS_SECRET_ACCESS_KEY",
+    // "AWS_BUCKET_NAME",
+    // "AWS_REGION",
+    // "AWS_ACCESS_KEY_ID",
+    // "AWS_SECRET_ACCESS_KEY",
   ],
 };

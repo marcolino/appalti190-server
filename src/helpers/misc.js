@@ -18,6 +18,10 @@ module.exports = {
 
   normalizeEmail: (email) => {
     //return email.toLowercase();
+    if (!email) {
+      return null;
+    }
+
     email = email.trim().toLowerCase();
 
     const atIndex = email.lastIndexOf("@");

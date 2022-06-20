@@ -1,5 +1,6 @@
 const db = require("../models");
-const validateEmail = require("email-validator");
+const emailValidate = require("email-validator");
+const codiceFiscaleValidate = require("codice-fiscale-js");
 const { normalizeEmail } = require("../helpers/misc");
 
 const {
@@ -8,6 +9,26 @@ const {
   role: Role,
   refreshToken: RefreshToken,
 } = db.models;
+
+// const PROPERTY_OK = 0;
+// const PROPERTY_EMAIL_INVALID = 1;
+// const PROPERTY_EMAIL_DUPLICATED = 2;
+// const PROPERTY_FIRSTNAME_EMPTY = 3;
+// const PROPERTY_LASTNAME_EMPTY = 4;
+
+
+
+exports.getRoles = async(req, res) => {
+console.log("getRoles CALLED");
+  // default role must be the first element in the returned array
+  Role.find({})
+  .select(["name", "-_id"])
+  .exec(async(err, roles) => {
+    if (err) return res.status(500).json({ message: "We could not get roles", reason: err });
+console.log("ROLES:", roles);
+    res.status(200).json(roles);
+  })
+};
 
 exports.getProfile = async(req, res) => {
   if (!req.userId) return res.status(400).json({message: "User must be authenticated"});
@@ -25,6 +46,9 @@ console.log("getProfile - user.roles:", user.roles);
   });
 };
 
+/**
+ * Update current user's profile
+ */
 exports.updateProfile = async(req, res) => {
 console.log("UpdateProfile, body:", req.body);
   if (!req.userId) return res.status(400).json({message: "User must be authenticated"});
@@ -35,29 +59,114 @@ console.log("UpdateProfile, body:", req.body);
     if (!user) return res.status(400).json({ message: "We were unable to find this user" });
 
     // validate and normalize email
-    let email = req.body.email;
-    if (!validateEmail.validate(email)) {
-      return res.status(400).json({ message: "Please supply a valid email" });
-    } 
-    email = normalizeEmail(email);
+    const [error, value] = [null, null];
 
-    // be sure email - if changed - is not taken already
-    if (normalizeEmail(email) !== normalizeEmail(user.email)) {
-      const check = await User.findOne({ email });
-      if (check) return res.status(400).json({ message: "This email is already taken, sorry." });
-    }
+    [error, value] = await propertyEmailValidate(req.body.email, user);
+    if (error) return res.status(400).json({ message: error });
+    user.email = value;
 
-    user.email = email;
-    user.firstName = req.body.firstName;
-    user.lastName = req.body.lastName;
+    [error, value] = user.firstName = propertyFirstNameValidate(req.body.firstName, user);
+    if (error) return res.status(400).json({ message: error });
+    user.firstName = value;
+
+    [error, value] = user.lastName = propertyLastNameValidate(req.body.lastName, user);
+    if (error) return res.status(400).json({ message: error });
+    user.lastName = value;
+
     user.fiscalCode = req.body.fiscalCode;
+
     user.businessName = req.body.businessName;
+
     user.address = req.body.address;
 
     // verify and save the user
     user.save(err => {
       if (err) return res.status(500).json({ message: err.message });
       res.status(200).json({ message: "The profile has been updated." });
+    });
+  });
+}
+
+/**
+ * Update a property of any user's profile
+ */
+ exports.updateUserProperty = async(req, res) => {
+console.log("updateUserProperty - userId:", req.body.userId);
+console.log("updateUserProperty - propertyName:", req.body.propertyName);
+console.log("updateUserProperty - propertyValue:", req.body.propertyValue);
+  User.findOne({ _id: req.body.userId }, async (err, user) => {
+    if (err) return res.status(500).json({ message: "We could not find user", reason: errorMessage(err) });
+    if (!user) return res.status(400).json({ message: "We were unable to find this user" });
+
+    const propertyName = req.body.propertyName;
+    const propertyValue = req.body.propertyValue;
+    
+    // TODO: address.street...
+    // if (!(req.body.propertyName in user)) {
+    //   return res.status(400).json({ message: `Property ${propertyName} can't be set` });
+    // }
+
+    let [error, value] = [null, null];
+    switch (propertyName) {
+      case "firstName":
+        [error, value] = propertyFirstNameValidate(propertyValue, user);
+        if (error) return res.status(400).json({ message: error });
+        user[propertyName] = value;
+        break;
+      case "lastName":
+        [error, value] = propertyLastNameValidate(propertyValue, user);
+        if (error) return res.status(400).json({ message: error });
+        user[propertyName] = value;
+        break;
+      case "email":
+        [error, value] = await propertyEmailValidate(propertyValue, user);
+        if (error) return res.status(400).json({ message: error });
+console.log("$$$$", propertyName, value)
+        user[propertyName] = value;
+      break;
+        case "fiscalCode":
+        [error, value] = propertyFiscalCodeValidate(propertyValue, user);
+        if (error) return res.status(400).json({ message: error });
+        user[propertyName] = value;
+        break;
+      case "businessName":
+        user[propertyName] = propertyValue;
+        break;
+      case "address_street":
+        if (!user.address) user.address = {};
+        user.address.street = propertyValue;
+        break;
+      case "address.streetNo":
+        if (!user.address) user.address = {};
+        user.address.streetNo = propertyValue;
+        break;
+      case "address.city":
+        if (!user.address) user.address = {};
+        user.address.city = propertyValue;
+        break;
+      case "address.zip":
+        if (!user.address) user.address = {};
+        user.address.zip = propertyValue;
+        break;
+      case "address.province":
+        if (!user.address) user.address = {};
+        user.address.province = propertyValue;
+        break;
+      case "address.country":
+        if (!user.address) user.address = {};
+        user.address.country = propertyValue;
+        break;
+
+      default: // unforeseen properties here do pass validation
+        user[propertyName] = propertyValue;
+        break;
+    }
+
+    // verify and save the user
+    user.save((err, user) => {
+      if (err) return res.status(500).json({ message: err.message });
+console.log("USER AFTER:", user.address);
+      res.status(200).json({ message: "The property has been updated.", propertyValue: value });
     });
   });
 }
@@ -108,7 +217,7 @@ exports.updatePlan = async(req, res) => {
       // verify and save the user
       user.save(err => {
         if (err) return res.status(500).json({ message: err.message });
-        res.status(200).json({ message: "The plan has been updated." });
+        res.status(200).json({ user });
       });
     });
   });
@@ -163,6 +272,7 @@ exports.adminPanel = (req, res) => {
         }
       }
     }
+users[0].addressStreet = users[0].address.street; // TODO: DEBUG ONLY!!!
     //console.log("adminPanel users with refresh tokens:", users);
     res.status(200).json({users});
   }).catch(function(err){
@@ -175,3 +285,41 @@ exports.adminBoard = (req, res) => {
   res.status(200).json("Admin Board.");
 };
 
+// user properties validation
+const propertyEmailValidate = async(value, user) => { // validate and normalize email
+  if (!emailValidate.validate(value)) {
+    return ["Please supply a valid email", value];
+  } 
+  value = normalizeEmail(value);
+
+  // be sure email - if changed - is not taken already
+  if (value !== normalizeEmail(user.email)) {
+    const check = await User.findOne({ email: value });
+    if (check) return ["This email is already taken, sorry", value];
+  }
+  return [null, value];
+};
+
+const propertyFirstNameValidate = (value, user) => { // validate and normalize first name
+  value = value.trim();
+  if (!value) {
+    return ["First name cannot be empty, sorry", value];
+  }
+  return [null, value];
+};
+
+const propertyLastNameValidate = (value, user) => { // validate and normalize last name
+  value = value.trim();
+  if (!value) {
+    return ["Last name cannot be empty, sorry", value];
+  }
+  return [null, value];
+};
+
+const propertyFiscalCodeValidate = (value, user) => { // validate and normalize (italian) fiscal code
+  value = value.trim();
+  if (!codiceFiscaleValidate.check(value)) {
+    return ["Fiscal code is not valid, sorry", value];
+  }
+  return [null, value];
+};

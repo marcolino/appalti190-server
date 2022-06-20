@@ -1,4 +1,4 @@
-const { get, set, upload, transformXls2Xml, validateXml, outcomeCheck, outcomeFailureDetails } = require("../controllers/job.controller");
+const { get, set, upload, transformXls2Xml, validateXml, outcomeCheck, outcomeFailureDetails, getPlans } = require("../controllers/job.controller");
 
 const { authJwt } = require("../middlewares");
 const xmlvalidator = require("xsd-schema-validator"); // TODO: debug only
@@ -84,6 +84,12 @@ console.log("Result from outcomeCheck result:", result);
     const [err, result] = await outcomeFailureDetails(req, res, next);
     console.log("Result from outcomeFailureDetails:", Object.keys(result));
     return err ? res.status(500).json(err) : res.status(200).json({result});
+  });
+
+  app.get("/api/job/getPlans", async(req, res, next) => {
+    const [err, result] = await getPlans(req, res, next);
+    //console.log("Result from getPlans:", result);
+    return err ? res.status(500).json(err) : res.status(200).json(result);
   });
 
 };

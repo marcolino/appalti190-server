@@ -1,11 +1,12 @@
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
-//const bodyParser = require("body-parser");
-//const logger = require("winston");
+const { logger, colors } = require("./src/controllers/logger.controller");
 const db = require("./src/models");
 const { assertEnvironment } = require("./src/helpers/environment");
 const config = require("./src/config");
+
+const production = (process.env.NODE_ENV === "production");
 
 const app = express();
 
@@ -49,18 +50,20 @@ app.use((req, res, next) => {
   next();
 })
 
-// use environment configuration
-if (!process.env.NODE_ENV) { // load environment variables from .env file in development environments
+// environment configuration
+if (production) { // load environment variables from .env file
+  logger.info(`Activating ${colors.BgGreen} production ${colors.Reset} environment`);
   require("dotenv").config({ path: path.resolve(__dirname, "./.env") });
-}
-if (process.env.NODE_ENV === "test") { // load environment variables from .env.test file in test environments
+} else { // load environment variables from .env.test file
+  logger.info(`Activating ${colors.BgYellow} test ${colors.Reset} environment`);
   require("dotenv").config({ path: path.resolve(__dirname, "./.env.test") });
 }
 
+// assert environment to be fully compliant with expectations
 assertEnvironment();
 
 // set up database connection uri
-const connUri = (process.env.NODE_ENV === "production") ?
+const connUri = (production) ?
   `${process.env.MONGO_SCHEME}://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@${process.env.MONGO_URL}/${process.env.MONGO_DB}` :
   `${process.env.MONGO_SCHEME}://${process.env.MONGO_URL}/${process.env.MONGO_DB}`
 ;
@@ -74,9 +77,7 @@ db.mongoose
     useCreateIndex: true,
   })
   .then(() => {
-    if (process.env.NODE_ENV !== "test") {
-      console.log("Successfully connected to MongoDB");
-    }
+    logger.info("Successfully connected to MongoDB");
     db.populate(); // populate database with initial contents if first time
   })
   .catch(err => {
@@ -104,7 +105,8 @@ app.get("*", (req, res) => {
 if (require.main === module) { // avoid listening while testing
   const PORT = process.env.PORT || config.api.port;
   app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    //console.log(`Server is running on port ${PORT}`);
+    logger.info(`Server is running on port ${PORT}`);
   });
 } else { // export app for testing
   module.exports = app;

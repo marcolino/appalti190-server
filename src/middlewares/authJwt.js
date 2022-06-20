@@ -16,9 +16,9 @@ const verifyToken = (req, res, next) => {
   jwt.verify(token, config.auth.secret, (err, decoded) => {
     if (err) {
       if (err instanceof TokenExpiredError) {
-        return res.status(401).json({ message: "You must be authorized to access this page", code: "AuthorizationExpired", reason: "Authorization was expired, please repeat login!" });
+        return res.status(401).json({ message: "Access token exired", code: "AuthorizationExpired", reason: "Authorization was expired, please repeat login!" });
       }
-      return res.status(401).json({ message: "You must be authorized to access this page", code: "NoAuthorization", rreason: "Unauthorized!" });
+      return res.status(401).json({ message: "You must be authorized to access this page", code: "NoAuthorization", reason: "Unauthorized!" });
     }
 //console.log("TOKEN DECODED:", decoded);
     req.userId = decoded.id;

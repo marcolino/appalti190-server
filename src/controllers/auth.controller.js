@@ -31,7 +31,7 @@ const signup = async(req, res) => {
 
   if (!validateEmail.validate(req.body.email)) {
     return res.status(400).json({ message: "Please supply a valid email" });
-  } 
+  }
   const email = normalizeEmail(req.body.email);
 
   user = new User({

@@ -48,5 +48,5 @@ Riferimenti:
     https://codeforgeek.com/refresh-token-jwt-nodejs-authentication/
 
 Servizi:
- - Cloudinary; marcosolari+1@gmail.com / Las....0! (UNUSED ANYMORE)
-  
+ - Storage - Cloudinary; marcosolari+1@gmail.com / Las....0! (UNUSED ANYMORE)
+ - Logs - Papertrail: https://papertrailapp.com/dashboard 
