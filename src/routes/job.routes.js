@@ -23,7 +23,7 @@ console.log("Successfully get job:", result);
 
   app.post("/api/job/upload", authJwt.verifyToken, async(req, res, next) => {
     upload.single("file")(req, res, err /* can't we pass next here ??? */ => {
-//console.log("route /api/job/upload upload result:", err, req.file);
+console.log("route /api/job/upload upload result:", err, req.file);
       return /*err ? res.status(500).json(err) : */res.status(200).json({ message: "Successfully uploaded file", file: req.file });
     })
   });
