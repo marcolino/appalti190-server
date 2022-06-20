@@ -57,7 +57,7 @@ try {
       new /*winston.*/transports.File({ filename: config.logsFile, })
     ],
   });
-logger.debug("LOGGER:", logger, logger.exceptionHandlers);
+logger.debug("LOGGER:", logger, logger?.exceptionHandlers);
 
   if (process.env.NODE_ENV === "NOproduction") { // log exceptions to Mail only in production
     // TODO: use syslog transport on papertrail only in production !!!
