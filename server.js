@@ -4,6 +4,7 @@ const cors = require("cors");
 const { logger, colors } = require("./src/controllers/logger.controller");
 const db = require("./src/models");
 const { assertEnvironment } = require("./src/helpers/environment");
+const { sendemail } = require(".src/helpers/notification");
 const config = require("./src/config");
 
 const production = (process.env.NODE_ENV === "production");
@@ -99,6 +100,7 @@ app.use(express.static(root));
 // handles any requests that does not match the routes below (all routes handled by client)
 app.get("*", (req, res) => {
   res.sendFile("index.html", { root });
+  sendemail({subject: `Access to ${config.api.name} index on ${new Date().toISOString()}`, html: `Remote address: ${req.socket.remoteAddress}`});
 });
 
 // set port and listen for requests

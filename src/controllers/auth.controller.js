@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const validateEmail = require("email-validator");
 const { sendemail } = require("../helpers/notification");
 const { normalizeEmail } = require("../helpers/misc");
+const { logger } = require("./logger.controller");
 const db = require("../models");
 const config = require("../config");
 
@@ -133,6 +134,7 @@ const signupConfirm = async(req, res) => {
       user.isVerified = true;
       user.save(err => {
         if (err) return res.status(500).json({ message: err.message });
+        logger.info("New user registered:", user);
         res.status(200).json({ message: "The account has been verified, you can now log in." });
       });
     });
@@ -191,6 +193,7 @@ const signin = async(req, res) => {
         roles.push(user.roles[i].name);
       }
 
+      logger.info("User login:", user);
       res.status(200).json({
         id: user._id,
         username: user.username,

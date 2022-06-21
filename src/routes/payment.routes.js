@@ -50,10 +50,12 @@ console.log("MODE:", process.env.STRIPE_MODE);
       // TODO: update user's plan in db...
 
       //res.redirect(303, session.url);
+
+      logger.info(`Payment success`);
       res.status(200).json({session, product}); // return the session with the redirect url instead of redirecting directly
     } catch(e) {
       //console.error("create-checkout-session error:", e?.raw?.message);
-      logger.error(`create-checkout-session error: ${JSON.stringify(e)}`);
+      logger.error(`Payment error: ${JSON.stringify(e)}`);
       res.status(400).json(e);
     }
   });
