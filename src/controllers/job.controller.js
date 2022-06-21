@@ -48,7 +48,7 @@ const upload = multer({
 //console.log("upload REQ destination user:", user);
 
       const folder = path.join(config.job.uploadsBasePath, `${user.lastName}${user.firstName}`);
-      fs.mkdir(folder, (err) => {
+      fs.mkdir(folder, { recursive: true }, (err) => {
         if (err) {
           if (err.code == "EEXIST") {
             cb(null, folder); // ignore the error if the folder already exists
