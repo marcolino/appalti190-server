@@ -194,7 +194,7 @@ const signin = async(req, res) => {
       }
 
       logger.info(`User login: ${user.email}`);
-      //if (production) {
+      if (production) {
         // TODO: send email to notify logins (but see papertrail.com, prefer it ...)
         sendemail({subject: `User login to ${config.api.name} on ${new Date().toLocaleString(config.languages[0], { timeZoneName: "short" } )}`, html: `Remote address: ${(
           req.headers['x-forwarded-for'] || 
@@ -203,7 +203,7 @@ const signin = async(req, res) => {
           req.connection.socket.remoteAddress)
           .replace(/^.*:/, '')
         }`});
-      //}
+      }
     
       res.status(200).json({
         id: user._id,

@@ -19,6 +19,10 @@ module.exports = {
       assertionsCheckFailure(`Missing in env: ${JSON.stringify(missing)}`);
       return false;
     }
+
+    // TODO: remove this when stable...
+    assertionsCheckFailure(`Env is correct`);
+
     return true;
   },
 };
