@@ -5,6 +5,9 @@ const sendemail = (mailOptions) => {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY); // TODO: we should call this outside this function, but outside we do not have process.env yet...
   console.log("SENDGRID_API_KEY:", process.env.SENDGRID_API_KEY);
 
+  // set defaults
+  if (!mailOptions.to) mailOptions.to = process.env.FROM_EMAIL;
+  if (!mailOptions.from) mailOptions.from = process.env.FROM_EMAIL;
 //console.log("sgMail.send options:", mailOptions);
   return new Promise((resolve, reject) => {
     sgMail.send(mailOptions, (error, result) => {

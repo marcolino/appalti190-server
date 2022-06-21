@@ -47,7 +47,7 @@ const upload = multer({
       const user = await User.findOne({ _id: req.userId }).exec();
 //console.log("upload REQ destination user:", user);
 
-      const folder = path.join(config.job.uploadsBasePath, `${user.lastName}${user.firstName}`);
+      const folder = path.join(config.job.uploadsBasePath, `${user.lastName}${user.firstName}`); // TODO: use email, it's UNIVOQUE!
       fs.mkdir(folder, { recursive: true }, (err) => {
         if (err) {
           if (err.code == "EEXIST") {

@@ -193,7 +193,7 @@ const signin = async(req, res) => {
         roles.push(user.roles[i].name);
       }
 
-      logger.info("User login:", user);
+      logger.info(`User login: ${user.email}`);
       res.status(200).json({
         id: user._id,
         username: user.username,
