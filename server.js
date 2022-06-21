@@ -97,12 +97,17 @@ require("./src/routes/payment.routes")(app);
 const root = path.join(__dirname, 'client', 'build');
 app.use(express.static(root));
 
+/*
 // handles any requests that does not match the routes below (all routes handled by client)
 app.get("*", (req, res) => {
+  if (production) { 
+    // TODO: someway send email to notify accesses, if no better option (see papertrail.com ...)
+    logger.info(`Access to ${config.api.name} index on ${new Date().toISOString()}`);
+    sendemail({subject: `Access to ${config.api.name} index on ${new Date().toISOString()}`, html: `Remote address: ${req.socket.remoteAddress}`});
+  }
   res.sendFile("index.html", { root });
-  // TODO: someway send email to notify accesses, if no better option (see papertrail.com ...)
-  //sendemail({subject: `Access to ${config.api.name} index on ${new Date().toISOString()}`, html: `Remote address: ${req.socket.remoteAddress}`});
 });
+*/
 
 // set port and listen for requests
 if (require.main === module) { // avoid listening while testing

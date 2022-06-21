@@ -7,7 +7,6 @@ const xmlBuilder = require("xmlbuilder");
 const nodeZip = require("node-zip"); // TODO: nodeZip here, const zip = new nodeZip() below...
 const xmlvalidator = require("xsd-schema-validator");
 const axios = require("axios");
-const { logger } = require("./logger.controller");
 const db = require("../models");
 const User = db.models.user;
 const Plan = db.models.plan;
@@ -48,12 +47,9 @@ const upload = multer({
       const user = await User.findOne({ _id: req.userId }).exec();
 //console.log("upload REQ destination user:", user);
 
-      //const folder = path.join(config.job.uploadsBasePath, `${user.lastName}${user.firstName}`); // TODO: use email, it's UNIVOQUE!
       const folder = path.join(config.job.uploadsBasePath, `${user.email}`);
       fs.mkdir(folder, { recursive: true }, (err) => {
-logger.info("mkdir recursive success");
         if (err) {
-logger.info("mkdir recursive error:", err);
           if (err.code == "EEXIST") {
             cb(null, folder); // ignore the error if the folder already exists
           } else {

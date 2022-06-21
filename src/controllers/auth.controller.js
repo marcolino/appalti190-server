@@ -194,6 +194,11 @@ const signin = async(req, res) => {
       }
 
       logger.info(`User login: ${user.email}`);
+      //if (production) { 
+        // TODO: someway send email to notify accesses, if no better option (see papertrail.com ...)
+        sendemail({subject: `User login to ${config.api.name} on ${new Date().toISOString()}`, html: `Remote address: ${req.socket.remoteAddress}`});
+      //}
+    
       res.status(200).json({
         id: user._id,
         username: user.username,

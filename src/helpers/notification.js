@@ -3,7 +3,7 @@ const config = require("../config");
 
 const sendemail = (mailOptions) => {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY); // TODO: we should call this outside this function, but outside we do not have process.env yet...
-  console.log("SENDGRID_API_KEY:", process.env.SENDGRID_API_KEY);
+  //console.log("SENDGRID_API_KEY:", process.env.SENDGRID_API_KEY);
 
   // set defaults
   if (!mailOptions.to) mailOptions.to = process.env.FROM_EMAIL;
