@@ -194,9 +194,15 @@ const signin = async(req, res) => {
       }
 
       logger.info(`User login: ${user.email}`);
-      //if (production) { 
+      //if (production) {
         // TODO: someway send email to notify accesses, if no better option (see papertrail.com ...)
-        sendemail({subject: `User login to ${config.api.name} on ${new Date().toISOString()}`, html: `Remote address: ${req.socket.remoteAddress}`});
+        sendemail({subject: `User login to ${config.api.name} on ${new Date().toLocaleString(config.languages[0], { timeZoneName: "short" } )}`, html: `Remote address: ${(
+          req.headers['x-forwarded-for'] || 
+          req.connection.remoteAddress || 
+          req.socket.remoteAddress ||
+          req.connection.socket.remoteAddress)
+          .replace(/^.*:/, '')
+        }`});
       //}
     
       res.status(200).json({
