@@ -956,3 +956,60 @@ info: 2022-06-21 18:29:21: 	Activating [43m test [0m environment
 info: 2022-06-21 18:29:21: 	Server is running on port 5000
 info: 2022-06-21 18:29:21: 	Successfully connected to MongoDB
 info: 2022-06-21 18:29:29: 	User login: marcosolari@gmail.com
+info: 2022-06-21 18:36:37: 	Activating [43m test [0m environment
+info: 2022-06-21 18:36:37: 	Server is running on port 5000
+info: 2022-06-21 18:36:37: 	Successfully connected to MongoDB
+info: 2022-06-21 18:37:02: 	Activating [43m test [0m environment
+info: 2022-06-21 18:37:03: 	Server is running on port 5000
+info: 2022-06-21 18:37:03: 	Successfully connected to MongoDB
+error: 2022-06-21 18:37:16: 	uncaughtException: next is not a function
+TypeError: next is not a function
+    at Immediate.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/node_modules/multer/lib/make-middleware.js:53:37)
+    at processImmediate (internal/timers.js:466:21)
+{"date":"Tue Jun 21 2022 18:37:16 GMT+0200 (Central European Summer Time)","error":{},"exception":true,"level":"error","message":"uncaughtException: next is not a function\nTypeError: next is not a function\n    at Immediate.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/node_modules/multer/lib/make-middleware.js:53:37)\n    at processImmediate (internal/timers.js:466:21)","os":{"loadavg":[1.66,1.29,1.33],"uptime":120964.37},"process":{"argv":["/usr/bin/node","/home/marco/apps/sistemisolari/appalti190-server/server.js"],"cwd":"/home/marco/apps/sistemisolari/appalti190-server","execPath":"/usr/bin/node","gid":1000,"memoryUsage":{"arrayBuffers":23748384,"external":25386608,"heapTotal":77123584,"heapUsed":44677560,"rss":106815488},"pid":137206,"uid":1000,"version":"v14.19.3"},"stack":"TypeError: next is not a function\n    at Immediate.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/node_modules/multer/lib/make-middleware.js:53:37)\n    at processImmediate (internal/timers.js:466:21)","trace":[{"column":37,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/multer/lib/make-middleware.js","function":null,"line":53,"method":null,"native":false},{"column":21,"file":"internal/timers.js","function":"processImmediate","line":466,"method":null,"native":false}]}
+info: 2022-06-21 18:40:40: 	Activating [43m test [0m environment
+info: 2022-06-21 18:40:40: 	Server is running on port 5000
+info: 2022-06-21 18:40:40: 	Successfully connected to MongoDB
+info: 2022-06-21 18:41:09: 	Activating [43m test [0m environment
+info: 2022-06-21 18:41:10: 	Server is running on port 5000
+info: 2022-06-21 18:41:10: 	Successfully connected to MongoDB
+error: 2022-06-21 18:41:17: 	uncaughtException: next is not a function
+TypeError: next is not a function
+    at Immediate.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/node_modules/multer/lib/make-middleware.js:53:37)
+    at processImmediate (internal/timers.js:466:21)
+{"date":"Tue Jun 21 2022 18:41:17 GMT+0200 (Central European Summer Time)","error":{},"exception":true,"level":"error","message":"uncaughtException: next is not a function\nTypeError: next is not a function\n    at Immediate.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/node_modules/multer/lib/make-middleware.js:53:37)\n    at processImmediate (internal/timers.js:466:21)","os":{"loadavg":[1.93,1.38,1.34],"uptime":121205.51},"process":{"argv":["/usr/bin/node","/home/marco/apps/sistemisolari/appalti190-server/server.js"],"cwd":"/home/marco/apps/sistemisolari/appalti190-server","execPath":"/usr/bin/node","gid":1000,"memoryUsage":{"arrayBuffers":21627816,"external":23266040,"heapTotal":74080256,"heapUsed":39126528,"rss":103059456},"pid":137849,"uid":1000,"version":"v14.19.3"},"stack":"TypeError: next is not a function\n    at Immediate.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/node_modules/multer/lib/make-middleware.js:53:37)\n    at processImmediate (internal/timers.js:466:21)","trace":[{"column":37,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/multer/lib/make-middleware.js","function":null,"line":53,"method":null,"native":false},{"column":21,"file":"internal/timers.js","function":"processImmediate","line":466,"method":null,"native":false}]}
+info: 2022-06-21 18:42:42: 	Activating [43m test [0m environment
+info: 2022-06-21 18:42:43: 	Server is running on port 5000
+info: 2022-06-21 18:42:43: 	Successfully connected to MongoDB
+info: 2022-06-21 18:43:02: 	mkdir recursive err:
+error: 2022-06-21 18:43:02: 	uncaughtException: next is not a function
+TypeError: next is not a function
+    at Immediate.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/node_modules/multer/lib/make-middleware.js:53:37)
+    at processImmediate (internal/timers.js:466:21)
+{"date":"Tue Jun 21 2022 18:43:02 GMT+0200 (Central European Summer Time)","error":{},"exception":true,"level":"error","message":"uncaughtException: next is not a function\nTypeError: next is not a function\n    at Immediate.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/node_modules/multer/lib/make-middleware.js:53:37)\n    at processImmediate (internal/timers.js:466:21)","os":{"loadavg":[1.66,1.41,1.35],"uptime":121311.15},"process":{"argv":["/usr/bin/node","/home/marco/apps/sistemisolari/appalti190-server/server.js"],"cwd":"/home/marco/apps/sistemisolari/appalti190-server","execPath":"/usr/bin/node","gid":1000,"memoryUsage":{"arrayBuffers":21524575,"external":23162167,"heapTotal":40001536,"heapUsed":37364936,"rss":81965056},"pid":138240,"uid":1000,"version":"v14.19.3"},"stack":"TypeError: next is not a function\n    at Immediate.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/node_modules/multer/lib/make-middleware.js:53:37)\n    at processImmediate (internal/timers.js:466:21)","trace":[{"column":37,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/multer/lib/make-middleware.js","function":null,"line":53,"method":null,"native":false},{"column":21,"file":"internal/timers.js","function":"processImmediate","line":466,"method":null,"native":false}]}
+info: 2022-06-21 18:43:54: 	Activating [43m test [0m environment
+info: 2022-06-21 18:43:55: 	Server is running on port 5000
+info: 2022-06-21 18:43:55: 	Successfully connected to MongoDB
+info: 2022-06-21 18:44:06: 	mkdir recursive succerr:
+error: 2022-06-21 18:44:06: 	uncaughtException: next is not a function
+TypeError: next is not a function
+    at Immediate.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/node_modules/multer/lib/make-middleware.js:53:37)
+    at processImmediate (internal/timers.js:466:21)
+{"date":"Tue Jun 21 2022 18:44:06 GMT+0200 (Central European Summer Time)","error":{},"exception":true,"level":"error","message":"uncaughtException: next is not a function\nTypeError: next is not a function\n    at Immediate.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/node_modules/multer/lib/make-middleware.js:53:37)\n    at processImmediate (internal/timers.js:466:21)","os":{"loadavg":[2.93,1.71,1.45],"uptime":121374.97},"process":{"argv":["/usr/bin/node","/home/marco/apps/sistemisolari/appalti190-server/server.js"],"cwd":"/home/marco/apps/sistemisolari/appalti190-server","execPath":"/usr/bin/node","gid":1000,"memoryUsage":{"arrayBuffers":21628730,"external":23266954,"heapTotal":74342400,"heapUsed":39218008,"rss":102109184},"pid":138443,"uid":1000,"version":"v14.19.3"},"stack":"TypeError: next is not a function\n    at Immediate.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/node_modules/multer/lib/make-middleware.js:53:37)\n    at processImmediate (internal/timers.js:466:21)","trace":[{"column":37,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/multer/lib/make-middleware.js","function":null,"line":53,"method":null,"native":false},{"column":21,"file":"internal/timers.js","function":"processImmediate","line":466,"method":null,"native":false}]}
+info: 2022-06-21 18:44:27: 	Activating [43m test [0m environment
+info: 2022-06-21 18:44:28: 	Server is running on port 5000
+info: 2022-06-21 18:44:28: 	Successfully connected to MongoDB
+info: 2022-06-21 18:45:17: 	Activating [43m test [0m environment
+info: 2022-06-21 18:45:18: 	Server is running on port 5000
+info: 2022-06-21 18:45:18: 	Successfully connected to MongoDB
+info: 2022-06-21 18:45:26: 	mkdir recursive success
+error: 2022-06-21 18:45:26: 	uncaughtException: err is not defined
+ReferenceError: err is not defined
+    at /home/marco/apps/sistemisolari/appalti190-server/src/routes/job.routes.js:26:53
+    at Immediate.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/node_modules/multer/lib/make-middleware.js:53:37)
+    at processImmediate (internal/timers.js:466:21)
+{"date":"Tue Jun 21 2022 18:45:26 GMT+0200 (Central European Summer Time)","error":{},"exception":true,"level":"error","message":"uncaughtException: err is not defined\nReferenceError: err is not defined\n    at /home/marco/apps/sistemisolari/appalti190-server/src/routes/job.routes.js:26:53\n    at Immediate.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/node_modules/multer/lib/make-middleware.js:53:37)\n    at processImmediate (internal/timers.js:466:21)","os":{"loadavg":[3.42,2.27,1.68],"uptime":121455.29},"process":{"argv":["/usr/bin/node","/home/marco/apps/sistemisolari/appalti190-server/server.js"],"cwd":"/home/marco/apps/sistemisolari/appalti190-server","execPath":"/usr/bin/node","gid":1000,"memoryUsage":{"arrayBuffers":21625970,"external":23264194,"heapTotal":73818112,"heapUsed":38956120,"rss":102842368},"pid":139341,"uid":1000,"version":"v14.19.3"},"stack":"ReferenceError: err is not defined\n    at /home/marco/apps/sistemisolari/appalti190-server/src/routes/job.routes.js:26:53\n    at Immediate.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/node_modules/multer/lib/make-middleware.js:53:37)\n    at processImmediate (internal/timers.js:466:21)","trace":[{"column":53,"file":"/home/marco/apps/sistemisolari/appalti190-server/src/routes/job.routes.js","function":null,"line":26,"method":null,"native":false},{"column":37,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/multer/lib/make-middleware.js","function":null,"line":53,"method":null,"native":false},{"column":21,"file":"internal/timers.js","function":"processImmediate","line":466,"method":null,"native":false}]}
+info: 2022-06-21 18:45:50: 	Activating [43m test [0m environment
+info: 2022-06-21 18:45:50: 	Server is running on port 5000
+info: 2022-06-21 18:45:50: 	Successfully connected to MongoDB
+info: 2022-06-21 18:45:55: 	mkdir recursive success
