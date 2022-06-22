@@ -61,7 +61,7 @@ if (production) { // load environment variables from .env file
 }
 
 // notify startup of this server app
-notification("Startup");
+notification({subject: "Startup"});
 
 // assert environment to be fully compliant with expectations
 assertEnvironment();
