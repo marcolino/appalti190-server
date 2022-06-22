@@ -41,7 +41,7 @@ const signup = async(req, res) => {
     password: req.body.password,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
-    address: { city: "Torino" }, // TODO...
+    address: { city: "" }, // TODO...
     roles: [role._id],
     plan: plan._id,
   });

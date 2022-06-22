@@ -59,7 +59,7 @@ console.log("UpdateProfile, body:", req.body);
     if (!user) return res.status(400).json({ message: "We were unable to find this user" });
 
     // validate and normalize email
-    const [error, value] = [null, null];
+    let [error, value] = [null, null];
 
     [error, value] = await propertyEmailValidate(req.body.email, user);
     if (error) return res.status(400).json({ message: error });
