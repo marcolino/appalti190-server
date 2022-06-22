@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const validateEmail = require("email-validator");
-const { sendemail } = require("../helpers/notification");
+const { sendemail, notification } = require("../helpers/notification");
 const { normalizeEmail, nowLocaleDateTime, remoteAddress } = require("../helpers/misc");
 const { logger } = require("./logger.controller");
 const db = require("../models");
@@ -194,10 +194,8 @@ const signin = async(req, res) => {
       }
 
       logger.info(`User login: ${user.email}`);
-      if (production) {
-        // TODO: send email to notify logins (but see papertrail.com, prefer it ...)
-        sendemail({subject: `User login to ${config.api.name} on ${nowLocaleDateTime()}`, html: `Remote address: ${remoteAddress(req)}`});
-      }
+      // notify logins (TODO: see papertrail.com, prefer it, possibly...)
+      notification({subject: `User login to ${config.api.name} on ${nowLocaleDateTime()}`, html: `Remote address: ${remoteAddress(req)}`});
     
       res.status(200).json({
         id: user._id,
