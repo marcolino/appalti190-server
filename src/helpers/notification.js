@@ -33,11 +33,12 @@ const assertionsCheckFailure = async (body) => {
   }
 };
 
-const startupNotification = async () => {
-  const subject = `${config.api.name} ~ Request from ${nowLocaleDateTime()}`;
+const notification = async (subject, html) => {
+  if (process.env.NODE_ENV !== "production") return; // notify only in production
+  html = html ? html : subject;
+  subject = `${config.api.name} ~ ${subject}`;
   const to = config.emailAdministration.to;
   const from = config.emailAdministration.from;
-  const html = `Startup notification`; //Request from ${remoteAddress(req)}`;
   try {
     await sendemail({to, from, subject, html});
   } catch(error) {
@@ -48,6 +49,6 @@ const startupNotification = async () => {
 module.exports = {
   sendemail,
   assertionsCheckFailure,
-  startupNotification,
+  notification,
 };
 
