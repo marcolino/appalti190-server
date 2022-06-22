@@ -3,7 +3,7 @@ const path = require("path");
 const cors = require("cors");
 const { logger, colors } = require("./src/controllers/logger.controller");
 const db = require("./src/models");
-const { assertEnvironment, startupNotification } = require("./src/helpers/environment");
+const { assertEnvironment } = require("./src/helpers/environment");
 const { startupNotification } = require("./src/helpers/misc");
 const config = require("./src/config");
 
