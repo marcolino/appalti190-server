@@ -1,5 +1,6 @@
 const url = require("url");
 //const punycode = require("punycode");
+const config = require("../config");
 
 module.exports = {
 
@@ -59,11 +60,11 @@ module.exports = {
 };
 
 const cleanDomain = (domain) => {
-  // We don't need to trim the domain as if it has any leading whitespace
-  // validation rejects it as invalid.
+  // We don't need to trim leading whitespace
+  // because validation rejects it as invalid.
 
-  // We don't need to strip a trailing '.' because validation rejects domains
-  // that have it.
+  // We don't need to strip a trailing '.'
+  // because validation rejects it as invalid.
 
   //domain = punycode.toASCII(domain);
   domain = url.domainToASCII(domain);

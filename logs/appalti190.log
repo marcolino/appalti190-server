@@ -1069,3 +1069,6 @@ info: 2022-06-22 10:33:00: 	Successfully connected to MongoDB
 info: 2022-06-22 10:34:12: 	Activating [43m test [0m environment
 info: 2022-06-22 10:34:12: 	Server is running on port 5000
 info: 2022-06-22 10:34:12: 	Successfully connected to MongoDB
+info: 2022-06-22 10:40:28: 	Activating [43m test [0m environment
+info: 2022-06-22 10:40:28: 	Server is running on port 5000
+info: 2022-06-22 10:40:28: 	Successfully connected to MongoDB
