@@ -34,7 +34,6 @@ const assertionsCheckFailure = async (body) => {
 };
 
 const notification = async ({subject, html}) => {
-console.log("NOTIFICATION - subject, html:", subject, html);
   if (process.env.NODE_ENV !== "production") return; // notify only in production
   html = html ? html : subject;
   subject = `${config.api.name} ~ ${subject}`;
