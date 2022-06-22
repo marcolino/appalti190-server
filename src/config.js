@@ -135,7 +135,7 @@ module.exports = {
     },
   },
   emailAdministration: {
-    from: "marcosolari+2@gmail.com",
+    from: "marcosolari@gmail.com",
     to: "marcosolari@gmail.com",
   },
   envRequiredVariables: [ // TODO: check all of these are necessary
