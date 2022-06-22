@@ -4,7 +4,7 @@ const cors = require("cors");
 const { logger, colors } = require("./src/controllers/logger.controller");
 const db = require("./src/models");
 const { assertEnvironment } = require("./src/helpers/environment");
-const { startupNotification } = require("./src/helpers/misc");
+const { startupNotification } = require("./src/helpers/notification");
 const config = require("./src/config");
 
 const production = (process.env.NODE_ENV === "production");
