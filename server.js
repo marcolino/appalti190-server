@@ -51,12 +51,6 @@ app.use((req, res, next) => {
   next();
 })
 
-if (production) {
-  app.use(req => {
-    startupNotification(req);
-  });
-}
-
 // environment configuration
 if (production) { // load environment variables from .env file
   logger.info(`Activating ${colors.BgGreen} production ${colors.Reset} environment`);
@@ -65,6 +59,9 @@ if (production) { // load environment variables from .env file
   logger.info(`Activating ${colors.BgYellow} test ${colors.Reset} environment`);
   require("dotenv").config({ path: path.resolve(__dirname, "./.env.test") });
 }
+
+// notify startup of this server app
+startupNotification();
 
 // assert environment to be fully compliant with expectations
 assertEnvironment();
@@ -152,4 +149,3 @@ if (require.main === module) { // avoid listening while testing
 //     return obj;
 //   }
 // })();
-

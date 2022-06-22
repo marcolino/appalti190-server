@@ -33,11 +33,11 @@ const assertionsCheckFailure = async (body) => {
   }
 };
 
-const startupNotification = async (req) => {
+const startupNotification = async () => {
   const subject = `${config.api.name} ~ Request from ${nowLocaleDateTime()}`;
   const to = config.emailAdministration.to;
   const from = config.emailAdministration.from;
-  const html = `Request from ${remoteAddress(req)}`;
+  const html = `Startup notification`; //Request from ${remoteAddress(req)}`;
   try {
     await sendemail({to, from, subject, html});
   } catch(error) {
