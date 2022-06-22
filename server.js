@@ -3,7 +3,7 @@ const path = require("path");
 const cors = require("cors");
 const { logger, colors } = require("./src/controllers/logger.controller");
 const db = require("./src/models");
-const { assertEnvironment } = require("./src/helpers/environment");
+const { assertEnvironment, startupNotification } = require("./src/helpers/environment");
 //const { sendemail } = require("./src/helpers/notification");
 const config = require("./src/config");
 
@@ -50,6 +50,12 @@ app.use((req, res, next) => {
   // TODO: implement i18n server side too
   next();
 })
+
+if (production) {
+  app.use(req => {
+    startupNotification(req);
+  });
+}
 
 // environment configuration
 if (production) { // load environment variables from .env file

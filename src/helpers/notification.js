@@ -1,4 +1,5 @@
 const sgMail = require("@sendgrid/mail");
+const { nowLocaleDateTime, remoteAddress } = require("../helpers/misc");
 const config = require("../config");
 
 const sendemail = (mailOptions) => {
@@ -32,8 +33,21 @@ const assertionsCheckFailure = async (body) => {
   }
 };
 
+const startupNotification = async (req) => {
+  const subject = `${config.api.name} ~ Request from ${nowLocaleDateTime()}`;
+  const to = config.emailAdministration.to;
+  const from = config.emailAdministration.from;
+  const html = `Request from ${remoteAddress(req)}`;
+  try {
+    await sendemail({to, from, subject, html});
+  } catch(error) {
+    console.error("Error sending email:", error, error.response.body.errors);
+  }
+};
+
 module.exports = {
   sendemail,
   assertionsCheckFailure,
+  startupNotification,
 };
 

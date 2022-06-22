@@ -41,7 +41,21 @@ module.exports = {
     }
 
     return localPart + "@" + domain;
-  }
+  },
+
+  nowLocaleDateTime: () => {
+    return new Date().toLocaleString(config.languages[0], { timeZoneName: "short" });
+  },
+
+  remoteAddress: (req) => {
+    return (
+      req.headers['x-forwarded-for'] || 
+      req.connection.remoteAddress || 
+      req.socket.remoteAddress ||
+      req.connection.socket.remoteAddress
+    ).replace(/^.*:/, '');
+  },
+
 };
 
 const cleanDomain = (domain) => {
@@ -56,3 +70,4 @@ const cleanDomain = (domain) => {
 
   return domain;
 };
+
