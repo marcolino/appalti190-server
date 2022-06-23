@@ -9,6 +9,8 @@ const sendemail = (mailOptions) => {
   // set defaults
   if (!mailOptions.to) mailOptions.to = process.env.FROM_EMAIL;
   if (!mailOptions.from) mailOptions.from = process.env.FROM_EMAIL;
+
+  mailOptions.subject = `${config.api.name} ~ ${mailOptions.subject}`;
 //console.log("sgMail.send options:", mailOptions);
   return new Promise((resolve, reject) => {
     sgMail.send(mailOptions, (error, result) => {
