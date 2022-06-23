@@ -134,7 +134,8 @@ const signupConfirm = async(req, res) => {
       user.isVerified = true;
       user.save(err => {
         if (err) return res.status(500).json({ message: err.message });
-        logger.info("New user registered:", user);
+        logger.info("User signup:", user);
+        notification({subject: `User signup on ${nowLocaleDateTime()}`, html: `Remote address: ${remoteAddress(req)}`});
         res.status(200).json({ message: "The account has been verified, you can now log in." });
       });
     });
