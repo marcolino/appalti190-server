@@ -195,7 +195,7 @@ const signin = async(req, res) => {
 
       logger.info(`User login: ${user.email}`);
       // notify logins (TODO: see papertrail.com, prefer it, possibly...)
-      notification({subject: `User login to ${config.api.name} on ${nowLocaleDateTime()}`, html: `Remote address: ${remoteAddress(req)}`});
+      notification({subject: `User login on ${nowLocaleDateTime()}`, html: `Remote address: ${remoteAddress(req)}`});
     
       res.status(200).json({
         id: user._id,
