@@ -136,7 +136,7 @@ module.exports = {
   },
   emailAdministration: {
     //from: "marcosolari@gmail.com",
-    from: "antonio.rossi@arsistemi.it", // TODO: check if this works and avoid SPAM marks by gmail...
+    from: "appalti190@arsistemi.it", // TODO: check if this works and avoid SPAM marks by gmail...
     to: "marcosolari@gmail.com",
   },
   envRequiredVariables: [ // TODO: check all of these are necessary
