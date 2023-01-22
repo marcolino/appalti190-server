@@ -471,6 +471,9 @@ const transformXls2Xml = async (req, res) => {
           //"codiceFiscale": partecipanteCodiceFiscale,
           "ragioneSociale": partecipanteRagioneSociale,
         };
+        if (!partecipanti) {
+          partecipanti = {};
+        }
         if (!("partecipante" in partecipanti)) {
           partecipanti["partecipante"] = [];
         }
