@@ -1090,3 +1090,10 @@ info: 2022-06-22 11:28:41: 	Successfully connected to MongoDB
 info: 2022-06-22 11:28:55: 	Activating [43m test [0m environment
 info: 2022-06-22 11:28:56: 	Server is running on port 5000
 info: 2022-06-22 11:28:56: 	Successfully connected to MongoDB
+info: 2023-01-22 11:38:52: 	Activating [43m test [0m environment
+info: 2023-01-22 11:38:53: 	Server is running on port 5000
+info: 2023-01-22 11:38:53: 	Successfully connected to MongoDB
+info: 2023-01-22 11:48:01: 	Activating [43m test [0m environment
+info: 2023-01-22 11:48:02: 	Server is running on port 5000
+info: 2023-01-22 11:48:02: 	Successfully connected to MongoDB
+info: 2023-01-22 11:49:51: 	User login: marcosolari@gmail.com

@@ -17,6 +17,7 @@
     "pub-dev": "yarn pub && yarn logs",
     "deploy": "git push heroku master",
     "SUSPENDED-predeploy": "yarn test",
+    "run-web": "heroku ps:scale web=1 --app appalti190",
     "logs": "heroku logs --tail",
     "logspt": "heroku addons:open --app appalti190 papertrail",
     "check-unused-dependencies": "depcheck",

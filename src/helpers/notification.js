@@ -22,7 +22,7 @@ const sendemail = (mailOptions) => {
 };
 
 const assertionsCheckFailure = async (body) => {
-  const subject = `${config.api.name} ~ Controllo asserzione fallito`;
+  const subject = `Controllo asserzione fallito`;
   const to = config.emailAdministration.to;
   const from = config.emailAdministration.from;
   const html = body;
