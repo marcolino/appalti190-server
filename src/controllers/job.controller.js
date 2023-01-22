@@ -628,7 +628,6 @@ console.log("ERROR1", error);
     //retval.xml = (process.env.NODE_ENV !== "production") ? xml.substring(0, 256) : xml;
 
     retval.outputFile = outputFile;
-//retval.outputFile = "downloads/marco/dataset-2021.xml";
 
     // let outputFolder = path.join(__dirname, "..", config.job.outputBasePath, encodeURIComponent(req.auth.user));
     // let outputFile = path.basename(datasetLink);
