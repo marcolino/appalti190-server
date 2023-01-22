@@ -1,0 +1,3419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<legge190:pubblicazione xsi:schemaLocation="legge190_1_0 datasetAppaltiL190.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:legge190="legge190_1_0">
+  <metadata>
+    <titolo>Pubblicazione 1 legge 190</titolo>
+    <abstract>Pubblicazione 1 legge 190 anno 1 rif. 2012</abstract>
+    <dataPubblicazioneDataset>2022-06-21</dataPubblicazioneDataset>
+    <entePubblicatore>S.I.TO SPA - SOCIETA INTERPORTO DI TORINO</entePubblicatore>
+    <dataUltimoAggiornamentoDataset>2022-06-21</dataUltimoAggiornamentoDataset>
+    <annoRiferimento>2021</annoRiferimento>
+    <urlFile>http://allegati.interportotorino.it/2021/dataset-2021.xml</urlFile>
+    <licenza>IODL</licenza>
+  </metadata>
+  <data>
+    <lotto>
+      <cig>4823962B5D</cig>
+      <strutturaProponente>
+        <codiceFiscaleProp>03717710010</codiceFiscaleProp>
+        <denominazione>S.I.TO SPA - SOCIETA INTERPORTO DI TORINO</denominazione>
+      </strutturaProponente>
+      <oggetto>Gara informale per l'affidamento in gestione dell'area adibita al servizio di rifornimento carburante, officina, autolavaggio e servizi connessi indicati nel progetto di potenziamento dell'impianto posto a base di gara nel complesso interportuale - C</oggetto>
+      <sceltaContraente>02-PROCEDURA RISTRETTA</sceltaContraente>
+      <partecipanti>
+        <partecipante>
+          <codiceFiscale>00435970587</codiceFiscale>
+          <ragioneSociale>Kuwait Petroleum Italia SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Eni Spa</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Esso Italiana S.r.l.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>api anonima petroli italiana S.p.A.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Shell Italia Spa</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TAMOIL ITALIA S.p.A.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TotalErg SpA</ragioneSociale>
+        </partecipante>
+      </partecipanti>
+      <aggiudicatari></aggiudicatari>
+      <importoAggiudicazione>0.00</importoAggiudicazione>
+      <tempiCompletamento></tempiCompletamento>
+      <importoSommeLiquidate>0.00</importoSommeLiquidate>
+    </lotto>
+    <lotto>
+      <cig>4870827D95</cig>
+      <strutturaProponente>
+        <codiceFiscaleProp>03717710010</codiceFiscaleProp>
+        <denominazione>S.I.TO SPA - SOCIETA INTERPORTO DI TORINO</denominazione>
+      </strutturaProponente>
+      <oggetto>Servizi relativi alle opere in verde nell'ambito dell'interporto di Torino</oggetto>
+      <sceltaContraente>04-PROCEDURA NEGOZIATA SENZA PREVIA PUBBLICAZIONE</sceltaContraente>
+      <partecipanti>
+        <raggruppamento>
+          <membro>
+            <ragioneSociale>ICEF S.R.L.</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>M.A.V.E.S. S.A.S.</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+        </raggruppamento>
+        <partecipante>
+          <codiceFiscale>05003380010</codiceFiscale>
+          <ragioneSociale>DAVID GIUSEPPE  &amp; C. S.A.S.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>POLLICE  VERDE di Vaccarino Alberto</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TECNOVERDE S.A.S.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CO.MAR S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BOERIS S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>AGER S.N.C.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>AGRO VERDE S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>AZIENDA AGRICOLA MERIANO FRANCESCO M. &amp; D. S.S.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GEOVERDE SYSTEM S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ITALVERDE S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>AZIENDA AGRICOLA EREDI OSTORERO  MICHELINO</ragioneSociale>
+        </partecipante>
+      </partecipanti>
+      <aggiudicatari>
+        <aggiudicatarioRaggruppamento>
+          <membro>
+            <ragioneSociale>ICEF S.R.L.</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>M.A.V.E.S. S.A.S.</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+        </aggiudicatarioRaggruppamento>
+      </aggiudicatari>
+      <importoAggiudicazione>78616.17</importoAggiudicazione>
+      <tempiCompletamento>
+        <dataInizio>2013-04-12</dataInizio>
+        <dataUltimazione>2014-05-06</dataUltimazione>
+      </tempiCompletamento>
+      <importoSommeLiquidate>117049.54</importoSommeLiquidate>
+    </lotto>
+    <lotto>
+      <cig>50685099EF</cig>
+      <strutturaProponente>
+        <codiceFiscaleProp>03717710010</codiceFiscaleProp>
+        <denominazione>S.I.TO SPA - SOCIETA INTERPORTO DI TORINO</denominazione>
+      </strutturaProponente>
+      <oggetto>Servizi di pulizia di alcuni immobili della S.I.TO Spa</oggetto>
+      <sceltaContraente>08-AFFIDAMENTO IN ECONOMIA - COTTIMO FIDUCIARIO</sceltaContraente>
+      <partecipanti>
+        <partecipante>
+          <codiceFiscale>05651570011</codiceFiscale>
+          <ragioneSociale>RES NOVA S.P.A.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PULITECNICA IMPRESA DI PULIZIA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EMME 2 S.A.S. DI FERRERO MARIO &amp; C.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COOPERATIVA SOCIALE  ANTEA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COOPLAT S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COES SOCIETA' COOPERATIVA SOCIALE ONLUS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>APIS COOPERATIVA DI SERVIZI</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>JET SERVICE S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>LADY CLEAN</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ALPHA MULTI SERVICE DI FORTE VALTER</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>LOGI CONF SERVIZI LOGISTICI S.C.P.A.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GIACOMELLI SABRINA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EVER CLEAN  SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CLEAN PLANET COOPERATIVA SOCIALE</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IGIENE AMBIENTALE VALVERDE SNC</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>G.S.A. GRUPPO SERVIZI ASSOCIATI</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PROFESSIONAL ART S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GI.EMME DI GIORGIO MICHELE</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SAFA DI F.F.</ragioneSociale>
+        </partecipante>
+      </partecipanti>
+      <aggiudicatari>
+        <aggiudicatario>
+          <codiceFiscale>05651570011</codiceFiscale>
+          <ragioneSociale>RES NOVA S.P.A.</ragioneSociale>
+        </aggiudicatario>
+      </aggiudicatari>
+      <importoAggiudicazione>95507.29</importoAggiudicazione>
+      <tempiCompletamento>
+        <dataInizio>2014-02-03</dataInizio>
+        <dataUltimazione>2016-02-29</dataUltimazione>
+      </tempiCompletamento>
+      <importoSommeLiquidate>95.51</importoSommeLiquidate>
+    </lotto>
+    <lotto>
+      <cig>5130225B96</cig>
+      <strutturaProponente>
+        <codiceFiscaleProp>03717710010</codiceFiscaleProp>
+        <denominazione>S.I.TO SPA - SOCIETA INTERPORTO DI TORINO</denominazione>
+      </strutturaProponente>
+      <oggetto>Gestione dell'area adibita al servizio di rifornimento carburante, officina, autolavaggio e servizi connessi indicati nel progetto di potenziamento dell'impianto posto a base di gara nel complesso Interportuale - zona Sud - Comune di Rivalta di Torin</oggetto>
+      <sceltaContraente>04-PROCEDURA NEGOZIATA SENZA PREVIA PUBBLICAZIONE</sceltaContraente>
+      <partecipanti>
+        <raggruppamento>
+          <membro>
+            <codiceFiscale>00435970587</codiceFiscale>
+            <ragioneSociale>Kuwait Petroleum Italia SpA</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>Orec Cantieri Srl</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+        </raggruppamento>
+      </partecipanti>
+      <aggiudicatari></aggiudicatari>
+      <importoAggiudicazione>0.00</importoAggiudicazione>
+      <tempiCompletamento>
+        <dataInizio>2014-03-01</dataInizio>
+      </tempiCompletamento>
+      <importoSommeLiquidate>0.00</importoSommeLiquidate>
+    </lotto>
+    <lotto>
+      <cig>51594554F4</cig>
+      <strutturaProponente>
+        <codiceFiscaleProp>03717710010</codiceFiscaleProp>
+        <denominazione>S.I.TO SPA - SOCIETA INTERPORTO DI TORINO</denominazione>
+      </strutturaProponente>
+      <oggetto>Opere, prestazioni forniture necessarie per la manutenzione, per il mantenimento, per la messa in sicurezza e la riparazione degli immobili di proprietà e alle parti comuni dell'Interporto di Torino</oggetto>
+      <sceltaContraente>04-PROCEDURA NEGOZIATA SENZA PREVIA PUBBLICAZIONE</sceltaContraente>
+      <partecipanti>
+        <partecipante>
+          <codiceFiscale>08036160011</codiceFiscale>
+          <ragioneSociale>PRADA  COSTRUZIONI S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SO.CO.FAT S.C.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILEVRA S.N.C.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PROGE S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MESTIERE CASA S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>RI.RE.CO DI QUINTINO DAMIANO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SERRA RENATO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MARGRITA S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MAGAV COSTRUZIONI E RISTRUTTURAZIONI EDILI</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Bgie di BUNESCU GABRIEL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MATTEO GEOM. LUCIANO COSTRUZIONI EDILI</ragioneSociale>
+        </partecipante>
+      </partecipanti>
+      <aggiudicatari>
+        <aggiudicatario>
+          <ragioneSociale>PROGE S.R.L.</ragioneSociale>
+        </aggiudicatario>
+      </aggiudicatari>
+      <importoAggiudicazione>89484.28</importoAggiudicazione>
+      <tempiCompletamento>
+        <dataInizio>2014-07-16</dataInizio>
+        <dataUltimazione>2016-06-29</dataUltimazione>
+      </tempiCompletamento>
+      <importoSommeLiquidate>101201.21</importoSommeLiquidate>
+    </lotto>
+    <lotto>
+      <cig>528606894D</cig>
+      <strutturaProponente>
+        <codiceFiscaleProp>03717710010</codiceFiscaleProp>
+        <denominazione>S.I.TO SPA - SOCIETA INTERPORTO DI TORINO</denominazione>
+      </strutturaProponente>
+      <oggetto>Servizio di sgombero neve, spargimento sale e prestazioni accessorie nell'Interporto di Torino, nelle aree a Sud e Nord della tangenziale per il periodo novembre 2013 - ottobre 2014</oggetto>
+      <sceltaContraente>04-PROCEDURA NEGOZIATA SENZA PREVIA PUBBLICAZIONE</sceltaContraente>
+      <partecipanti>
+        <partecipante>
+          <codiceFiscale>06083550019</codiceFiscale>
+          <ragioneSociale>BOERIS S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DAVID GIUSEPPE  &amp; C. S.A.S.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>F.G. S.r.L. di Fassino Giovanni</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>AZIENDA AGRICOLA VIVAISTICA DANIELE GIARDINI DI CASTAGNO DANIELE</ragioneSociale>
+        </partecipante>
+      </partecipanti>
+      <aggiudicatari>
+        <aggiudicatario>
+          <codiceFiscale>06083550019</codiceFiscale>
+          <ragioneSociale>BOERIS S.R.L.</ragioneSociale>
+        </aggiudicatario>
+      </aggiudicatari>
+      <importoAggiudicazione>33358.00</importoAggiudicazione>
+      <tempiCompletamento>
+        <dataInizio>2013-11-22</dataInizio>
+        <dataUltimazione>2014-02-28</dataUltimazione>
+      </tempiCompletamento>
+      <importoSommeLiquidate>7102.04</importoSommeLiquidate>
+    </lotto>
+    <lotto>
+      <cig>54512913A4</cig>
+      <strutturaProponente>
+        <codiceFiscaleProp>03717710010</codiceFiscaleProp>
+        <denominazione>S.I.TO SPA - SOCIETA INTERPORTO DI TORINO</denominazione>
+      </strutturaProponente>
+      <oggetto>Manutenzione della copertura del magazzino NORD 7A</oggetto>
+      <sceltaContraente>04-PROCEDURA NEGOZIATA SENZA PREVIA PUBBLICAZIONE</sceltaContraente>
+      <partecipanti>
+        <partecipante>
+          <codiceFiscale>07625820019</codiceFiscale>
+          <ragioneSociale>EURO COPERTURE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DIEFFE COSTRUZIONI GENERALI S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EMME-CI S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COPRI SYSTEM S.P.A.</ragioneSociale>
+        </partecipante>
+      </partecipanti>
+      <aggiudicatari>
+        <aggiudicatario>
+          <ragioneSociale>DIEFFE COSTRUZIONI GENERALI S.R.L.</ragioneSociale>
+        </aggiudicatario>
+      </aggiudicatari>
+      <importoAggiudicazione>39221.24</importoAggiudicazione>
+      <tempiCompletamento>
+        <dataInizio>2014-05-12</dataInizio>
+        <dataUltimazione>2014-06-30</dataUltimazione>
+      </tempiCompletamento>
+      <importoSommeLiquidate>39221.24</importoSommeLiquidate>
+    </lotto>
+    <lotto>
+      <cig>54930922EB</cig>
+      <strutturaProponente>
+        <codiceFiscaleProp>03717710010</codiceFiscaleProp>
+        <denominazione>S.I.TO SPA - SOCIETA INTERPORTO DI TORINO</denominazione>
+      </strutturaProponente>
+      <oggetto>Manutenzione straordinaria nel magazzino ad uso spedizionieri denominato Nord 2</oggetto>
+      <sceltaContraente>04-PROCEDURA NEGOZIATA SENZA PREVIA PUBBLICAZIONE</sceltaContraente>
+      <partecipanti>
+        <partecipante>
+          <codiceFiscale>09209650010</codiceFiscale>
+          <ragioneSociale>OLYMPIA COSTRUZIONI S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ICEF S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMPRESA PIAZZA S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TRA.MA S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>A.M.S. DI SCHEPIS ANTONINO &amp; C. S.A.S.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TERRA COSTRUZIONI S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PRADA  COSTRUZIONI S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMSET S.A.S. DI R. MONTI &amp; L. SALUSSO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILEVRA S.N.C.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PROGE S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MARGRITA S.R.L.</ragioneSociale>
+        </partecipante>
+      </partecipanti>
+      <aggiudicatari>
+        <aggiudicatario>
+          <codiceFiscale>09209650010</codiceFiscale>
+          <ragioneSociale>OLYMPIA COSTRUZIONI S.R.L.</ragioneSociale>
+        </aggiudicatario>
+      </aggiudicatari>
+      <importoAggiudicazione>168548.85</importoAggiudicazione>
+      <tempiCompletamento>
+        <dataInizio>2014-04-16</dataInizio>
+        <dataUltimazione>2014-12-02</dataUltimazione>
+      </tempiCompletamento>
+      <importoSommeLiquidate>214821.45</importoSommeLiquidate>
+    </lotto>
+    <lotto>
+      <cig>55375101D0</cig>
+      <strutturaProponente>
+        <codiceFiscaleProp>03717710010</codiceFiscaleProp>
+        <denominazione>S.I.TO SPA - SOCIETA INTERPORTO DI TORINO</denominazione>
+      </strutturaProponente>
+      <oggetto>Servizi relativi alle opere in verde nell'ambito dell'interporto di Torino</oggetto>
+      <sceltaContraente>04-PROCEDURA NEGOZIATA SENZA PREVIA PUBBLICAZIONE</sceltaContraente>
+      <partecipanti>
+        <raggruppamento>
+          <membro>
+            <ragioneSociale>ICEF S.R.L.</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>M.A.V.E.S. S.A.S. </ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+        </raggruppamento>
+        <partecipante>
+          <codiceFiscale>00507280014</codiceFiscale>
+          <ragioneSociale>SO.CO.FAT S.C.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>AZIENDA AGRICOLA VIVAISTICA DANIELE GIARDINI DI CASTAGNO DANIELE</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>AGRIGARDEN S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>AGROGREEN S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>G.S. SERVICE S.N.C.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GREEN KEEPER S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GEOVERDE SYSTEM S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EUROVERDE S.A.S. DI GRECO SERGIO &amp; C.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>AGER S.N.C.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>APIS COOPERATIVA DI SERVIZI</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>RES NOVA S.P.A.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BOERIS S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DAVID GIUSEPPE  &amp; C. S.A.S.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TECNOVERDE S.A.S.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>OSTORERO SARA</ragioneSociale>
+        </partecipante>
+      </partecipanti>
+      <aggiudicatari>
+        <aggiudicatarioRaggruppamento>
+          <membro>
+            <ragioneSociale>ICEF S.R.L.</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>M.A.V.E.S. S.A.S. </ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+        </aggiudicatarioRaggruppamento>
+      </aggiudicatari>
+      <importoAggiudicazione>81203.14</importoAggiudicazione>
+      <tempiCompletamento>
+        <dataInizio>2014-05-06</dataInizio>
+        <dataUltimazione>2015-05-29</dataUltimazione>
+      </tempiCompletamento>
+      <importoSommeLiquidate>95321.13</importoSommeLiquidate>
+    </lotto>
+    <lotto>
+      <cig>XC90D48F49</cig>
+      <strutturaProponente>
+        <codiceFiscaleProp>03717710010</codiceFiscaleProp>
+        <denominazione>S.I.TO SPA - SOCIETA INTERPORTO DI TORINO</denominazione>
+      </strutturaProponente>
+      <oggetto>Lavori di manutenzione straordinaria della copertura del capannone nord 20</oggetto>
+      <sceltaContraente>23-AFFIDAMENTO DIRETTO</sceltaContraente>
+      <partecipanti>
+        <raggruppamento>
+          <membro>
+            <ragioneSociale>Arch. A. Vergnano</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>Arch. A. Di Gregorio</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>Arch. A. Vergnano</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>Arch. A. Di Gregorio</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>Arch. A. Vergnano</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>Arch. A. Di Gregorio</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>PEGASO Srl Servizi Fiduciari</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>SISTEMI DI SICUREZZA SrL</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>PEGASO Srl</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>SISTEMI DI SICUREZZA Srl</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>IREN AMBIENTE SpA</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>SOC. COOPERATIVA DI PRODUZIONE LAVORO LOGI CONF SERVIZI LOGISTICI</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>PEGASO Srl</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>SISTEMI DI SICUREZZA Srl</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>AGRIDEA s.c.s.</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>ECOSOL SCS a.r.l.</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale> SUD SERVICE SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>NORD COSTRUZIONI GENERALI SRL</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>D.G.L. COSTRUZIONI SAS DI LAZZARA PIERO &amp; CO</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>CAVE SANGONE SPA</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>EFFEDUE SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>CANTIERI MODERNI SRL</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>ICEF SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>AGROGREEN SRL</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>COSTRUZIONI GENERALI EDILQUATTRO SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>BORIO GIACOMO SRL</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>RAZZETTI COSTRUZIONI GENERALI SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>COMAS COSTRUZIONI MANUTENZIONE STRADE SRL</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>CIMO IMPRESA COSTRUZIONI INDUSTRIALI EDILI STRADALI SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>S.C. EDIL DI PAGLIERO RENZO SAS</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>MASER SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>CO.GEN.T.A SRL</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>TERRA COSTRUZIONI SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>AGRI SCAVI SAS</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>AVALIS COSTRUZIONI SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>A.T.E. SNC DI FALCO SILVIO &amp; C.</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>ASTONE COSTRUZIONI SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>CE.SI.A. SRL (Centro Siciliano Appalti)</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>MMF COSTRUZIONI GENERALI SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>CO.GE.CA. SRL</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>SE.MA. COSTRUZIONI GENERALI SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>SCAVI PIZZETTI SRL</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>EDILMAR SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>CAPPELLO GIUSEPPE SRL</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>MAGNETTI SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>TERRA.CON SRL</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale> AVALIS COSTRUZIONI SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>AUTOTRASPORTI ESCAVAZIONI PRINA SILVIO SAS</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>EDILTRE SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>CAGNO COSTRUZIONI SRL</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>EDILMAR SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>ITALVERDE SRL</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>IM.A.F. SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>EDILFER SRL</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale> FERRERI CARLO</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>ARTUSO SRL</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>FRATELLI BOTTANO SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>COGIBIT SRL</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>SIAL SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>GREEN KEEPER SUBALPINA SRL</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>SERRHOUSE SRLS</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>BLUE SHARK SRL</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale> NG COSTRUZIONI ED IMPIANTI UNIPERSONALE</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>SAES SOCIETA' APPALTI EDILI STRADALI SRL </ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>CARPENTECNICA GROUP SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>BCS COSTRUZIONI SRL</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>COSTRUZIONI CINQUEGRANA SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>MOSTRAD  SRL</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>PETRA' SRLS</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>PINTO SRL</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>GIULIA 78 SOCIETA COOPERATIVA</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>ITALIA2000 SOCIETA' COOPERATIVA</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale> TECNICA RESTAURI SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>IMPRENET CONSORZIO STABILE SRL</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>BORGIS SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>M.I.T. SRL </ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>GALLO VALTER &amp; C. SNC</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>I.E.F. LEONARDO SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>CASELLE STRADE SRL</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>TERRA COSTRUZIONI SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>CAVIT SPA</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>ATLANTE S.C.P.A.</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>BIANCO COSTRUZIONI SRL</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>CAUDA STRADE SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>LIBONO E STEFAN SRL</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>AI STUDIO -ASSOCIAZIONE PROFESSIONALE </ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>VALENTE ARNALDI DOTT. GEOL. ANDREA</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>BALMA BUILDING Srl</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>ESSECI SRL</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>PREVE COSTRUZIONI S'PA</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>EDILGROUP SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>D.R. FERROVIARIA ITALIA SRL</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>ALLEGRINI SRL</ragioneSociale>
+            <ruolo>02-MANDATARIA</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>MERCITALIA SHUNTING &amp; TERMINAL SRL</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+        </raggruppamento>
+        <partecipante>
+          <codiceFiscale>07625820019</codiceFiscale>
+          <ragioneSociale>EURO COPERTURE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILEVRA S.N.C.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MASTERCOP S.N.C.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DIEFFE COSTRUZIONI GENERALI S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>FAVARETTI S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COPRI SYSTEM S.P.A.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>AA SRL COPERTURE </ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ANCOVER COSTRUZIONI S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EMME-CI S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMSET S.A.S. DI R. MONTI &amp; L. SALUSSO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILEVRA S.N.C.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DIEFFE COSTRUZIONI GENERALI S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COPRI SYSTEM S.P.A.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GRAFFI STUDIO ASSOCIATO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ARCH. IGOR FLIS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILEVRA S.N.C.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DIEFFE COSTRUZIONI GENERALI S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>OLYMPIA COSTRUZIONI S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Arch. L. Bonfante</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Ing. G. Matta</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Arch. M. Bagetto</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EURO COPERTURE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COPRI SYSTEM S.P.A.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>OLYMPIA COSTRUZIONI S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Arch. L. Bonfante</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Ing. G. Matta</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Arch. M. Bagetto</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Arch. L. Bonfante</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Ing. G. Matta</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Arch. M. Bagetto</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Studio Tecnico Associato AS32</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Arch. Sandra Rovere</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Arch. L. Bonfante</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>AR.FER srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SI. GI. FER. Snc</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SERFER srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DI PIETRANTONIO &amp; C. Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMPRESA PIAZZA S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>C.I.A.T. Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Impresa Brillada Vittorio &amp; C. snc</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>G.M.E. Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IL.MA Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Panero Impianti Elettrici sas</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ITALIANA TECNOLOGICA Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>S.G. IMPIANTI</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>THERMOREX sas</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Amitrano antincendio</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>THERMOREX sas</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Bgie di BUNESCU GABRIEL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Ing. A. Rostagno</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Arch. M. Vaglietti</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>OLICAR spa</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>THERMOREX sas</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>THERMOREX sas</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Termodinamica Service Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Codelfa Spa</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Tecnotre Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>AR.FER srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SI. GI. FER. Snc</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SERFER srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Panero Impianti Elettrici sas</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Panero Impianti Elettrici sas</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SOTEA Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MUGART Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SISGE INFORMATICA Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CANON SOLUTIONS ITALIA NORD Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GRUPPO VENCO Spa</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>UNI.MAS Sas</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BRILLADA VITTORIO &amp; C. Snc</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SINTEXCAL  Spa</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GARZENA SERGIO Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BITUX S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDIL C.R.E di Marzano Fabio</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MATTEO GEOM. LUCIANO COSTRUZIONI EDILI</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PROGE S.R.L</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Man.El Service Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EMAC Snc</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BUNESCU GABRIEL - impresa edile</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BUNESCU GABRIEL - impresa edile</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILEVRA S.N.C.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>NUOVA TOPOLIN  Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILEVRA S.N.C.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILEVRA S.N.C.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILEVRA S.N.C.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILEVRA S.N.C.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>OLYMPIA COSTRUZIONI S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MATTEO GEOM. LUCIANO COSTRUZIONI EDILI</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>FRASER di Ciani Francesco</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ALUNOVA Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MATTEO GEOM. LUCIANO COSTRUZIONI EDILI</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DEL REGNO Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SERVIZI - GRAFICI S.rl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>OVAS Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SOVESA Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SIA Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CEI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TERNA CHIUSURE DI SICUREZZA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>KANTAR  MEDIA Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SELPRESS  MEDIA  MONITORING  &amp;  NEWSBANCK Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MIMESI Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>INTERMEDIA SERVICE SOC. COOP.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>INDUSTRIAL ENGINEERING CONSULTANTS  Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>STUDIO FRANZERO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>FRASER di Ciani Francesco</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ROSSO ILARIO  C. Snc</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>AGROGREEN S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>G.K.S. Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>S.I.C.E.T. SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>S.C. EDIL DI PAGLIERO RENZO SaS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CIMO Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ESCAVAZIONI VAL SUSA Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COGEIS SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IVIES SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>AGROGREEN S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BITUX S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BORIO GIACOMO Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GIANNI ASTRUA Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COOP.VIRIDIA S.C.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BLUECO Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>D.H.D. Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BOERIS Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>AZIENDA AGRICOLA VIVAISTICA DANIELE GIARDINI DI CASTAGNO DANIELE</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MB Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GS Service Snc</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GAYDOU RENZO SaS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EUROVERDE SaS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EURO COPERTURE Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COPRI SYSTEM S.P.A.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TRE.ERRE Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ASFALT - CCP SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMPRESA DI COSTRUZIONI GIRARDI LUCIANO di Boidi Anna Maria E. C. SaS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BALMA BUILDING Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TECNOVERDE SaS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GREEN LINE</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>LA NUOVA COOPERATIVA  SOCIETA' COOPERATIVA SOCIALE IMPRESA SOCIALE</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>NOODLES COMUNICAZIONE  SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PENNO ADVERTISING SaS </ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ROKIVO SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>NOODLES COMUNICAZIONE  SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PENNO ADVERTISING SaS </ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PUNTO REC STUDIO SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EGGERS 2.0  SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SOCIETA' AGRICOLA VIVAI  PIANTE CAV. GIANNI SARACCO E FIGLI </ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>AGER SnC</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TECNOVERDE SaS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GS SERVICE SnC</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>OVAS Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>NOVARA REALSTRADE Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SERVIZI - GRAFICI Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GRD SERVICE Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>G.K.S. Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BORGIS SaS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Impresa DUCCO Piero</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EUROVERDE SaS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ADFOR SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SIA Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>OVAS Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILEVRA Snc</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PROGE Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TORINESE ANTINCENDI Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TIELLE IMPIANTI Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COGEAS Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>THERMOREX SaS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MIT Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ASPERA SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COOPLAT  SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IGIENCONTROL SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>RES NOVA SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TECNOVERDE SaS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GRAF-ART SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>STYLGRAFICA  PUBBLICITARIA DI BRIVIO ENRICO &amp; C. SNc </ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CANON SOLUTIONS ITALIA NORD Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SER.OFFICE Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SIL.MA ASCENSORI </ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CODEBO' SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>THERMOREX SaS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TIELLE IMPIANTI Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DIEFFE COSTRUZIONI GENERALI Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COPRI System SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COGEFA SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>S.A.M. SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MEDIASTRADE di Sangiorgi Giuseppe</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CCP RESINE Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EMMECI SnC</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TUV INTERCERT Italia SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DEKRA Italia  SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Bureau Veritas Italia SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMQ SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>FROSSASCO SPURGHI SnC</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CAR-JET di Gandolfi Carla</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>LABORATORIO SETTE - Arch. Andrea Muzio</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ARK.I.POST ENGINEERING Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Arch. FRANCO MOSCHIETTO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>STUDIO FRANZERO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>A.M.S. DI SCHEPIS ANTONINO &amp; C. S.A.S.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILEVRA SnC</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ALUNOVA SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PROGE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>G.S.A. SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ARGUS SICUREZZA SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COOPERATIVA SOCIALE LADY EUROPA a.r.l. onlus</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GI.ZETA SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MAJA GLOBAL SERVICE S.C</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>P.D.L. Service SaS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ANGEVA SERVIZI SaS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>LA ROXI SERVIZI SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>B.A.M.R. SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>WORK &amp; SERVICES </ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BONI SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>I.C.C.S. SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CONSORZIO P.S.L. Società Cooperativa</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SSG SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>LA NUOVA COOPERATIVA SOCIETA COOPERATIVA SOCIALE IMPRESA SOCIALE</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ACCADEMIA SERVIZI SOC. COOP.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MARCA Società  Cooperativa Sociale</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COOPERATIVA SOCIALE P.G. FRASSATI DI P.L. s.c.s.onlus</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>C.M. SERVICE SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TEDDE GROUP SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COOPERATIVA IL PORTICO Cooperativa Sociale a.r.l.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>RES NOVA SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PRO&amp;OUT Service Soc. Coop.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CONSORZIO COMPAGNIA DEI SERVIZI SOCIETA' COOPERATIVA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PFE SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>UNILABOR  scrl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GRATTACASO  Società di Servizi</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GRUPPO SIASS SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GARERI Servizi Ambientali</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ECOOP SERVICES SOCIETA' COOPERATIVA SOCIALE</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ASB SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BOSCOFORTE</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SICILVILLE Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CAR MAR Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>FLORICOLTURA MINETTI</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>F.LLI BUCCELLETTI </ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>UMBRA SERVIZI</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TECNOVERDE SaS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SAVET Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>LA NUOVA COOPERATIVA SOCIETA' COOPERATIVA SOCIALE IMPRESA SOCIALE</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COOPERATIVA SOCIALE BARBARA B  s.c.s.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILEVRA SnC</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DIGRA Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TERRA.CON Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GODINO SCAVI Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Impianti &amp; Co.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Di Carlo Calogero</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ALCHIM SaS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>E.P.A. Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>AUTOINGROS TORINO SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MIRAFIORI MOTOR VILLAGE-FCA ITALY SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Ing. Giorgio GIANARRO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PROGETTAZIONI GENERALI TORINO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ESSEPIESSE</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ARK.I.POST ENGINEERING Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Ing. Roberto RENI</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Studio di Ingegneria e Architettura Ing. Claudio Badariotti</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PASTORE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CEDIT SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Ing. Michelangelo Avolio</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Arch. Sandra Rovere</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Ing. Vincenzo Principato</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Studio di Ingegneria  Mancini &amp; Palmieri</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CUDIA IMPIANTI  di Cudia Francesco</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TIELLE Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>VER-PONT SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>REZINA Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>G.S. SERVICE Snc</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>STRADELLA ASSICURAZIONI Snc</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ASSITECA B.A. SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>RECONTA ERNST &amp; YOUNG SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CROWE HORWARTH Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>KPMG SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CO.RAC.FER. Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMPRESA PAROLDI GIUSEPPE &amp; C. Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PSS VIGILANZA Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IRA LEVITT Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>G.S.I. Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>OK-GOL Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>HIS Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>I.V.R.I. SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>INNOVA ECOSERVIZI Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SELE NOL Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TEKNOSERVICE Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TEAM 3R AMBIENTE Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COOPERATIVA SOCIALE P.G. FRASSATI DI P.L. S.c.s. Onlus</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ONOFARO ANTONINO Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ECONORD SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ITAL GROUP SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PSS VIGILANZA SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>REAR SOCIETA' COOPERATIVA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>I.V.R.I. SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMEG SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COTTI IMPIANTI SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PANERO IMPIANTI ELETTRICI SaS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ORSO SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TIELLE IMPIANTI SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SCALETTI SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>I.R.M.E. SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CUDIA IMPIANTI di Cudia Francesco</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ANTINCENDIO BRUSASCO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>F.P. Carpenteria in ferro di Fabiano Pietro</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Assi[B] Underwriting S.r.l.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GENERALI ITALIA SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>UNIPOL SAI ASSICURAZIONI SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GRUPPO  ZURICH  ITALIA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Assi[B] Underwriting S.r.l.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GENERALI ITALIA SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>UNIPOL SAI ASSICURAZIONI SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GRUPPO  ZURICH  ITALIA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Assi[B] Underwriting S.r.l.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GENERALI ITALIA SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>UNIPOL SAI ASSICURAZIONI SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GRUPPO  ZURICH  ITALIA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILEVRA SNC</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PROGE SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DIEFFE COSTRUZIONI GENERALI S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COPRI SYSTEM S.P.A.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PROGE SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILEVRA SnC</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MEDIASTRADE di Sangiorgi Giuseppe</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILEVRA SNC</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PROGE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>REALE MUTUA ASSICURAZIONI</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>THERMOREX SaS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>M.I.T SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CUDIA IMPIANTI di Cudia Francesco</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>G.R. IMPIANTI SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>THERMOREX SaS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MACOR SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SOVESA SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SEA Segnaletica Stradale SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SISA SaS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>G.D.L. di Iannizzi Giorgio</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PROGE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ARGA SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EUROCART SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GIORDANO Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>FOREVER SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PADILLA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DOORHAN ITALIA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>A.S. IMPIANTI DI PAUTASSO R.E C. SnC</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PANERO IMPIANTI ELETTRICI SaS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ORSO SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMEG SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>VERPONT  SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILCA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>THERMOREX SAS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GHESSA  DANILO &amp; C. Snc</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GALASSI FRANCESCO PAOLO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GHESSA  DANILO &amp; C. Snc</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>THERMOREX SAS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GHESSA  DANILO &amp; C. Snc</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GD TEST SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>4 EMME SERVICE SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ISKANDER Engineering. Group</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CITIEMME SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILEVRA SNC</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>OLYMPIA COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TERRA COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PROGE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILCA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILEVRA SNC</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BALMA BUILDING SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TIELLE IMPIANTI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>M.I.T. SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SCALETTI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PASTORE SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>F.P. CARPENTERIA  in ferro di Fabiano Pietro</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMPRESA PAROLDI GIUSEPPE &amp; C. SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ING. DE ALOE COSTRUZIONI SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IM.A.F. SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SI.GI.FER SnC</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ING. MARCELLO CHIAMPO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ALBERTO PORRO ARCHITETTO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IEC INDUSTRIAL ENGINEERING CONSULTANTS SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>STUDIO FRANZERO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILCA SrL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PROGE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>G.R. Impianti S.r.l.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DIGITO SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ELETTROTEAM SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>KOINE' SISTEMI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PANERO IMPIANTI ELETTRICI SAS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COTTI IMPIANTI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMEG SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ORSO SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PROGE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILEVRA SNC</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>OLYMPIA COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CO.GE.FA SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PROGE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ANTINCENDIO ANTINFORTUNISTICA BRUSASCO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>VIVAI BARRETTA GARDEN SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ISAM SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>AGRI-SERVIZI</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMPRESA EDILE DOLCECASA DEL GEOMETRA VERDERAME C. SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>F.LLI FERRARA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>NEW GROUP INFRASTRUTTURE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PRODON IMPIANTI TECNOLOGICI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>I.TEC COSTRUZIONI GENERALI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>VALLOGGIA FRATELLI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DAG COSTRUZIONI SRL UNIPERSONALE</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GRAL COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CO.GE.AS. SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>RITONNARO COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>QUINTINO COSTRUZIONI GENERALI SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDIL MA.VI TORINO SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>AGRIGARDEN SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COEMA EDILITA' SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COEDIS SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>S.E.C.A.P. SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CEVIG SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IDROCEM MANUFATTI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILCA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SICET SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>L.G.P. COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TRIPI G. IMPRESA EDILE</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DICATALDO SABINO Impianti &amp; Costruzioni Generali</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>LA CORSICATO SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SARACINO COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>D.C. COSTRUZIONI SRL UNIPERSONALE</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CONSORZIO STABILE MARR S.C.A.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BAUDINO F.LLI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CONSORZIO STABILE APPALTITALIA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SAPA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BALMA BUILDING SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMPRESA FRATELLI D'AMBROSIO SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BEGEN INFRASTRUTTURE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ISOVIT SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>RICO COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMPRESA PIAZZA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CONSORZIO STABILE ENERGOS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PREVE COSTRUZIONI SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>LENTA ANTONIO SRL A SOCIO UNICO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMPRESA EDILE FRANCO SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILTRANSPORT VISCOMI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMPRESA EDILE SALCIM SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILCA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>F.P. CARPENTERIA IN FERRO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BOERIS SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GS Service Snc</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DAVID GIUSEPPE &amp; C. SAS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>RES NOVA SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IGIENCONTROL SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MULTISERVIZIGROUP</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SOVESA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>STS Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ABB SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SCHNEIDER ELECTRIC SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMEB SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Em.Ac SnC</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MASSANO Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BAUDINO F.LLI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>S.A.M. SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CO.G.E.F.A. SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GESA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>OCERT SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ARCH. PRONO ROBERTO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ING. ENRICO CERIONI</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ARCH. ANDREA SILLANO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ING. DIODATI ANTONIO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SABIL SAS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>STACCHIO IMPIANTI</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>HITRAC ENGINEERING GROUP</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>RENDO IMPIANTI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PEAQUIN SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>G.R. IMPIANTI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ELETTRO SERVICE di Ambrosone Michele</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>RIZZOLO ENERTECH SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GI.L.C IMPIANTI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>C.I.E.M. SAS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CTE ENERGY 2 SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SIME SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>AUTEC SERVICE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PERUCCA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>H.T.S. ELETTROMECCANICA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CLESA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PR.I.MA. TECHNOLOGY</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SOCIETA’ PIEMONTE SNC</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MACOR SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>INTERNATIONAL SECURITY SERVICE VIGILANZA SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>G.S.A. SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>RANGERS SERVIZI FIDUCIARI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ALL SYSTEM SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ELISICILIA SR</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ENI SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>UNIVERGAS ITALIA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SOCOGAS SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GABOGAS SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ENERGAS SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ARCOSERVIZI SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PR.I.MA TECHNOLOGY di Alfonso Bascianelli</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SOCIETA’ PIEMONTE SNC</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>C.F. IMPIANTI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GRAFFI GREEN  SPACE</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>R.P.P. STUDIO TECNICO ASSOCIATO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DELOITTE TOUCHE SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GDA Revisori Indipendenti SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SOCIETA' PIEMONTE SNC</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>M.I.T. SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>METHERM SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ARCOSERVIZI SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SMALDONE IMPIANTI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SCHINETTI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CUDIA IMPIANTI DI CUDIA FRANCESCO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Tielle Impianti Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GP PIOLA GIORGIO &amp; C.SNC</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COTTI IMPIANTI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ALBERTO ing. Dario</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Ing. Andrea Valle</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EUROFINS MODULO UNO SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>F.P.CARPENTERIA di Fabiano Pietro</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>F.P.CARPENTERIA di Fabiano Pietro</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ANTINCENDIO ANTINFORTUNISTICA BRUSASCO DI S. MILITELLO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Ing. Renzo Diena</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Claudio Guidolin</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>D.R. FERROVIARIA ITALIA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMPRESA PAROLDI GIUSEPPE &amp; C.S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CEVIG SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>G.K.S. SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>AGROGREEN SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>D.G.L. COSTRUZIONI S.a.s. di Lazzara Piero &amp; C.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMPRESA BORIO GIACOMO S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMPRESA SODA COSTRUZIONI S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>OVAS SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PROGE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>S.E.C.A.P. S.p.A. </ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COEDIS SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>C.R.E.U.M.A. SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SARACINO COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GIUGGIA COSTRUZIONI S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>S.A.I.S.E.F. SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Scotta Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMPRESA DE GIULIANI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>NEOCOS S.r.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Bertini srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GM GROUP SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>FRATELLI D'AMBROSIO SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TECNO COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>C.M.A. S.R.L. DI CORSINI ROMANO &amp; FIGLI</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Idroterm s.r.l.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ROSSELLO COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Viglietti Antonio &amp; Figlio S.r.l.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ARK.I.POST Engineering S.r.l.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>F.L.O. Studio di Ingegneria di Varrone Bruna</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COOPERATIVA SOCIALE P.G. FRASSATI</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SAMSIC Italia SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PROFSSIONAL SERVICE SNS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SERVIZI EUROTREND S.C.A.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ICT  Logic Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>INFOSISTEMI Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MOLTECO PRINTING SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DIGITO SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SOGELMA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CEA DEMINING SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILTECNICA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DRAFINSUB SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GRUPPO BIOCHEMIT SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CANNIZZARO ROBERTA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PREVE COSTRUZIONI SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GF STRADE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CO.MAR. SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SOC. COOP. AGR. VALLI UNITE DEL CANAVESE</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GODINO SCAVI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PICCO BARTOLOMEO SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMPRESA BORIO GIACOMO SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GINI GIUSEPPE SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>G.K.S. SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BETONSCAVI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BERSISA GIUSEPPE SAS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MA.MI SRL Impresa Sociale</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILINVEST SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GUGLIOTTA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PORTALUPI CARLO IMPRESA SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>LC GENERAL SCAVI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>VALLOGGIA F.LLI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>I.C.F.A SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>AUTOTRASPORTI PRINA SILVIO SAS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CIVELLI COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>FEA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BORGIS SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMPRESA DE GIULIANI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ITALVERDE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>VI.COS VIGEVANO COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMPRESA RAMELLA &amp; C. SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PERINO PIERO SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SOMOTER SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>S.A.I.M.P. SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SICET SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CANTIERI MODERNI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>FAVINI COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BAUDINO COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>RONZONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDIL EUROPA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CAUDA STRADE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GISABELLA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>RITONNARO COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>AGRIGARDEN SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ICOSE SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MC COSTRUZIONI SAS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BUA COSTRUZIONI GENERALI SAS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>VIGLIETTI ANTONIO &amp; FIGLIO SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SOVESA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GIUSTINIANA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>S.IM.CO SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EFFEDUE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>NOVARA REALSTRADE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SIMEDIL SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SERRAO SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILTRANSPORT VISCOMI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IEPIT SAS DI VALLONE VITO &amp; C.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILGAMMA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>F.LLI FERRARA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMPRESA EDILE FRANCO SRL UNIPERSONALE</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BAUDINO F.LLI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GEOVERDE SYSTEM SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>S.A.M. SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SC EDIL DI PAGLIERO RENZO SAS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MAPLEX SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMPRESA F.LLI SOGNO &amp; FIGLI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMPRESA PIAZZA LUCA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BLU COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DITTA CITRINITI GEOM MASSIMO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>VITTONE SCAVI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COGEIS SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>G.S. SERVICE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ICE GREEN</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MONCALIERI SERVIZI SOCIETÀ COOPERATIVA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>G.K.S. SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ALLIANZ SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GENERALI ITALIA SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Axa Assicurazioni SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ALLIANZ SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GROUPAMA ASSICURAZIONI SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>HDI GLOBAL SE Rappresentanza Generale per l'Italia</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Helvetia Compagnia Svizzera d'Assicurazioni SA - Rappresentanza Generale e Direzione per l'Italia</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>AVIVA ITALIA S.P.A.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>Nobis Compagnia di Assicurazioni Spa</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SOC. COOP COSTRUZIONI FEFA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>OIRIS SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IAZZETTA COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MELLO SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>NORDEX SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COSMIC IMPIANTI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>LA FENICE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CUZZOLINO COSTRUZIONI SOCIETA' COOPERATIVA DI PRODUZIONE E LAVORO ARL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SOL.EDIL GROUP SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SANTOVITO MICHELE</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILNAPOLI OPERE E COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CELLETTI COSTRUZIONI GENERALI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>FUMASONI ANTONIO E FIGLI DI ANDREA FUMASONI SAS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>P.N.P. COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>LE.MY SOCIETA' COOPERATIVA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GIUDICE COSTRUZIONI E SERVIZI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SEMAT SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>VENERE COSTRUZIONI SRL SEMPLIFICATA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>G.S.M. COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>RATTALINO SCAVI SRL A SOCIO UNICO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>NORD COSTRUZIONI GENERALI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>C.G.T. SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ARPE APPALTI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CLG COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ALFA TERMICA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DELTA IMPIANTI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>S.C. EDIL DI PAGLIERO SARA SAS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>RESILTECH SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>FERRARIS SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SICET SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ACM SRL ASSOCIATI COSTRUZIONI MERIDIONALI</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>FENIX CONSORZIO STABILE SCARL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILIZIA VERICI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>FINOCCHIARO COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMPRESA EDILE GEOMETRA PEIRETTI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DI.GI.ALL SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MARIO RAUCCI COSTRUZIONI</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CIVELLI COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>VENETA21 SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>RICO APPALTI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ZARA APPALTI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CLP COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COEFFE STRADE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>C.G.V. SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CO.MAS SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMMOBILIARE G. &amp; B. SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BETON MIX SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILNOVA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CEVIG SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>AF COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CO.GE.CA. SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CATUOGNO SALVATORE</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SELVA MERCURIO SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>LAVORI PONTICELLI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMACO SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILGAMMA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>F.LLI FERRARA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BITUX SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TF COSTRUZIONI  SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDIL TECNA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMPRESA TIRONE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PREVE COSTRUZIONI SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDIL.AN.PA-SOCIETA' COOPERATIVA DI PRODUZIONE E LAVORO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CARUSO COSTRUZIONI  SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CO.GA.L SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>C.E.V. CONSORZIO EDILI VENETI SOCIETA' COOPERATIVA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SAMOA RESTAURI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>A.T.S. COSTRUZIONI GENERALI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>I.M.E. SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COSTRUZIONI INFRASTRUTTURE GENERALI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CONSORZIO STABILE DEL MEDITERRANEO SCARL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BCM SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>S.E.C.A.P SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DREAM HOUSE SRLS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GM GROUP SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>NOVA EDIL SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>S.A.M. SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>LA COSTRUENDA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DICATALDO SABINO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CONSORZIO STABILE VENTIMAGGIO SOCIETA' CONSORTILE ARL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PMM SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SOVESA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>OPERE CONSORZIO STABILE SOCIETA' CONSORTILE ARL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SCIENTIA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TENAGLIA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ZAIRA SOCIETA' COOPERATIVA DI PRODUZIONE E LAVORO ARL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMPRE.CO.M SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SMACOS SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BALMA BUILDING SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DE.FO SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>INFRASTRUTTURE M&amp;B SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GUARINO COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>NEVE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>LEUKOS CONSORZIO STABILE</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>R.T.I. CO-GESI SRL-EUROVERDE SAS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CAIVANO GROUP SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>STEM SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GEOM.IANNO MICHELE COSTRUZIONI</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>FO.VI. GAS SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>AGROGREEN SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SA.VE MECCANICA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DOPPIA C IMPIANTI DI CAPACCHIONE COSIMO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SA.DO COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SANGALLI SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>C.M.E. SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MULTI MANUTENZIONE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDIL RENTAL GROUP SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SINOPOLI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>I.C.F.A. SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>FORMICHELLA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CO.MAR SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILINVEST SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMPRESA BORIO GIACOMO SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>OMNIA SERVITIA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>3C AEDIFICATORIA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MICRON SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>NUOVA TRE ESSE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ALCHIMIA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMPRESA EDILE FRANCO SRL - UNIPERSONALE</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>S.IM.CO SOCIETA' IMMOBILIARE E COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SOMES SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>RITONNARO COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>AF SERVICE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDILCOSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>S.M. EDILIZIA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PALAZZO COSTRUZIONI SRLS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EDIL BRADANICA CALCESTRUZZI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CIESSE COSTRUZIONI E SERVIZI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>GARAU SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>D.A.C.I.A. SOCIETA' COOPERATIVA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CF. FERRARA COSTRUZIONI </ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MA.MI SRL - IMPRESA SOCIALE</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>STE.PA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PROGE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>NEW GROUP INFRASTRUTTURE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BUILD SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CONSORZIO STABILE ENERGOS</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>NEW ROAD SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EREDI CIRILLO LUIGI SAS DI PELLEGRINO ROSA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BEGEN INFRASTRUTTURE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>MIRABELLI MARIANO SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BRESCIANI ASFALTI SRL CON UNICO SOCIO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DOMA APPALTI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>VIOLA COSTRUZIONI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>DE SANTIS GIANNI COSTRUZIONI ED APPALTI SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EURO COPERTURE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>TERRA COSTRUZIONI S.R.L.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CLESA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>LA NUOVA COOPERATIVA  SOCIETA' COOPERATIVA SOCIALE IMPRESA SOCIALE</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IGIENCONTROL SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>F.P. DI FABIANO ANTONIO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>EUROCOPERTURE Srl</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ING. MARCO BAGETTO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>STUDIO BRADASCHIA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PROGECO ENGINEERING SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>STUDIO DI INGEGNERIA MANCINI PLAMIERI E ASSOCIATI</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SIDOTI  ENGINEERING SRL UNIPERSONALE</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>INTEGRA CONSORZIO STABILE DI ARCHITETTURA E INGEGNERIA INTEGRATA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>I.C.T. GENESIA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>ELLISSE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CLESA SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>REAR SOCIETA' COOPERATIVA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>T &amp; R SECURITY SERVICE SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>3 A CORP SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>G.S.A. SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>IMPRESA GIELLE DI LUIGI GALANTUCCI</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COSMOPOL SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SAFETY MANAGEMENT SERVICE SpA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>SICURITALIA GROUP SERVICE S.c.p.a.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>POLISTRADE COSTRUZIONI GENERALI SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>S.A.I.S.E.F. SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>OPERE CONSORZIO STABILE SOCIETA' CONSORTILE ARL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>CENACOLO CONSORZIO COSTRUZIONI GENERALI SCARL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>RATTALINO SCAVI SRL A SOCIO UNICO</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>COGEIS SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>KUWAIT PETROLEUM ITALIA SPA</ragioneSociale>
+        </partecipante>
+      </partecipanti>
+      <aggiudicatari>
+        <aggiudicatarioRaggruppamento>
+          <membro>
+            <ragioneSociale>AI STUDIO -ASSOCIAZIONE PROFESSIONALE </ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+          <membro>
+            <ragioneSociale>VALENTE ARNALDI DOTT. GEOL. ANDREA</ragioneSociale>
+            <ruolo>01-MANDANTE</ruolo>
+          </membro>
+        </aggiudicatarioRaggruppamento>
+        <aggiudicatario>
+          <ragioneSociale>MASTERCOP S.N.C.</ragioneSociale>
+        </aggiudicatario>
+        <aggiudicatario>
+          <ragioneSociale>COPRI SYSTEM S.P.A.</ragioneSociale>
+        </aggiudicatario>
+        <aggiudicatario>
+          <ragioneSociale>ARCH. IGOR FLIS</ragioneSociale>
+        </aggiudicatario>
+        <aggiudicatario>
+          <ragioneSociale>DIEFFE COSTRUZIONI GENERALI S.R.L.</ragioneSociale>
+        </aggiudicatario>
+        <aggiudicatario>
+          <ragioneSociale>Ing. G. Matta</ragioneSociale>
+        </aggiudicatario>
+        <aggiudicatario>
+          <ragioneSociale>Ing. G. Matta</ragioneSociale>
+        </aggiudicatario>
+        <aggiudicatario>
+          <ragioneSociale>Ing. G. Matta</ragioneSociale>
+        </aggiudicatario>
+        <aggiudicatario>
+          <ragioneSociale>Studio Tecnico Associato AS32</ragioneSociale>
+        </aggiudicatario>
+        <aggiudicatario>
+          <ragioneSociale>THERMOREX sas</ragioneSociale>
+        </aggiudicatario>
+        <aggiudicatario>
+          <ragioneSociale>UNILABOR  scrl</ragioneSociale>
+        </aggiudicatario>
+        <aggiudicatario>
+          <ragioneSociale>F.LLI FERRARA SRL</ragioneSociale>
+        </aggiudicatario>
+        <aggiudicatario>
+          <ragioneSociale>R.P.P. STUDIO TECNICO ASSOCIATO</ragioneSociale>
+        </aggiudicatario>
+        <aggiudicatario>
+          <ragioneSociale>ARCOSERVIZI SPA</ragioneSociale>
+        </aggiudicatario>
+        <aggiudicatario>
+          <ragioneSociale>F.P.CARPENTERIA di Fabiano Pietro</ragioneSociale>
+        </aggiudicatario>
+        <aggiudicatario>
+          <ragioneSociale>F.P.CARPENTERIA di Fabiano Pietro</ragioneSociale>
+        </aggiudicatario>
+        <aggiudicatario>
+          <ragioneSociale>ANTINCENDIO ANTINFORTUNISTICA BRUSASCO DI S. MILITELLO</ragioneSociale>
+        </aggiudicatario>
+        <aggiudicatario>
+          <ragioneSociale>DIGITO SRL</ragioneSociale>
+        </aggiudicatario>
+        <aggiudicatario>
+          <ragioneSociale>CIVELLI COSTRUZIONI SRL</ragioneSociale>
+        </aggiudicatario>
+        <aggiudicatario>
+          <ragioneSociale>G.K.S. SRL</ragioneSociale>
+        </aggiudicatario>
+        <aggiudicatario>
+          <ragioneSociale>SOC. COOP COSTRUZIONI FEFA</ragioneSociale>
+        </aggiudicatario>
+        <aggiudicatario>
+          <ragioneSociale>TERRA COSTRUZIONI S.R.L.</ragioneSociale>
+        </aggiudicatario>
+        <aggiudicatario>
+          <ragioneSociale>CLESA SRL</ragioneSociale>
+        </aggiudicatario>
+        <aggiudicatario>
+          <ragioneSociale>IGIENCONTROL SRL</ragioneSociale>
+        </aggiudicatario>
+      </aggiudicatari>
+      <importoAggiudicazione>18118.44</importoAggiudicazione>
+      <tempiCompletamento>
+        <dataInizio>2013-09-27</dataInizio>
+        <dataUltimazione>2013-11-18</dataUltimazione>
+      </tempiCompletamento>
+      <importoSommeLiquidate>18118.44</importoSommeLiquidate>
+    </lotto>
+  </data>
+</legge190:pubblicazione>

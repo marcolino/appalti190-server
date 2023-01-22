@@ -1,4 +1,4 @@
-const year = 2021; // the reference year (data/year is year + 1)
+const year = 2022; // the reference year (data/year is year + 1)
 const titolo = "Pubblicazione 1 legge 190";
 const abstract = "Pubblicazione 1 legge 190 anno 1 rif. 2012";
 const licenza = "IODL";
