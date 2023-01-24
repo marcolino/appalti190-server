@@ -47,7 +47,7 @@ const upload = multer({
       const user = await User.findOne({ _id: req.userId }).exec();
 //console.log("upload REQ destination user:", user);
 
-      const folder = path.join(config.job.uploadsBasePath, `${user.email}`);
+      const folder = path.join(config.job.uploadsBasePath, user.email);
       fs.mkdir(folder, { recursive: true }, (err) => {
         if (err) {
           if (err.code == "EEXIST") {
@@ -598,15 +598,17 @@ console.log("SLICESIZE", sliceSize);
 
     // serialize zip archive
     let fileName = path.basename(xmlObj["legge190:pubblicazione"].metadata.urlFile).replace(/\.xml$/, `.zip`);
-    let folderName = path.join(__dirname, "..", config.job.outputBasePath, encodeURIComponent(req.auth.user));
-    let [error, outputFile] = serializeArchive(folderName, fileName, zip);
-    if (error) {
-      retval.errors.push(`[errore] ${error}`);
+    let folderName = path.join(__dirname, "..", "..", config.job.outputBasePath, config.job.outputDownloads, user.email);
+    let urlPath = path.join(config.job.outputDownloads, user.email, fileName);
+    let result = serializeArchive(folderName, fileName, urlPath, zip);
+    if (result.error) {
+      retval.errors.push(result.error);
       return [null, retval];
     }
     retval.xmls = xmls;
     retval.xmlIndice = xmlIndice;
-    retval.outputFile = outputFile;
+    retval.outputFile = result.outputFile;
+    retval.outputUrl = result.outputUrl;
   } else { // there are no slices, just the single file
 console.log("SLICESIZE ELSE", sliceSize);
     xmlObj["legge190:pubblicazione"]["data"]["lotto"] = lotti;
@@ -617,20 +619,27 @@ console.log("SLICESIZE ELSE", sliceSize);
 
     // serialize dataset xml
     let fileName = path.basename(datasetLink);
-    let folderName = path.join(__dirname, "..", config.job.outputBasePath, encodeURIComponent("marco"/* TODO: RESTORE req.auth.user!!! req.auth.user*/));
-    let [error, outputFile] = serializeDataset(folderName, fileName, xml);
-    if (error) {
-      retval.errors.push(`[errore] ${error}`);
-console.log("ERROR1", error);
+    //let folderName = path.join(__dirname, "..", "..", config.job.outputBasePath, encodeURIComponent("marco"/* TODO: RESTORE req.auth.user!!! req.auth.user*/));
+console.log("USER:", user);
+console.log("YEAR:", config.job.year);
+    let folderName = path.join(__dirname, "..", "..", config.job.outputBasePath, config.job.outputDownloads, user.email);
+    let urlPath = path.join(config.job.outputDownloads, user.email, fileName);
+console.log("URL_PATH:", urlPath);
+    let result = serializeDataset(folderName, fileName, urlPath, xml);
+    if (result.error) {
+      retval.errors.push(result.error);
+console.log("ERROR1", result.error);
       return [null, retval];
     }
+console.log("OUTPUT_URL:", result.outputUrl);
+    retval.outputFile = result.outputFile;
+    retval.outputUrl = result.outputUrl;
+
     /**
      * While developing, truncate xml to ease debug...
      */
     retval.xml = xml;
     //retval.xml = (process.env.NODE_ENV !== "production") ? xml.substring(0, 256) : xml;
-
-    retval.outputFile = outputFile;
 
     // let outputFolder = path.join(__dirname, "..", config.job.outputBasePath, encodeURIComponent(req.auth.user));
     // let outputFile = path.basename(datasetLink);
@@ -690,7 +699,6 @@ function consolidate(xmlObj, lotto, raggruppamento, partecipanti, aggiudicatario
 
 // save contents to file on disk
 function save(folder, file, mode, contents) {
-  let error = null;
   try {
     if (!fs.existsSync(folder)) { // create folder if not present
       fs.mkdirSync(folder, { recursive: true });
@@ -699,30 +707,44 @@ function save(folder, file, mode, contents) {
       fs.unlinkSync(path.join(folder, file));
     }
     fs.writeFileSync(path.join(folder, file), contents, mode); // write the contents to file
-    return null;
+    return true;
   } catch (err) {
-    return `[fatal] ${JSON.stringify(err)}`;
+    return JSON.stringify(err);
   }
 }
 
 // serialize zip archive to disk
-function serializeArchive(outputFolder, outputFile, zip) {
+function serializeArchive(outputFolder, outputFile, outputUrlPath, zip) {
   let contents = zip.generate({ base64: false, compression: 'DEFLATE' });
   //fs.writeFileSync(path.join(zipFolder, zipFile), zipContents, "binary");
-  let error = save(outputFolder, outputFile, "binary", contents);
-  if (error) {
-    return [`[errore] ${error}`];
+  if ((result = save(outputFolder, outputFile, "binary", contents)) !== true) {
+    return `[errore] ${result}`;
   }
-  return [null, path.join(outputFolder, outputFile).replace(/^.*\/public\//, "")];
+console.log("config.serverDomain:", config.serverDomain);
+console.log("outputUrlPath:", outputUrlPath);
+    return {
+    error: null,
+    outputFile: path.join(outputFolder, outputFile), //.replace(/^.*\/public\//, "")
+    outputUrl: config.serverDomain + outputUrlPath,
+  };
 }
 
 // serialize xml dataset to disk
-function serializeDataset(outputFolder, outputFile, contents) {
-  let error = save(outputFolder, outputFile, /* use default mode*/ "", contents);
-  if (error) {
-    return [`[errore] ${error}`];
+function serializeDataset(outputFolder, outputFile, outputUrlPath, contents) {
+console.log("XXX:", outputFolder, outputFile);
+console.log("YYY:", config.serverDomain);
+  if ((result = save(outputFolder, outputFile, /* use default mode*/ "", contents)) !== true) {
+    return {
+      error: `[errore] ${result}`
+    };
   }
-  return [null, path.join(outputFolder, outputFile).replace(/^.*\/public\//, "")];
+  console.log("config.serverDomain:", config.serverDomain);
+  console.log("outputUrlPath:", outputUrlPath);
+  return {
+    error: null,
+    outputFile: path.join(outputFolder, outputFile),
+    outputUrl: config.serverDomain + outputUrlPath,
+  };
 }
 
 // check if codice fiscale is "estero"

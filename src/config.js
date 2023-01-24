@@ -4,9 +4,13 @@ const abstract = "Pubblicazione 1 legge 190 anno 1 rif. 2012";
 const licenza = "IODL";
 const serverBaseUrl = `${process.env.NODE_ENV === "production" ?
   "https://appalti190.herokuapp.com" :
+  "http://localhost:5000"
+}`;
+const clientAppalti190BaseUrl = `${process.env.NODE_ENV === "production" ?
+  "https://appalti190.herokuapp.com" :
   "http://localhost:3000"
 }`;
-const clientBaseUrl = `${process.env.NODE_ENV === "production" ?
+const clientShowcaseBaseUrl = `${process.env.NODE_ENV === "production" ?
   "https://appalti190-showcase.herokuapp.com" :
   "http://localhost:8080"
 }`;
@@ -48,7 +52,8 @@ module.exports = {
   job: {
     year,
     uploadsBasePath: "uploads",
-    outputBasePath: "/public/downloads",
+    outputBasePath: "/public/",
+    outputDownloads: "/downloads/",
     schemaFile: `./data/${year + 1}/datasetAppaltiL190.xsd`, // the xsd schema file (every new year must be manually downloaded new version from authority, and applied possible changes to code/data)
     schemaIndiceFile: `./data/${year + 1}/datasetIndiceAppaltiL190.xsd`, // the xsd indice schema file (every new year must be manually downloaded new version from authority, and applied possible changes to code/data)
     datasetMaximumSize: 5 * (1024 * 1024),
@@ -89,9 +94,10 @@ module.exports = {
     outcomeUrl: "https://dati.anticorruzione.it/rest/legge190/ricerca?max=20&start=0",
     outcomeFailureDetailsBaseUrl: "https://dati.anticorruzione.it/rest/legge190/dettaglio",
   },
-  corsDomains: [
-    serverBaseUrl,
-    clientBaseUrl,
+  serverDomain: serverBaseUrl,
+  clientDomains: [
+    clientAppalti190BaseUrl,
+    clientShowcaseBaseUrl,
   ],
   payment: {
     stripe: {
@@ -128,10 +134,10 @@ module.exports = {
           price_id: "price_1KVgfKFZEWHriL1utJyT904c",
         },
       },
-      paymentSuccessUrl: `${serverBaseUrl}/payment-success`,
-      paymentCancelUrl: `${serverBaseUrl}/payment-cancel`,
-      paymentSuccessUrlClient: `${clientBaseUrl}/payment-success`,
-      paymentCancelUrlClient: `${clientBaseUrl}/payment-cancel`,
+      paymentSuccessUrl: `${clientAppalti190BaseUrl}/payment-success`,
+      paymentCancelUrl: `${clientAppalti190BaseUrl}/payment-cancel`,
+      paymentSuccessUrlClient: `${clientShowcaseBaseUrl}/payment-success`,
+      paymentCancelUrlClient: `${clientShowcaseBaseUrl}/payment-cancel`,
     },
   },
   emailAdministration: {

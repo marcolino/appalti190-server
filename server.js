@@ -13,7 +13,8 @@ const app = express();
 
 // enable CORS, and whitelist our domains
 app.use(cors({
-  origin: config.corsDomains,
+  //origin: config.corsDomains,
+  origin: Object.keys(config.clientDomains).map(domain => config.clientDomains[domain]),
 }));
 
 // parse requests of content-type - application/json
@@ -97,8 +98,10 @@ require("./src/routes/job.routes")(app);
 require("./src/routes/payment.routes")(app);
 
 // serve the static files from the client - "client" is a link to the frontend site
-const root = path.join(__dirname, 'client', 'build');
-app.use(express.static(root));
+const rootClient = path.join(__dirname, "client", "build");
+app.use(express.static(rootClient));
+const rootServer = path.join(__dirname, config.job.outputBasePath);
+app.use(express.static(rootServer));
 
 /*
 // handles any requests that does not match the routes below (all routes handled by client)
