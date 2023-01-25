@@ -1760,3 +1760,66 @@ Error: EIO: i/o error, write
     at DerivedLogger.Readable.push (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/node_modules/readable-stream/lib/_stream_readable.js:241:10)
     at DerivedLogger.Transform.push (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/node_modules/readable-stream/lib/_stream_transform.js:139:32)
     at DerivedLogger._transform (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/lib/winston/logger.js:313:12)
+info: 2023-01-25 07:17:48: 	Activating [43m test [0m environment
+info: 2023-01-25 07:17:49: 	Server is running on port 5000
+info: 2023-01-25 07:17:49: 	Successfully connected to MongoDB
+info: 2023-01-25 07:19:25: 	Activating [43m test [0m environment
+info: 2023-01-25 07:19:25: 	Server is running on port 5000
+info: 2023-01-25 07:19:25: 	Successfully connected to MongoDB
+info: 2023-01-25 07:20:57: 	Activating [43m test [0m environment
+info: 2023-01-25 07:20:57: 	Server is running on port 5000
+info: 2023-01-25 07:20:57: 	Successfully connected to MongoDB
+info: 2023-01-25 07:21:46: 	Activating [43m test [0m environment
+info: 2023-01-25 07:21:47: 	Server is running on port 5000
+info: 2023-01-25 07:21:47: 	Successfully connected to MongoDB
+info: 2023-01-25 07:21:57: 	Activating [43m test [0m environment
+info: 2023-01-25 07:21:57: 	Server is running on port 5000
+info: 2023-01-25 07:21:57: 	Successfully connected to MongoDB
+info: 2023-01-25 07:25:58: 	Activating [43m test [0m environment
+info: 2023-01-25 07:25:58: 	Server is running on port 5000
+info: 2023-01-25 07:25:58: 	Successfully connected to MongoDB
+info: 2023-01-25 07:26:09: 	Activating [43m test [0m environment
+info: 2023-01-25 07:26:09: 	Server is running on port 5000
+info: 2023-01-25 07:26:09: 	Successfully connected to MongoDB
+info: 2023-01-25 07:26:31: 	Activating [43m test [0m environment
+info: 2023-01-25 07:26:32: 	Server is running on port 5000
+info: 2023-01-25 07:26:32: 	Successfully connected to MongoDB
+info: 2023-01-25 07:28:15: 	User login: marcosolari@gmail.com
+info: 2023-01-25 07:28:29: 	Activating [43m test [0m environment
+info: 2023-01-25 07:28:29: 	Server is running on port 5000
+info: 2023-01-25 07:28:29: 	Successfully connected to MongoDB
+error: 2023-01-25 07:32:06: 	uncaughtException: write EPIPE
+Error: write EPIPE
+    at WriteWrap.onWriteComplete [as oncomplete] (internal/stream_base_commons.js:94:16)
+{"date":"Wed Jan 25 2023 07:32:06 GMT+0100 (Central European Standard Time)","error":{"code":"EPIPE","errno":-32,"syscall":"write"},"exception":true,"level":"error","message":"uncaughtException: write EPIPE\nError: write EPIPE\n    at WriteWrap.onWriteComplete [as oncomplete] (internal/stream_base_commons.js:94:16)","os":{"loadavg":[1.19,1.47,1.28],"uptime":1028.1},"process":{"argv":["/usr/bin/node","/home/marco/apps/sistemisolari/appalti190-server/server.js"],"cwd":"/home/marco/apps/sistemisolari/appalti190-server","execPath":"/usr/bin/node","gid":1000,"memoryUsage":{"arrayBuffers":30403341,"external":27524310,"heapTotal":71553024,"heapUsed":69169648,"rss":128704512},"pid":6900,"uid":1000,"version":"v14.20.1"},"stack":"Error: write EPIPE\n    at WriteWrap.onWriteComplete [as oncomplete] (internal/stream_base_commons.js:94:16)","trace":[{"column":16,"file":"internal/stream_base_commons.js","function":"WriteWrap.onWriteComplete [as oncomplete]","line":94,"method":"onWriteComplete [as oncomplete]","native":false}]}
+info: 2023-01-25 07:52:28: 	Activating [43m test [0m environment
+info: 2023-01-25 07:52:28: 	Server is running on port 5000
+info: 2023-01-25 07:52:28: 	Successfully connected to MongoDB
+error: 2023-01-25 07:55:31: 	uncaughtException: write EPIPE
+Error: write EPIPE
+    at WriteWrap.onWriteComplete [as oncomplete] (internal/stream_base_commons.js:94:16)
+{"date":"Wed Jan 25 2023 07:55:31 GMT+0100 (Central European Standard Time)","error":{"code":"EPIPE","errno":-32,"syscall":"write"},"exception":true,"level":"error","message":"uncaughtException: write EPIPE\nError: write EPIPE\n    at WriteWrap.onWriteComplete [as oncomplete] (internal/stream_base_commons.js:94:16)","os":{"loadavg":[0.98,1.52,1.45],"uptime":2433.12},"process":{"argv":["/usr/bin/node","/home/marco/apps/sistemisolari/appalti190-server/server.js"],"cwd":"/home/marco/apps/sistemisolari/appalti190-server","execPath":"/usr/bin/node","gid":1000,"memoryUsage":{"arrayBuffers":33391885,"external":30512854,"heapTotal":73183232,"heapUsed":58874784,"rss":126443520},"pid":11819,"uid":1000,"version":"v14.20.1"},"stack":"Error: write EPIPE\n    at WriteWrap.onWriteComplete [as oncomplete] (internal/stream_base_commons.js:94:16)","trace":[{"column":16,"file":"internal/stream_base_commons.js","function":"WriteWrap.onWriteComplete [as oncomplete]","line":94,"method":"onWriteComplete [as oncomplete]","native":false}]}
+info: 2023-01-25 07:57:07: 	Activating [43m test [0m environment
+info: 2023-01-25 07:57:07: 	Server is running on port 5000
+info: 2023-01-25 07:57:07: 	Successfully connected to MongoDB
+error: 2023-01-25 08:01:08: 	uncaughtException: write EPIPE
+Error: write EPIPE
+    at WriteWrap.onWriteComplete [as oncomplete] (internal/stream_base_commons.js:94:16)
+{"date":"Wed Jan 25 2023 08:01:08 GMT+0100 (Central European Standard Time)","error":{"code":"EPIPE","errno":-32,"syscall":"write"},"exception":true,"level":"error","message":"uncaughtException: write EPIPE\nError: write EPIPE\n    at WriteWrap.onWriteComplete [as oncomplete] (internal/stream_base_commons.js:94:16)","os":{"loadavg":[2,1.31,1.34],"uptime":2770.03},"process":{"argv":["/usr/bin/node","/home/marco/apps/sistemisolari/appalti190-server/server.js"],"cwd":"/home/marco/apps/sistemisolari/appalti190-server","execPath":"/usr/bin/node","gid":1000,"memoryUsage":{"arrayBuffers":33381801,"external":30502770,"heapTotal":73183232,"heapUsed":58916192,"rss":129294336},"pid":12343,"uid":1000,"version":"v14.20.1"},"stack":"Error: write EPIPE\n    at WriteWrap.onWriteComplete [as oncomplete] (internal/stream_base_commons.js:94:16)","trace":[{"column":16,"file":"internal/stream_base_commons.js","function":"WriteWrap.onWriteComplete [as oncomplete]","line":94,"method":"onWriteComplete [as oncomplete]","native":false}]}
+info: 2023-01-25 08:01:26: 	Activating [43m test [0m environment
+info: 2023-01-25 08:01:26: 	Server is running on port 5000
+info: 2023-01-25 08:01:26: 	Successfully connected to MongoDB
+info: 2023-01-25 08:37:02: 	User login: marcosolari@gmail.com
+error: 2023-01-25 08:38:57: 	uncaughtException: write EPIPE
+Error: write EPIPE
+    at WriteWrap.onWriteComplete [as oncomplete] (internal/stream_base_commons.js:94:16)
+{"date":"Wed Jan 25 2023 08:38:57 GMT+0100 (Central European Standard Time)","error":{"code":"EPIPE","errno":-32,"syscall":"write"},"exception":true,"level":"error","message":"uncaughtException: write EPIPE\nError: write EPIPE\n    at WriteWrap.onWriteComplete [as oncomplete] (internal/stream_base_commons.js:94:16)","os":{"loadavg":[1.85,1.26,1.27],"uptime":5039.02},"process":{"argv":["/usr/bin/node","/home/marco/apps/sistemisolari/appalti190-server/server.js"],"cwd":"/home/marco/apps/sistemisolari/appalti190-server","execPath":"/usr/bin/node","gid":1000,"memoryUsage":{"arrayBuffers":27352259,"external":24473228,"heapTotal":63016960,"heapUsed":60271528,"rss":131616768},"pid":13159,"uid":1000,"version":"v14.20.1"},"stack":"Error: write EPIPE\n    at WriteWrap.onWriteComplete [as oncomplete] (internal/stream_base_commons.js:94:16)","trace":[{"column":16,"file":"internal/stream_base_commons.js","function":"WriteWrap.onWriteComplete [as oncomplete]","line":94,"method":"onWriteComplete [as oncomplete]","native":false}]}
+info: 2023-01-25 08:40:24: 	Activating [43m test [0m environment
+info: 2023-01-25 08:40:25: 	Server is running on port 5000
+info: 2023-01-25 08:40:25: 	Successfully connected to MongoDB
+info: 2023-01-25 08:52:05: 	Activating [43m test [0m environment
+info: 2023-01-25 08:52:06: 	Server is running on port 5000
+info: 2023-01-25 08:52:06: 	Successfully connected to MongoDB
+info: 2023-01-25 08:53:47: 	Activating [43m test [0m environment
+info: 2023-01-25 08:53:47: 	Server is running on port 5000
+info: 2023-01-25 08:53:47: 	Successfully connected to MongoDB

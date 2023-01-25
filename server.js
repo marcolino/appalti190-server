@@ -13,7 +13,6 @@ const app = express();
 
 // enable CORS, and whitelist our domains
 app.use(cors({
-  //origin: config.corsDomains,
   origin: Object.keys(config.clientDomains).map(domain => config.clientDomains[domain]),
 }));
 

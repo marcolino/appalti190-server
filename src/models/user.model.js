@@ -138,7 +138,7 @@ console.log("generateSignupVerificationCode payload:", payload);
 
 function generateRandomCode(maxDigits) {
   const maxValue = Math.pow(10, maxDigits);
-  return Math.floor(Math.random(maxValue) * maxValue);
+  return String(Math.floor(Math.random(maxValue) * maxValue)).padStart(maxDigits, "0");
 }
 
 module.exports = mongoose.model("User", UserSchema);
