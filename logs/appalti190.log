@@ -2002,3 +2002,13 @@ info: 2023-01-26 10:22:07: 	Activating [43m test [0m environment
 info: 2023-01-26 10:22:07: 	Server is running on port 5000
 info: 2023-01-26 10:22:07: 	Successfully connected to MongoDB
 info: 2023-01-26 10:22:33: 	User login: marcosolari@gmail.com
+info: 2023-01-26 11:09:54: 	Activating [43m test [0m environment
+info: 2023-01-26 11:09:54: 	Server is running on port 5000
+info: 2023-01-26 11:09:54: 	Successfully connected to MongoDB
+info: 2023-01-26 11:15:08: 	Activating [43m test [0m environment
+info: 2023-01-26 11:15:08: 	Server is running on port 5000
+info: 2023-01-26 11:15:08: 	Successfully connected to MongoDB
+info: 2023-01-26 11:44:23: 	Activating [43m test [0m environment
+info: 2023-01-26 11:44:23: 	Server is running on port 5000
+info: 2023-01-26 11:44:23: 	Successfully connected to MongoDB
+info: 2023-01-26 11:45:42: 	User login: marcosolari@gmail.com
