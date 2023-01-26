@@ -1,6 +1,6 @@
 {
   "name": "appalti190",
-  "version": "2.1.4",
+  "version": "2.2.0",
   "description": "Servizio per l'assolvimento degli obblighi di pubblicazione delle informazioni all’Autorità Nazionale AntiCorruzione, ai sensi della legge n. 190/2012",
   "engines": {
     "node": "14.x",
@@ -13,7 +13,7 @@
     "start": "node server.js",
     "test": "mocha --exit --timeout 10000",
     "testwatch": "nodemon --exec \"mocha --recursive --timeout 10000\"",
-    "pub": "git add . && git commit -m \"deploying to heroku\" && git push && yarn push",
+    "pub": "git add . && git commit -m \"generic commit\" && git push && yarn push",
     "pub-dev": "yarn pub && yarn logs",
     "push": "git push heroku master",
     "SUSPENDED-predeploy": "yarn test",
