@@ -837,6 +837,21 @@ const outcomeFailureDetails = async (req, res) => {
   ;
 };
 
+const urlExistenceCheck = async (req, res) => {
+  //console.log("REQQQ:", req);
+  try {
+    let r = await axios.head(req.body.url);
+    console.log("urlExistenceCheck retval", r);
+    return [false, true];
+  } catch (error) {
+    console.log("urlExistenceCheck error:", error.message);// .response.status);
+    if (error.response && error.response.status >= 400) {
+      return [false, false];
+    }
+    return [true, false]; // return false for every status, in case of error...
+  }
+};
+
 const getPlans = async (req, res) => {
   try {
     const retval = await Plan.find().sort({pricePerYear: 1}).lean(); // TODO: sort by pricePerYear LOW->HIGH
@@ -854,5 +869,6 @@ module.exports = {
   validateXml,
   outcomeCheck,
   outcomeFailureDetails,
+  urlExistenceCheck,
   getPlans,
 };
