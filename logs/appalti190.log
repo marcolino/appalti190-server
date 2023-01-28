@@ -2022,3 +2022,149 @@ info: 2023-01-26 11:51:03: 	Activating [43m test [0m environment
 info: 2023-01-26 11:51:03: 	Server is running on port 5000
 info: 2023-01-26 11:51:04: 	Successfully connected to MongoDB
 info: 2023-01-26 12:49:17: 	User login: marcosolari@gmail.com
+info: 2023-01-26 15:13:32: 	Activating [43m test [0m environment
+info: 2023-01-26 15:13:33: 	Server is running on port 5000
+info: 2023-01-26 15:13:33: 	Successfully connected to MongoDB
+info: 2023-01-26 15:14:43: 	User login: marcosolari@gmail.com
+info: 2023-01-26 15:17:06: 	User login: marcosolari@gmail.com
+info: 2023-01-26 16:22:11: 	Activating [43m test [0m environment
+{"date":"Thu Jan 26 2023 16:22:11 GMT+0100 (Central European Standard Time)","error":{"code":"EIO","errno":-5,"syscall":"write"},"exception":true,"level":"error","message":"uncaughtException: EIO: i/o error, write\nError: EIO: i/o error, write\n    at writeSync (fs.js:737:3)\n    at SyncWriteStream._write (internal/fs/sync_write_stream.js:24:3)\n    at writeOrBuffer (internal/streams/writable.js:358:12)\n    at SyncWriteStream.Writable.write (internal/streams/writable.js:303:10)\n    at Console.log (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/lib/winston/transports/console.js:79:23)\n    at Console._write (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston-transport/index.js:103:17)\n    at doWrite (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:409:139)\n    at writeOrBuffer (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:398:5)\n    at Console.Writable.write (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:307:11)\n    at DerivedLogger.ondata (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/node_modules/readable-stream/lib/_stream_readable.js:681:20)\n    at DerivedLogger.emit (events.js:412:35)\n    at addChunk (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/node_modules/readable-stream/lib/_stream_readable.js:298:12)\n    at readableAddChunk (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/node_modules/readable-stream/lib/_stream_readable.js:280:11)\n    at DerivedLogger.Readable.push (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/node_modules/readable-stream/lib/_stream_readable.js:241:10)\n    at DerivedLogger.Transform.push (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/node_modules/readable-stream/lib/_stream_transform.js:139:32)\n    at DerivedLogger._transform (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/lib/winston/logger.js:313:12)","os":{"loadavg":[1.35,1.19,1.15],"uptime":18149.65},"process":{"argv":["/usr/bin/node","/home/marco/apps/sistemisolari/appalti190-server/server.js"],"cwd":"/home/marco/apps/sistemisolari/appalti190-server","execPath":"/usr/bin/node","gid":1000,"memoryUsage":{"arrayBuffers":18729322,"external":20351170,"heapTotal":34820096,"heapUsed":22455368,"rss":71110656},"pid":27852,"uid":1000,"version":"v14.20.1"},"stack":"Error: EIO: i/o error, write\n    at writeSync (fs.js:737:3)\n    at SyncWriteStream._write (internal/fs/sync_write_stream.js:24:3)\n    at writeOrBuffer (internal/streams/writable.js:358:12)\n    at SyncWriteStream.Writable.write (internal/streams/writable.js:303:10)\n    at Console.log (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/lib/winston/transports/console.js:79:23)\n    at Console._write (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston-transport/index.js:103:17)\n    at doWrite (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:409:139)\n    at writeOrBuffer (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:398:5)\n    at Console.Writable.write (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:307:11)\n    at DerivedLogger.ondata (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/node_modules/readable-stream/lib/_stream_readable.js:681:20)\n    at DerivedLogger.emit (events.js:412:35)\n    at addChunk (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/node_modules/readable-stream/lib/_stream_readable.js:298:12)\n    at readableAddChunk (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/node_modules/readable-stream/lib/_stream_readable.js:280:11)\n    at DerivedLogger.Readable.push (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/node_modules/readable-stream/lib/_stream_readable.js:241:10)\n    at DerivedLogger.Transform.push (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/node_modules/readable-stream/lib/_stream_transform.js:139:32)\n    at DerivedLogger._transform (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/lib/winston/logger.js:313:12)","trace":[{"column":3,"file":"fs.js","function":"writeSync","line":737,"method":null,"native":false},{"column":3,"file":"internal/fs/sync_write_stream.js","function":"SyncWriteStream._write","line":24,"method":"_write","native":false},{"column":12,"file":"internal/streams/writable.js","function":"writeOrBuffer","line":358,"method":null,"native":false},{"column":10,"file":"internal/streams/writable.js","function":"SyncWriteStream.Writable.write","line":303,"method":"write","native":false},{"column":23,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/lib/winston/transports/console.js","function":"Console.log","line":79,"method":"log","native":false},{"column":17,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston-transport/index.js","function":"Console._write","line":103,"method":"_write","native":false},{"column":139,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js","function":"doWrite","line":409,"method":null,"native":false},{"column":5,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js","function":"writeOrBuffer","line":398,"method":null,"native":false},{"column":11,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js","function":"Console.Writable.write","line":307,"method":"write","native":false},{"column":20,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/node_modules/readable-stream/lib/_stream_readable.js","function":"DerivedLogger.ondata","line":681,"method":"ondata","native":false},{"column":35,"file":"events.js","function":"DerivedLogger.emit","line":412,"method":"emit","native":false},{"column":12,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/node_modules/readable-stream/lib/_stream_readable.js","function":"addChunk","line":298,"method":null,"native":false},{"column":11,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/node_modules/readable-stream/lib/_stream_readable.js","function":"readableAddChunk","line":280,"method":null,"native":false},{"column":10,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/node_modules/readable-stream/lib/_stream_readable.js","function":"DerivedLogger.Readable.push","line":241,"method":"push","native":false},{"column":32,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/node_modules/readable-stream/lib/_stream_transform.js","function":"DerivedLogger.Transform.push","line":139,"method":"push","native":false},{"column":12,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/lib/winston/logger.js","function":"DerivedLogger._transform","line":313,"method":"_transform","native":false}]}
+error: 2023-01-26 16:22:11: 	uncaughtException: EIO: i/o error, write
+Error: EIO: i/o error, write
+    at writeSync (fs.js:737:3)
+    at SyncWriteStream._write (internal/fs/sync_write_stream.js:24:3)
+    at writeOrBuffer (internal/streams/writable.js:358:12)
+    at SyncWriteStream.Writable.write (internal/streams/writable.js:303:10)
+    at Console.log (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:409:139)
+    at writeOrBuffer (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:398:5)
+    at Console.Writable.write (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:307:11)
+    at DerivedLogger.ondata (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/node_modules/readable-stream/lib/_stream_readable.js:681:20)
+    at DerivedLogger.emit (events.js:412:35)
+    at addChunk (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/node_modules/readable-stream/lib/_stream_readable.js:298:12)
+    at readableAddChunk (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/node_modules/readable-stream/lib/_stream_readable.js:280:11)
+    at DerivedLogger.Readable.push (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/node_modules/readable-stream/lib/_stream_readable.js:241:10)
+    at DerivedLogger.Transform.push (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/node_modules/readable-stream/lib/_stream_transform.js:139:32)
+    at DerivedLogger._transform (/home/marco/apps/sistemisolari/appalti190-server/node_modules/winston/lib/winston/logger.js:313:12)
+info: 2023-01-27 09:20:20: 	Activating [43m test [0m environment
+info: 2023-01-27 09:20:21: 	Server is running on port 5000
+info: 2023-01-27 09:20:21: 	Successfully connected to MongoDB
+info: 2023-01-27 09:35:21: 	Activating [43m test [0m environment
+info: 2023-01-27 09:35:22: 	Server is running on port 5000
+info: 2023-01-27 09:35:22: 	Successfully connected to MongoDB
+info: 2023-01-27 09:41:54: 	Activating [43m test [0m environment
+info: 2023-01-27 09:41:55: 	Server is running on port 5000
+info: 2023-01-27 09:41:55: 	Successfully connected to MongoDB
+info: 2023-01-27 09:45:44: 	Activating [43m test [0m environment
+info: 2023-01-27 09:45:44: 	Server is running on port 5000
+info: 2023-01-27 09:45:44: 	Successfully connected to MongoDB
+info: 2023-01-27 09:46:03: 	Activating [43m test [0m environment
+info: 2023-01-27 09:46:04: 	Server is running on port 5000
+info: 2023-01-27 09:46:04: 	Successfully connected to MongoDB
+info: 2023-01-27 09:53:31: 	Activating [43m test [0m environment
+info: 2023-01-27 09:53:32: 	Server is running on port 5000
+info: 2023-01-27 09:53:32: 	Successfully connected to MongoDB
+info: 2023-01-27 09:55:37: 	Activating [43m test [0m environment
+info: 2023-01-27 09:55:37: 	Server is running on port 5000
+info: 2023-01-27 09:55:37: 	Successfully connected to MongoDB
+info: 2023-01-27 09:57:26: 	Activating [43m test [0m environment
+info: 2023-01-27 09:57:26: 	Server is running on port 5000
+info: 2023-01-27 09:57:26: 	Successfully connected to MongoDB
+info: 2023-01-27 10:09:26: 	Activating [43m test [0m environment
+info: 2023-01-27 10:09:27: 	Server is running on port 5000
+info: 2023-01-27 10:09:27: 	Successfully connected to MongoDB
+info: 2023-01-27 10:10:09: 	Activating [43m test [0m environment
+info: 2023-01-27 10:10:09: 	Server is running on port 5000
+info: 2023-01-27 10:10:09: 	Successfully connected to MongoDB
+info: 2023-01-27 10:11:42: 	Activating [43m test [0m environment
+info: 2023-01-27 10:11:43: 	Server is running on port 5000
+info: 2023-01-27 10:11:43: 	Successfully connected to MongoDB
+info: 2023-01-27 10:14:34: 	Activating [43m test [0m environment
+info: 2023-01-27 10:14:35: 	Server is running on port 5000
+info: 2023-01-27 10:14:35: 	Successfully connected to MongoDB
+info: 2023-01-27 10:16:48: 	User login: marcosolari@gmail.com
+info: 2023-01-27 10:17:54: 	Activating [43m test [0m environment
+info: 2023-01-27 10:17:54: 	Server is running on port 5000
+info: 2023-01-27 10:17:54: 	Successfully connected to MongoDB
+info: 2023-01-27 10:20:33: 	Activating [43m test [0m environment
+info: 2023-01-27 10:20:33: 	Server is running on port 5000
+info: 2023-01-27 10:20:33: 	Successfully connected to MongoDB
+info: 2023-01-27 10:20:47: 	Activating [43m test [0m environment
+info: 2023-01-27 10:20:47: 	Server is running on port 5000
+info: 2023-01-27 10:20:47: 	Successfully connected to MongoDB
+info: 2023-01-27 11:39:47: 	User login: marcosolari@gmail.com
+info: 2023-01-27 11:40:12: 	User login: marcosolari@gmail.com
+info: 2023-01-27 11:42:42: 	User login: marcosolari@gmail.com
+error: 2023-01-27 11:46:58: 	uncaughtException: write EPIPE
+Error: write EPIPE
+    at WriteWrap.onWriteComplete [as oncomplete] (internal/stream_base_commons.js:94:16)
+{"date":"Fri Jan 27 2023 11:46:58 GMT+0100 (Central European Standard Time)","error":{"code":"EPIPE","errno":-32,"syscall":"write"},"exception":true,"level":"error","message":"uncaughtException: write EPIPE\nError: write EPIPE\n    at WriteWrap.onWriteComplete [as oncomplete] (internal/stream_base_commons.js:94:16)","os":{"loadavg":[1.32,1.37,1.46],"uptime":63854.94},"process":{"argv":["/usr/bin/node","/home/marco/apps/sistemisolari/appalti190-server/server.js"],"cwd":"/home/marco/apps/sistemisolari/appalti190-server","execPath":"/usr/bin/node","gid":1000,"memoryUsage":{"arrayBuffers":34925191,"external":32046160,"heapTotal":235061248,"heapUsed":204011224,"rss":302514176},"pid":30130,"uid":1000,"version":"v14.20.1"},"stack":"Error: write EPIPE\n    at WriteWrap.onWriteComplete [as oncomplete] (internal/stream_base_commons.js:94:16)","trace":[{"column":16,"file":"internal/stream_base_commons.js","function":"WriteWrap.onWriteComplete [as oncomplete]","line":94,"method":"onWriteComplete [as oncomplete]","native":false}]}
+info: 2023-01-27 11:47:24: 	Activating [43m test [0m environment
+info: 2023-01-27 11:47:25: 	Server is running on port 5000
+info: 2023-01-27 11:47:25: 	Successfully connected to MongoDB
+error: 2023-01-27 11:48:39: 	uncaughtException: write EPIPE
+Error: write EPIPE
+    at WriteWrap.onWriteComplete [as oncomplete] (internal/stream_base_commons.js:94:16)
+{"date":"Fri Jan 27 2023 11:48:39 GMT+0100 (Central European Standard Time)","error":{"code":"EPIPE","errno":-32,"syscall":"write"},"exception":true,"level":"error","message":"uncaughtException: write EPIPE\nError: write EPIPE\n    at WriteWrap.onWriteComplete [as oncomplete] (internal/stream_base_commons.js:94:16)","os":{"loadavg":[1.7,1.63,1.55],"uptime":63955.55},"process":{"argv":["/usr/bin/node","/home/marco/apps/sistemisolari/appalti190-server/server.js"],"cwd":"/home/marco/apps/sistemisolari/appalti190-server","execPath":"/usr/bin/node","gid":1000,"memoryUsage":{"arrayBuffers":25807443,"external":22928412,"heapTotal":64716800,"heapUsed":44893496,"rss":106434560},"pid":53250,"uid":1000,"version":"v14.20.1"},"stack":"Error: write EPIPE\n    at WriteWrap.onWriteComplete [as oncomplete] (internal/stream_base_commons.js:94:16)","trace":[{"column":16,"file":"internal/stream_base_commons.js","function":"WriteWrap.onWriteComplete [as oncomplete]","line":94,"method":"onWriteComplete [as oncomplete]","native":false}]}
+info: 2023-01-27 11:48:56: 	Activating [43m test [0m environment
+info: 2023-01-27 11:48:56: 	Server is running on port 5000
+info: 2023-01-27 11:48:56: 	Successfully connected to MongoDB
+error: 2023-01-27 11:52:05: 	uncaughtException: write EPIPE
+Error: write EPIPE
+    at WriteWrap.onWriteComplete [as oncomplete] (internal/stream_base_commons.js:94:16)
+{"date":"Fri Jan 27 2023 11:52:05 GMT+0100 (Central European Standard Time)","error":{"code":"EPIPE","errno":-32,"syscall":"write"},"exception":true,"level":"error","message":"uncaughtException: write EPIPE\nError: write EPIPE\n    at WriteWrap.onWriteComplete [as oncomplete] (internal/stream_base_commons.js:94:16)","os":{"loadavg":[1.76,1.63,1.57],"uptime":64161.71},"process":{"argv":["/usr/bin/node","/home/marco/apps/sistemisolari/appalti190-server/server.js"],"cwd":"/home/marco/apps/sistemisolari/appalti190-server","execPath":"/usr/bin/node","gid":1000,"memoryUsage":{"arrayBuffers":25807459,"external":22928428,"heapTotal":51220480,"heapUsed":46905128,"rss":104763392},"pid":53628,"uid":1000,"version":"v14.20.1"},"stack":"Error: write EPIPE\n    at WriteWrap.onWriteComplete [as oncomplete] (internal/stream_base_commons.js:94:16)","trace":[{"column":16,"file":"internal/stream_base_commons.js","function":"WriteWrap.onWriteComplete [as oncomplete]","line":94,"method":"onWriteComplete [as oncomplete]","native":false}]}
+info: 2023-01-27 11:54:05: 	Activating [43m test [0m environment
+info: 2023-01-27 11:54:05: 	Server is running on port 5000
+info: 2023-01-27 11:54:05: 	Successfully connected to MongoDB
+error: 2023-01-27 11:54:53: 	uncaughtException: write EPIPE
+Error: write EPIPE
+    at WriteWrap.onWriteComplete [as oncomplete] (internal/stream_base_commons.js:94:16)
+{"date":"Fri Jan 27 2023 11:54:53 GMT+0100 (Central European Standard Time)","error":{"code":"EPIPE","errno":-32,"syscall":"write"},"exception":true,"level":"error","message":"uncaughtException: write EPIPE\nError: write EPIPE\n    at WriteWrap.onWriteComplete [as oncomplete] (internal/stream_base_commons.js:94:16)","os":{"loadavg":[1.01,1.44,1.51],"uptime":64329.97},"process":{"argv":["/usr/bin/node","/home/marco/apps/sistemisolari/appalti190-server/server.js"],"cwd":"/home/marco/apps/sistemisolari/appalti190-server","execPath":"/usr/bin/node","gid":1000,"memoryUsage":{"arrayBuffers":30410940,"external":27531909,"heapTotal":181719040,"heapUsed":138176712,"rss":229965824},"pid":54220,"uid":1000,"version":"v14.20.1"},"stack":"Error: write EPIPE\n    at WriteWrap.onWriteComplete [as oncomplete] (internal/stream_base_commons.js:94:16)","trace":[{"column":16,"file":"internal/stream_base_commons.js","function":"WriteWrap.onWriteComplete [as oncomplete]","line":94,"method":"onWriteComplete [as oncomplete]","native":false}]}
+info: 2023-01-27 11:56:54: 	Activating [43m test [0m environment
+info: 2023-01-27 11:56:54: 	Server is running on port 5000
+info: 2023-01-27 11:56:54: 	Successfully connected to MongoDB
+info: 2023-01-27 12:33:02: 	Activating [43m test [0m environment
+info: 2023-01-27 12:33:03: 	Server is running on port 5000
+info: 2023-01-27 12:33:03: 	Successfully connected to MongoDB
+info: 2023-01-27 12:33:52: 	Activating [43m test [0m environment
+info: 2023-01-27 12:33:52: 	Server is running on port 5000
+info: 2023-01-27 12:33:52: 	Successfully connected to MongoDB
+info: 2023-01-27 12:34:31: 	Activating [43m test [0m environment
+info: 2023-01-27 12:34:31: 	Server is running on port 5000
+info: 2023-01-27 12:34:31: 	Successfully connected to MongoDB
+info: 2023-01-27 12:34:58: 	Activating [43m test [0m environment
+info: 2023-01-27 12:34:58: 	Server is running on port 5000
+info: 2023-01-27 12:34:58: 	Successfully connected to MongoDB
+info: 2023-01-27 12:35:18: 	Activating [43m test [0m environment
+info: 2023-01-27 12:35:18: 	Server is running on port 5000
+info: 2023-01-27 12:35:18: 	Successfully connected to MongoDB
+info: 2023-01-27 12:35:42: 	Activating [43m test [0m environment
+info: 2023-01-27 12:35:43: 	Server is running on port 5000
+info: 2023-01-27 12:35:43: 	Successfully connected to MongoDB
+info: 2023-01-27 12:36:04: 	Activating [43m test [0m environment
+info: 2023-01-27 12:36:05: 	Server is running on port 5000
+info: 2023-01-27 12:36:05: 	Successfully connected to MongoDB
+info: 2023-01-27 12:36:10: 	Activating [43m test [0m environment
+info: 2023-01-27 12:36:10: 	Server is running on port 5000
+info: 2023-01-27 12:36:10: 	Successfully connected to MongoDB
+info: 2023-01-27 12:36:36: 	Activating [43m test [0m environment
+info: 2023-01-27 12:36:36: 	Server is running on port 5000
+info: 2023-01-27 12:36:36: 	Successfully connected to MongoDB
+info: 2023-01-27 12:36:53: 	Activating [43m test [0m environment
+info: 2023-01-27 12:36:54: 	Server is running on port 5000
+info: 2023-01-27 12:36:54: 	Successfully connected to MongoDB
+info: 2023-01-27 12:38:03: 	Activating [43m test [0m environment
+info: 2023-01-27 12:38:03: 	Server is running on port 5000
+info: 2023-01-27 12:38:03: 	Successfully connected to MongoDB
+info: 2023-01-27 12:38:12: 	Activating [43m test [0m environment
+info: 2023-01-27 12:38:13: 	Server is running on port 5000
+info: 2023-01-27 12:38:13: 	Successfully connected to MongoDB
+info: 2023-01-27 12:51:37: 	User login: marcosolari@gmail.com
+info: 2023-01-27 15:08:17: 	User login: marcosolari@gmail.com
+info: 2023-01-27 15:15:38: 	Activating [43m test [0m environment
+info: 2023-01-27 15:15:39: 	Server is running on port 5000
+info: 2023-01-27 15:15:39: 	Successfully connected to MongoDB
+info: 2023-01-27 17:59:37: 	User login: marcosolari@gmail.com
+info: 2023-01-27 19:32:20: 	User login: marcosolari@gmail.com
+info: 2023-01-27 21:13:18: 	User login: marcosolari@gmail.com

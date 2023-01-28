@@ -48,6 +48,10 @@ const signup = async(req, res) => {
 
   user.save(async(err, user) => {
     if (err) {
+console.error("NEW USER ERR:", err.code, err)
+      if (err.code === 11000) { // duplicated user email
+        return res.status(400).json({ code: "EmailExistsAlready", message: "Email is already in use (SERVER)" }); // TODO: remove (SERVER)
+      }
       return res.status(500).json({ message: err });
     }
 
@@ -135,7 +139,8 @@ const signupConfirm = async(req, res) => {
       user.save(err => {
         if (err) return res.status(500).json({ message: err.message });
         logger.info("User signup:", user);
-        notification({subject: `User signup on ${nowLocaleDateTime()}`, html: `Remote address: ${remoteAddress(req)}`});
+        notification({subject: `User signup on ${nowLocaleDateTime()}`, html: `User: ${user.email}, IP: ${remoteAddress(req)}`});
+
         res.status(200).json({ message: "The account has been verified, you can now log in." });
       });
     });

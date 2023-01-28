@@ -74,6 +74,7 @@ const transformXls2Xml = async (req, res) => {
     code: "OK",
     message: null,
     rownum: 1, // we skip the xls header
+    warnings: [],
     errors: [],
     header: null,
     metadati: null,
@@ -221,7 +222,8 @@ const transformXls2Xml = async (req, res) => {
       isAggregateContinuation = false;
     } else {
       let error = `Riga CIG con il campo "Partecipanti" impostato a ${row["PARTECIPANTI"]}, si ignora`;
-      return retval.errors.push(`[warning] ${error} (${retval.rownum})`);
+      //return retval.errors.push(`[attenzione] ${error} (${retval.rownum})`);
+      return retval.warnings.push(`${error} (${retval.rownum})`);
     }
 
     if (!("AGGIUDICATARI" in row)) {
@@ -234,7 +236,8 @@ const transformXls2Xml = async (req, res) => {
       isAggiudicatario = true;
     } else {
       let error = `Riga CIG con il campo "Aggiudicatari" impostato a ${row["AGGIUDICATARI"]}, si ignora`;
-      return retval.errors.push(`[attenzione] ${error} (${retval.rownum})`);
+      //return retval.errors.push(`[attenzione] ${error} (${retval.rownum})`);
+      return retval.warnings.push(`${error} (${retval.rownum})`);
     }
 
     if (!("__EMPTY" in row) || !row["__EMPTY"]) {
@@ -245,7 +248,8 @@ const transformXls2Xml = async (req, res) => {
         return; // empty row, just skip it, no warning
       }
       let error = `Almeno uno fra Codice Fiscale e Identificativo Estero è obbligatorio, si ignora`;
-      return retval.errors.push(`[attenzione] ${error} (${retval.rownum})`);
+      //return retval.errors.push(`[attenzione] ${error} (${retval.rownum})`);
+      return retval.warnings.push(`${error} (${retval.rownum})`);
     }
 
     const partecipanteCodiceFiscale = row["__EMPTY"];
@@ -281,7 +285,8 @@ const transformXls2Xml = async (req, res) => {
       let oggetto = row["OGGETTO"];
       if (typeof oggetto === "undefined") {
         let error = `Riga CIG con il campo "Oggetto" vuoto, si ignora`;
-        return retval.errors.push(`[attenzione] ${error} (${retval.rownum})`);
+        //return retval.errors.push(`[attenzione] ${error} (${retval.rownum})`);
+        return retval.warnings.push(`${error} (${retval.rownum})`);
       } else {
         oggetto = String(row["OGGETTO"]).trim();
       }
@@ -289,7 +294,8 @@ const transformXls2Xml = async (req, res) => {
       let sceltaContraente = row["SCELTA CONTRAENTE"];
       if (typeof sceltaContraente === "undefined") {
         let error = `Riga CIG con il campo "Scelta Contraente" vuoto, si ignora`;
-        return retval.errors.push(`[attenzione] ${error} (${retval.rownum})`);
+        //return retval.errors.push(`[attenzione] ${error} (${retval.rownum})`);
+        return retval.warnings.push(`${error} (${retval.rownum})`);
       } else {
         sceltaContraente = String(row["SCELTA CONTRAENTE"]).trim();
       }
@@ -312,7 +318,8 @@ const transformXls2Xml = async (req, res) => {
 
       if (row["PARTECIPANTI"] === "") { // a CIG row MUST contain a PARTECIPANTI (A or S)
         let error = `Riga CIG con il campo "Partecipanti" vuoto, si ignora`;
-        return retval.errors.push(`[attenzione] ${error} (${retval.rownum})`);
+        //return retval.errors.push(`[attenzione] ${error} (${retval.rownum})`);
+        return retval.warnings.push(`${error} (${retval.rownum})`);
       }
     
       if (config.job.correctCommonErrors) {
@@ -718,11 +725,11 @@ function serializeArchive(outputFolder, outputFile, outputUrlPath, zip) {
   let contents = zip.generate({ base64: false, compression: 'DEFLATE' });
   //fs.writeFileSync(path.join(zipFolder, zipFile), zipContents, "binary");
   if ((result = save(outputFolder, outputFile, "binary", contents)) !== true) {
-    return `[errore] ${result}`;
+    return `${result}`;
   }
 console.log("config.serverDomain:", config.serverDomain);
 console.log("outputUrlPath:", outputUrlPath);
-    return {
+  return {
     error: null,
     outputFile: path.join(outputFolder, outputFile), //.replace(/^.*\/public\//, "")
     outputUrl: config.serverDomain + outputUrlPath,
@@ -731,11 +738,9 @@ console.log("outputUrlPath:", outputUrlPath);
 
 // serialize xml dataset to disk
 function serializeDataset(outputFolder, outputFile, outputUrlPath, contents) {
-console.log("XXX:", outputFolder, outputFile);
-console.log("YYY:", config.serverDomain);
   if ((result = save(outputFolder, outputFile, /* use default mode*/ "", contents)) !== true) {
     return {
-      error: `[errore] ${result}`
+      error: `${result}`
     };
   }
   console.log("config.serverDomain:", config.serverDomain);
@@ -785,7 +790,7 @@ const validateXml = async (req, res) => {
 
   } else { // no other cases allowed
     //return [ new Error(`[errore] Non presenti né un archivio zip né un dataset xml da validare`), null ]; //.then(resolved, rejected);
-    return [`[errore] Non presenti né un archivio zip né un dataset xml da validare`]; //.then(resolved, rejected);
+    return [`Non presenti né un archivio zip né un dataset xml da validare`]; //.then(resolved, rejected);
   }
 };
 

@@ -47,7 +47,7 @@ app.use((req, res, next) => {
   });
   req.language = language;
   //console.log("LANGUAGE PREFERRED BY CLIENT:", req.language);
-  // TODO: implement i18n server side too
+  // TODO: implement i18n server side too (or always use codes with messages)
   next();
 })
 

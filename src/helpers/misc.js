@@ -35,6 +35,7 @@ module.exports = {
 
     domain = cleanDomain(domain);
 
+    // trim separators that allow multiple emails for the same real address
     const separator = domain === "yahoo.com" ? "-" : "+";
     const separatorIndex = localPart.indexOf(separator);
     if (separatorIndex > 0) {
