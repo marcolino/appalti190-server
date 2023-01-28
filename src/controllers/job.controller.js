@@ -783,7 +783,7 @@ const validateXml = async (req, res) => {
     //   console.error("validate error:", err);
     // }
 
-    // //return validate(xml, schema);
+    // //return validate(xml  , schema);
     // const retval = await validate(xml, schema);
     // //console.log("RETVAL:", typeof retval, retval);
     // return [null, retval]; // TODO...
@@ -796,7 +796,6 @@ const validateXml = async (req, res) => {
 
 async function validate(xml, schema) {
   return new Promise((resolve) => {
-console.log("VALIDATE XML SCHEMA:", schema);
         xmlvalidator.validateXML(xml, schema, (err, result) => {
       if (err) {
         return resolve({error: {message: "Errore validazione XML", reason: err.message}});
