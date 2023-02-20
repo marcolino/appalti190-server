@@ -6,6 +6,11 @@
       <priority>0.7</priority>
     </url>
     <url>
+      <loc>https://appalti190.arsistemi.it/support</loc>
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+    <url>
       <loc>https://appalti190.arsistemi.it/signup</loc>
       <changefreq>monthly</changefreq>
       <priority>0.3</priority>

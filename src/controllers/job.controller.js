@@ -101,26 +101,28 @@ const transformXls2Xml = async (req, res) => {
     return [null, retval];
   }
 
-//console.log("LLLLL", req.language);
-//console.log("MMMMM", req.body);
   // read input xls file into workbook
   const input = req.body.filePath;
-  //const input = "uploads/marco/2022-03-14_18:48:06.xls";
   const workbook = xlsx.readFile(input, { cellDates: true });
+console.log("workbook:", workbook);
 
   // parse the requested sheets
   const sheetElencoGare = xlsx.utils.sheet_to_json(workbook.Sheets[config.job.sheets.elencoGare], {
     header: false,
     blankrows: true,
   });
+
   if (!sheetElencoGare.length) {
+console.log("sheetElencoGare vuoto");
     retval.errors.push(`Foglio ${config.job.sheets.elencoGare} non trovato`);
-    return retval;
+    retval.message = `Il file di input è corrotto, oppure vuoto.`;
+    retval.code = "BROKEN_INPUT";
+    return [null, retval];
   }
+
   const sheetMetadati = xlsx.utils.sheet_to_json(workbook.Sheets[config.job.sheets.metadati]);
   if (!sheetMetadati.length) {
-    retval.errors.push(`Foglio ${config.job.sheets.metadati} non trovato`);
-    return retval;
+    return retval.errors.push(`Foglio ${config.job.sheets.metadati} non trovato`);
   }
 
   const metadati = config.job.xmlHeader.metadata;
@@ -423,11 +425,11 @@ const transformXls2Xml = async (req, res) => {
 
       if (!lotto) {
         let warning = `Trovata una riga di continuazione (senza CIG) senza un lotto (riga CIG precedente), si ignora`;
-        return retval.errors.push(`[${retval.rownum}] ${warning}`);
+        return retval.warnings.push(`[${retval.rownum}] ${warning}`);
       }
       if (!("__EMPTY_1" in row)) {
         let warning = `Trovata una riga di continuazione (senza CIG) senza un Codice Fiscale/ID Estero, si ignora`;
-        return retval.errors.push(`[${retval.rownum}] ${warning}`);
+        return retval.warnings.push(`[${retval.rownum}] ${warning}`);
       }
 
       if (isAggregate) { // an aggregate row
@@ -512,8 +514,9 @@ const transformXls2Xml = async (req, res) => {
 
   if (retval.cigCount > user.plan.cigNumberAllowed) {
     retval.message = `The number of CIGs uploaded exeeds the number allowed by plan ${user.plan.name}, ${user.plan.cigNumberAllowed}.`;
-    retval.code = "TRUNCATED_DUE_TO_PLAN_LIMIT";
-console.log("*********************** USER.PLAN:", user.plan)
+    //retval.code = "TRUNCATED_DUE_TO_PLAN_LIMIT";
+    retval.truncatedDueToPlanLimit = true;
+console.log("user.plan:", user.plan)
     retval.planCurrent = user.plan;
 
     // calculate minimum required plan
@@ -633,11 +636,17 @@ console.log("YEAR:", config.job.year);
     let urlPath = path.join(config.job.outputDownloads, user.email, fileName);
 console.log("URL_PATH:", urlPath);
     let result = serializeDataset(folderName, fileName, urlPath, xml);
+
+/* HERE!!! */ //retval.message = `Debug forced error!`; retval.code = "DEBUG FORCED ERROR"; return [null, retval];
+
     if (result.error) {
       retval.errors.push(result.error);
-console.log("ERROR1", result.error);
       return [null, retval];
     }
+    //retval.xml = xml;
+    /* retval.xml = xml; WE DON'T NEED XML ON THE CLIENT ... */
+    //retval.xmlFilePath = folderName = path.join(folderName, fileName);
+
 console.log("OUTPUT_URL:", result.outputUrl);
     retval.outputFile = result.outputFile;
     retval.outputUrl = result.outputUrl;
@@ -645,7 +654,6 @@ console.log("OUTPUT_URL:", result.outputUrl);
     /**
      * While developing, truncate xml to ease debug...
      */
-    retval.xml = xml;
     //retval.xml = (process.env.NODE_ENV !== "production") ? xml.substring(0, 256) : xml;
 
     // let outputFolder = path.join(__dirname, "..", config.job.outputBasePath, encodeURIComponent(req.auth.user));
@@ -716,7 +724,17 @@ function save(folder, file, mode, contents) {
     fs.writeFileSync(path.join(folder, file), contents, mode); // write the contents to file
     return true;
   } catch (err) {
-    return JSON.stringify(err);
+    return err;
+  }
+}
+
+// load contents from file on disk
+function load(path) {
+  try {
+    const contents = fs.readFileSync(path, config.job.encoding); // read the contents from file
+    return contents;
+  } catch (err) {
+    return err;
   }
 }
 
@@ -740,16 +758,33 @@ console.log("outputUrlPath:", outputUrlPath);
 function serializeDataset(outputFolder, outputFile, outputUrlPath, contents) {
   if ((result = save(outputFolder, outputFile, /* use default mode*/ "", contents)) !== true) {
     return {
-      error: `${result}`
+      error: result,
+      outputFile: null,
+      outputUrl: null,
+    };
+  } else {
+    return {
+      error: null,
+      outputFile: path.join(outputFolder, outputFile),
+      outputUrl: config.serverDomain + outputUrlPath,
+    };
+  };
+}
+
+// deserialize xml dataset from disk
+function deserializeDataset(inputFilePath) {
+  const contents = load(inputFilePath);
+  if (contents instanceof Error) {
+    return {
+      error: contents.message,
+      contents: null,
+    };
+  } else {
+    return {
+      error: null,
+      contents
     };
   }
-  console.log("config.serverDomain:", config.serverDomain);
-  console.log("outputUrlPath:", outputUrlPath);
-  return {
-    error: null,
-    outputFile: path.join(outputFolder, outputFile),
-    outputUrl: config.serverDomain + outputUrlPath,
-  };
 }
 
 // check if codice fiscale is "estero"
@@ -760,6 +795,9 @@ function isEstero(codiceFiscale) {
 // validate XML
 const validateXml = async (req, res) => {
 //console.log("req.body:", Object.keys(req.body.transform));
+
+  // TODO: handle xml's from filePath, not by contents... (see dataset case below)
+
   if (req.body.transform.xmlIndice) { // a zip archive with indice and datasets inside is present
     const xmlIndice = req.body.transform.xmlIndice;
     const xmls = req.body.transform.xmls;
@@ -773,59 +811,113 @@ const validateXml = async (req, res) => {
     }
     return Promise.all(promises);
   } else
-  if (req.body.transform.xml) { // a single xml dataset is present
-    const xml = req.body.transform.xml;
+  //if (req.body.transform.xml) { // a single xml dataset is present
+  if (req.body.transform.outputFile/*xmlFilePath*/) { // a single xml dataset is present
+      ///////////////////////////////////////////////////////////////////// storing only filename
+    //const xml = req.body.transform.xml;
+    const result = deserializeDataset(req.body.transform.outputFile/*xmlFilePath*/);
+    if (result.error) {
+      return {
+        code: "CANNOT_READ_XML",
+        message: result.error,
+      };
+//       retval.errors.push(result.error);
+// console.log("ERROR1", result.error);
+//       return [null, retval];
+    }
+//console.log("OUTPUT_URL:", result.outputUrl);
+    //retval.outputFile = result.outputFile;
+    const xml = result.contents;
     const schema = path.join(__dirname, "../..", config.job.schemaFile);
+console.log("XML type:", typeof xml, 'len:', xml.length);
 
-    // try {
     return validate(xml, schema);
-    // } catch (err) {
-    //   console.error("validate error:", err);
-    // }
-
-    // //return validate(xml  , schema);
-    // const retval = await validate(xml, schema);
-    // //console.log("RETVAL:", typeof retval, retval);
-    // return [null, retval]; // TODO...
-
   } else { // no other cases allowed
-    //return [ new Error(`[errore] Non presenti né un archivio zip né un dataset xml da validare`), null ]; //.then(resolved, rejected);
-    return [`Non presenti né un archivio zip né un dataset xml da validare`]; //.then(resolved, rejected);
+    return {
+      code: "XML_NOT_FOUND",
+      message: "No zip archive nor xml dataset to be validated found",
+    };
   }
 };
 
 async function validate(xml, schema) {
   return new Promise((resolve) => {
-        xmlvalidator.validateXML(xml, schema, (err, result) => {
+    xmlvalidator.validateXML(xml, schema, (err, result) => {
       if (err) {
-        return resolve({error: {message: "Errore validazione XML", reason: err.message}});
+        return resolve({code: "OK", message: `Error while validating XML: ${err.message}`});
       }
       if (!result.valid) {
-console.warn("xmlvalidator.validateXML NOT VALID:", result);
-        return resolve({error: {message: "Errore validità XML", reason: result.message}});
+        return resolve({code: "OK", message: `Invalid XML: ${result.message}`});
       }
-      return resolve(true);
+      return resolve({code: "OK", message: `Valid XML`, result});
     });
   });
 };
 
 const outcomeCheck = async (req, res) => {
   const data = {
-    anno: req.body.anno,
+    anno: req.body.anno + 1,
     codiceFiscaleAmministrazione: req.body.codiceFiscaleAmministrazione,
     denominazioneAmministrazione: "", // not handled
     identificativoComunicazione: "", // not handled
   };
 console.log("OUTCOMECHECK - config.job.outcomeUrl:", config.job.outcomeUrl);
+  let answer = {};
   return await axios.post(config.job.outcomeUrl, data)
-    .then(response => {
-console.log("OUTCOMECHECK - OK response:", response.data);
-      return response?.data?.result?.length ? response.data.result[0] : {};
+    .then(async(response) => {
+console.log("OUTCOMECHECK - OK response:", response.data.result);
+
+      const len = response?.data?.result?.length;
+      if (len > 0) {
+        answer = response.data.result[len - 1];
+console.log("OUTCOMECHECK - ANSWER:", answer);
+      }
+      if (answer?.esitoUltimoTentativoAccessoUrl === "fallito") { // check did fail, get also failure details page
+        const outcomeFailureDetailsBaseUrl = `${config.job.outcomeFailureDetailsBaseUrl}/${config.job.year + 1}/${answer.identificativoPEC}`;
+console.log("OUTCOMECHECK - DETAILS URL:", outcomeFailureDetailsBaseUrl);
+// "https://dati.anticorruzione.it/rest/legge190/dettaglio/2023/opec21004.20230127104028.29210.497.1.51@pec.aruba.it"
+          // "headers": {
+          //   "accept": "application/json, text/plain, */*",
+          //   "accept-language": "it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7",
+          //   "cache-control": "no-cache",
+          //   "pragma": "no-cache",
+          //   "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"101\", \"Google Chrome\";v=\"101\"",
+          //   "sec-ch-ua-mobile": "?0",
+          //   "sec-ch-ua-platform": "\"Linux\"",
+          //   "sec-fetch-dest": "empty",
+          //   "sec-fetch-mode": "cors",
+          //   "sec-fetch-site": "same-origin",
+          //   "cookie": "_ga=GA1.2.1075427088.1674389486; GUEST_LANGUAGE_ID=it_IT; _gat=1",
+          //   "Referer": "https://dati.anticorruzione.it/",
+          //   "Referrer-Policy": "strict-origin-when-cross-origin"
+          // },
+        return await axios.get(outcomeFailureDetailsBaseUrl)
+          .then(async(responseDetails) => {
+            answer.esitoComunicazione = responseDetails?.data?.dati?.esitoComunicazione;
+            answer.tentativiAccessoUrl = responseDetails?.data?.dati?.tentativiAccessoUrl;
+console.log("OUTCOMECHECK DETAILS - OK:", answer);
+            return [false, answer];
+          })
+          .catch(error => {
+console.log("OUTCOMECHECK DETAILS - KO error:", error?.response?.statusText);
+            //return [error.response.data ? new Error(error.response.data) : error];
+            answer.esitoComunicazione = {};
+            answer.esitoComunicazione.codice = "?";
+            answer.esitoComunicazione.descrizione = error?.response?.status;
+            answer.esitoComunicazione.dettaglio = error?.response?.statusText;
+            answer.tentativiAccessoUrl = [];
+            return [false, answer];
+          })
+        ;
+      }
+console.log("OUTCOMECHECK ANSWER *:", answer);
+      return [false, answer];
     })
     .catch(error => {
 console.log("OUTCOMECHECK - KO error:", error?.message, error?.response?.data?.message);
       //return [error.response.data ? new Error(error.response.data) : error];
-      return {error: error?.message, reason: error?.response?.data?.message};
+      //answer = {error: error?.message, reason: error?.response?.data?.message};
+      return [error, answer];
     })
   ;
 };
@@ -842,18 +934,28 @@ const outcomeFailureDetails = async (req, res) => {
   ;
 };
 
-const urlExistenceCheck = async (req, res) => {
-  //console.log("REQQQ:", req);
+const urlExistenceAndMatch = async (req, res) => {
   try {
-    let r = await axios.head(req.body.url);
-    console.log("urlExistenceCheck retval", r);
-    return [false, true];
-  } catch (error) {
-    console.log("urlExistenceCheck error:", error.message);// .response.status);
-    if (error.response && error.response.status >= 400) {
-      return [false, false];
+    // read remote file
+    const response = await axios.get(req.body.url);
+    const remoteContents = response.data;
+    console.log("urlExistenceAndMatch remoteContents length", remoteContents.length, typeof remoteContents);
+
+    // read local file to compare
+    const buffer = fs.readFileSync(req.body.fileToMatch);
+    const localContents = buffer.toString();
+    console.log("urlExistenceAndMatch localContents length", localContents.length, typeof localContents);
+
+    // compare contents
+    // if (localContents !== remoteContents) { // TODO: use this code!!! The next line is temporary!!!
+    if (localContents.slice(localContents.length - 564) !== remoteContents.slice(remoteContents.length - 564) ) {
+      return [false, {published: true, publishedAsIs: false}];
     }
-    return [true, false]; // return false for every status, in case of error...
+
+    return [false, {published: true, publishedAsIs: true}];
+  } catch (error) {
+    console.log("urlExistenceAndMatch error:", error.message);// .response.status);
+    return [error]; // return false for every status, in case of error...
   }
 };
 
@@ -874,6 +976,6 @@ module.exports = {
   validateXml,
   outcomeCheck,
   outcomeFailureDetails,
-  urlExistenceCheck,
+  urlExistenceAndMatch,
   getPlans,
 };

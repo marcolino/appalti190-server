@@ -3,9 +3,9 @@
   <metadata>
     <titolo>Pubblicazione 1 legge 190</titolo>
     <abstract>Pubblicazione 1 legge 190 anno 1 rif. 2012</abstract>
-    <dataPubblicazioneDataset>2023-01-28</dataPubblicazioneDataset>
+    <dataPubblicazioneDataset>2023-02-20</dataPubblicazioneDataset>
     <entePubblicatore>S.I.TO SPA - SOCIETA INTERPORTO DI TORINO</entePubblicatore>
-    <dataUltimoAggiornamentoDataset>2023-01-28</dataUltimoAggiornamentoDataset>
+    <dataUltimoAggiornamentoDataset>2023-02-20</dataUltimoAggiornamentoDataset>
     <annoRiferimento>2022</annoRiferimento>
     <urlFile>http://allegati.interportotorino.it/2022/dataset-2022.xml</urlFile>
     <licenza>IODL</licenza>
@@ -16560,6 +16560,9 @@
           <ragioneSociale>ISAM SRL</ragioneSociale>
         </partecipante>
         <partecipante>
+          <ragioneSociale>COOPERATIVA SOCIALE BARBARA B</ragioneSociale>
+        </partecipante>
+        <partecipante>
           <ragioneSociale>AGRI-SERVIZI</ragioneSociale>
         </partecipante>
       </partecipanti>
@@ -30600,9 +30603,6 @@
       <partecipanti>
         <raggruppamento>
           <membro>
-            <ragioneSociale>PREVE COSTRUZIONI S'PA</ragioneSociale>
-          </membro>
-          <membro>
             <ragioneSociale>EDILGROUP SRL</ragioneSociale>
             <ruolo>02-MANDATARIA</ruolo>
           </membro>
@@ -30625,6 +30625,9 @@
         </partecipante>
         <partecipante>
           <ragioneSociale>POLISTRADE COSTRUZIONI GENERALI SPA</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PREVE COSTRUZIONI S'PA</ragioneSociale>
         </partecipante>
         <partecipante>
           <ragioneSociale>S.A.I.S.E.F. SPA</ragioneSociale>
@@ -33438,7 +33441,7 @@
       <sceltaContraente>04-PROCEDURA NEGOZIATA SENZA PREVIA PUBBLICAZIONE</sceltaContraente>
       <partecipanti>
         <partecipante>
-          <codiceFiscale>089999970018</codiceFiscale>
+          <codiceFiscale>08999970018</codiceFiscale>
           <ragioneSociale>SERVIZI GRAFICI  SRL</ragioneSociale>
         </partecipante>
         <partecipante>
@@ -33447,7 +33450,7 @@
       </partecipanti>
       <aggiudicatari>
         <aggiudicatario>
-          <codiceFiscale>089999970018</codiceFiscale>
+          <codiceFiscale>08999970018</codiceFiscale>
           <ragioneSociale>SERVIZI GRAFICI  SRL</ragioneSociale>
         </aggiudicatario>
       </aggiudicatari>
@@ -34140,13 +34143,13 @@
       <sceltaContraente>23-AFFIDAMENTO DIRETTO</sceltaContraente>
       <partecipanti>
         <partecipante>
-          <codiceFiscale>089999970018</codiceFiscale>
+          <codiceFiscale>08999970018</codiceFiscale>
           <ragioneSociale>SERVIZI GRAFICI  SRL</ragioneSociale>
         </partecipante>
       </partecipanti>
       <aggiudicatari>
         <aggiudicatario>
-          <codiceFiscale>089999970018</codiceFiscale>
+          <codiceFiscale>08999970018</codiceFiscale>
           <ragioneSociale>SERVIZI GRAFICI  SRL</ragioneSociale>
         </aggiudicatario>
       </aggiudicatari>
@@ -34371,41 +34374,8 @@
         </partecipante>
       </partecipanti>
       <aggiudicatari>
-        <aggiudicatarioRaggruppamento>
-          <membro>
-            <codiceFiscale>05911040011</codiceFiscale>
-            <ragioneSociale>M.A.V.E.S.  SRL</ragioneSociale>
-            <ruolo>02-MANDATARIA</ruolo>
-          </membro>
-          <membro>
-            <ragioneSociale>AGER SNC</ragioneSociale>
-            <ruolo>01-MANDANTE</ruolo>
-          </membro>
-        </aggiudicatarioRaggruppamento>
-      </aggiudicatari>
-      <importoAggiudicazione>0.00</importoAggiudicazione>
-      <tempiCompletamento></tempiCompletamento>
-      <importoSommeLiquidate>0.00</importoSommeLiquidate>
-    </lotto>
-    <lotto>
-      <cig>92364038DF</cig>
-      <strutturaProponente>
-        <codiceFiscaleProp>03717710010</codiceFiscaleProp>
-        <denominazione>S.I.TO SPA - SOCIETA INTERPORTO DI TORINO</denominazione>
-      </strutturaProponente>
-      <oggetto>Lavori di manutenzione straordinaria di una parte della copertura del Magazzino NORD 7 modulo B</oggetto>
-      <sceltaContraente>23-AFFIDAMENTO DIRETTO</sceltaContraente>
-      <partecipanti>
-        <partecipante>
-          <ragioneSociale>IRACO Srl</ragioneSociale>
-        </partecipante>
-        <partecipante>
-          <ragioneSociale>ING. DE ALOE COSTRUZIONI Srl</ragioneSociale>
-        </partecipante>
-      </partecipanti>
-      <aggiudicatari>
         <aggiudicatario>
-          <ragioneSociale>IRACO Srl</ragioneSociale>
+          <ragioneSociale>ICEF SR</ragioneSociale>
         </aggiudicatario>
       </aggiudicatari>
       <importoAggiudicazione>0.00</importoAggiudicazione>
@@ -34421,6 +34391,39 @@
       <oggetto>Lavori di manutenzione straordinaria di una parte della copertura del Magazzino NORD 7 modulo B</oggetto>
       <sceltaContraente>23-AFFIDAMENTO DIRETTO</sceltaContraente>
       <partecipanti>
+        <partecipante>
+          <codiceFiscale>03141180012</codiceFiscale>
+          <ragioneSociale>SIDIFER snc di Diana e C.</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>BALLIU SRL</ragioneSociale>
+        </partecipante>
+        <partecipante>
+          <ragioneSociale>PROGETTO EDILE s.r.l.s.</ragioneSociale>
+        </partecipante>
+      </partecipanti>
+      <aggiudicatari>
+        <aggiudicatario>
+          <ragioneSociale>BALLIU SRL</ragioneSociale>
+        </aggiudicatario>
+      </aggiudicatari>
+      <importoAggiudicazione>0.00</importoAggiudicazione>
+      <tempiCompletamento></tempiCompletamento>
+      <importoSommeLiquidate>0.00</importoSommeLiquidate>
+    </lotto>
+    <lotto>
+      <cig>9248944609</cig>
+      <strutturaProponente>
+        <codiceFiscaleProp>03717710010</codiceFiscaleProp>
+        <denominazione>S.I.TO SPA - SOCIETA INTERPORTO DI TORINO</denominazione>
+      </strutturaProponente>
+      <oggetto>Lavori di manutenzione dell'armamento posto sul ponte  di connessione tra il raccordo della S.I.TO e lo Scalo di Orbassano di R.F.I.</oggetto>
+      <sceltaContraente>04-PROCEDURA NEGOZIATA SENZA PREVIA PUBBLICAZIONE</sceltaContraente>
+      <partecipanti>
+        <partecipante>
+          <codiceFiscale>01235060066</codiceFiscale>
+          <ragioneSociale>IMPRESA PAROLDI GIUSEPPE &amp; C. Srl</ragioneSociale>
+        </partecipante>
         <partecipante>
           <ragioneSociale>IRACO Srl</ragioneSociale>
         </partecipante>
@@ -35117,13 +35120,13 @@
       <sceltaContraente>23-AFFIDAMENTO DIRETTO</sceltaContraente>
       <partecipanti>
         <partecipante>
-          <codiceFiscale>9044620012</codiceFiscale>
+          <codiceFiscale>09044620012</codiceFiscale>
           <ragioneSociale>L’IGIENICA SRL</ragioneSociale>
         </partecipante>
       </partecipanti>
       <aggiudicatari>
         <aggiudicatario>
-          <codiceFiscale>9044620012</codiceFiscale>
+          <codiceFiscale>09044620012</codiceFiscale>
           <ragioneSociale>L’IGIENICA SRL</ragioneSociale>
         </aggiudicatario>
       </aggiudicatari>

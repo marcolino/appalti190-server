@@ -51,6 +51,7 @@ module.exports = {
   currency: "EUR", // default currency (ISO 4217:2015)
   job: {
     year,
+    encoding: "utf8", // files encodinf
     uploadsBasePath: "uploads",
     outputBasePath: "/public/",
     outputDownloads: "/downloads/",
@@ -91,6 +92,7 @@ module.exports = {
     sheetElencoGareHeaderRows: 2,
     correctCommonErrors: true,
     documentationUrl: "/docs/Specifiche Tecniche Legge 190 v1.3.pdf",
+    outcomeUrlVisual: "https://dati.anticorruzione.it/#/l190",
     outcomeUrl: "https://dati.anticorruzione.it/rest/legge190/ricerca?max=20&start=0",
     outcomeFailureDetailsBaseUrl: "https://dati.anticorruzione.it/rest/legge190/dettaglio",
   },
