@@ -47,7 +47,7 @@ console.log("MODE:", process.env.STRIPE_MODE);
         return res.status(400).json({message: "no session url", code: "NO_SESSION_URL"});
       }
 
-      // TODO: update user's plan in db...
+      // TODO: update user's plan in db and localstorage ....
 
       //res.redirect(303, session.url);
 

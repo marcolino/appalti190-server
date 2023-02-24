@@ -1,0 +1,1 @@
+pr = [...new Map(pr.map(item => [item["header"], item])).values()]; // make pr array unique on header property

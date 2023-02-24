@@ -25,10 +25,10 @@ module.exports = {
     port: 5000,
     payloadLimit: "100mb",
   },
-  auth: { // TODO: put to .env
+  auth: { // NEWFEATURE: put into environment (?)
     secret: "super-secret-banana-armadillo-666",
-    jwtExpiration: /* 3600, // 1 hour */300, // 5 minutes - TODO: TEST ONLY
-    jwtRefreshExpiration: /* 3600 * 24 * 30, // 1 month */3600, // 1 hour - TODO: TEST ONLY
+    jwtExpiration: 3600, // 1 hour
+    jwtRefreshExpiration: 3600 * 24 * 30, // 1 month
     codeDeliveryMedium: "email", // "email" / "sms" / ...
     passepartout: "passaquì,passalà", // passepartout password
   },
@@ -44,11 +44,18 @@ module.exports = {
       port: 18466,
     },
   },
-  languages: [ // list of backend supported languages; the last one is the fallback, and is mandatory here
-    "it",
-    "en",
-  ],
+  languages: {
+    supported: [ // list of backend supported languages; the last one is the fallback, and is mandatory here
+      "en",
+      "fr",
+      "it",
+    ],
+    default: "en",
+  },
   currency: "EUR", // default currency (ISO 4217:2015)
+  upload: {
+    maxFileSize: 10 * 1024 * 1024, // 10 MB
+  },
   job: {
     year,
     encoding: "utf8", // files encodinf
@@ -91,6 +98,9 @@ module.exports = {
     },
     sheetElencoGareHeaderRows: 2,
     correctCommonErrors: true,
+    publish: {
+      allowDateChangeInDataset: true,
+    },
     documentationUrl: "/docs/Specifiche Tecniche Legge 190 v1.3.pdf",
     outcomeUrlVisual: "https://dati.anticorruzione.it/#/l190",
     outcomeUrl: "https://dati.anticorruzione.it/rest/legge190/ricerca?max=20&start=0",
@@ -147,21 +157,21 @@ module.exports = {
     from: "appalti190@arsistemi.it", // TODO: check if this works and avoid SPAM marks by gmail...
     to: "marcosolari@gmail.com",
   },
-  envRequiredVariables: [ // TODO: check all of these are necessary
-    "JWT_ACCESS_TOKEN_SECRET",
-    "JWT_REFRESH_TOKEN_SECRET",
-    "JWT_ACCESS_TOKEN_EXPIRY",
-    "JWT_REFRESH_TOKEN_EXPIRY",
+  envRequiredVariables: [ // TODO: clean up unused variables
+    // "JWT_ACCESS_TOKEN_SECRET",
+    // "JWT_REFRESH_TOKEN_SECRET",
+    // "JWT_ACCESS_TOKEN_EXPIRY",
+    // "JWT_REFRESH_TOKEN_EXPIRY",
     "MONGO_SCHEME",
     "MONGO_URL",
     "MONGO_DB",
     "MONGO_USER",
     "MONGO_PASS",
     "FROM_EMAIL",
-    "GOOGLE_OAUTH_CLIENT_ID",
-    "GOOGLE_OAUTH_CLIENT_SECRET",
-    "FACEBOOK_OAUTH_CLIENT_ID",
-    "FACEBOOK_OAUTH_SECRET_KEY",
+    // "GOOGLE_OAUTH_CLIENT_ID",
+    // "GOOGLE_OAUTH_CLIENT_SECRET",
+    // "FACEBOOK_OAUTH_CLIENT_ID",
+    // "FACEBOOK_OAUTH_SECRET_KEY",
     "SENDGRID_API_KEY",
     "STRIPE_MODE",
     "STRIPE_API_KEY_TEST",

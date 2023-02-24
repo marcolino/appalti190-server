@@ -46,7 +46,7 @@ module.exports = {
   },
 
   nowLocaleDateTime: () => {
-    return new Date().toLocaleString(config.languages[0], { timeZoneName: "short" });
+    return new Date().toLocaleString(config.languages.default, { timeZoneName: "short" }); // TODO: use requested language
   },
 
   remoteAddress: (req) => {

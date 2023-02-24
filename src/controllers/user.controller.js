@@ -31,7 +31,7 @@ console.log("ROLES:", roles);
 };
 
 exports.getProfile = async(req, res) => {
-  if (!req.userId) return res.status(400).json({message: "User must be authenticated"});
+  if (!req.userId) return res.status(400).json({message: req.t("User must be authenticated")});
 
   User.findOne({
     _id: req.userId
@@ -101,7 +101,6 @@ console.log("updateUserProperty - propertyValue:", req.body.propertyValue);
     const propertyName = req.body.propertyName;
     const propertyValue = req.body.propertyValue;
     
-    // TODO: address.street...
     // if (!(req.body.propertyName in user)) {
     //   return res.status(400).json({ message: `Property ${propertyName} can't be set` });
     // }
@@ -246,8 +245,8 @@ exports.adminPanel = (req, res) => {
   Promise.all([
     User.find({
       // we comment next row just waiting to add isDeleted property to current db...
-      //isDeleted: false, // TODO: add isDeleted condition everywhere?
-      isVerified: true, // TODO: add isVerified condition everywhere?
+      isDeleted: false,
+      isVerified: true,
     })
     .select(["-password", "-__v"])
     .populate("roles", "-__v")
@@ -272,8 +271,6 @@ exports.adminPanel = (req, res) => {
         }
       }
     }
-users[0].addressStreet = users[0].address.street; // TODO: DEBUG ONLY!!!
-    //console.log("adminPanel users with refresh tokens:", users);
     res.status(200).json({users});
   }).catch(function(err){
     console.log("adminPanel error:", err);

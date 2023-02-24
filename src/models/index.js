@@ -46,7 +46,7 @@ db.plans = [
 
 db.populate = () => { // first time populate static reference documents
 
-  // TODO: add admin user ?
+  // NEWFEATURE: add admin user
   
   const Role = db.models.role;
   Role.estimatedDocumentCount((err, count) => {

@@ -3,8 +3,7 @@ const fs = require("fs");
 const multer = require("multer");
 const xlsx = require("xlsx");
 const xmlBuilder = require("xmlbuilder");
-//const nodeZip = new require("node-zip")(); // nodeZip here, const zip = new nodeZip() below...
-const nodeZip = require("node-zip"); // TODO: nodeZip here, const zip = new nodeZip() below...
+const nodeZip = require("node-zip");
 const xmlvalidator = require("xsd-schema-validator");
 const axios = require("axios");
 const db = require("../models");
@@ -65,14 +64,14 @@ const upload = multer({
     }
   }),
   limits: {
-    fileSize: 10000000, // TODO: in config, and handle overflows...
+    fileSize: config.upload.maxFileSize,
   },
 });
 
 const transformXls2Xml = async (req, res) => {
   const retval = {
     code: "OK",
-    message: null,
+    message: "",
     rownum: 1, // we skip the xls header
     warnings: [],
     errors: [],
@@ -93,18 +92,17 @@ const transformXls2Xml = async (req, res) => {
   if (!user) {
     retval.message = `The user must be authenticated.`;
     retval.code = "ABORTED_DUE_TO_MISSING_AUTHENTICATION";
-    return [null, retval]; // TODO: handle errors like this in the first return var...
+    return retval;
   }
   if (!user.plan) {
     retval.message = `The user must have a plan.`;
     retval.code = "ABORTED_DUE_TO_MISSING_PLAN";
-    return [null, retval];
+    return retval;
   }
 
   // read input xls file into workbook
   const input = req.body.filePath;
   const workbook = xlsx.readFile(input, { cellDates: true });
-console.log("workbook:", workbook);
 
   // parse the requested sheets
   const sheetElencoGare = xlsx.utils.sheet_to_json(workbook.Sheets[config.job.sheets.elencoGare], {
@@ -115,14 +113,17 @@ console.log("workbook:", workbook);
   if (!sheetElencoGare.length) {
 console.log("sheetElencoGare vuoto");
     retval.errors.push(`Foglio ${config.job.sheets.elencoGare} non trovato`);
-    retval.message = `Il file di input è corrotto, oppure vuoto.`;
+    retval.message = `Il file di input è corrotto.`;
     retval.code = "BROKEN_INPUT";
-    return [null, retval];
+    return retval;
   }
 
   const sheetMetadati = xlsx.utils.sheet_to_json(workbook.Sheets[config.job.sheets.metadati]);
   if (!sheetMetadati.length) {
-    return retval.errors.push(`Foglio ${config.job.sheets.metadati} non trovato`);
+    retval.errors.push(`Foglio ${config.job.sheets.metadati} non trovato`);
+    retval.message = `Il file di input è corrotto.`;
+    retval.code = "BROKEN_INPUT";
+    return retval;
   }
 
   const metadati = config.job.xmlHeader.metadata;
@@ -224,8 +225,8 @@ console.log("sheetElencoGare vuoto");
       isAggregateContinuation = false;
     } else {
       let error = `Riga CIG con il campo "Partecipanti" impostato a ${row["PARTECIPANTI"]}, si ignora`;
-      //return retval.errors.push(`[attenzione] ${error} (${retval.rownum})`);
-      return retval.warnings.push(`${error} (${retval.rownum})`);
+      retval.warnings.push(`${error} (${retval.rownum})`);
+      return;
     }
 
     if (!("AGGIUDICATARI" in row)) {
@@ -238,8 +239,8 @@ console.log("sheetElencoGare vuoto");
       isAggiudicatario = true;
     } else {
       let error = `Riga CIG con il campo "Aggiudicatari" impostato a ${row["AGGIUDICATARI"]}, si ignora`;
-      //return retval.errors.push(`[attenzione] ${error} (${retval.rownum})`);
-      return retval.warnings.push(`${error} (${retval.rownum})`);
+      retval.warnings.push(`${error} (${retval.rownum})`);
+      return;
     }
 
     if (!("__EMPTY" in row) || !row["__EMPTY"]) {
@@ -250,8 +251,8 @@ console.log("sheetElencoGare vuoto");
         return; // empty row, just skip it, no warning
       }
       let error = `Almeno uno fra Codice Fiscale e Identificativo Estero è obbligatorio, si ignora`;
-      //return retval.errors.push(`[attenzione] ${error} (${retval.rownum})`);
-      return retval.warnings.push(`${error} (${retval.rownum})`);
+      retval.warnings.push(`${error} (${retval.rownum})`);
+      return;
     }
 
     const partecipanteCodiceFiscale = row["__EMPTY"];
@@ -287,8 +288,8 @@ console.log("sheetElencoGare vuoto");
       let oggetto = row["OGGETTO"];
       if (typeof oggetto === "undefined") {
         let error = `Riga CIG con il campo "Oggetto" vuoto, si ignora`;
-        //return retval.errors.push(`[attenzione] ${error} (${retval.rownum})`);
-        return retval.warnings.push(`${error} (${retval.rownum})`);
+        retval.warnings.push(`${error} (${retval.rownum})`);
+        return
       } else {
         oggetto = String(row["OGGETTO"]).trim();
       }
@@ -296,8 +297,8 @@ console.log("sheetElencoGare vuoto");
       let sceltaContraente = row["SCELTA CONTRAENTE"];
       if (typeof sceltaContraente === "undefined") {
         let error = `Riga CIG con il campo "Scelta Contraente" vuoto, si ignora`;
-        //return retval.errors.push(`[attenzione] ${error} (${retval.rownum})`);
-        return retval.warnings.push(`${error} (${retval.rownum})`);
+        retval.warnings.push(`${error} (${retval.rownum})`);
+        return;
       } else {
         sceltaContraente = String(row["SCELTA CONTRAENTE"]).trim();
       }
@@ -320,11 +321,11 @@ console.log("sheetElencoGare vuoto");
 
       if (row["PARTECIPANTI"] === "") { // a CIG row MUST contain a PARTECIPANTI (A or S)
         let error = `Riga CIG con il campo "Partecipanti" vuoto, si ignora`;
-        //return retval.errors.push(`[attenzione] ${error} (${retval.rownum})`);
-        return retval.warnings.push(`${error} (${retval.rownum})`);
+        retval.warnings.push(`${error} (${retval.rownum})`);
+        return;
       }
     
-      if (config.job.correctCommonErrors) {
+      if (config.job.correctCommonErrors) { // TODO: remove this code when good template is used!
         if (typeof oggetto !== "undefined") {
           oggetto = oggetto.substring(0, 250);
         }
@@ -425,11 +426,13 @@ console.log("sheetElencoGare vuoto");
 
       if (!lotto) {
         let warning = `Trovata una riga di continuazione (senza CIG) senza un lotto (riga CIG precedente), si ignora`;
-        return retval.warnings.push(`[${retval.rownum}] ${warning}`);
+        retval.warnings.push(`[${retval.rownum}] ${warning}`);
+        return;
       }
       if (!("__EMPTY_1" in row)) {
         let warning = `Trovata una riga di continuazione (senza CIG) senza un Codice Fiscale/ID Estero, si ignora`;
-        return retval.warnings.push(`[${retval.rownum}] ${warning}`);
+        retval.warnings.push(`[${retval.rownum}] ${warning}`);
+        return;
       }
 
       if (isAggregate) { // an aggregate row
@@ -439,7 +442,6 @@ console.log("sheetElencoGare vuoto");
           partecipante.codiceFiscale = partecipanteCodiceFiscale;
         }
         partecipante = {
-          //"codiceFiscale": partecipanteCodiceFiscale,
           "ragioneSociale": partecipanteRagioneSociale,
           "ruolo": partecipanteRuolo,
         };
@@ -458,7 +460,6 @@ console.log("sheetElencoGare vuoto");
             aggiudicatario.codiceFiscale = partecipanteCodiceFiscale;
           }
           aggiudicatario = {
-            //"codiceFiscale": partecipanteCodiceFiscale,
             "ragioneSociale": partecipanteRagioneSociale,
             "ruolo": partecipanteRuolo,
           };
@@ -477,7 +478,6 @@ console.log("sheetElencoGare vuoto");
           partecipante.codiceFiscale = partecipanteCodiceFiscale;
         }
         partecipante = {
-          //"codiceFiscale": partecipanteCodiceFiscale,
           "ragioneSociale": partecipanteRagioneSociale,
         };
         if (!partecipanti) {
@@ -495,15 +495,14 @@ console.log("sheetElencoGare vuoto");
             aggiudicatario.codiceFiscale = partecipanteCodiceFiscale;
           }
           aggiudicatario = {
-            //"codiceFiscale": partecipanteCodiceFiscale,
             "ragioneSociale": partecipanteRagioneSociale,
           };
-          /**/if (!aggiudicatari) {
+          if (!aggiudicatari) {
             aggiudicatari = {};
           }
           if (!("aggiudicatario" in aggiudicatari)) {
             aggiudicatari["aggiudicatario"] = [];
-          }/**/
+          }
           aggiudicatari["aggiudicatario"].push(aggiudicatario);
         }
 
@@ -555,7 +554,7 @@ console.log("BREAK");
       break;
     }
   } while (true);
-console.log("OK");
+
   //xmls.push(xml); // the first xml is done already
   if (sliceSize > 0) { // we have to build xmls for all slices
 console.log("SLICESIZE", sliceSize);
@@ -564,7 +563,7 @@ console.log("SLICESIZE", sliceSize);
       if (dataset >= 1) {
         let fromIndex = dataset * sliceSize;
         let toIndex = fromIndex + Math.min(sliceSize, lotti.length - fromIndex);
-        let lottiSlice = lotti.slice(fromIndex, toIndex); // TODO: check il last lotti are included...
+        let lottiSlice = lotti.slice(fromIndex, toIndex);
         xmlObj["legge190:pubblicazione"]["data"]["lotto"] = lottiSlice;
         // build dataset xml
         xml = createXML(xmlObj);
@@ -581,27 +580,12 @@ console.log("SLICESIZE", sliceSize);
       };
       xmlObjIndice["indici"].indice.dataset.push(datasetInfo);
 
-      // save dataset xml
-      // let outputFolder = path.join(__dirname, "..", config.job.outputBasePath, encodeURIComponent(req.auth.user));
-      // let outputFile = path.basename(datasetLink);
-      // let error = save(outputFolder, outputFile, xml); // TODO: we can remove this
-      // if (error) {
-      //   retval.errors.push(`[errore] ${error}`);
-      //   return retval;
-      // }
       // add dataset to zip
       zip.file(path.basename(datasetLink), xml);
     }
 
     // build and save indici xml
     let xmlIndice = createXML(xmlObjIndice);
-    // let outputFolder = path.join(__dirname, "..", config.job.outputBasePath, encodeURIComponent(req.auth.user));
-    // let outputFile = path.basename(xmlObjIndice["indici"].metadata.urlFile);
-    // let error = save(outputFolder, outputFile, xmlIndice); // TODO: we can remove this
-    // if (error) {
-    //   retval.errors.push(`[errore] ${error}`);
-    //   return retval;
-    // }
 
     // add indice to zip
     zip.file(path.basename(xmlObjIndice["indici"].metadata.urlFile), xmlIndice);
@@ -613,14 +597,15 @@ console.log("SLICESIZE", sliceSize);
     let result = serializeArchive(folderName, fileName, urlPath, zip);
     if (result.error) {
       retval.errors.push(result.error);
-      return [null, retval];
+      retval.message = `Errore nell'archiviazione.`;
+      retval.code = "ARCHIVE_ERROR";
+      return retval;
     }
     retval.xmls = xmls;
     retval.xmlIndice = xmlIndice;
     retval.outputFile = result.outputFile;
     retval.outputUrl = result.outputUrl;
   } else { // there are no slices, just the single file
-console.log("SLICESIZE ELSE", sliceSize);
     xmlObj["legge190:pubblicazione"]["data"]["lotto"] = lotti;
     datasetLink = `${xmlObj["legge190:pubblicazione"].metadata.urlFile}`; //.replace(/\.xml$/, `-${datasetTag}`)}.xml`;
 
@@ -629,53 +614,32 @@ console.log("SLICESIZE ELSE", sliceSize);
 
     // serialize dataset xml
     let fileName = path.basename(datasetLink);
-    //let folderName = path.join(__dirname, "..", "..", config.job.outputBasePath, encodeURIComponent("marco"/* TODO: RESTORE req.auth.user!!! req.auth.user*/));
-console.log("USER:", user);
-console.log("YEAR:", config.job.year);
     let folderName = path.join(__dirname, "..", "..", config.job.outputBasePath, config.job.outputDownloads, user.email);
     let urlPath = path.join(config.job.outputDownloads, user.email, fileName);
-console.log("URL_PATH:", urlPath);
     let result = serializeDataset(folderName, fileName, urlPath, xml);
-
-/* HERE!!! */ //retval.message = `Debug forced error!`; retval.code = "DEBUG FORCED ERROR"; return [null, retval];
 
     if (result.error) {
       retval.errors.push(result.error);
-      return [null, retval];
+    } else {
+      retval.outputFile = result.outputFile;
+      retval.outputUrl = result.outputUrl;
     }
-    //retval.xml = xml;
-    /* retval.xml = xml; WE DON'T NEED XML ON THE CLIENT ... */
-    //retval.xmlFilePath = folderName = path.join(folderName, fileName);
-
-console.log("OUTPUT_URL:", result.outputUrl);
-    retval.outputFile = result.outputFile;
-    retval.outputUrl = result.outputUrl;
-
-    /**
-     * While developing, truncate xml to ease debug...
-     */
-    //retval.xml = (process.env.NODE_ENV !== "production") ? xml.substring(0, 256) : xml;
-
-    // let outputFolder = path.join(__dirname, "..", config.job.outputBasePath, encodeURIComponent(req.auth.user));
-    // let outputFile = path.basename(datasetLink);
-    // let error = save(outputFolder, outputFile, xml);
-    // if (error) {
-    //   retval.errors.push(`[errore] ${error}`);
-    //   return retval;
-    // }
   }
 
-  // TODO: should return only here!
+  const errors = retval.errors.length;
+  const warnings = retval.warnings.length;
+  if (!retval.message) {
+    if (errors > 0) {
+      retval.message += `Transformazione completata con ${errors} errori`;
+      if (warnings > 0) {
+        retval.message += ` e ${warnins} avvisi`;
+      }
+    } else {
+      if (warnings > 0) retval.message += `Transformazione completata con ${warnings} avvisi`;
+    }
+  }
 
-/*
-  // save job status to user
-  //const user = await User.findOne({ _id: req.userId }).exec();
-  user.job = {}; // TODO; job could exist...
-  user.job.transform = retval;
-  await user.save();
-*/
-
-  return [null, retval]; // TODO: we never use the first element of return array (error), change return type to object...
+  return retval;
 };
 
 function createXML(xmlObj) {
@@ -794,44 +758,39 @@ function isEstero(codiceFiscale) {
 
 // validate XML
 const validateXml = async (req, res) => {
-//console.log("req.body:", Object.keys(req.body.transform));
-
-  // TODO: handle xml's from filePath, not by contents... (see dataset case below)
-
-  if (req.body.transform.xmlIndice) { // a zip archive with indice and datasets inside is present
-    const xmlIndice = req.body.transform.xmlIndice;
+  if (req.body?.transform?.xmlIndice) { // a zip archive with indice and datasets inside is present
+    const xmlIndice = req.body?.transform?.xmlIndice;
     const xmls = req.body.transform.xmls;
-    const schemaIndice = path.join(__dirname, "../..", config.schemaIndiceFile);
-    const schema = path.join(__dirname, "../..", config.schemaFile);
+    const schemaIndice = path.join(__dirname, "../..", config.job.schemaIndiceFile);
+    const schema = path.join(__dirname, "../..", config.job.schemaFile);
     const promises = [];
     
     promises.push(validate(xmlIndice, schemaIndice));
     for (let i = 0; i < xmls.length; i++) {
       promises.push(validate(xmls[i], schema));
     }
-    return Promise.all(promises);
+    const results = await Promise.all(promises);
+    if (results.filter(result => result.code === "OK").length === results.length) { // all results are OK
+      return results[0]; // return first result, all are ok
+    } else {
+      return results.find(result => result.code !== "OK");
+    }
   } else
-  //if (req.body.transform.xml) { // a single xml dataset is present
-  if (req.body.transform.outputFile/*xmlFilePath*/) { // a single xml dataset is present
-      ///////////////////////////////////////////////////////////////////// storing only filename
-    //const xml = req.body.transform.xml;
+  if (req.body.transform.outputFile) { // a single xml dataset is present
     const result = deserializeDataset(req.body.transform.outputFile/*xmlFilePath*/);
     if (result.error) {
       return {
         code: "CANNOT_READ_XML",
         message: result.error,
       };
-//       retval.errors.push(result.error);
-// console.log("ERROR1", result.error);
-//       return [null, retval];
     }
-//console.log("OUTPUT_URL:", result.outputUrl);
-    //retval.outputFile = result.outputFile;
     const xml = result.contents;
     const schema = path.join(__dirname, "../..", config.job.schemaFile);
-console.log("XML type:", typeof xml, 'len:', xml.length);
+//console.log("XML type:", typeof xml, 'len:', xml.length);
 
-    return validate(xml, schema);
+    const validation = await validate(xml, schema);
+
+    return validation;
   } else { // no other cases allowed
     return {
       code: "XML_NOT_FOUND",
@@ -844,15 +803,25 @@ async function validate(xml, schema) {
   return new Promise((resolve) => {
     xmlvalidator.validateXML(xml, schema, (err, result) => {
       if (err) {
-        return resolve({code: "OK", message: `Error while validating XML: ${err.message}`});
+        return resolve({code: "ERROR", message: "Errore nella validazione XML", errors: reclaimValidateMessage(err.message)});
       }
       if (!result.valid) {
-        return resolve({code: "OK", message: `Invalid XML: ${result.message}`});
+        return resolve({code: "ERROR", message: "Problemi nella validazione XML", errors: reclaimValidateMessage(result.message)});
       }
-      return resolve({code: "OK", message: `Valid XML`, result});
+      return resolve({code: "OK", message: "Valid XML"});
     });
   });
 };
+
+function reclaimValidateMessage(message) {
+  const messages = message.split("\n");
+  const pattern = /^\t\[([^\]]+)\]\s*([^:]*):\s*(.*)$/;
+  messages.shift(); // first line is a title
+  const reclaimedMessages = messages.map(message => {
+    return `xml validation ${message.replace(pattern, "$1")} - ${message.replace(pattern, "$2")}: ${message.replace(pattern, "$3")}`;
+  });
+  return reclaimedMessages;
+}
 
 const outcomeCheck = async (req, res) => {
   const data = {
@@ -861,62 +830,37 @@ const outcomeCheck = async (req, res) => {
     denominazioneAmministrazione: "", // not handled
     identificativoComunicazione: "", // not handled
   };
-console.log("OUTCOMECHECK - config.job.outcomeUrl:", config.job.outcomeUrl);
   let answer = {};
   return await axios.post(config.job.outcomeUrl, data)
     .then(async(response) => {
-console.log("OUTCOMECHECK - OK response:", response.data.result);
 
       const len = response?.data?.result?.length;
       if (len > 0) {
         answer = response.data.result[len - 1];
-console.log("OUTCOMECHECK - ANSWER:", answer);
       }
       if (answer?.esitoUltimoTentativoAccessoUrl === "fallito") { // check did fail, get also failure details page
         const outcomeFailureDetailsBaseUrl = `${config.job.outcomeFailureDetailsBaseUrl}/${config.job.year + 1}/${answer.identificativoPEC}`;
-console.log("OUTCOMECHECK - DETAILS URL:", outcomeFailureDetailsBaseUrl);
-// "https://dati.anticorruzione.it/rest/legge190/dettaglio/2023/opec21004.20230127104028.29210.497.1.51@pec.aruba.it"
-          // "headers": {
-          //   "accept": "application/json, text/plain, */*",
-          //   "accept-language": "it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7",
-          //   "cache-control": "no-cache",
-          //   "pragma": "no-cache",
-          //   "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"101\", \"Google Chrome\";v=\"101\"",
-          //   "sec-ch-ua-mobile": "?0",
-          //   "sec-ch-ua-platform": "\"Linux\"",
-          //   "sec-fetch-dest": "empty",
-          //   "sec-fetch-mode": "cors",
-          //   "sec-fetch-site": "same-origin",
-          //   "cookie": "_ga=GA1.2.1075427088.1674389486; GUEST_LANGUAGE_ID=it_IT; _gat=1",
-          //   "Referer": "https://dati.anticorruzione.it/",
-          //   "Referrer-Policy": "strict-origin-when-cross-origin"
-          // },
         return await axios.get(outcomeFailureDetailsBaseUrl)
           .then(async(responseDetails) => {
             answer.esitoComunicazione = responseDetails?.data?.dati?.esitoComunicazione;
             answer.tentativiAccessoUrl = responseDetails?.data?.dati?.tentativiAccessoUrl;
-console.log("OUTCOMECHECK DETAILS - OK:", answer);
-            return [false, answer];
+            return [null, answer];
           })
           .catch(error => {
-console.log("OUTCOMECHECK DETAILS - KO error:", error?.response?.statusText);
-            //return [error.response.data ? new Error(error.response.data) : error];
             answer.esitoComunicazione = {};
             answer.esitoComunicazione.codice = "?";
             answer.esitoComunicazione.descrizione = error?.response?.status;
             answer.esitoComunicazione.dettaglio = error?.response?.statusText;
             answer.tentativiAccessoUrl = [];
-            return [false, answer];
+            return [null, answer];
           })
         ;
       }
-console.log("OUTCOMECHECK ANSWER *:", answer);
-      return [false, answer];
+      //console.log("OUTCOMECHECK ANSWER *:", answer);
+      return [null, answer];
     })
     .catch(error => {
-console.log("OUTCOMECHECK - KO error:", error?.message, error?.response?.data?.message);
-      //return [error.response.data ? new Error(error.response.data) : error];
-      //answer = {error: error?.message, reason: error?.response?.data?.message};
+      console.error("error checking outcome:", errorMessage(error));
       return [error, answer];
     })
   ;
@@ -947,12 +891,12 @@ const urlExistenceAndMatch = async (req, res) => {
     console.log("urlExistenceAndMatch localContents length", localContents.length, typeof localContents);
 
     // compare contents
-    // if (localContents !== remoteContents) { // TODO: use this code!!! The next line is temporary!!!
-    if (localContents.slice(localContents.length - 564) !== remoteContents.slice(remoteContents.length - 564) ) {
-      return [false, {published: true, publishedAsIs: false}];
+    const bytesToIgnoreAtTheTopOfTheDatasets = (config.publish.allowDateChangeInDataset ? 564 : 0);
+    if (localContents.slice(localContents.length - bytesToIgnoreAtTheTopOfTheDatasets) !== remoteContents.slice(remoteContents.length - bytesToIgnoreAtTheTopOfTheDatasets) ) {
+      return [null, {published: true, publishedAsIs: false}];
     }
 
-    return [false, {published: true, publishedAsIs: true}];
+    return [null, {published: true, publishedAsIs: true}];
   } catch (error) {
     console.log("urlExistenceAndMatch error:", error.message);// .response.status);
     return [error]; // return false for every status, in case of error...
@@ -961,7 +905,7 @@ const urlExistenceAndMatch = async (req, res) => {
 
 const getPlans = async (req, res) => {
   try {
-    const retval = await Plan.find().sort({pricePerYear: 1}).lean(); // TODO: sort by pricePerYear LOW->HIGH
+    const retval = await Plan.find().sort({pricePerYear: 1}).lean(); // sort by pricePerYear LOW->HIGH
     return [null, retval];
   } catch(error) {
     return [error];

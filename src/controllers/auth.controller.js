@@ -41,7 +41,7 @@ const signup = async(req, res) => {
     password: req.body.password,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
-    address: { city: "" }, // TODO...
+    address: { city: "" }, // NEWFEATURE...
     roles: [role._id],
     plan: plan._id,
   });
@@ -50,7 +50,7 @@ const signup = async(req, res) => {
     if (err) {
 console.error("NEW USER ERR:", err.code, err)
       if (err.code === 11000) { // duplicated user email
-        return res.status(400).json({ code: "EmailExistsAlready", message: "Email is already in use (SERVER)" }); // TODO: remove (SERVER)
+        return res.status(400).json({ code: "EmailExistsAlready", message: "Email is already in use" });
       }
       return res.status(500).json({ message: err });
     }
@@ -193,7 +193,6 @@ const signin = async(req, res) => {
       // create new refresh token
       user.refreshToken = await RefreshToken.createToken(user);
 
-      // create array of roles names (TODO: should we use roles objects?)
       const roles = [];
       for (let i = 0; i < user.roles.length; i++) {
         roles.push(user.roles[i].name);

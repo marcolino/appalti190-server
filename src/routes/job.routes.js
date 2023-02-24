@@ -15,9 +15,7 @@ module.exports = app => {
   });
 
   app.post("/api/job/upload", authJwt.verifyToken, async(req, res, next) => {
-    upload.single("file")(req, res, err/*next*/ => {
-      //console.log("route /api/job/upload upload req.file:", req.file);
-      // TODO: test this error handling...
+    upload.single("file")(req, res, err => {
       if (next instanceof multer.MulterError) {
         // a Multer error occurred when uploading
         res.status(500).json(err);
@@ -31,14 +29,18 @@ module.exports = app => {
   });
   
   app.post("/api/job/transformXls2Xml/:filePath", authJwt.verifyToken, async(req, res, next) => {
-    const [err, result] = await transformXls2Xml(req, res, next);
-    return err ? res.status(500).json(err) : res.status(200).json({result});
-  });
+    try {
+      const result = await transformXls2Xml(req, res, next);
+      res.status(200).json({result});
+    } catch (err) {
+      res.status(500).json(err);
+    }
+});
 
   app.post("/api/job/validateXml/:transform", authJwt.verifyToken, async(req, res, next) => {
     try {
       const result = await validateXml(req, res, next);
-       res.status(200).json({result}); // TODO - was: json({result}) ...
+      res.status(200).json({result});
     } catch (err) {
       res.status(500).json(err);
     }

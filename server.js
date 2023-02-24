@@ -1,14 +1,31 @@
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
+const i18next = require("i18next");
+const backend = require("i18next-node-fs-backend");
+const i18nextMiddleware = require("i18next-http-middleware");
 const { logger, colors } = require("./src/controllers/logger.controller");
 const db = require("./src/models");
 const { assertEnvironment } = require("./src/helpers/environment");
-const { notification } = require("./src/helpers/notification");
+const { setupEmail, notification } = require("./src/helpers/notification");
 const config = require("./src/config");
 
 const production = (process.env.NODE_ENV === "production");
 
+// setup I18N
+i18next
+  .use(backend)
+  .use(i18nextMiddleware.LanguageDetector)
+  .init({
+    debug: false,
+    backend: {
+      loadPath: __dirname + "/src//locales/{{lng}}/{{ns}}.json"
+    },
+    fallbackLng: config.languages.default,
+    preload: [config.languages.default]
+  })
+;
+    
 const app = express();
 
 // enable CORS, and whitelist our domains
@@ -37,19 +54,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// handle client preferred language (please place this middleware before declaring any routes)
-app.use((req, res, next) => {
-  let language;
-  config.languages.every((lang, index) => { // list of backend supported languages; the last one is the fallback
-    language = req.get("x-user-language");
-    if (language) return false; // break
-    return true;
-  });
-  req.language = language;
-  //console.log("LANGUAGE PREFERRED BY CLIENT:", req.language);
-  // TODO: implement i18n server side too (or always use codes with messages)
-  next();
-})
+// use i18n
+app.use(i18nextMiddleware.handle(i18next));
 
 // environment configuration
 if (production) { // load environment variables from .env file
@@ -59,6 +65,9 @@ if (production) { // load environment variables from .env file
   logger.info(`Activating ${colors.BgYellow} test ${colors.Reset} environment`);
   require("dotenv").config({ path: path.resolve(__dirname, "./.env.test") });
 }
+
+// setup email
+setupEmail();
 
 // notify startup of this server app
 notification({subject: "Startup"});
@@ -102,18 +111,6 @@ app.use(express.static(rootClient));
 const rootServer = path.join(__dirname, config.job.outputBasePath);
 app.use(express.static(rootServer));
 
-/*
-// handles any requests that does not match the routes below (all routes handled by client)
-app.get("*", (req, res) => {
-  if (production) { 
-    // TODO: someway send email to notify accesses, if no better option (see papertrail.com ...)
-    logger.info(`Access to ${config.api.name} index on ${new Date().toISOString()}`);
-    sendemail({subject: `Access to ${config.api.name} index on ${new Date().toISOString()}`, html: `Remote address: ${req.socket.remoteAddress}`});
-  }
-  res.sendFile("index.html", { root });
-});
-*/
-
 // set port and listen for requests
 if (require.main === module) { // avoid listening while testing
   const PORT = process.env.PORT || config.api.port;
@@ -124,30 +121,3 @@ if (require.main === module) { // avoid listening while testing
 } else { // export app for testing
   module.exports = app;
 }
-
-// // change console.log, to truncate BIG fields
-// (() => {
-//   const consoleOriginal = console.log;
-//   const big = 256;
-//   console.log = function() {
-//     const argumentsCloned = JSON.parse(JSON.stringify(arguments));
-//     const argumentsTruncated = objectTruncateBigValues(argumentsCloned, big);
-//     consoleOriginal.apply(this, argumentsTruncated);
-//   }
-//   function objectTruncateBigValues(obj, big) {
-//     if (typeof obj === "object") {
-//       for (const key in obj) {
-//         if (typeof obj[key] === "object") {
-//           objectTruncateBigValues(obj[key], big)
-//         } else {
-//           //if (typeof obj[key] === "string") { // truncate all string properties
-//           if (key === "xml") { // truncate only "xml" properties
-//             const val = obj[key].substring(0, big);
-//             obj[key] = val;
-//           }
-//         }
-//       }
-//     }
-//     return obj;
-//   }
-// })();
