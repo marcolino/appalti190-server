@@ -1,6 +1,7 @@
 const db = require("../models");
 const emailValidate = require("email-validator");
 const codiceFiscaleValidate = require("codice-fiscale-js");
+const i18n = require("i18next");
 const { normalizeEmail } = require("../helpers/misc");
 
 const {
@@ -24,7 +25,7 @@ console.log("getRoles CALLED");
   Role.find({})
   .select(["name", "-_id"])
   .exec(async(err, roles) => {
-    if (err) return res.status(500).json({ message: "We could not get roles", reason: err });
+    if (err) return res.status(500).json({ message: req.t("Could not find roles"), reason: err });
 console.log("ROLES:", roles);
     res.status(200).json(roles);
   })
@@ -39,8 +40,8 @@ exports.getProfile = async(req, res) => {
   .populate("roles", "-__v")
   .populate("plan", "-__v")
   .exec(async(err, user) => {
-    if (err) return res.status(500).json({ message: "We could not find user", reason: errorMessage(err) });
-    if (!user) return res.status(400).json({ message: "We were unable to find this user" });
+    if (err) return res.status(500).json({ message: req.t("Could not find user"), reason: errorMessage(err) });
+    if (!user) return res.status(400).json({ message: req.t("Could not find this user") });
 console.log("getProfile - user.roles:", user.roles);
     res.status(200).json({user});
   });
@@ -51,12 +52,12 @@ console.log("getProfile - user.roles:", user.roles);
  */
 exports.updateProfile = async(req, res) => {
 console.log("UpdateProfile, body:", req.body);
-  if (!req.userId) return res.status(400).json({message: "User must be authenticated"});
-  if (!req.body.email) return res.status(400).json({message: "Email is mandatory"});
+  if (!req.userId) return res.status(400).json({ message: req.t("User must be authenticated") });
+  if (!req.body.email) return res.status(400).json({ message: req.t("Email is mandatory") });
 
   User.findOne({ _id: req.userId }, async (err, user) => {
-    if (err) return res.status(500).json({ message: "We could not find user", reason: errorMessage(err) });
-    if (!user) return res.status(400).json({ message: "We were unable to find this user" });
+    if (err) return res.status(500).json({ message: req.t("Could not find user"), reason: errorMessage(err) });
+    if (!user) return res.status(400).json({ message: req.t("Could not find this user") });
 
     // validate and normalize email
     let [error, value] = [null, null];
@@ -82,7 +83,7 @@ console.log("UpdateProfile, body:", req.body);
     // verify and save the user
     user.save(err => {
       if (err) return res.status(500).json({ message: err.message });
-      res.status(200).json({ message: "The profile has been updated." });
+      res.status(200).json({ message: req.t("The profile has been updated") + "." });
     });
   });
 }
@@ -90,13 +91,13 @@ console.log("UpdateProfile, body:", req.body);
 /**
  * Update a property of any user's profile
  */
- exports.updateUserProperty = async(req, res) => {
+exports.updateUserProperty = async(req, res) => {
 console.log("updateUserProperty - userId:", req.body.userId);
 console.log("updateUserProperty - propertyName:", req.body.propertyName);
 console.log("updateUserProperty - propertyValue:", req.body.propertyValue);
   User.findOne({ _id: req.body.userId }, async (err, user) => {
-    if (err) return res.status(500).json({ message: "We could not find user", reason: errorMessage(err) });
-    if (!user) return res.status(400).json({ message: "We were unable to find this user" });
+    if (err) return res.status(500).json({ message: req.t("Could not find user"), reason: errorMessage(err) });
+    if (!user) return res.status(400).json({ message: req.t("Could not find this user") });
 
     const propertyName = req.body.propertyName;
     const propertyValue = req.body.propertyValue;
@@ -165,18 +166,18 @@ console.log("$$$$", propertyName, value)
     user.save((err, user) => {
       if (err) return res.status(500).json({ message: err.message });
 console.log("USER AFTER:", user.address);
-      res.status(200).json({ message: "The property has been updated.", propertyValue: value });
+      res.status(200).json({ message: req.t("The property has been updated") + ".", propertyValue: value });
     });
   });
 }
 
 exports.updateRoles = async(req, res) => {
   console.log("UpdateRoles, body:", req.body);
-  if (!req.userId) return res.status(400).json({message: "User must be authenticated"});
+  if (!req.userId) return res.status(400).json({ message: req.t("User must be authenticated") });
 
   User.findOne({ _id: req.userId }, async (err, user) => {
-    if (err) return res.status(500).json({ message: "We could not find user", reason: errorMessage(err) });
-    if (!user) return res.status(400).json({ message: "We were unable to find this user" });
+    if (err) return res.status(500).json({ message: req.t("Could not find user"), reason: errorMessage(err) });
+    if (!user) return res.status(400).json({ message: req.t("Could not find this user") });
 
     // get roles ids, here we only have the names...
     Role.find({
@@ -191,20 +192,20 @@ exports.updateRoles = async(req, res) => {
       // verify and save the user
       user.save(err => {
         if (err) return res.status(500).json({ message: err.message });
-        res.status(200).json({ message: "The profile has been updated." });
+        res.status(200).json({ message: req.t("The profile has been updated") + "." });
       });
     });
   });
 }
   
 exports.updatePlan = async(req, res) => {
-  if (!req.userId) return res.status(400).json({message: "User must be authenticated"});
-  if (!req.body.plan) return res.status(400).json({message: "Plan is mandatory"});
+  if (!req.userId) return res.status(400).json({ message: req.t("User must be authenticated") });
+  if (!req.body.plan) return res.status(400).json({ message: req.t("Plan is mandatory") });
   // plan value correctness is enforced by database model
 
   User.findOne({ _id: req.userId }, async (err, user) => {
-    if (err) return res.status(500).json({ message: "We could not find user", reason: errorMessage(err) });
-    if (!user) return res.status(400).json({ message: "We were unable to find this user" });
+    if (err) return res.status(500).json({ message: req.t("Error looking for user"), reason: errorMessage(err) });
+    if (!user) return res.status(400).json({ message: req.t("User not found") });
 
     // search plan
     Plan.findOne({
@@ -223,11 +224,11 @@ exports.updatePlan = async(req, res) => {
 }
 
 exports.allAccess = (req, res) => {
-  res.status(200).json("Public Content.");
+  res.status(200).json("Public Content");
 };
 
 exports.userBoard = (req, res) => {
-  res.status(200).json("User Content.");
+  res.status(200).json("User Content");
 };
 
 exports.users = async(req, res) => {
@@ -279,20 +280,20 @@ exports.adminPanel = (req, res) => {
 
 exports.adminBoard = (req, res) => {
   console.log("Admin Board:", req.params, req.body);
-  res.status(200).json("Admin Board.");
+  res.status(200).json("Admin Board");
 };
 
 // user properties validation
 const propertyEmailValidate = async(value, user) => { // validate and normalize email
   if (!emailValidate.validate(value)) {
-    return ["Please supply a valid email", value];
+    return [ i18n.t("Please supply a valid email"), value];
   } 
   value = normalizeEmail(value);
 
   // be sure email - if changed - is not taken already
   if (value !== normalizeEmail(user.email)) {
     const check = await User.findOne({ email: value });
-    if (check) return ["This email is already taken, sorry", value];
+    if (check) return [ i18n.t("This email is already taken, sorry"), value ];
   }
   return [null, value];
 };
@@ -300,7 +301,7 @@ const propertyEmailValidate = async(value, user) => { // validate and normalize 
 const propertyFirstNameValidate = (value, user) => { // validate and normalize first name
   value = value.trim();
   if (!value) {
-    return ["First name cannot be empty, sorry", value];
+    return [ i18n.t("First name cannot be empty, sorry"), value ];
   }
   return [null, value];
 };
@@ -308,7 +309,7 @@ const propertyFirstNameValidate = (value, user) => { // validate and normalize f
 const propertyLastNameValidate = (value, user) => { // validate and normalize last name
   value = value.trim();
   if (!value) {
-    return ["Last name cannot be empty, sorry", value];
+    return [ i18n.t("Last name cannot be empty, sorry"), value ];
   }
   return [null, value];
 };
@@ -316,7 +317,7 @@ const propertyLastNameValidate = (value, user) => { // validate and normalize la
 const propertyFiscalCodeValidate = (value, user) => { // validate and normalize (italian) fiscal code
   value = value.trim();
   if (!codiceFiscaleValidate.check(value)) {
-    return ["Fiscal code is not valid, sorry", value];
+    return [ i18n.t("Fiscal code is not valid, sorry"), value ];
   }
   return [null, value];
 };

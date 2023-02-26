@@ -1,12 +1,13 @@
 - gestire le traduzioni delle risposte (in base a "accept-language") - OK
 - forzare Number.MAX_INT in user.plan.cigNumberAllowed per il piano "unlimited" nel metodo del modello "pre-save" - OK
 - res.status().send -> res.status().json - OK
+- cambiare "we" in una forma impersonale - OK
+- usare req.t("text") per tutti i testi - OK
+- tradurre tutto in locales/*/* - OK
 
-- usare req.t("text") per tutti i testi
-- tradurre tutto in locales/*/*
 - capire come salvare i files xls caricati dagli utenti (db?)
 - usare winston logger come da v1
 - impostare tests come da v1
-- rimuovere gli account non confermati, periodicamente
+- rimuovere gli account non confermati, periodicamente (?)
 - nella registrazione, in caso di email già presente, controllare se non è verificato, e dire all'utente che si è in attesa di validazione
 - data del file xls: ora locale

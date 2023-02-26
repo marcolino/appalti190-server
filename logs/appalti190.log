@@ -4507,3 +4507,299 @@ AssertionError: expected 403 to deeply equal 200
     at endReadableNT (internal/streams/readable.js:1333:12)
     at processTicksAndRejections (internal/process/task_queues.js:82:21)
 {"date":"Fri Feb 24 2023 10:41:59 GMT+0100 (Central European Standard Time)","error":{"actual":403,"expected":200,"message":"expected 403 to deeply equal 200","name":"AssertionError","operator":"strictEqual","showDiff":true,"stack":"AssertionError: expected 403 to deeply equal 200\n    at /home/marco/apps/sistemisolari/appalti190-server/test/user.js:44:34\n    at Test.Request.callback (/home/marco/apps/sistemisolari/appalti190-server/node_modules/superagent/lib/node/index.js:716:12)\n    at /home/marco/apps/sistemisolari/appalti190-server/node_modules/superagent/lib/node/index.js:916:18\n    at IncomingMessage.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/node_modules/superagent/lib/node/parsers/json.js:19:7)\n    at IncomingMessage.emit (events.js:412:35)\n    at endReadableNT (internal/streams/readable.js:1333:12)\n    at processTicksAndRejections (internal/process/task_queues.js:82:21)"},"exception":true,"level":"error","message":"uncaughtException: expected 403 to deeply equal 200\nAssertionError: expected 403 to deeply equal 200\n    at /home/marco/apps/sistemisolari/appalti190-server/test/user.js:44:34\n    at Test.Request.callback (/home/marco/apps/sistemisolari/appalti190-server/node_modules/superagent/lib/node/index.js:716:12)\n    at /home/marco/apps/sistemisolari/appalti190-server/node_modules/superagent/lib/node/index.js:916:18\n    at IncomingMessage.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/node_modules/superagent/lib/node/parsers/json.js:19:7)\n    at IncomingMessage.emit (events.js:412:35)\n    at endReadableNT (internal/streams/readable.js:1333:12)\n    at processTicksAndRejections (internal/process/task_queues.js:82:21)","os":{"loadavg":[1.69,1.66,1.52],"uptime":1769.93},"process":{"argv":["/usr/bin/node","/home/marco/apps/sistemisolari/appalti190-server/node_modules/.bin/mocha","--exit","--timeout","10000"],"cwd":"/home/marco/apps/sistemisolari/appalti190-server","execPath":"/usr/bin/node","gid":1000,"memoryUsage":{"arrayBuffers":22245031,"external":23970397,"heapTotal":81911808,"heapUsed":60811944,"rss":120537088},"pid":9487,"uid":1000,"version":"v14.20.1"},"stack":"AssertionError: expected 403 to deeply equal 200\n    at /home/marco/apps/sistemisolari/appalti190-server/test/user.js:44:34\n    at Test.Request.callback (/home/marco/apps/sistemisolari/appalti190-server/node_modules/superagent/lib/node/index.js:716:12)\n    at /home/marco/apps/sistemisolari/appalti190-server/node_modules/superagent/lib/node/index.js:916:18\n    at IncomingMessage.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/node_modules/superagent/lib/node/parsers/json.js:19:7)\n    at IncomingMessage.emit (events.js:412:35)\n    at endReadableNT (internal/streams/readable.js:1333:12)\n    at processTicksAndRejections (internal/process/task_queues.js:82:21)","trace":[{"column":34,"file":"/home/marco/apps/sistemisolari/appalti190-server/test/user.js","function":null,"line":44,"method":null,"native":false},{"column":12,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/superagent/lib/node/index.js","function":"Test.Request.callback","line":716,"method":"callback","native":false},{"column":18,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/superagent/lib/node/index.js","function":null,"line":916,"method":null,"native":false},{"column":7,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/superagent/lib/node/parsers/json.js","function":null,"line":19,"method":null,"native":false},{"column":35,"file":"events.js","function":"IncomingMessage.emit","line":412,"method":"emit","native":false},{"column":12,"file":"internal/streams/readable.js","function":"endReadableNT","line":1333,"method":null,"native":false},{"column":21,"file":"internal/process/task_queues.js","function":"processTicksAndRejections","line":82,"method":null,"native":false}]}
+info: 2023-02-24 21:52:10: 	Activating [43m test [0m environment
+{"date":"Fri Feb 24 2023 21:52:11 GMT+0100 (Central European Standard Time)","error":{},"exception":true,"level":"error","message":"uncaughtException: missing ) after argument list\n/home/marco/apps/sistemisolari/appalti190-server/src/controllers/job.controller.js:252\n      let error = req.t(\"At least one in \\\"Codice Fiscale\\\" and \"Identificativo Estero\\\" is mandatory, ignoring\");\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\nSyntaxError: missing ) after argument list\n    at wrapSafe (internal/modules/cjs/loader.js:1001:16)\n    at Module._compile (internal/modules/cjs/loader.js:1049:27)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Module.require (internal/modules/cjs/loader.js:974:19)\n    at require (internal/modules/cjs/helpers.js:101:18)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/src/routes/job.routes.js:2:130)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Module.require (internal/modules/cjs/loader.js:974:19)\n    at require (internal/modules/cjs/helpers.js:101:18)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/server.js:105:1)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)","os":{"loadavg":[1.63,1.56,1.25],"uptime":12595.36},"process":{"argv":["/usr/bin/node","/home/marco/apps/sistemisolari/appalti190-server/server.js"],"cwd":"/home/marco/apps/sistemisolari/appalti190-server","execPath":"/usr/bin/node","gid":1000,"memoryUsage":{"arrayBuffers":19033871,"external":20654751,"heapTotal":59310080,"heapUsed":28619416,"rss":81686528},"pid":9474,"uid":1000,"version":"v14.20.1"},"stack":"/home/marco/apps/sistemisolari/appalti190-server/src/controllers/job.controller.js:252\n      let error = req.t(\"At least one in \\\"Codice Fiscale\\\" and \"Identificativo Estero\\\" is mandatory, ignoring\");\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\nSyntaxError: missing ) after argument list\n    at wrapSafe (internal/modules/cjs/loader.js:1001:16)\n    at Module._compile (internal/modules/cjs/loader.js:1049:27)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Module.require (internal/modules/cjs/loader.js:974:19)\n    at require (internal/modules/cjs/helpers.js:101:18)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/src/routes/job.routes.js:2:130)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Module.require (internal/modules/cjs/loader.js:974:19)\n    at require (internal/modules/cjs/helpers.js:101:18)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/server.js:105:1)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)","trace":[{"column":16,"file":"internal/modules/cjs/loader.js","function":"wrapSafe","line":1001,"method":null,"native":false},{"column":27,"file":"internal/modules/cjs/loader.js","function":"Module._compile","line":1049,"method":"_compile","native":false},{"column":10,"file":"internal/modules/cjs/loader.js","function":"Module._extensions..js","line":1114,"method":".js","native":false},{"column":32,"file":"internal/modules/cjs/loader.js","function":"Module.load","line":950,"method":"load","native":false},{"column":12,"file":"internal/modules/cjs/loader.js","function":"Module._load","line":790,"method":"_load","native":false},{"column":19,"file":"internal/modules/cjs/loader.js","function":"Module.require","line":974,"method":"require","native":false},{"column":18,"file":"internal/modules/cjs/helpers.js","function":"require","line":101,"method":null,"native":false},{"column":130,"file":"/home/marco/apps/sistemisolari/appalti190-server/src/routes/job.routes.js","function":null,"line":2,"method":null,"native":false},{"column":14,"file":"internal/modules/cjs/loader.js","function":"Module._compile","line":1085,"method":"_compile","native":false},{"column":10,"file":"internal/modules/cjs/loader.js","function":"Module._extensions..js","line":1114,"method":".js","native":false},{"column":32,"file":"internal/modules/cjs/loader.js","function":"Module.load","line":950,"method":"load","native":false},{"column":12,"file":"internal/modules/cjs/loader.js","function":"Module._load","line":790,"method":"_load","native":false},{"column":19,"file":"internal/modules/cjs/loader.js","function":"Module.require","line":974,"method":"require","native":false},{"column":18,"file":"internal/modules/cjs/helpers.js","function":"require","line":101,"method":null,"native":false},{"column":1,"file":"/home/marco/apps/sistemisolari/appalti190-server/server.js","function":null,"line":105,"method":null,"native":false},{"column":14,"file":"internal/modules/cjs/loader.js","function":"Module._compile","line":1085,"method":"_compile","native":false}]}
+error: 2023-02-24 21:52:11: 	uncaughtException: missing ) after argument list
+/home/marco/apps/sistemisolari/appalti190-server/src/controllers/job.controller.js:252
+      let error = req.t("At least one in \"Codice Fiscale\" and "Identificativo Estero\" is mandatory, ignoring");
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+SyntaxError: missing ) after argument list
+    at wrapSafe (internal/modules/cjs/loader.js:1001:16)
+    at Module._compile (internal/modules/cjs/loader.js:1049:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)
+    at Module.load (internal/modules/cjs/loader.js:950:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:790:12)
+    at Module.require (internal/modules/cjs/loader.js:974:19)
+    at require (internal/modules/cjs/helpers.js:101:18)
+    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/src/routes/job.routes.js:2:130)
+    at Module._compile (internal/modules/cjs/loader.js:1085:14)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)
+    at Module.load (internal/modules/cjs/loader.js:950:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:790:12)
+    at Module.require (internal/modules/cjs/loader.js:974:19)
+    at require (internal/modules/cjs/helpers.js:101:18)
+    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/server.js:105:1)
+    at Module._compile (internal/modules/cjs/loader.js:1085:14)
+info: 2023-02-24 21:52:32: 	Activating [43m test [0m environment
+info: 2023-02-24 21:52:33: 	Server is running on port 5000
+info: 2023-02-24 21:52:33: 	Successfully connected to MongoDB
+info: 2023-02-24 21:54:18: 	Activating [43m test [0m environment
+info: 2023-02-24 21:54:19: 	Server is running on port 5000
+info: 2023-02-24 21:54:19: 	Successfully connected to MongoDB
+info: 2023-02-25 18:26:13: 	Activating [43m test [0m environment
+info: 2023-02-25 18:26:13: 	Server is running on port 5000
+info: 2023-02-25 18:26:13: 	Successfully connected to MongoDB
+info: 2023-02-25 18:27:06: 	Activating [43m test [0m environment
+info: 2023-02-25 18:27:07: 	Server is running on port 5000
+info: 2023-02-25 18:27:07: 	Successfully connected to MongoDB
+info: 2023-02-25 18:37:15: 	Activating [43m test [0m environment
+info: 2023-02-25 18:37:15: 	Server is running on port 5000
+info: 2023-02-25 18:37:15: 	Successfully connected to MongoDB
+info: 2023-02-25 18:37:31: 	Activating [43m test [0m environment
+info: 2023-02-25 18:37:31: 	Server is running on port 5000
+info: 2023-02-25 18:37:31: 	Successfully connected to MongoDB
+info: 2023-02-25 18:38:09: 	Activating [43m test [0m environment
+info: 2023-02-25 18:38:10: 	Server is running on port 5000
+info: 2023-02-25 18:38:10: 	Successfully connected to MongoDB
+info: 2023-02-25 18:38:30: 	Activating [43m test [0m environment
+info: 2023-02-25 18:38:30: 	Server is running on port 5000
+info: 2023-02-25 18:38:30: 	Successfully connected to MongoDB
+info: 2023-02-25 18:39:13: 	Activating [43m test [0m environment
+info: 2023-02-25 18:39:13: 	Server is running on port 5000
+info: 2023-02-25 18:39:13: 	Successfully connected to MongoDB
+info: 2023-02-25 18:39:37: 	Activating [43m test [0m environment
+info: 2023-02-25 18:39:37: 	Server is running on port 5000
+info: 2023-02-25 18:39:37: 	Successfully connected to MongoDB
+info: 2023-02-25 18:40:00: 	Activating [43m test [0m environment
+info: 2023-02-25 18:40:00: 	Server is running on port 5000
+info: 2023-02-25 18:40:00: 	Successfully connected to MongoDB
+info: 2023-02-25 18:44:33: 	Activating [43m test [0m environment
+info: 2023-02-25 18:44:34: 	Server is running on port 5000
+info: 2023-02-25 18:44:34: 	Successfully connected to MongoDB
+info: 2023-02-25 18:44:43: 	Activating [43m test [0m environment
+info: 2023-02-25 18:44:43: 	Server is running on port 5000
+info: 2023-02-25 18:44:43: 	Successfully connected to MongoDB
+info: 2023-02-25 18:45:42: 	Activating [43m test [0m environment
+info: 2023-02-25 18:45:42: 	Server is running on port 5000
+info: 2023-02-25 18:45:42: 	Successfully connected to MongoDB
+info: 2023-02-25 18:45:53: 	Activating [43m test [0m environment
+info: 2023-02-25 18:45:53: 	Server is running on port 5000
+info: 2023-02-25 18:45:53: 	Successfully connected to MongoDB
+info: 2023-02-25 18:46:05: 	Activating [43m test [0m environment
+info: 2023-02-25 18:46:06: 	Server is running on port 5000
+info: 2023-02-25 18:46:06: 	Successfully connected to MongoDB
+info: 2023-02-25 18:46:10: 	Activating [43m test [0m environment
+info: 2023-02-25 18:46:11: 	Server is running on port 5000
+info: 2023-02-25 18:46:11: 	Successfully connected to MongoDB
+info: 2023-02-25 18:47:54: 	Activating [43m test [0m environment
+info: 2023-02-25 18:47:55: 	Server is running on port 5000
+info: 2023-02-25 18:47:55: 	Successfully connected to MongoDB
+info: 2023-02-25 18:50:21: 	Activating [43m test [0m environment
+info: 2023-02-25 18:50:21: 	Server is running on port 5000
+info: 2023-02-25 18:50:22: 	Successfully connected to MongoDB
+info: 2023-02-25 18:54:16: 	Activating [43m test [0m environment
+info: 2023-02-25 18:54:17: 	Server is running on port 5000
+info: 2023-02-25 18:54:17: 	Successfully connected to MongoDB
+info: 2023-02-25 18:54:22: 	Activating [43m test [0m environment
+info: 2023-02-25 18:54:22: 	Server is running on port 5000
+info: 2023-02-25 18:54:22: 	Successfully connected to MongoDB
+info: 2023-02-25 19:00:17: 	Activating [43m test [0m environment
+info: 2023-02-25 19:00:17: 	Server is running on port 5000
+info: 2023-02-25 19:00:17: 	Successfully connected to MongoDB
+info: 2023-02-25 19:02:28: 	Activating [43m test [0m environment
+info: 2023-02-25 19:02:29: 	Server is running on port 5000
+info: 2023-02-25 19:02:29: 	Successfully connected to MongoDB
+info: 2023-02-25 19:12:48: 	Activating [43m test [0m environment
+info: 2023-02-25 19:12:48: 	Server is running on port 5000
+info: 2023-02-25 19:12:48: 	Successfully connected to MongoDB
+info: 2023-02-25 19:13:07: 	Activating [43m test [0m environment
+info: 2023-02-25 19:13:08: 	Server is running on port 5000
+info: 2023-02-25 19:13:08: 	Successfully connected to MongoDB
+info: 2023-02-25 19:13:17: 	Activating [43m test [0m environment
+info: 2023-02-25 19:13:18: 	Server is running on port 5000
+info: 2023-02-25 19:13:18: 	Successfully connected to MongoDB
+info: 2023-02-25 19:13:25: 	Activating [43m test [0m environment
+info: 2023-02-25 19:13:26: 	Server is running on port 5000
+info: 2023-02-25 19:13:26: 	Successfully connected to MongoDB
+info: 2023-02-25 19:13:40: 	Activating [43m test [0m environment
+info: 2023-02-25 19:13:40: 	Server is running on port 5000
+info: 2023-02-25 19:13:40: 	Successfully connected to MongoDB
+info: 2023-02-25 19:13:52: 	Activating [43m test [0m environment
+info: 2023-02-25 19:13:53: 	Server is running on port 5000
+info: 2023-02-25 19:13:53: 	Successfully connected to MongoDB
+info: 2023-02-25 19:21:42: 	Activating [43m test [0m environment
+info: 2023-02-25 19:21:42: 	Server is running on port 5000
+info: 2023-02-25 19:21:42: 	Successfully connected to MongoDB
+info: 2023-02-25 19:27:03: 	Activating [43m test [0m environment
+info: 2023-02-25 19:27:04: 	Server is running on port 5000
+info: 2023-02-25 19:27:04: 	Successfully connected to MongoDB
+info: 2023-02-25 19:27:43: 	User signup:
+info: 2023-02-25 19:27:47: 	User login: marcosolari@gmail.com
+info: 2023-02-25 19:29:30: 	Activating [43m test [0m environment
+info: 2023-02-25 19:29:30: 	Server is running on port 5000
+info: 2023-02-25 19:29:30: 	Successfully connected to MongoDB
+info: 2023-02-25 19:29:35: 	User login: marcosolari@gmail.com
+info: 2023-02-26 11:03:49: 	Activating [43m test [0m environment
+{"date":"Sun Feb 26 2023 11:03:49 GMT+0100 (Central European Standard Time)","error":{},"exception":true,"level":"error","message":"uncaughtException: Unexpected token '{'\n/home/marco/apps/sistemisolari/appalti190-server/src/controllers/auth.controller.js:158\n    {},\n    ^\n\nSyntaxError: Unexpected token '{'\n    at wrapSafe (internal/modules/cjs/loader.js:1001:16)\n    at Module._compile (internal/modules/cjs/loader.js:1049:27)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Module.require (internal/modules/cjs/loader.js:974:19)\n    at require (internal/modules/cjs/helpers.js:101:18)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/src/routes/auth.routes.js:2:20)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Module.require (internal/modules/cjs/loader.js:974:19)\n    at require (internal/modules/cjs/helpers.js:101:18)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/server.js:103:1)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)","os":{"loadavg":[1.5,1.23,0.8],"uptime":56873.3},"process":{"argv":["/usr/bin/node","/home/marco/apps/sistemisolari/appalti190-server/server.js"],"cwd":"/home/marco/apps/sistemisolari/appalti190-server","execPath":"/usr/bin/node","gid":1000,"memoryUsage":{"arrayBuffers":19122303,"external":20743491,"heapTotal":36438016,"heapUsed":26420536,"rss":73158656},"pid":29026,"uid":1000,"version":"v14.20.1"},"stack":"/home/marco/apps/sistemisolari/appalti190-server/src/controllers/auth.controller.js:158\n    {},\n    ^\n\nSyntaxError: Unexpected token '{'\n    at wrapSafe (internal/modules/cjs/loader.js:1001:16)\n    at Module._compile (internal/modules/cjs/loader.js:1049:27)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Module.require (internal/modules/cjs/loader.js:974:19)\n    at require (internal/modules/cjs/helpers.js:101:18)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/src/routes/auth.routes.js:2:20)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Module.require (internal/modules/cjs/loader.js:974:19)\n    at require (internal/modules/cjs/helpers.js:101:18)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/server.js:103:1)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)","trace":[{"column":16,"file":"internal/modules/cjs/loader.js","function":"wrapSafe","line":1001,"method":null,"native":false},{"column":27,"file":"internal/modules/cjs/loader.js","function":"Module._compile","line":1049,"method":"_compile","native":false},{"column":10,"file":"internal/modules/cjs/loader.js","function":"Module._extensions..js","line":1114,"method":".js","native":false},{"column":32,"file":"internal/modules/cjs/loader.js","function":"Module.load","line":950,"method":"load","native":false},{"column":12,"file":"internal/modules/cjs/loader.js","function":"Module._load","line":790,"method":"_load","native":false},{"column":19,"file":"internal/modules/cjs/loader.js","function":"Module.require","line":974,"method":"require","native":false},{"column":18,"file":"internal/modules/cjs/helpers.js","function":"require","line":101,"method":null,"native":false},{"column":20,"file":"/home/marco/apps/sistemisolari/appalti190-server/src/routes/auth.routes.js","function":null,"line":2,"method":null,"native":false},{"column":14,"file":"internal/modules/cjs/loader.js","function":"Module._compile","line":1085,"method":"_compile","native":false},{"column":10,"file":"internal/modules/cjs/loader.js","function":"Module._extensions..js","line":1114,"method":".js","native":false},{"column":32,"file":"internal/modules/cjs/loader.js","function":"Module.load","line":950,"method":"load","native":false},{"column":12,"file":"internal/modules/cjs/loader.js","function":"Module._load","line":790,"method":"_load","native":false},{"column":19,"file":"internal/modules/cjs/loader.js","function":"Module.require","line":974,"method":"require","native":false},{"column":18,"file":"internal/modules/cjs/helpers.js","function":"require","line":101,"method":null,"native":false},{"column":1,"file":"/home/marco/apps/sistemisolari/appalti190-server/server.js","function":null,"line":103,"method":null,"native":false},{"column":14,"file":"internal/modules/cjs/loader.js","function":"Module._compile","line":1085,"method":"_compile","native":false}]}
+error: 2023-02-26 11:03:49: 	uncaughtException: Unexpected token '{'
+/home/marco/apps/sistemisolari/appalti190-server/src/controllers/auth.controller.js:158
+    {},
+    ^
+
+SyntaxError: Unexpected token '{'
+    at wrapSafe (internal/modules/cjs/loader.js:1001:16)
+    at Module._compile (internal/modules/cjs/loader.js:1049:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)
+    at Module.load (internal/modules/cjs/loader.js:950:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:790:12)
+    at Module.require (internal/modules/cjs/loader.js:974:19)
+    at require (internal/modules/cjs/helpers.js:101:18)
+    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/src/routes/auth.routes.js:2:20)
+    at Module._compile (internal/modules/cjs/loader.js:1085:14)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)
+    at Module.load (internal/modules/cjs/loader.js:950:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:790:12)
+    at Module.require (internal/modules/cjs/loader.js:974:19)
+    at require (internal/modules/cjs/helpers.js:101:18)
+    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/server.js:103:1)
+    at Module._compile (internal/modules/cjs/loader.js:1085:14)
+info: 2023-02-26 11:09:03: 	Activating [43m test [0m environment
+info: 2023-02-26 11:09:04: 	Server is running on port 5000
+info: 2023-02-26 11:09:04: 	Successfully connected to MongoDB
+info: 2023-02-26 11:10:03: 	Activating [43m test [0m environment
+info: 2023-02-26 11:10:03: 	Server is running on port 5000
+info: 2023-02-26 11:10:03: 	Successfully connected to MongoDB
+info: 2023-02-26 11:13:03: 	Activating [43m test [0m environment
+info: 2023-02-26 11:13:04: 	Server is running on port 5000
+info: 2023-02-26 11:13:04: 	Successfully connected to MongoDB
+info: 2023-02-26 11:21:21: 	Activating [43m test [0m environment
+info: 2023-02-26 11:21:22: 	Server is running on port 5000
+info: 2023-02-26 11:21:22: 	Successfully connected to MongoDB
+info: 2023-02-26 11:23:32: 	Activating [43m test [0m environment
+info: 2023-02-26 11:23:32: 	Server is running on port 5000
+info: 2023-02-26 11:23:32: 	Successfully connected to MongoDB
+info: 2023-02-26 11:26:19: 	Activating [43m test [0m environment
+info: 2023-02-26 11:26:19: 	Server is running on port 5000
+info: 2023-02-26 11:26:19: 	Successfully connected to MongoDB
+error: 2023-02-26 11:26:25: 	uncaughtException: Unexpected token ':'
+/home/marco/apps/sistemisolari/appalti190-server/src/models/user.model.js:86
+  /if (!this.options.allowUnverified) condition.isVerified = true; // TODO: enable when implemented exception for registration!!!
+                                                                          ^
+
+SyntaxError: Unexpected token ':'
+    at wrapSafe (internal/modules/cjs/loader.js:1001:16)
+    at Module._compile (internal/modules/cjs/loader.js:1049:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)
+    at Module.load (internal/modules/cjs/loader.js:950:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:790:12)
+    at Module.require (internal/modules/cjs/loader.js:974:19)
+    at require (internal/modules/cjs/helpers.js:101:18)
+    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/src/models/index.js:12:9)
+    at Module._compile (internal/modules/cjs/loader.js:1085:14)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)
+    at Module.load (internal/modules/cjs/loader.js:950:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:790:12)
+    at Module.require (internal/modules/cjs/loader.js:974:19)
+    at require (internal/modules/cjs/helpers.js:101:18)
+    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/server.js:8:12)
+    at Module._compile (internal/modules/cjs/loader.js:1085:14)
+{"date":"Sun Feb 26 2023 11:26:25 GMT+0100 (Central European Standard Time)","error":{},"exception":true,"level":"error","message":"uncaughtException: Unexpected token ':'\n/home/marco/apps/sistemisolari/appalti190-server/src/models/user.model.js:86\n  /if (!this.options.allowUnverified) condition.isVerified = true; // TODO: enable when implemented exception for registration!!!\n                                                                          ^\n\nSyntaxError: Unexpected token ':'\n    at wrapSafe (internal/modules/cjs/loader.js:1001:16)\n    at Module._compile (internal/modules/cjs/loader.js:1049:27)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Module.require (internal/modules/cjs/loader.js:974:19)\n    at require (internal/modules/cjs/helpers.js:101:18)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/src/models/index.js:12:9)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Module.require (internal/modules/cjs/loader.js:974:19)\n    at require (internal/modules/cjs/helpers.js:101:18)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/server.js:8:12)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)","os":{"loadavg":[1.67,1.61,1.44],"uptime":58229.63},"process":{"argv":["/usr/bin/node","/home/marco/apps/sistemisolari/appalti190-server/server.js"],"cwd":"/home/marco/apps/sistemisolari/appalti190-server","execPath":"/usr/bin/node","gid":1000,"memoryUsage":{"arrayBuffers":18559461,"external":20169791,"heapTotal":36175872,"heapUsed":20399928,"rss":73052160},"pid":31001,"uid":1000,"version":"v14.20.1"},"stack":"/home/marco/apps/sistemisolari/appalti190-server/src/models/user.model.js:86\n  /if (!this.options.allowUnverified) condition.isVerified = true; // TODO: enable when implemented exception for registration!!!\n                                                                          ^\n\nSyntaxError: Unexpected token ':'\n    at wrapSafe (internal/modules/cjs/loader.js:1001:16)\n    at Module._compile (internal/modules/cjs/loader.js:1049:27)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Module.require (internal/modules/cjs/loader.js:974:19)\n    at require (internal/modules/cjs/helpers.js:101:18)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/src/models/index.js:12:9)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Module.require (internal/modules/cjs/loader.js:974:19)\n    at require (internal/modules/cjs/helpers.js:101:18)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/server.js:8:12)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)","trace":[{"column":16,"file":"internal/modules/cjs/loader.js","function":"wrapSafe","line":1001,"method":null,"native":false},{"column":27,"file":"internal/modules/cjs/loader.js","function":"Module._compile","line":1049,"method":"_compile","native":false},{"column":10,"file":"internal/modules/cjs/loader.js","function":"Module._extensions..js","line":1114,"method":".js","native":false},{"column":32,"file":"internal/modules/cjs/loader.js","function":"Module.load","line":950,"method":"load","native":false},{"column":12,"file":"internal/modules/cjs/loader.js","function":"Module._load","line":790,"method":"_load","native":false},{"column":19,"file":"internal/modules/cjs/loader.js","function":"Module.require","line":974,"method":"require","native":false},{"column":18,"file":"internal/modules/cjs/helpers.js","function":"require","line":101,"method":null,"native":false},{"column":9,"file":"/home/marco/apps/sistemisolari/appalti190-server/src/models/index.js","function":null,"line":12,"method":null,"native":false},{"column":14,"file":"internal/modules/cjs/loader.js","function":"Module._compile","line":1085,"method":"_compile","native":false},{"column":10,"file":"internal/modules/cjs/loader.js","function":"Module._extensions..js","line":1114,"method":".js","native":false},{"column":32,"file":"internal/modules/cjs/loader.js","function":"Module.load","line":950,"method":"load","native":false},{"column":12,"file":"internal/modules/cjs/loader.js","function":"Module._load","line":790,"method":"_load","native":false},{"column":19,"file":"internal/modules/cjs/loader.js","function":"Module.require","line":974,"method":"require","native":false},{"column":18,"file":"internal/modules/cjs/helpers.js","function":"require","line":101,"method":null,"native":false},{"column":12,"file":"/home/marco/apps/sistemisolari/appalti190-server/server.js","function":null,"line":8,"method":null,"native":false},{"column":14,"file":"internal/modules/cjs/loader.js","function":"Module._compile","line":1085,"method":"_compile","native":false}]}
+info: 2023-02-26 11:26:27: 	Activating [43m test [0m environment
+info: 2023-02-26 11:26:27: 	Server is running on port 5000
+info: 2023-02-26 11:26:27: 	Successfully connected to MongoDB
+info: 2023-02-26 11:30:48: 	User signup:
+info: 2023-02-26 11:31:06: 	User login: marcosolari@gmail.com
+info: 2023-02-26 11:31:22: 	User login: marcosolari@gmail.com
+info: 2023-02-26 11:38:35: 	User login: marcosolari@gmail.com
+info: 2023-02-26 11:40:01: 	User login: marcosolari@gmail.com
+info: 2023-02-26 12:08:43: 	User login: marcosolari@gmail.com
+info: 2023-02-26 12:09:00: 	User login: marcosolari@gmail.com
+info: 2023-02-26 12:24:38: 	Payment success
+error: 2023-02-26 12:34:42: 	uncaughtException: Cannot read property 'roles' of null
+TypeError: Cannot read property 'roles' of null
+    at /home/marco/apps/sistemisolari/appalti190-server/src/middlewares/authJwt.js:38:26
+    at /home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/model.js:5074:18
+    at processTicksAndRejections (internal/process/task_queues.js:77:11)
+{"date":"Sun Feb 26 2023 12:34:42 GMT+0100 (Central European Standard Time)","error":{},"exception":true,"level":"error","message":"uncaughtException: Cannot read property 'roles' of null\nTypeError: Cannot read property 'roles' of null\n    at /home/marco/apps/sistemisolari/appalti190-server/src/middlewares/authJwt.js:38:26\n    at /home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/model.js:5074:18\n    at processTicksAndRejections (internal/process/task_queues.js:77:11)","os":{"loadavg":[3.04,1.73,1.48],"uptime":62326.25},"process":{"argv":["/usr/bin/node","/home/marco/apps/sistemisolari/appalti190-server/server.js"],"cwd":"/home/marco/apps/sistemisolari/appalti190-server","execPath":"/usr/bin/node","gid":1000,"memoryUsage":{"arrayBuffers":21311427,"external":22952065,"heapTotal":44503040,"heapUsed":41861016,"rss":108793856},"pid":31026,"uid":1000,"version":"v14.20.1"},"stack":"TypeError: Cannot read property 'roles' of null\n    at /home/marco/apps/sistemisolari/appalti190-server/src/middlewares/authJwt.js:38:26\n    at /home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/model.js:5074:18\n    at processTicksAndRejections (internal/process/task_queues.js:77:11)","trace":[{"column":26,"file":"/home/marco/apps/sistemisolari/appalti190-server/src/middlewares/authJwt.js","function":null,"line":38,"method":null,"native":false},{"column":18,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/model.js","function":null,"line":5074,"method":null,"native":false},{"column":11,"file":"internal/process/task_queues.js","function":"processTicksAndRejections","line":77,"method":null,"native":false}]}
+info: 2023-02-26 12:37:50: 	Activating [43m test [0m environment
+info: 2023-02-26 12:37:51: 	Server is running on port 5000
+info: 2023-02-26 12:37:51: 	Successfully connected to MongoDB
+info: 2023-02-26 12:38:19: 	Payment success
+error: 2023-02-26 12:40:01: 	uncaughtException: Cannot read property 'roles' of null
+TypeError: Cannot read property 'roles' of null
+    at /home/marco/apps/sistemisolari/appalti190-server/src/middlewares/authJwt.js:39:26
+    at /home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/model.js:5074:18
+    at processTicksAndRejections (internal/process/task_queues.js:77:11)
+{"date":"Sun Feb 26 2023 12:40:01 GMT+0100 (Central European Standard Time)","error":{},"exception":true,"level":"error","message":"uncaughtException: Cannot read property 'roles' of null\nTypeError: Cannot read property 'roles' of null\n    at /home/marco/apps/sistemisolari/appalti190-server/src/middlewares/authJwt.js:39:26\n    at /home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/model.js:5074:18\n    at processTicksAndRejections (internal/process/task_queues.js:77:11)","os":{"loadavg":[3.21,2.6,1.92],"uptime":62644.83},"process":{"argv":["/usr/bin/node","/home/marco/apps/sistemisolari/appalti190-server/server.js"],"cwd":"/home/marco/apps/sistemisolari/appalti190-server","execPath":"/usr/bin/node","gid":1000,"memoryUsage":{"arrayBuffers":21299494,"external":22940132,"heapTotal":42143744,"heapUsed":39428888,"rss":84971520},"pid":37876,"uid":1000,"version":"v14.20.1"},"stack":"TypeError: Cannot read property 'roles' of null\n    at /home/marco/apps/sistemisolari/appalti190-server/src/middlewares/authJwt.js:39:26\n    at /home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/model.js:5074:18\n    at processTicksAndRejections (internal/process/task_queues.js:77:11)","trace":[{"column":26,"file":"/home/marco/apps/sistemisolari/appalti190-server/src/middlewares/authJwt.js","function":null,"line":39,"method":null,"native":false},{"column":18,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/model.js","function":null,"line":5074,"method":null,"native":false},{"column":11,"file":"internal/process/task_queues.js","function":"processTicksAndRejections","line":77,"method":null,"native":false}]}
+info: 2023-02-26 12:41:42: 	Activating [43m test [0m environment
+info: 2023-02-26 12:41:43: 	Server is running on port 5000
+info: 2023-02-26 12:41:43: 	Successfully connected to MongoDB
+info: 2023-02-26 12:42:08: 	Activating [43m test [0m environment
+info: 2023-02-26 12:42:09: 	Server is running on port 5000
+info: 2023-02-26 12:42:09: 	Successfully connected to MongoDB
+info: 2023-02-26 12:42:18: 	Payment success
+info: 2023-02-26 12:42:51: 	Activating [43m test [0m environment
+info: 2023-02-26 12:42:52: 	Server is running on port 5000
+info: 2023-02-26 12:42:52: 	Successfully connected to MongoDB
+info: 2023-02-26 12:43:10: 	Activating [43m test [0m environment
+info: 2023-02-26 12:43:11: 	Server is running on port 5000
+info: 2023-02-26 12:43:11: 	Successfully connected to MongoDB
+info: 2023-02-26 12:46:46: 	User login: marcosolari@gmail.com
+info: 2023-02-26 12:47:36: 	Payment success
+info: 2023-02-26 12:48:48: 	Activating [43m test [0m environment
+info: 2023-02-26 12:48:49: 	Server is running on port 5000
+info: 2023-02-26 12:48:49: 	Successfully connected to MongoDB
+info: 2023-02-26 12:51:40: 	User login: marcosolari@gmail.com
+info: 2023-02-26 12:56:55: 	User login: marcosolari@gmail.com
+info: 2023-02-26 12:59:02: 	User login: marcosolari@gmail.com
+info: 2023-02-26 13:01:06: 	User login: marcosolari@gmail.com
+info: 2023-02-26 13:10:30: 	User login: marcosolari@gmail.com
+info: 2023-02-26 13:50:14: 	User login: marcosolari@gmail.com
+info: 2023-02-26 13:50:44: 	User login: marcosolari@gmail.com
+info: 2023-02-26 13:56:48: 	User login: marcosolari@gmail.com
+info: 2023-02-26 14:02:17: 	User login: marcosolari@gmail.com
+info: 2023-02-26 14:15:23: 	User login: marcosolari@gmail.com
+info: 2023-02-26 14:22:37: 	User login: marcosolari@gmail.com
+info: 2023-02-26 14:25:24: 	User login: marcosolari@gmail.com
+info: 2023-02-26 14:27:09: 	User login: marcosolari@gmail.com
+info: 2023-02-26 14:28:50: 	User login: marcosolari@gmail.com
+info: 2023-02-26 14:32:18: 	User login: marcosolari@gmail.com
+info: 2023-02-26 14:33:46: 	User login: marcosolari@gmail.com
+info: 2023-02-26 14:41:46: 	User login: marcosolari@gmail.com
+info: 2023-02-26 14:43:31: 	User login: marcosolari@gmail.com
+info: 2023-02-26 14:45:03: 	User login: marcosolari@gmail.com
+info: 2023-02-26 14:46:16: 	User login: marcosolari@gmail.com
+info: 2023-02-26 14:48:12: 	User login: marcosolari@gmail.com
+info: 2023-02-26 14:50:41: 	User login: marcosolari@gmail.com
+info: 2023-02-26 14:53:30: 	User login: marcosolari@gmail.com
+info: 2023-02-26 14:54:13: 	Payment session created
+info: 2023-02-26 14:54:29: 	User login: marcosolari@gmail.com
+info: 2023-02-26 14:56:19: 	User login: marcosolari@gmail.com
+info: 2023-02-26 15:00:38: 	User login: marcosolari@gmail.com
+info: 2023-02-26 15:01:32: 	User login: marcosolari@gmail.com
+info: 2023-02-26 15:04:33: 	User login: marcosolari@gmail.com
+info: 2023-02-26 15:06:12: 	User login: marcosolari@gmail.com
+info: 2023-02-26 15:06:52: 	User login: marcosolari@gmail.com
+info: 2023-02-26 15:07:54: 	User login: marcosolari@gmail.com
+info: 2023-02-26 15:08:23: 	User login: marcosolari@gmail.com
+info: 2023-02-26 19:00:40: 	User login: marcosolari@gmail.com
+info: 2023-02-26 19:03:57: 	Activating [43m test [0m environment
+info: 2023-02-26 19:03:58: 	Server is running on port 5000
+info: 2023-02-26 19:03:58: 	Successfully connected to MongoDB
+info: 2023-02-26 19:07:21: 	User login: marcosolari@gmail.com
+info: 2023-02-26 19:09:30: 	User login: marcosolari@gmail.com
+info: 2023-02-26 19:10:06: 	User login: marcosolari@gmail.com
+info: 2023-02-26 19:10:41: 	User login: marcosolari@gmail.com
+info: 2023-02-26 19:11:33: 	User login: marcosolari@gmail.com
+info: 2023-02-26 19:12:28: 	User login: marcosolari@gmail.com
+info: 2023-02-26 19:15:15: 	User login: marcosolari@gmail.com
+info: 2023-02-26 19:16:22: 	User login: marcosolari@gmail.com
+info: 2023-02-26 19:17:26: 	Activating [43m test [0m environment
+info: 2023-02-26 19:17:26: 	Server is running on port 5000
+info: 2023-02-26 19:17:26: 	Successfully connected to MongoDB
+info: 2023-02-26 19:17:44: 	User login: marcosolari@gmail.com
+info: 2023-02-26 19:19:06: 	Activating [43m test [0m environment
+info: 2023-02-26 19:19:07: 	Server is running on port 5000
+info: 2023-02-26 19:19:07: 	Successfully connected to MongoDB
+info: 2023-02-26 19:22:10: 	User login: marcosolari@gmail.com
+info: 2023-02-26 19:30:40: 	User login: marcosolari@gmail.com
+info: 2023-02-26 19:35:35: 	User login: marcosolari@gmail.com
+info: 2023-02-26 20:24:57: 	Activating [43m test [0m environment
+info: 2023-02-26 20:24:57: 	Server is running on port 5000
+info: 2023-02-26 20:24:57: 	Successfully connected to MongoDB
+info: 2023-02-26 20:25:38: 	User login: marcosolari@gmail.com
+info: 2023-02-26 20:26:01: 	Activating [43m test [0m environment
+info: 2023-02-26 20:26:02: 	Server is running on port 5000
+info: 2023-02-26 20:26:02: 	Successfully connected to MongoDB
+info: 2023-02-26 20:42:05: 	User login: marcosolari@gmail.com

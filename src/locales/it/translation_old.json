@@ -1,4 +1,10 @@
 {
+  "Errore nell'archiviazione": "Errore nell'archiviazione",
   "hello": "ciao!",
-  "hello due": "hello due"
+  "hello due": "hello due",
+  "per verificare il tuo account": "per verificare il tuo account",
+  "Please provide a valid email": "Si prega di fornsci un'email valida, per favore",
+  "We could not find user": "Impossibile trovare l'utente",
+  "We could not get roles": "Impossibile trovare ruoli",
+  "We were unable to find this user": "Impossibile trovare questo utente"
 }

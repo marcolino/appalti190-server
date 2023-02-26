@@ -90,12 +90,12 @@ const transformXls2Xml = async (req, res) => {
     .populate("plan", "-__v")
   ;
   if (!user) {
-    retval.message = `The user must be authenticated.`;
+    retval.message = req.t("The user must be authenticated") + ".";
     retval.code = "ABORTED_DUE_TO_MISSING_AUTHENTICATION";
     return retval;
   }
   if (!user.plan) {
-    retval.message = `The user must have a plan.`;
+    retval.message = req.t("The user must have a plan") + ".";
     retval.code = "ABORTED_DUE_TO_MISSING_PLAN";
     return retval;
   }
@@ -111,17 +111,16 @@ const transformXls2Xml = async (req, res) => {
   });
 
   if (!sheetElencoGare.length) {
-console.log("sheetElencoGare vuoto");
-    retval.errors.push(`Foglio ${config.job.sheets.elencoGare} non trovato`);
-    retval.message = `Il file di input è corrotto.`;
+    retval.errors.push(req.t("Sheet {{sheet}} not found", {sheet: config.job.sheets.elencoGare}));
+    retval.message = req.t("Input file is corrupted") + ".";
     retval.code = "BROKEN_INPUT";
     return retval;
   }
 
   const sheetMetadati = xlsx.utils.sheet_to_json(workbook.Sheets[config.job.sheets.metadati]);
   if (!sheetMetadati.length) {
-    retval.errors.push(`Foglio ${config.job.sheets.metadati} non trovato`);
-    retval.message = `Il file di input è corrotto.`;
+    retval.errors.push(req.t("Sheet {{sheet}} not found", {sheet: config.job.sheets.metadati}));
+    retval.message = req.t("Input file is corrupted") + ".";
     retval.code = "BROKEN_INPUT";
     return retval;
   }
@@ -145,15 +144,15 @@ console.log("sheetElencoGare vuoto");
   // we assume "entePubblicatore" is the same as "strutturaProponente"
   metadati.entePubblicatore = header.denominazioneStrutturaProponente;
 
-  let today = new Date(); today = today.toISOString().split('T')[0];
+  let today = new Date(); today = today.toISOString().split("T")[0];
   metadati.dataPubblicazioneDataset = today;
 
   // get last modification date of input file
   try {
     const stats = fs.statSync(input);
-    const date = new Date(stats.mtime); metadati.dataUltimoAggiornamentoDataset = date.toISOString().split('T')[0];
+    const date = new Date(stats.mtime); metadati.dataUltimoAggiornamentoDataset = date.toISOString().split("T")[0];
   } catch (err) {
-    retval.errors.push(`Impossibile leggere la data di ultima modifica del file di input ${input}: ${err.message}`);
+    retval.errors.push(t.req("Can't read last modification date of input file {{input}}", {input}) + ": " + err.message);
     metadati.dataUltimoAggiornamentoDataset = today;
   }
 
@@ -224,7 +223,7 @@ console.log("sheetElencoGare vuoto");
       isAggregate = false;
       isAggregateContinuation = false;
     } else {
-      let error = `Riga CIG con il campo "Partecipanti" impostato a ${row["PARTECIPANTI"]}, si ignora`;
+      let error = req.t("CIG row with \"Partecipanti\" field set to {{what}}, ignoring", {what: row["PARTECIPANTI"]});
       retval.warnings.push(`${error} (${retval.rownum})`);
       return;
     }
@@ -238,7 +237,7 @@ console.log("sheetElencoGare vuoto");
     if (row["AGGIUDICATARI"] === "S") {
       isAggiudicatario = true;
     } else {
-      let error = `Riga CIG con il campo "Aggiudicatari" impostato a ${row["AGGIUDICATARI"]}, si ignora`;
+      let error = req.t("CIG row with \"Aggiudicatari\" field set to {{what}}, ignoring", {what: row["AGGIUDICATARI"]});
       retval.warnings.push(`${error} (${retval.rownum})`);
       return;
     }
@@ -250,7 +249,7 @@ console.log("sheetElencoGare vuoto");
       ) {
         return; // empty row, just skip it, no warning
       }
-      let error = `Almeno uno fra Codice Fiscale e Identificativo Estero è obbligatorio, si ignora`;
+      let error = req.t("At least one in \"Codice Fiscale\" and \"Identificativo Estero\" is mandatory, ignoring");
       retval.warnings.push(`${error} (${retval.rownum})`);
       return;
     }
@@ -287,7 +286,7 @@ console.log("sheetElencoGare vuoto");
 
       let oggetto = row["OGGETTO"];
       if (typeof oggetto === "undefined") {
-        let error = `Riga CIG con il campo "Oggetto" vuoto, si ignora`;
+        let error = req.t("CIG row with empty \"Oggetto\" field, ignoring");
         retval.warnings.push(`${error} (${retval.rownum})`);
         return
       } else {
@@ -296,7 +295,7 @@ console.log("sheetElencoGare vuoto");
 
       let sceltaContraente = row["SCELTA CONTRAENTE"];
       if (typeof sceltaContraente === "undefined") {
-        let error = `Riga CIG con il campo "Scelta Contraente" vuoto, si ignora`;
+        let error = req.t("CIG row with empty \"Scelta Contraente\", ignoring");
         retval.warnings.push(`${error} (${retval.rownum})`);
         return;
       } else {
@@ -320,7 +319,7 @@ console.log("sheetElencoGare vuoto");
       }
 
       if (row["PARTECIPANTI"] === "") { // a CIG row MUST contain a PARTECIPANTI (A or S)
-        let error = `Riga CIG con il campo "Partecipanti" vuoto, si ignora`;
+        let error = req.t("CIG row with empty \"Partecipanti\" field, ignoring");
         retval.warnings.push(`${error} (${retval.rownum})`);
         return;
       }
@@ -425,7 +424,7 @@ console.log("sheetElencoGare vuoto");
     } else { // a continuation row
 
       if (!lotto) {
-        let warning = `Trovata una riga di continuazione (senza CIG) senza un lotto (riga CIG precedente), si ignora`;
+        let warning = req.t("Found a continuation row (with no CIG) without a \"lotto\" (previous CIG row), ignoring");
         retval.warnings.push(`[${retval.rownum}] ${warning}`);
         return;
       }
@@ -597,7 +596,7 @@ console.log("SLICESIZE", sliceSize);
     let result = serializeArchive(folderName, fileName, urlPath, zip);
     if (result.error) {
       retval.errors.push(result.error);
-      retval.message = `Errore nell'archiviazione.`;
+      retval.message = req.t("Error while archiving") + ".";
       retval.code = "ARCHIVE_ERROR";
       return retval;
     }
@@ -704,7 +703,7 @@ function load(path) {
 
 // serialize zip archive to disk
 function serializeArchive(outputFolder, outputFile, outputUrlPath, zip) {
-  let contents = zip.generate({ base64: false, compression: 'DEFLATE' });
+  let contents = zip.generate({ base64: false, compression: "DEFLATE" });
   //fs.writeFileSync(path.join(zipFolder, zipFile), zipContents, "binary");
   if ((result = save(outputFolder, outputFile, "binary", contents)) !== true) {
     return `${result}`;
@@ -786,29 +785,29 @@ const validateXml = async (req, res) => {
     }
     const xml = result.contents;
     const schema = path.join(__dirname, "../..", config.job.schemaFile);
-//console.log("XML type:", typeof xml, 'len:', xml.length);
+//console.log("XML type:", typeof xml, "len:", xml.length);
 
-    const validation = await validate(xml, schema);
+    const validation = await validate(req, res, xml, schema);
 
     return validation;
   } else { // no other cases allowed
     return {
       code: "XML_NOT_FOUND",
-      message: "No zip archive nor xml dataset to be validated found",
+      message: req.t("No zip archive nor xml dataset to be validated found"),
     };
   }
 };
 
-async function validate(xml, schema) {
+async function validate(req, res, xml, schema) {
   return new Promise((resolve) => {
     xmlvalidator.validateXML(xml, schema, (err, result) => {
       if (err) {
-        return resolve({code: "ERROR", message: "Errore nella validazione XML", errors: reclaimValidateMessage(err.message)});
+        return resolve({code: "ERROR", message: req.t("Error in XML validation"), errors: reclaimValidateMessage(err.message)});
       }
       if (!result.valid) {
-        return resolve({code: "ERROR", message: "Problemi nella validazione XML", errors: reclaimValidateMessage(result.message)});
+        return resolve({code: "ERROR", message: req.t("Problems in XML validation"), errors: reclaimValidateMessage(result.message)});
       }
-      return resolve({code: "OK", message: "Valid XML"});
+      return resolve({code: "OK", message: req.t("Valid XML")});
     });
   });
 };

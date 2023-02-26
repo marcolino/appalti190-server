@@ -51,11 +51,11 @@ module.exports = {
 
   remoteAddress: (req) => {
     return (
-      req.headers['x-forwarded-for'] || 
+      req.headers["x-forwarded-for"] || 
       req.connection.remoteAddress || 
       req.socket.remoteAddress ||
       req.connection.socket.remoteAddress
-    ).replace(/^.*:/, '');
+    ).replace(/^.*:/, "");
   },
 
 };
@@ -64,7 +64,7 @@ const cleanDomain = (domain) => {
   // We don't need to trim leading whitespace
   // because validation rejects it as invalid.
 
-  // We don't need to strip a trailing '.'
+  // We don't need to strip a trailing "."
   // because validation rejects it as invalid.
 
   //domain = punycode.toASCII(domain);

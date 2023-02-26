@@ -83,7 +83,7 @@ UserSchema.pre("find", function() {
 console.log("PRE FIND OPTIONS:", this.options); // try adding "allowDeleted" / "allowUnverified" options...
   let condition = {};
   if (!this.options.allowDeleted) condition.isDeleted = false;
-  if (!this.options.allowUnverified) condition.isVerified = true;
+  if (!this.options.allowUnverified) condition.isVerified = true; // TODO: enable when implemented exception for registration!!!
   user.where(condition); // TODO: check options.allowUnverified works when we want unverified users...
 });
 

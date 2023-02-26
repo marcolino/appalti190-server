@@ -1,4 +1,8 @@
 {
+  "Errore nell'archiviazione": "Errore nell'archiviazione",
   "hello": "hello!",
-  "hello due": "hello due"
+  "hello due": "hello due",
+  "We could not find user": "We could not find user",
+  "We could not get roles": "We could not get roles",
+  "We were unable to find this user": "We were unable to find this user"
 }

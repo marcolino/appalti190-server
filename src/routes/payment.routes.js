@@ -51,7 +51,7 @@ console.log("MODE:", process.env.STRIPE_MODE);
 
       //res.redirect(303, session.url);
 
-      logger.info(`Payment success`);
+      logger.info(`Payment session created`);
       res.status(200).json({session, product}); // return the session with the redirect url instead of redirecting directly
     } catch(e) {
       //console.error("create-checkout-session error:", e?.raw?.message);

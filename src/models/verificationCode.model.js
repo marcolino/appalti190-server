@@ -6,7 +6,7 @@ const VerificationCode = mongoose.model(
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       required: "userId user reference is required in VerificationCode document",
-      ref: 'User'
+      ref: "User"
     },
     code: {
       type: String,

@@ -50,7 +50,7 @@ app.use((req, res, next) => {
 // handle version, if needed
 app.use((req, res, next) => {
   // req.version is used to determine the version
-  req.version = req.headers['accept-version'];
+  req.version = req.headers["accept-version"];
   next();
 });
 

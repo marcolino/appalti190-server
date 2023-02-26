@@ -3,6 +3,8 @@ const winston = require("winston");
 require("winston-syslog");
 //const Mail = require("winston-mail").Mail;
 //const AwsCloudWatch = require("winston-aws-cloudwatch");
+//const i18n = require("i18next");
+
 const config = require("../config");
 
 const localhost = require("os").hostname;
@@ -73,7 +75,7 @@ try {
     });
     transports.push(new winston.transports.Console({
       format: winston.format.combine(winston.format.timestamp(), consoleLogFormat),
-      level: 'debug',
+      level: "debug",
       handleExceptions: true,
       prettyPrint: true,
       colorize: true,
