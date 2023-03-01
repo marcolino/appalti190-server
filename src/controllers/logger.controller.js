@@ -69,7 +69,7 @@ try {
     );
   }
 
-  if (process.env.NODE_ENV !== "production") { // if we're not in production then also log to the `Console` transport
+  if (process.env.NODE_ENV !== "production" /*&& process.env.NODE_ENV !== "test"*/) { // if we're not in production nor test then also log to the `Console` transport
     const consoleLogFormat = winston.format.printf(info => {
       return `${info.timestamp} ${info.level}: ` + info.message;
     });

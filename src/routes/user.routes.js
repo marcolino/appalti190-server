@@ -17,6 +17,7 @@ module.exports = app => {
   app.get("/api/user/getRoles", [authJwt.verifyToken], userController.getRoles);
   app.post("/api/user/updateRoles", [authJwt.verifyToken, authJwt.isAdmin], userController.updateRoles);
   app.post("/api/user/updatePlan", [authJwt.verifyToken, authJwt.isAdmin], userController.updatePlan);
+  //app.post("/api/user/deleteAll", [authJwt.verifyToken, authJwt.isAdmin], userController.deleteAll); // BE CAREFUL HERE!!!
   app.get("/api/admin/getAdminPanel", [authJwt.verifyToken, authJwt.isAdmin], userController.adminPanel);
   /**
    * To use versioning:

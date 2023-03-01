@@ -42,7 +42,6 @@ exports.getProfile = async(req, res) => {
   .exec(async(err, user) => {
     if (err) return res.status(500).json({ message: req.t("Could not find user"), reason: errorMessage(err) });
     if (!user) return res.status(400).json({ message: req.t("Could not find this user") });
-console.log("getProfile - user.roles:", user.roles);
     res.status(200).json({user});
   });
 };
@@ -51,7 +50,6 @@ console.log("getProfile - user.roles:", user.roles);
  * Update current user's profile
  */
 exports.updateProfile = async(req, res) => {
-console.log("UpdateProfile, body:", req.body);
   if (!req.userId) return res.status(400).json({ message: req.t("User must be authenticated") });
   if (!req.body.email) return res.status(400).json({ message: req.t("Email is mandatory") });
 
@@ -60,7 +58,7 @@ console.log("UpdateProfile, body:", req.body);
     if (!user) return res.status(400).json({ message: req.t("Could not find this user") });
 
     // validate and normalize email
-    let [error, value] = [null, null];
+    const [error, value] = [null, null];
 
     [error, value] = await propertyEmailValidate(req.body.email, user);
     if (error) return res.status(400).json({ message: error });
@@ -83,7 +81,7 @@ console.log("UpdateProfile, body:", req.body);
     // verify and save the user
     user.save(err => {
       if (err) return res.status(500).json({ message: err.message });
-      res.status(200).json({ message: req.t("The profile has been updated") + "." });
+      res.status(200).json({ message: req.t("The profile has been updated")});
     });
   });
 }
@@ -106,7 +104,7 @@ console.log("updateUserProperty - propertyValue:", req.body.propertyValue);
     //   return res.status(400).json({ message: `Property ${propertyName} can't be set` });
     // }
 
-    let [error, value] = [null, null];
+    const [error, value] = [null, null];
     switch (propertyName) {
       case "firstName":
         [error, value] = propertyFirstNameValidate(propertyValue, user);
@@ -166,7 +164,7 @@ console.log("$$$$", propertyName, value)
     user.save((err, user) => {
       if (err) return res.status(500).json({ message: err.message });
 console.log("USER AFTER:", user.address);
-      res.status(200).json({ message: req.t("The property has been updated") + ".", propertyValue: value });
+      res.status(200).json({ message: req.t("The property has been updated"), propertyValue: value });
     });
   });
 }
@@ -192,7 +190,7 @@ exports.updateRoles = async(req, res) => {
       // verify and save the user
       user.save(err => {
         if (err) return res.status(500).json({ message: err.message });
-        res.status(200).json({ message: req.t("The profile has been updated") + "." });
+        res.status(200).json({ message: req.t("The profile has been updated") });
       });
     });
   });
@@ -232,7 +230,7 @@ exports.userBoard = (req, res) => {
 };
 
 exports.users = async(req, res) => {
-  let users = await User.find()
+  const users = await User.find()
     .select(["-password", "-__v"])
     .populate("roles", "-__v")
     .populate("plan", "-__v")
@@ -242,13 +240,15 @@ exports.users = async(req, res) => {
   res.status(200).json({users});
 };
 
+exports.deleteAll = async(req, res) => {
+  const result = User.deleteMany({}/*, () => {}*/);
+console.log("deleteAll result:", result);
+  res.status(200).json(result);
+};
+
 exports.adminPanel = (req, res) => {
   Promise.all([
-    User.find({
-      // we comment next row just waiting to add isDeleted property to current db...
-      isDeleted: false,
-      isVerified: true,
-    })
+    User.find()
     .select(["-password", "-__v"])
     .populate("roles", "-__v")
     .populate("plan", "-__v")

@@ -1,6 +1,7 @@
 const url = require("url");
-//const punycode = require("punycode");
 const config = require("../config");
+
+
 
 module.exports = {
 
@@ -46,7 +47,25 @@ module.exports = {
   },
 
   nowLocaleDateTime: () => {
-    return new Date().toLocaleString(config.languages.default, { timeZoneName: "short" }); // TODO: use requested language
+    return new Date().toLocaleString(config.locale, { timeZoneName: "short" });
+  },
+
+  nowLocaleDateTimeFilenameFormat: (date = new Date()) => {
+    let offset = new Date(date).getTimezoneOffset() * 60;
+    let d = new Date(date);
+    d.setHours(d.getHours() - offset);
+    let year = d.getFullYear();
+    let month = "" + (d.getMonth() + 1);
+    if (month.length < 2) month = "0" + month;
+    let day = "" + d.getDate();
+    if (day.length < 2) day = "0" + day;
+    let hour = "" + d.getHours();
+    if (hour.length < 2) hour = "0" + hour;
+    let minute = "" + d.getMinutes();
+    if (minute.length < 2) minute = "0" + minute;
+    let second = "" + d.getSeconds();
+    if (second.length < 2) second = "0" + second;
+    return [year, month, day].join("-") + "_" + [hour, minute, second].join(":");
   },
 
   remoteAddress: (req) => {
@@ -67,7 +86,6 @@ const cleanDomain = (domain) => {
   // We don't need to strip a trailing "."
   // because validation rejects it as invalid.
 
-  //domain = punycode.toASCII(domain);
   domain = url.domainToASCII(domain);
 
   return domain;

@@ -26,7 +26,7 @@ module.exports = {
     payloadLimit: "100mb",
   },
   auth: { // NEWFEATURE: put into environment (?)
-    secret: "super-secret-banana-armadillo-666",
+    secret: "super-secret-banana-armadillo-666!",
     jwtExpiration: 3600, // 1 hour
     jwtRefreshExpiration: 3600 * 24 * 30, // 1 month
     codeDeliveryMedium: "email", // "email" / "sms" / ...
@@ -52,6 +52,7 @@ module.exports = {
     ],
     default: "en",
   },
+  locale: "it", // server's locale (for dates)
   currency: "EUR", // default currency (ISO 4217:2015)
   upload: {
     maxFileSize: 10 * 1024 * 1024, // 10 MB

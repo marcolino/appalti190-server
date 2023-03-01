@@ -27,7 +27,6 @@ const verifyToken = (req, res, next) => {
 };
 
 const isAdmin = (req, res, next) => {
-console.log("isAdmin, req.userId:", req.userId);
   User.findById(req.userId).exec((err, user) => {
     if (err) {
       res.status(500).json({ message: err});
@@ -38,7 +37,6 @@ console.log("isAdmin, req.userId:", req.userId);
       return;
     }
 
-console.log("isAdmin, user:", user);
     Role.find(
       {
         _id: { $in: user.roles }

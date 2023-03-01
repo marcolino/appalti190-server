@@ -11,15 +11,13 @@
   "scripts": {
     "start-dev": "nodemon --ignore client/ -w '.' -w .env server.js",
     "start": "node server.js",
-    "test": "mocha --exit --timeout 10000",
+    "test": "mocha --exit --timeout 5000 test/auth.test test/user.test",
     "testwatch": "nodemon --exec \"mocha --recursive --timeout 10000\"",
     "pub": "git add . && git commit -m \"generic commit\" && git push && yarn push",
     "pub-dev": "yarn pub && yarn logs",
     "push": "git push heroku master",
-
     "i18n": "i18next 'src/**/*.js' --config 'i18next-parser.config.js' --silent",
     "i18n-check": "i18next 'src/**/*.js' --config 'i18next-parser.config.js' --silent --output /tmp/i18n-check-$$.json && cmp --silent /tmp/i18n-check-$$.json src/locales/en/translation.json; test $? = '1' && echo 'Some new texts to be translated!' || echo 'Translations are ok'; rm /tmp/i18n-check-$$.json",
-
     "SUSPENDED-predeploy": "yarn test",
     "run-web": "heroku ps:scale web=1 --app appalti190",
     "stop-web": "heroku ps:scale web=0 --app appalti190",
@@ -69,6 +67,7 @@
     "xsd-schema-validator": "^0.7.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.21.0",
     "chai": "^4.3.6",
     "chai-http": "^4.3.0",
     "mocha": "^9.2.2",

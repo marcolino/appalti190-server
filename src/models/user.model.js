@@ -80,11 +80,10 @@ const UserSchema = mongoose.Schema({
 
 UserSchema.pre("find", function() {
   const user = this;
-console.log("PRE FIND OPTIONS:", this.options); // try adding "allowDeleted" / "allowUnverified" options...
   let condition = {};
   if (!this.options.allowDeleted) condition.isDeleted = false;
-  if (!this.options.allowUnverified) condition.isVerified = true; // TODO: enable when implemented exception for registration!!!
-  user.where(condition); // TODO: check options.allowUnverified works when we want unverified users...
+  if (!this.options.allowUnverified) condition.isVerified = true;
+  user.where(condition);
 });
 
 UserSchema.pre("save", function(next) {
@@ -135,7 +134,7 @@ UserSchema.methods.generateSignupVerificationCode = (userId) => {
     //token: crypto.randomBytes(20).toString("hex")
     code: generateRandomCode(maxDigits),
   };
-console.log("generateSignupVerificationCode payload:", payload);
+  //console.info("generateSignupVerificationCode payload:", payload);
   return new VerificationCode(payload);
 };
 

@@ -11,6 +11,7 @@ const { setupEmail, notification } = require("./src/helpers/notification");
 const config = require("./src/config");
 
 const production = (process.env.NODE_ENV === "production");
+const testing = typeof global.it === "function"; // testing (mocha/chai/...)
 
 // setup I18N
 i18next
@@ -76,9 +77,16 @@ notification({subject: "Startup"});
 assertEnvironment();
 
 // set up database connection uri
-const connUri = (production) ?
-  `${process.env.MONGO_SCHEME}://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@${process.env.MONGO_URL}/${process.env.MONGO_DB}` :
-  `${process.env.MONGO_SCHEME}://${process.env.MONGO_URL}/${process.env.MONGO_DB}`
+const connUri =
+  production ?
+    // production db uri
+    `${process.env.MONGO_SCHEME}://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@${process.env.MONGO_URL}/${process.env.MONGO_DB}` :
+  testing ?
+    // test db uri
+    `${process.env.MONGO_SCHEME}://${process.env.MONGO_URL}/${process.env.MONGO_DB_TEST}`
+  :
+    // development db uri
+    `${process.env.MONGO_SCHEME}://${process.env.MONGO_URL}/${process.env.MONGO_DB}`
 ;
 
 // connect to database

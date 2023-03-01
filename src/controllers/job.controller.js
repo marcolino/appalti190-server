@@ -7,6 +7,7 @@ const nodeZip = require("node-zip");
 const xmlvalidator = require("xsd-schema-validator");
 const axios = require("axios");
 const db = require("../models");
+const { nowLocaleDateTimeFilenameFormat } = require("../helpers/misc");
 const User = db.models.user;
 const Plan = db.models.plan;
 const config = require("../config");
@@ -42,10 +43,8 @@ const set = async (req, res) => {
 const upload = multer({
   storage: multer.diskStorage({
     destination: async(req, file, cb) => {
-//console.log("upload REQ destination userid:", req.userId);
       const user = await User.findOne({ _id: req.userId }).exec();
-//console.log("upload REQ destination user:", user);
-
+      //console.log("upload REQ destination user:", user);
       const folder = path.join(config.job.uploadsBasePath, user.email);
       fs.mkdir(folder, { recursive: true }, (err) => {
         if (err) {
@@ -60,7 +59,7 @@ const upload = multer({
       });
     },
     filename: (req, file, cb) => {
-      cb(null, `${new Date().toISOString().replace(/T/, "_").replace(/\..+/, "") }.xls`);
+      cb(null, nowLocaleDateTimeFilenameFormat() + path.extname(file?.originalname) ?? "");
     }
   }),
   limits: {
@@ -90,12 +89,12 @@ const transformXls2Xml = async (req, res) => {
     .populate("plan", "-__v")
   ;
   if (!user) {
-    retval.message = req.t("The user must be authenticated") + ".";
+    retval.message = req.t("The user must be authenticated");
     retval.code = "ABORTED_DUE_TO_MISSING_AUTHENTICATION";
     return retval;
   }
   if (!user.plan) {
-    retval.message = req.t("The user must have a plan") + ".";
+    retval.message = req.t("The user must have a plan");
     retval.code = "ABORTED_DUE_TO_MISSING_PLAN";
     return retval;
   }
@@ -112,7 +111,7 @@ const transformXls2Xml = async (req, res) => {
 
   if (!sheetElencoGare.length) {
     retval.errors.push(req.t("Sheet {{sheet}} not found", {sheet: config.job.sheets.elencoGare}));
-    retval.message = req.t("Input file is corrupted") + ".";
+    retval.message = req.t("Input file is corrupted");
     retval.code = "BROKEN_INPUT";
     return retval;
   }
@@ -120,7 +119,7 @@ const transformXls2Xml = async (req, res) => {
   const sheetMetadati = xlsx.utils.sheet_to_json(workbook.Sheets[config.job.sheets.metadati]);
   if (!sheetMetadati.length) {
     retval.errors.push(req.t("Sheet {{sheet}} not found", {sheet: config.job.sheets.metadati}));
-    retval.message = req.t("Input file is corrupted") + ".";
+    retval.message = req.t("Input file is corrupted");
     retval.code = "BROKEN_INPUT";
     return retval;
   }
@@ -152,7 +151,7 @@ const transformXls2Xml = async (req, res) => {
     const stats = fs.statSync(input);
     const date = new Date(stats.mtime); metadati.dataUltimoAggiornamentoDataset = date.toISOString().split("T")[0];
   } catch (err) {
-    retval.errors.push(t.req("Can't read last modification date of input file {{input}}", {input}) + ": " + err.message);
+    retval.errors.push(req.t("Can't read last modification date of input file {{input}}", {input}) + ": " + err.message);
     metadati.dataUltimoAggiornamentoDataset = today;
   }
 
@@ -596,7 +595,7 @@ console.log("SLICESIZE", sliceSize);
     let result = serializeArchive(folderName, fileName, urlPath, zip);
     if (result.error) {
       retval.errors.push(result.error);
-      retval.message = req.t("Error while archiving") + ".";
+      retval.message = req.t("Error while archiving");
       retval.code = "ARCHIVE_ERROR";
       return retval;
     }
@@ -890,7 +889,7 @@ const urlExistenceAndMatch = async (req, res) => {
     console.log("urlExistenceAndMatch localContents length", localContents.length, typeof localContents);
 
     // compare contents
-    const bytesToIgnoreAtTheTopOfTheDatasets = (config.publish.allowDateChangeInDataset ? 564 : 0);
+    const bytesToIgnoreAtTheTopOfTheDatasets = (config.job?.publish?.allowDateChangeInDataset ? 564 : 0);
     if (localContents.slice(localContents.length - bytesToIgnoreAtTheTopOfTheDatasets) !== remoteContents.slice(remoteContents.length - bytesToIgnoreAtTheTopOfTheDatasets) ) {
       return [null, {published: true, publishedAsIs: false}];
     }

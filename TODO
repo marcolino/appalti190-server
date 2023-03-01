@@ -1,13 +1,17 @@
-- gestire le traduzioni delle risposte (in base a "accept-language") - OK
-- forzare Number.MAX_INT in user.plan.cigNumberAllowed per il piano "unlimited" nel metodo del modello "pre-save" - OK
-- res.status().send -> res.status().json - OK
-- cambiare "we" in una forma impersonale - OK
-- usare req.t("text") per tutti i testi - OK
-- tradurre tutto in locales/*/* - OK
-
-- capire come salvare i files xls caricati dagli utenti (db?)
+- gestire le traduzioni delle risposte (in base a "accept-language")
+- forzare Number.MAX_INT in user.plan.cigNumberAllowed per il piano "unlimited" nel metodo del modello "pre-save"
+- res.status().send -> res.status().json
+- cambiare "we" in una forma impersonale
+- usare req.t("text") per tutti i testi
+- tradurre tutto in locales/*/*
+- capire come salvare i files xls caricati dagli utenti (salvati in /uploads/USER_EMAIL/YYYY-MM-DD_hh:mm:ss.xls)
 - usare winston logger come da v1
-- impostare tests come da v1
-- rimuovere gli account non confermati, periodicamente (?)
-- nella registrazione, in caso di email già presente, controllare se non è verificato, e dire all'utente che si è in attesa di validazione
 - data del file xls: ora locale
+- nella registrazione, in caso di email già presente, controllare se non è verificato, e dire all'utente che si è in attesa di validazione
+
+- TODO impostare tests come da v1
+- TODO rimuovere gli account non confermati, periodicamente (?)
+- TODO sendemail FROM ...
+- TODO logger.error in tutte le catch ...
+
+- NEWFEATURE decidere se acquistare un piano su papertrail per i logs in produzione
