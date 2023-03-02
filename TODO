@@ -8,10 +8,13 @@
 - usare winston logger come da v1
 - data del file xls: ora locale
 - nella registrazione, in caso di email già presente, controllare se non è verificato, e dire all'utente che si è in attesa di validazione
+- implementare TTL per le collezioni mongodb con scadenza
+- impostare tests con chai
 
-- TODO impostare tests come da v1
-- TODO rimuovere gli account non confermati, periodicamente (?)
+- TODO completare tests con chai
 - TODO sendemail FROM ...
 - TODO logger.error in tutte le catch ...
+- TODO rimuovere i console. ...
 
 - NEWFEATURE decidere se acquistare un piano su papertrail per i logs in produzione
+- NEWFEATURE rimuovere gli account non confermati, periodicamente (??)

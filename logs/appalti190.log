@@ -7998,3 +7998,175 @@ info: 2023-03-01 17:48:50: 	User login: user@mail.com
 info: 2023-03-01 17:48:50: 	User signup: {"roles":["63fce828d86497622429a3c0"],"isDeleted":false,"isVerified":true,"_id":"63ff81f2e84d0d1c550d6145","email":"admin@mail.com","password":"$2a$10$dLNZnV/q2GnF1hXDlmGc/Oy3jaZXgSZvTSQ8N6AgI44hq6ChaE01W","address":{"_id":"63ff81f2e84d0d1c550d6146","city":""},"plan":"63fce828d86497622429a3c4","__v":0}
 info: 2023-03-01 17:48:50: 	User login: admin@mail.com
 info: 2023-03-01 17:48:50: 	User login: admin@mail.com
+info: 2023-03-02 09:23:55: 	Activating [43m test [0m environment
+info: 2023-03-02 09:23:55: 	Server is running on port 5000
+info: 2023-03-02 09:23:55: 	Successfully connected to MongoDB
+info: 2023-03-02 09:24:22: 	Activating [43m test [0m environment
+info: 2023-03-02 09:24:23: 	Server is running on port 5000
+info: 2023-03-02 09:24:23: 	Successfully connected to MongoDB
+info: 2023-03-02 09:28:12: 	Activating [43m test [0m environment
+info: 2023-03-02 09:28:13: 	Server is running on port 5000
+info: 2023-03-02 09:28:13: 	Successfully connected to MongoDB
+error: 2023-03-02 09:29:08: 	uncaughtException: Invalid value for schema path `expires`, got value "undefined"
+TypeError: Invalid value for schema path `expires`, got value "undefined"
+    at Schema.add (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js:484:13)
+    at new Schema (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js:132:10)
+    at Mongoose.Schema (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js:96:12)
+    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/src/models/refreshToken.model.js:5:37)
+    at Module._compile (internal/modules/cjs/loader.js:1085:14)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)
+    at Module.load (internal/modules/cjs/loader.js:950:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:790:12)
+    at Module.require (internal/modules/cjs/loader.js:974:19)
+    at require (internal/modules/cjs/helpers.js:101:18)
+    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/src/models/index.js:15:17)
+    at Module._compile (internal/modules/cjs/loader.js:1085:14)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)
+    at Module.load (internal/modules/cjs/loader.js:950:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:790:12)
+    at Module.require (internal/modules/cjs/loader.js:974:19)
+{"date":"Thu Mar 02 2023 09:29:08 GMT+0100 (Central European Standard Time)","error":{},"exception":true,"level":"error","message":"uncaughtException: Invalid value for schema path `expires`, got value \"undefined\"\nTypeError: Invalid value for schema path `expires`, got value \"undefined\"\n    at Schema.add (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js:484:13)\n    at new Schema (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js:132:10)\n    at Mongoose.Schema (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js:96:12)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/src/models/refreshToken.model.js:5:37)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Module.require (internal/modules/cjs/loader.js:974:19)\n    at require (internal/modules/cjs/helpers.js:101:18)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/src/models/index.js:15:17)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Module.require (internal/modules/cjs/loader.js:974:19)","os":{"loadavg":[1.02,1.25,1.07],"uptime":57206.79},"process":{"argv":["/usr/bin/node","/home/marco/apps/sistemisolari/appalti190-server/server.js"],"cwd":"/home/marco/apps/sistemisolari/appalti190-server","execPath":"/usr/bin/node","gid":1000,"memoryUsage":{"arrayBuffers":18857334,"external":20467972,"heapTotal":35651584,"heapUsed":22561248,"rss":72749056},"pid":14500,"uid":1000,"version":"v14.20.1"},"stack":"TypeError: Invalid value for schema path `expires`, got value \"undefined\"\n    at Schema.add (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js:484:13)\n    at new Schema (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js:132:10)\n    at Mongoose.Schema (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js:96:12)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/src/models/refreshToken.model.js:5:37)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Module.require (internal/modules/cjs/loader.js:974:19)\n    at require (internal/modules/cjs/helpers.js:101:18)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/src/models/index.js:15:17)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Module.require (internal/modules/cjs/loader.js:974:19)","trace":[{"column":13,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js","function":"Schema.add","line":484,"method":"add","native":false},{"column":10,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js","function":"new Schema","line":132,"method":null,"native":false},{"column":12,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js","function":"Mongoose.Schema","line":96,"method":"Schema","native":false},{"column":37,"file":"/home/marco/apps/sistemisolari/appalti190-server/src/models/refreshToken.model.js","function":null,"line":5,"method":null,"native":false},{"column":14,"file":"internal/modules/cjs/loader.js","function":"Module._compile","line":1085,"method":"_compile","native":false},{"column":10,"file":"internal/modules/cjs/loader.js","function":"Module._extensions..js","line":1114,"method":".js","native":false},{"column":32,"file":"internal/modules/cjs/loader.js","function":"Module.load","line":950,"method":"load","native":false},{"column":12,"file":"internal/modules/cjs/loader.js","function":"Module._load","line":790,"method":"_load","native":false},{"column":19,"file":"internal/modules/cjs/loader.js","function":"Module.require","line":974,"method":"require","native":false},{"column":18,"file":"internal/modules/cjs/helpers.js","function":"require","line":101,"method":null,"native":false},{"column":17,"file":"/home/marco/apps/sistemisolari/appalti190-server/src/models/index.js","function":null,"line":15,"method":null,"native":false},{"column":14,"file":"internal/modules/cjs/loader.js","function":"Module._compile","line":1085,"method":"_compile","native":false},{"column":10,"file":"internal/modules/cjs/loader.js","function":"Module._extensions..js","line":1114,"method":".js","native":false},{"column":32,"file":"internal/modules/cjs/loader.js","function":"Module.load","line":950,"method":"load","native":false},{"column":12,"file":"internal/modules/cjs/loader.js","function":"Module._load","line":790,"method":"_load","native":false},{"column":19,"file":"internal/modules/cjs/loader.js","function":"Module.require","line":974,"method":"require","native":false}]}
+error: 2023-03-02 09:29:36: 	uncaughtException: Invalid schema configuration: `2592000` is not a valid type at path `expires`. See http://bit.ly/mongoose-schematypes for a list of valid schema types.
+TypeError: Invalid schema configuration: `2592000` is not a valid type at path `expires`. See http://bit.ly/mongoose-schematypes for a list of valid schema types.
+    at Schema.interpretAsType (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js:1044:11)
+    at Schema.path (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js:684:27)
+    at Schema.add (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js:507:12)
+    at new Schema (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js:132:10)
+    at Mongoose.Schema (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js:96:12)
+    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/src/models/refreshToken.model.js:5:37)
+    at Module._compile (internal/modules/cjs/loader.js:1085:14)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)
+    at Module.load (internal/modules/cjs/loader.js:950:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:790:12)
+    at Module.require (internal/modules/cjs/loader.js:974:19)
+    at require (internal/modules/cjs/helpers.js:101:18)
+    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/src/models/index.js:15:17)
+    at Module._compile (internal/modules/cjs/loader.js:1085:14)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)
+    at Module.load (internal/modules/cjs/loader.js:950:32)
+{"date":"Thu Mar 02 2023 09:29:36 GMT+0100 (Central European Standard Time)","error":{},"exception":true,"level":"error","message":"uncaughtException: Invalid schema configuration: `2592000` is not a valid type at path `expires`. See http://bit.ly/mongoose-schematypes for a list of valid schema types.\nTypeError: Invalid schema configuration: `2592000` is not a valid type at path `expires`. See http://bit.ly/mongoose-schematypes for a list of valid schema types.\n    at Schema.interpretAsType (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js:1044:11)\n    at Schema.path (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js:684:27)\n    at Schema.add (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js:507:12)\n    at new Schema (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js:132:10)\n    at Mongoose.Schema (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js:96:12)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/src/models/refreshToken.model.js:5:37)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Module.require (internal/modules/cjs/loader.js:974:19)\n    at require (internal/modules/cjs/helpers.js:101:18)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/src/models/index.js:15:17)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)","os":{"loadavg":[1.65,1.36,1.12],"uptime":57234.39},"process":{"argv":["/usr/bin/node","/home/marco/apps/sistemisolari/appalti190-server/server.js"],"cwd":"/home/marco/apps/sistemisolari/appalti190-server","execPath":"/usr/bin/node","gid":1000,"memoryUsage":{"arrayBuffers":18817619,"external":20428257,"heapTotal":35389440,"heapUsed":22508184,"rss":73805824},"pid":14576,"uid":1000,"version":"v14.20.1"},"stack":"TypeError: Invalid schema configuration: `2592000` is not a valid type at path `expires`. See http://bit.ly/mongoose-schematypes for a list of valid schema types.\n    at Schema.interpretAsType (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js:1044:11)\n    at Schema.path (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js:684:27)\n    at Schema.add (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js:507:12)\n    at new Schema (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js:132:10)\n    at Mongoose.Schema (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js:96:12)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/src/models/refreshToken.model.js:5:37)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Module.require (internal/modules/cjs/loader.js:974:19)\n    at require (internal/modules/cjs/helpers.js:101:18)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/src/models/index.js:15:17)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)","trace":[{"column":11,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js","function":"Schema.interpretAsType","line":1044,"method":"interpretAsType","native":false},{"column":27,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js","function":"Schema.path","line":684,"method":"path","native":false},{"column":12,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js","function":"Schema.add","line":507,"method":"add","native":false},{"column":10,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js","function":"new Schema","line":132,"method":null,"native":false},{"column":12,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/schema.js","function":"Mongoose.Schema","line":96,"method":"Schema","native":false},{"column":37,"file":"/home/marco/apps/sistemisolari/appalti190-server/src/models/refreshToken.model.js","function":null,"line":5,"method":null,"native":false},{"column":14,"file":"internal/modules/cjs/loader.js","function":"Module._compile","line":1085,"method":"_compile","native":false},{"column":10,"file":"internal/modules/cjs/loader.js","function":"Module._extensions..js","line":1114,"method":".js","native":false},{"column":32,"file":"internal/modules/cjs/loader.js","function":"Module.load","line":950,"method":"load","native":false},{"column":12,"file":"internal/modules/cjs/loader.js","function":"Module._load","line":790,"method":"_load","native":false},{"column":19,"file":"internal/modules/cjs/loader.js","function":"Module.require","line":974,"method":"require","native":false},{"column":18,"file":"internal/modules/cjs/helpers.js","function":"require","line":101,"method":null,"native":false},{"column":17,"file":"/home/marco/apps/sistemisolari/appalti190-server/src/models/index.js","function":null,"line":15,"method":null,"native":false},{"column":14,"file":"internal/modules/cjs/loader.js","function":"Module._compile","line":1085,"method":"_compile","native":false},{"column":10,"file":"internal/modules/cjs/loader.js","function":"Module._extensions..js","line":1114,"method":".js","native":false},{"column":32,"file":"internal/modules/cjs/loader.js","function":"Module.load","line":950,"method":"load","native":false}]}
+info: 2023-03-02 09:30:39: 	Activating [43m test [0m environment
+info: 2023-03-02 09:30:40: 	Server is running on port 5000
+info: 2023-03-02 09:30:40: 	Successfully connected to MongoDB
+info: 2023-03-02 09:31:32: 	Activating [43m test [0m environment
+info: 2023-03-02 09:31:32: 	Server is running on port 5000
+info: 2023-03-02 09:31:32: 	Successfully connected to MongoDB
+info: 2023-03-02 09:31:43: 	Activating [43m test [0m environment
+info: 2023-03-02 09:31:44: 	Server is running on port 5000
+info: 2023-03-02 09:31:44: 	Successfully connected to MongoDB
+info: 2023-03-02 09:32:05: 	Activating [43m test [0m environment
+info: 2023-03-02 09:32:06: 	Server is running on port 5000
+info: 2023-03-02 09:32:06: 	Successfully connected to MongoDB
+info: 2023-03-02 09:33:25: 	User login: marcosolari@gmail.com
+info: 2023-03-02 09:37:28: 	User login: marcosolari@gmail.com
+info: 2023-03-02 09:57:32: 	User login: marcosolari@gmail.com
+info: 2023-03-02 10:12:10: 	Activating [43m test [0m environment
+info: 2023-03-02 10:12:11: 	Server is running on port 5000
+info: 2023-03-02 10:12:11: 	Successfully connected to MongoDB
+info: 2023-03-02 10:12:44: 	Activating [43m test [0m environment
+info: 2023-03-02 10:12:45: 	Server is running on port 5000
+info: 2023-03-02 10:12:45: 	Successfully connected to MongoDB
+info: 2023-03-02 10:12:53: 	User login: marcosolari@gmail.com
+info: 2023-03-02 10:14:16: 	Activating [43m test [0m environment
+info: 2023-03-02 10:14:17: 	Server is running on port 5000
+info: 2023-03-02 10:14:17: 	Successfully connected to MongoDB
+info: 2023-03-02 10:14:30: 	Activating [43m test [0m environment
+info: 2023-03-02 10:14:31: 	Server is running on port 5000
+info: 2023-03-02 10:14:31: 	Successfully connected to MongoDB
+info: 2023-03-02 10:16:03: 	User signup: {"roles":["6259a5ac054d71917e04ecb4"],"isDeleted":false,"isVerified":true,"_id":"6400691117fed44aa4bfe946","email":"marcoatorino@gmail.com","password":"$2a$10$7zAyw6i9wcH9Z2x.XT5N6.UY1lLPt4PSwGhiKCZXrWLxJtLCsQBOS","firstName":"Marco","lastName":"Solari","address":{"_id":"6400691117fed44aa4bfe947","city":""},"plan":"6259a5ac054d71917e04ecba","__v":0}
+info: 2023-03-02 10:16:09: 	User login: marcosolari@gmail.com
+info: 2023-03-02 10:18:53: 	Activating [43m test [0m environment
+info: 2023-03-02 10:18:53: 	Server is running on port 5000
+info: 2023-03-02 10:18:53: 	Successfully connected to MongoDB
+info: 2023-03-02 10:21:27: 	User signup: {"roles":["6259a5ac054d71917e04ecb4"],"isDeleted":false,"isVerified":true,"_id":"64006a6dc0cdb64c21a262ab","email":"marcoatorino@gmail.com","password":"$2a$10$/l4npVcM0K6wtcR8/vDDj.hTcJjD85gHVqAqPIN1wwzgvApUO9sZu","firstName":"Marco","lastName":"Solari","address":{"_id":"64006a6dc0cdb64c21a262ac","city":""},"plan":"6259a5ac054d71917e04ecba","__v":0}
+info: 2023-03-02 10:21:32: 	User login: marcosolari@gmail.com
+info: 2023-03-02 10:27:41: 	Activating [43m test [0m environment
+info: 2023-03-02 10:27:42: 	Server is running on port 5000
+info: 2023-03-02 10:27:42: 	Successfully connected to MongoDB
+info: 2023-03-02 10:29:23: 	Activating [43m test [0m environment
+info: 2023-03-02 10:29:23: 	Server is running on port 5000
+info: 2023-03-02 10:29:23: 	Successfully connected to MongoDB
+info: 2023-03-02 10:29:38: 	User signup: {"roles":["6259a5ac054d71917e04ecb4"],"isDeleted":false,"isVerified":true,"_id":"64006c3cb34bb64f80907115","email":"marcoatorino@gmail.com","password":"$2a$10$eJ7/idsIWqLMb1bZyVQ7heGfHLpxwoiaB96CWErgTvUVdXhlJY2t.","firstName":"Marco","lastName":"Solari","address":{"_id":"64006c3cb34bb64f80907116","city":""},"plan":"6259a5ac054d71917e04ecba","__v":0}
+info: 2023-03-02 10:29:50: 	User login: marcoatorino@gmail.com
+info: 2023-03-02 10:35:27: 	Activating [43m test [0m environment
+info: 2023-03-02 10:35:28: 	Server is running on port 5000
+info: 2023-03-02 10:35:28: 	Successfully connected to MongoDB
+info: 2023-03-02 10:35:46: 	Activating [43m test [0m environment
+info: 2023-03-02 10:35:47: 	Server is running on port 5000
+info: 2023-03-02 10:35:47: 	Successfully connected to MongoDB
+info: 2023-03-02 10:35:57: 	Activating [43m test [0m environment
+info: 2023-03-02 10:35:58: 	Server is running on port 5000
+info: 2023-03-02 10:35:58: 	Successfully connected to MongoDB
+info: 2023-03-02 10:37:19: 	User signup: {"roles":["6259a5ac054d71917e04ecb4"],"isDeleted":false,"isVerified":true,"_id":"64006e28b74bed53ac2e9120","email":"marcoatorino@gmail.com","password":"$2a$10$mYU1z2d8v2z5gqQL550Bcu4xk/tZiG5NDgEx3LNKY12/ZBngQEJU6","firstName":"Marco","lastName":"Solari","address":{"_id":"64006e28b74bed53ac2e9121","city":""},"plan":"6259a5ac054d71917e04ecba","__v":0}
+info: 2023-03-02 10:38:45: 	User login: marcosolari@gmail.com
+info: 2023-03-02 10:40:20: 	Activating [43m test [0m environment
+info: 2023-03-02 10:40:21: 	Server is running on port 5000
+info: 2023-03-02 10:40:21: 	Successfully connected to MongoDB
+info: 2023-03-02 10:41:31: 	Activating [43m test [0m environment
+info: 2023-03-02 10:41:32: 	Server is running on port 5000
+info: 2023-03-02 10:41:32: 	Successfully connected to MongoDB
+info: 2023-03-02 10:43:14: 	Activating [43m test [0m environment
+info: 2023-03-02 10:43:15: 	Server is running on port 5000
+info: 2023-03-02 10:43:15: 	Successfully connected to MongoDB
+info: 2023-03-02 10:43:21: 	Activating [43m test [0m environment
+info: 2023-03-02 10:43:22: 	Server is running on port 5000
+info: 2023-03-02 10:43:22: 	Successfully connected to MongoDB
+error: 2023-03-02 10:45:27: 	uncaughtException: str.toLowerCase is not a function
+TypeError: str.toLowerCase is not a function
+    at pluralize (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose-legacy-pluralize/index.js:85:13)
+    at Object.exports.toCollectionName (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/utils.js:46:12)
+    at Mongoose.model (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/index.js:579:13)
+    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/src/models/verificationCode.model.js:7:35)
+    at Module._compile (internal/modules/cjs/loader.js:1085:14)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)
+    at Module.load (internal/modules/cjs/loader.js:950:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:790:12)
+    at Module.require (internal/modules/cjs/loader.js:974:19)
+    at require (internal/modules/cjs/helpers.js:101:18)
+    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/src/models/user.model.js:5:26)
+    at Module._compile (internal/modules/cjs/loader.js:1085:14)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)
+    at Module.load (internal/modules/cjs/loader.js:950:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:790:12)
+    at Module.require (internal/modules/cjs/loader.js:974:19)
+{"date":"Thu Mar 02 2023 10:45:27 GMT+0100 (Central European Standard Time)","error":{},"exception":true,"level":"error","message":"uncaughtException: str.toLowerCase is not a function\nTypeError: str.toLowerCase is not a function\n    at pluralize (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose-legacy-pluralize/index.js:85:13)\n    at Object.exports.toCollectionName (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/utils.js:46:12)\n    at Mongoose.model (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/index.js:579:13)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/src/models/verificationCode.model.js:7:35)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Module.require (internal/modules/cjs/loader.js:974:19)\n    at require (internal/modules/cjs/helpers.js:101:18)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/src/models/user.model.js:5:26)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Module.require (internal/modules/cjs/loader.js:974:19)","os":{"loadavg":[2.16,1.76,1.6],"uptime":61785.99},"process":{"argv":["/usr/bin/node","/home/marco/apps/sistemisolari/appalti190-server/server.js"],"cwd":"/home/marco/apps/sistemisolari/appalti190-server","execPath":"/usr/bin/node","gid":1000,"memoryUsage":{"arrayBuffers":18844421,"external":20455059,"heapTotal":35389440,"heapUsed":21651688,"rss":70078464},"pid":22473,"uid":1000,"version":"v14.20.1"},"stack":"TypeError: str.toLowerCase is not a function\n    at pluralize (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose-legacy-pluralize/index.js:85:13)\n    at Object.exports.toCollectionName (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/utils.js:46:12)\n    at Mongoose.model (/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/index.js:579:13)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/src/models/verificationCode.model.js:7:35)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Module.require (internal/modules/cjs/loader.js:974:19)\n    at require (internal/modules/cjs/helpers.js:101:18)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/src/models/user.model.js:5:26)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Module.require (internal/modules/cjs/loader.js:974:19)","trace":[{"column":13,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose-legacy-pluralize/index.js","function":"pluralize","line":85,"method":null,"native":false},{"column":12,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/utils.js","function":"Object.exports.toCollectionName","line":46,"method":"toCollectionName","native":false},{"column":13,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/mongoose/lib/index.js","function":"Mongoose.model","line":579,"method":"model","native":false},{"column":35,"file":"/home/marco/apps/sistemisolari/appalti190-server/src/models/verificationCode.model.js","function":null,"line":7,"method":null,"native":false},{"column":14,"file":"internal/modules/cjs/loader.js","function":"Module._compile","line":1085,"method":"_compile","native":false},{"column":10,"file":"internal/modules/cjs/loader.js","function":"Module._extensions..js","line":1114,"method":".js","native":false},{"column":32,"file":"internal/modules/cjs/loader.js","function":"Module.load","line":950,"method":"load","native":false},{"column":12,"file":"internal/modules/cjs/loader.js","function":"Module._load","line":790,"method":"_load","native":false},{"column":19,"file":"internal/modules/cjs/loader.js","function":"Module.require","line":974,"method":"require","native":false},{"column":18,"file":"internal/modules/cjs/helpers.js","function":"require","line":101,"method":null,"native":false},{"column":26,"file":"/home/marco/apps/sistemisolari/appalti190-server/src/models/user.model.js","function":null,"line":5,"method":null,"native":false},{"column":14,"file":"internal/modules/cjs/loader.js","function":"Module._compile","line":1085,"method":"_compile","native":false},{"column":10,"file":"internal/modules/cjs/loader.js","function":"Module._extensions..js","line":1114,"method":".js","native":false},{"column":32,"file":"internal/modules/cjs/loader.js","function":"Module.load","line":950,"method":"load","native":false},{"column":12,"file":"internal/modules/cjs/loader.js","function":"Module._load","line":790,"method":"_load","native":false},{"column":19,"file":"internal/modules/cjs/loader.js","function":"Module.require","line":974,"method":"require","native":false}]}
+info: 2023-03-02 10:46:08: 	Activating [43m test [0m environment
+info: 2023-03-02 10:46:08: 	Server is running on port 5000
+info: 2023-03-02 10:46:08: 	Successfully connected to MongoDB
+info: 2023-03-02 10:46:13: 	Activating [43m test [0m environment
+info: 2023-03-02 10:46:14: 	Server is running on port 5000
+info: 2023-03-02 10:46:14: 	Successfully connected to MongoDB
+info: 2023-03-02 10:46:22: 	Activating [43m test [0m environment
+info: 2023-03-02 10:46:23: 	Server is running on port 5000
+info: 2023-03-02 10:46:23: 	Successfully connected to MongoDB
+info: 2023-03-02 10:49:04: 	Activating [43m test [0m environment
+info: 2023-03-02 10:49:05: 	Server is running on port 5000
+info: 2023-03-02 10:49:05: 	Successfully connected to MongoDB
+info: 2023-03-02 10:51:18: 	User signup: {"roles":["6259a5ac054d71917e04ecb4"],"isDeleted":false,"isVerified":true,"_id":"64007163395819599b45cf85","email":"marcoatorino@gmail.com","password":"$2a$10$z6zCCe.XOhiIziDEH6Mgbe0UTBlYO3IRN/aDFOp19b82E5GOwAkre","firstName":"Marco","lastName":"Solari","address":{"_id":"64007163395819599b45cf86","city":""},"plan":"6259a5ac054d71917e04ecba","createdAt":"2023-03-02T09:50:27.020Z","updatedAt":"2023-03-02T09:51:18.450Z","__v":0}
+info: 2023-03-02 10:51:33: 	User login: marcosolari@gmail.com
+info: 2023-03-02 10:52:48: 	Activating [43m test [0m environment
+info: 2023-03-02 10:52:49: 	Server is running on port 5000
+info: 2023-03-02 10:52:49: 	Successfully connected to MongoDB
+info: 2023-03-02 10:52:53: 	Activating [43m test [0m environment
+info: 2023-03-02 10:52:54: 	Server is running on port 5000
+info: 2023-03-02 10:52:54: 	Successfully connected to MongoDB
+info: 2023-03-02 10:53:14: 	Activating [43m test [0m environment
+info: 2023-03-02 10:53:15: 	Server is running on port 5000
+info: 2023-03-02 10:53:15: 	Successfully connected to MongoDB
+info: 2023-03-02 10:53:35: 	Activating [43m test [0m environment
+info: 2023-03-02 10:53:36: 	Server is running on port 5000
+info: 2023-03-02 10:53:36: 	Successfully connected to MongoDB
+info: 2023-03-02 10:53:39: 	Activating [43m test [0m environment
+info: 2023-03-02 10:53:39: 	Server is running on port 5000
+info: 2023-03-02 10:53:39: 	Successfully connected to MongoDB
+info: 2023-03-02 10:54:50: 	User signup: {"roles":["6259a5ac054d71917e04ecb4"],"isDeleted":false,"isVerified":true,"_id":"64007245a3e6a35c60a8a174","email":"marcoatorino@gmail.com","password":"$2a$10$OfbKXUmdypKV1XijGKjamOyOq9r9qL.T1LnZFgosyK1oQjQU5jTie","firstName":"Marco","lastName":"Solari","address":{"_id":"64007245a3e6a35c60a8a175","city":""},"plan":"6259a5ac054d71917e04ecba","createdAt":"2023-03-02T09:54:13.349Z","updatedAt":"2023-03-02T09:54:50.647Z","__v":0}
+info: 2023-03-02 10:55:10: 	User login: marcosolari@gmail.com
+info: 2023-03-02 10:57:46: 	Activating [43m test [0m environment
+info: 2023-03-02 10:57:47: 	Server is running on port 5000
+info: 2023-03-02 10:57:47: 	Successfully connected to MongoDB
+info: 2023-03-02 10:57:51: 	Activating [43m test [0m environment
+info: 2023-03-02 10:57:52: 	Server is running on port 5000
+info: 2023-03-02 10:57:52: 	Successfully connected to MongoDB
+info: 2023-03-02 10:58:13: 	Activating [43m test [0m environment
+info: 2023-03-02 10:58:14: 	Server is running on port 5000
+info: 2023-03-02 10:58:14: 	Successfully connected to MongoDB

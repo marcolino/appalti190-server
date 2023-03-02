@@ -76,7 +76,7 @@ const UserSchema = mongoose.Schema({
   resetPasswordExpires: {
     type: Date,
   },
-});
+}, {timestamps: true});
 
 UserSchema.pre("find", function() {
   const user = this;

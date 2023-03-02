@@ -206,7 +206,7 @@ const signin = async(req, res) => {
 
       // creacte new access token
       user.accessToken = jwt.sign({ id: user.id }, config.auth.secret, {
-        expiresIn: config.auth.jwtExpiration,
+        expiresIn: config.auth.jwtExpirationSeconds,
       });
 
       // create new refresh token
@@ -378,7 +378,7 @@ const refreshToken = async(req, res) => {
     }
 
     let newAccessToken = jwt.sign({ id: refreshToken.user._id }, config.auth.secret, {
-      expiresIn: config.auth.jwtExpiration,
+      expiresIn: config.auth.jwtExpirationSeconds,
     });
 
     return res.status(200).json({

@@ -9,13 +9,19 @@ const RefreshTokenSchema = mongoose.Schema({
     ref: "User",
   },
   expiryDate: Date,
+  createdAt: {
+    type: Date,
+    required: "createdAt date is required in RefreshToken document",
+    default: Date.now,
+    expiresAfterSeconds: config.auth.jwtRefreshExpirationSeconds,
+  },
 });
 
 RefreshTokenSchema.statics.createToken = async function (user) {
   const expiredAt = new Date();
 
   expiredAt.setSeconds(
-    expiredAt.getSeconds() + config.auth.jwtRefreshExpiration
+    expiredAt.getSeconds() + config.auth.jwtRefreshExpirationSeconds
   );
 
   const token = uuidv4();

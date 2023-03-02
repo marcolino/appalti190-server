@@ -27,15 +27,16 @@ module.exports = {
   },
   auth: { // NEWFEATURE: put into environment (?)
     secret: "super-secret-banana-armadillo-666!",
-    jwtExpiration: 3600, // 1 hour
-    jwtRefreshExpiration: 3600 * 24 * 30, // 1 month
+    jwtExpirationSeconds: 3600, // 1 hour TTL
+    jwtRefreshExpirationSeconds: 3600 * 24 * 30, // 1 month TTL
+    verificationCodesExpirySeconds: 60 * 60 * 12, // 12 hours TTL
     codeDeliveryMedium: "email", // "email" / "sms" / ...
     passepartout: "passaquì,passalà", // passepartout password
   },
   db: {
     HOST: "localhost",
     PORT: 27017,
-    DB: "appalti190"
+    DB: "appalti190",
   },
   logs: {
     file: "logs/appalti190.log", // logs and exceptions file
