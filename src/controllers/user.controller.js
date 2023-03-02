@@ -1,8 +1,9 @@
-const db = require("../models");
 const emailValidate = require("email-validator");
 const codiceFiscaleValidate = require("codice-fiscale-js");
 const i18n = require("i18next");
-const { normalizeEmail } = require("../helpers/misc");
+const db = require("../models");
+const authJwt = require("../middlewares/authJwt");
+const { normalizeEmail, isAdmin } = require("../helpers/misc");
 
 const {
   user: User,
@@ -40,7 +41,7 @@ exports.getProfile = async(req, res) => {
   .populate("roles", "-__v")
   .populate("plan", "-__v")
   .exec(async(err, user) => {
-    if (err) return res.status(500).json({ message: req.t("Could not find user"), reason: errorMessage(err) });
+    if (err) return res.status(500).json({ message: req.t("Could not find user"), reason: err.message });
     if (!user) return res.status(400).json({ message: req.t("Could not find this user") });
     res.status(200).json({user});
   });
@@ -49,34 +50,55 @@ exports.getProfile = async(req, res) => {
 /**
  * Update current user's profile
  */
-exports.updateProfile = async(req, res) => {
+exports.updateProfile = async(req, res, next) => {
   if (!req.userId) return res.status(400).json({ message: req.t("User must be authenticated") });
-  if (!req.body.email) return res.status(400).json({ message: req.t("Email is mandatory") });
+  //if (!req.body.email) return res.status(400).json({ message: req.t("Email is mandatory") });
 
-  User.findOne({ _id: req.userId }, async (err, user) => {
-    if (err) return res.status(500).json({ message: req.t("Could not find user"), reason: errorMessage(err) });
+  let userId = req.userId;
+  if (req.body.userId) { // request to update another user's profile
+    if (!isAdmin(req.body.userId)) { // check if request is from admin
+      return res.status(403).json({ message: req.t("You must have admin role to update anoter user's profile"), code: "MustBeAdmin", reason: req.t("Admin role required") });
+    } else {
+      userId = req.body.userId; // if admin, accept a specific user id in request
+    }
+  }
+
+  User.findOne({ _id: userId }, async (err, user) => {
+    if (err) return res.status(500).json({ message: req.t("Could not find user"), reason: err.message });
     if (!user) return res.status(400).json({ message: req.t("Could not find this user") });
 
     // validate and normalize email
-    const [error, value] = [null, null];
+    let [error, value] = [null, null];
 
     [error, value] = await propertyEmailValidate(req.body.email, user);
     if (error) return res.status(400).json({ message: error });
     user.email = value;
 
-    [error, value] = user.firstName = propertyFirstNameValidate(req.body.firstName, user);
-    if (error) return res.status(400).json({ message: error });
-    user.firstName = value;
+    if (req.body.firstName) {
+      [error, value] = user.firstName = propertyFirstNameValidate(req.body.firstName, user);
+      if (error) return res.status(400).json({ message: error });
+      user.firstName = value;
+    }
 
-    [error, value] = user.lastName = propertyLastNameValidate(req.body.lastName, user);
-    if (error) return res.status(400).json({ message: error });
-    user.lastName = value;
+    if (req.body.lastName) {
+      [error, value] = user.lastName = propertyLastNameValidate(req.body.lastName, user);
+      if (error) return res.status(400).json({ message: error });
+      user.lastName = value;
+    }
 
-    user.fiscalCode = req.body.fiscalCode;
+    if (req.body.fiscalCode) {
+      [error, value] = user.fiscalCode = propertyFiscalCodeValidate(req.body.fiscalCode, user);
+      if (error) return res.status(400).json({ message: error });
+      user.fiscalCode = value;
+    }
 
-    user.businessName = req.body.businessName;
+    if (req.body.businessName) {
+      user.businessName = req.body.businessName;
+    }
 
-    user.address = req.body.address;
+    if (req.body.address) {
+      user.address = req.body.address;
+    }
 
     // verify and save the user
     user.save(err => {
@@ -90,11 +112,8 @@ exports.updateProfile = async(req, res) => {
  * Update a property of any user's profile
  */
 exports.updateUserProperty = async(req, res) => {
-console.log("updateUserProperty - userId:", req.body.userId);
-console.log("updateUserProperty - propertyName:", req.body.propertyName);
-console.log("updateUserProperty - propertyValue:", req.body.propertyValue);
   User.findOne({ _id: req.body.userId }, async (err, user) => {
-    if (err) return res.status(500).json({ message: req.t("Could not find user"), reason: errorMessage(err) });
+    if (err) return res.status(500).json({ message: req.t("Could not find user"), reason: err.message });
     if (!user) return res.status(400).json({ message: req.t("Could not find this user") });
 
     const propertyName = req.body.propertyName;
@@ -174,7 +193,7 @@ exports.updateRoles = async(req, res) => {
   if (!req.userId) return res.status(400).json({ message: req.t("User must be authenticated") });
 
   User.findOne({ _id: req.userId }, async (err, user) => {
-    if (err) return res.status(500).json({ message: req.t("Could not find user"), reason: errorMessage(err) });
+    if (err) return res.status(500).json({ message: req.t("Could not find user"), reason: err.message });
     if (!user) return res.status(400).json({ message: req.t("Could not find this user") });
 
     // get roles ids, here we only have the names...
@@ -202,7 +221,7 @@ exports.updatePlan = async(req, res) => {
   // plan value correctness is enforced by database model
 
   User.findOne({ _id: req.userId }, async (err, user) => {
-    if (err) return res.status(500).json({ message: req.t("Error looking for user"), reason: errorMessage(err) });
+    if (err) return res.status(500).json({ message: req.t("Error looking for user"), reason: err.message });
     if (!user) return res.status(400).json({ message: req.t("User not found") });
 
     // search plan
@@ -299,7 +318,7 @@ const propertyEmailValidate = async(value, user) => { // validate and normalize 
 };
 
 const propertyFirstNameValidate = (value, user) => { // validate and normalize first name
-  value = value.trim();
+  value = value?.trim();
   if (!value) {
     return [ i18n.t("First name cannot be empty, sorry"), value ];
   }
@@ -307,7 +326,7 @@ const propertyFirstNameValidate = (value, user) => { // validate and normalize f
 };
 
 const propertyLastNameValidate = (value, user) => { // validate and normalize last name
-  value = value.trim();
+  value = value?.trim();
   if (!value) {
     return [ i18n.t("Last name cannot be empty, sorry"), value ];
   }
@@ -315,9 +334,10 @@ const propertyLastNameValidate = (value, user) => { // validate and normalize la
 };
 
 const propertyFiscalCodeValidate = (value, user) => { // validate and normalize (italian) fiscal code
-  value = value.trim();
+  value = value?.trim();
   if (!codiceFiscaleValidate.check(value)) {
     return [ i18n.t("Fiscal code is not valid, sorry"), value ];
   }
   return [null, value];
 };
+

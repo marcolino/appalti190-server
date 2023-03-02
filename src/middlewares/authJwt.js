@@ -10,15 +10,15 @@ const verifyToken = (req, res, next) => {
   let token = req.headers["x-access-token"];
 
   if (!token) {
-    return res.status(403).json({ message: "You must be authenticated to access this page", code: "NoToken", reason: "No token provided" });
+    return res.status(403).json({ message: req.t("You must be authenticated to access this page"), code: "NoToken", reason: req.t("No token provided") });
   }
 
   jwt.verify(token, config.auth.secret, (err, decoded) => {
     if (err) {
       if (err instanceof TokenExpiredError) {
-        return res.status(401).json({ message: "Access token exired", code: "AuthorizationExpired", reason: "Authorization was expired, please repeat login!" });
+        return res.status(401).json({ message: req.t("Access token expired"), code: "AuthorizationExpired", reason: req.t("Authorization was expired, please repeat login!") });
       }
-      return res.status(401).json({ message: "You must be authorized to access this page", code: "NoAuthorization", reason: "Unauthorized!" });
+      return res.status(401).json({ message: req.t("You must be authorized to access this page"), code: "NoAuthorization", reason: req.t("Unauthorized!") });
     }
 //console.log("TOKEN DECODED:", decoded);
     req.userId = decoded.id;
@@ -29,12 +29,10 @@ const verifyToken = (req, res, next) => {
 const isAdmin = (req, res, next) => {
   User.findById(req.userId).exec((err, user) => {
     if (err) {
-      res.status(500).json({ message: err});
-      return;
+      return res.status(500).json({ message: err});
     }
     if (!user) {
-      res.status(500).json({ message: req.t("User not found!")});
-      return;
+      return res.status(500).json({ message: req.t("User not found!")});
     }
 
     Role.find(
@@ -43,19 +41,17 @@ const isAdmin = (req, res, next) => {
       },
       (err, roles) => {
         if (err) {
-          res.status(500).json({ message: err });
-          return;
+          return res.status(500).json({ message: err });
         }
 
         for (let i = 0; i < roles.length; i++) {
           if (roles[i].name === "admin") {
-            next();
-            return;
+            if (next) { let a = 1; }
+            return next();
           }
         }
 
-        res.status(403).json({ message: "You must have admin role to access this page", code: "MustBeAdmin", reason: "Admin role required" });
-        return;
+        return res.status(403).json({ message: req.t("You must have admin role to access this page"), code: "MustBeAdmin", reason: req.t("Admin role required") });
       }
     );
   });

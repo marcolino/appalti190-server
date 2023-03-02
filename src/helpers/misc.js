@@ -1,7 +1,8 @@
 const url = require("url");
 const config = require("../config");
-
-
+const db = require("../models");
+const User = db.models.user;
+const Role = db.models.role;
 
 module.exports = {
 
@@ -77,6 +78,36 @@ module.exports = {
     ).replace(/^.*:/, "");
   },
 
+  isAdmin: async(userId) => {
+    return await User.findById(userId).exec((err, user) => {
+      if (err) {
+        return false;
+      }
+      if (!user) {
+        return false;
+      }
+  
+      return Role.find(
+        {
+          _id: { $in: user.roles }
+        },
+        (err, roles) => {
+          if (err) {
+            return false;
+          }
+  
+          for (let i = 0; i < roles.length; i++) {
+            if (roles[i].name === "admin") {
+              return true;
+            }
+          }
+  
+          return false;
+        }
+      );
+    });
+  },
+
 };
 
 const cleanDomain = (domain) => {
@@ -90,4 +121,3 @@ const cleanDomain = (domain) => {
 
   return domain;
 };
-

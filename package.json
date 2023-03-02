@@ -11,7 +11,7 @@
   "scripts": {
     "start-dev": "nodemon --ignore client/ -w '.' -w .env server.js",
     "start": "node server.js",
-    "test": "mocha --exit --timeout 5000 test/auth.test test/user.test",
+    "test": "mocha --exit --timeout 5000 test",
     "testwatch": "nodemon --exec \"mocha --recursive --timeout 10000\"",
     "pub": "git add . && git commit -m \"generic commit\" && git push && yarn push",
     "pub-dev": "yarn pub && yarn logs",

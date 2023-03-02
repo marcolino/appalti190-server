@@ -19,30 +19,21 @@ let accessTokenUser, accessTokenAdmin, adminUserId;
 
 describe("API tests - User routes", function() {
 
-  it("login normal user", function(done) {
-    chai.request(server)
-      .post("/api/auth/signin")
-      .send({
-        "email": config.user.email,
-        "password": config.user.password,
-      })
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
-        res.should.have.status(200);
-        res.body.should.have.property("accessToken");
-        accessTokenUser = res.body.accessToken;
-        userId = res.body.id;
-        done();
-      })
-    ;
+  before(async() => { // before these tests we empty the database
+    // clearing user collection from test database
+    User.deleteMany({}, (err) => {
+      if (err) {
+        console.error(err);
+      }
+    });
   });
 
-  it("register admin user", function(done) {
+  it("register normal user", function(done) {
     chai.request(server)
       .post("/api/auth/signup")
       .send({
-        "email": config.admin.email,
-        "password": config.admin.password,
+        "email": config.user.email,
+        "password": config.user.password,
       })
       .end((err, res) => {
         if (err) { console.error("Error:", err); done(); }
@@ -63,82 +54,246 @@ describe("API tests - User routes", function() {
     ;
   });
 
-  it("login admin user before it is admin", function(done) {
+  it("login normal user", function(done) {
     chai.request(server)
       .post("/api/auth/signin")
       .send({
-        "email": config.admin.email,
-        "password": config.admin.password,
+        "email": config.user.email,
+        "password": config.user.password,
       })
       .end((err, res) => {
         if (err) { console.error("Error:", err); done(); }
         res.should.have.status(200);
-        //res.body.should.have.property("accessToken");
-        //accessTokenUser = res.body.accessToken;
-        adminUserId = res.body.id;
+        res.body.should.have.property("accessToken");
+        res.body.should.have.property("id");
+        accessTokenUser = res.body.accessToken;
+        config.user.id = res.body.id;
         done();
       })
     ;
   });
 
-  describe("overrides admin user's role and login as admin user", function() {
-    before(async () => {
-      User.findOne({ _id: adminUserId }, async (err, user) => {
-        if (err) console.error("Could not find user", err);
-        if (!user) console.error("Could not find this user");
-        Role.find({
-          "name": { $in: [ "admin" ] }
-        }, (err, docs) => {
-          if (err) console.error(err.message);
-          user.roles = docs.map(doc => doc._id);
-          user.save(err => {
-            if (err) console.error(err.message);
-          });
+  it("register admin user", function(done) {
+    chai.request(server)
+      .post("/api/auth/signup")
+      .send({
+        "email": config.admin.email,
+        "password": config.admin.password,
+        "forcerole": "admin",
+        "forceplan": "unlimited",
+      })
+      .end((err, res) => {
+        if (err) { console.error("Error:", err); done(); }
+        res.should.have.status(201);
+        res.body.should.have.property("code");
+        signupConfirmCode = res.body.code;
+        chai.request(server)
+        .post("/api/auth/signupConfirm")
+        .send({ code: signupConfirmCode })
+        .end((err, res) => {
+          if (err) { console.error("Error:", err); done(); }
+          res.should.have.status(200);
+          res.body.should.have.property("message");
+          expect(res.body.message).to.equal("The account has been verified, you can now log in");
+          done();
         });
       })
-    });
+    ;
+  });
 
-    it("should login as admin user", function(done) {
-      chai.request(server)
-        .post("/api/auth/signin")
-        .send(config.admin)
-        .end((err, res) => {
-          if (err) { console.error("Error:", err); done(); }
-          res.should.have.status(200);
-          res.body.should.have.property("accessToken");
-          res.body.should.have.property("roles");
-          //expect(res.body.roles).to.include("admin"); // here it's not yet changed to admin... (?)
-          accessTokenAdmin = res.body.accessToken;
-          done();
-        });
-      ;
-    });
+  it("should login as admin user", function(done) {
+    chai.request(server)
+      .post("/api/auth/signin")
+      .send(config.admin)
+      .end((err, res) => {
+        if (err) { console.error("Error:", err); done(); }
+        res.should.have.status(200);
+        res.body.should.have.property("accessToken");
+        res.body.should.have.property("roles");
+        res.body.should.have.property("id");
+        expect(res.body.roles).to.include("admin");
+        accessTokenAdmin = res.body.accessToken;
+        config.admin.id = res.body.id;
+        done();
+      });
+    ;
+  });
 
-    it("should not get all users with user role", function(done) {
-      chai.request(server)
-        .get("/api/admin/getAdminPanel")
-        //.set("x-access-token", accessTokenUser)
-        .send({})
-        .end((err, res) => {
-          if (err) { console.error("Error:", err); done(); }
-          res.should.have.status(403);
-          done();
-        });
-      ;
-    });
+  it("should not get all users with user role", function(done) {
+    chai.request(server)
+      .get("/api/admin/getAdminPanel")
+      .set("x-access-token", accessTokenUser)
+      .send({})
+      .end((err, res) => {
+        if (err) { console.error("Error:", err); done(); }
+        res.should.have.status(403);
+        done();
+      });
+    ;
+  });
 
-    it("should get all users with admin role", function(done) {
-      chai.request(server)
-        .get("/api/user")
-        .set("x-access-token", accessTokenAdmin)
-        .send({})
-        .end((err, res) => {
-          if (err) { console.error("Error:", err); done(); }
-          res.should.have.status(200);
-          done();
-        });
-      ;
-    });
+  it("should get user's profile", function(done) {
+    chai.request(server)
+      .get("/api/user/getProfile")
+      .set("x-access-token", accessTokenUser)
+      .send({})
+      .end((err, res) => {
+        if (err) { console.error("Error:", err); done(); }
+        res.should.have.status(200);
+//console.log("BODY:", res.body);
+        res.body.should.have.property("user");
+        done();
+      });
+    ;
+  });
+
+  it("should not get user's profile without authentication", function(done) {
+    chai.request(server)
+      .get("/api/user/getProfile")
+      //.set("x-access-token", accessTokenUser)
+      .send({})
+      .end((err, res) => {
+        if (err) { console.error("Error:", err); done(); }
+        res.should.have.status(403);
+        done();
+      });
+    ;
+  });
+
+  it("should update user's profile", function(done) {
+    chai.request(server)
+      .post("/api/user/updateProfile")
+      .set("x-access-token", accessTokenUser)
+      .send({
+        email: config.user.email,
+        firstName: "updated first name",
+        lastName: "updated last name",
+        //fiscalCode: "XXXYYY11A22Z999A",
+        businessName: "test business name",
+        address: {
+          street: "Solari street",
+          streetNo: "0",
+          city: "Rivoli",
+          province: "TO",
+          zip: "10100",
+          country: "Italy",
+        },
+        roles: [ "user" ],
+      })
+      .end((err, res) => {
+        if (err) { console.error("Error:", err); done(); }
+        if (res.status !== 200) console.error("Unexpected response:", res.error); // TODO: always use this for 200's (?)
+        res.should.have.status(200);
+        res.body.should.have.property("message");
+        done();
+      });
+    ;
+  });
+
+  it("should not update user's profile without autentication", function(done) {
+    chai.request(server)
+      .post("/api/user/updateProfile")
+      //.set("x-access-token", accessTokenUser)
+      .send({
+        userId: config.user.id,
+        email: config.user.email,
+      })
+      .end((err, res) => {
+        if (err) { console.error("Error:", err); done(); }
+        res.should.have.status(403);
+        done();
+      });
+    ;
+  });
+
+  it("should not update user's profile for a different not existent user - as normal user", function(done) {
+    chai.request(server)
+      .post("/api/user/updateProfile")
+      .set("x-access-token", accessTokenUser)
+      .send({
+        userId: "111111111111111111111111",
+        firstName: config.user.name + "-bis",
+      })
+      .end((err, res) => {
+        if (err) { console.error("Error:", err); done(); }
+        res.should.have.status(400);
+        done();
+      });
+    ;
+  });
+
+  it("should not update user's profile for a different existent user - as normal user", function(done) {
+    chai.request(server)
+      .post("/api/user/updateProfile")
+      .set("x-access-token", accessTokenUser)
+      .send({
+        userId: config.user.id,
+        firstName: config.user.name + "-bis",
+      })
+      .end((err, res) => {
+        if (err) { console.error("Error:", err); done(); }
+        res.should.have.status(400);
+        done();
+      });
+    ;
+  });
+
+  it("should update user's profile for a different existent user - as admin user", function(done) {
+    chai.request(server)
+      .post("/api/user/updateProfile")
+      .set("x-access-token", accessTokenAdmin)
+      .send({
+        userId: config.user.id,
+        firstName: config.user.name + "-bis",
+      })
+      .end((err, res) => {
+        if (err) { console.error("Error:", err); done(); }
+        res.should.have.status(400);
+        done();
+      });
+    ;
+  });
+
+  it("should update user's own property", function(done) {
+    chai.request(server)
+      .post("/api/user/updateUserProperty")
+      .set("x-access-token", accessTokenUser)
+      .send({
+        firstName: "updated first name",
+        // lastName: "updated last name",
+        // //fiscalCode: "XXXYYY11A22Z999A",
+        // businessName: "test business name",
+        // address: {
+        //   street: "Solari street",
+        //   streetNo: "0",
+        //   city: "Rivoli",
+        //   province: "TO",
+        //   zip: "10100",
+        //   country: "Italy",
+        // },
+        // roles: [ "user" ],
+      })
+      .end((err, res) => {
+        if (err) { console.error("Error:", err); done(); }
+        if (res.status !== 200) console.error("Unexpected response:", res.error)
+        res.should.have.status(200);
+        res.body.should.have.property("message");
+        done();
+      });
+    ;
+  });
+  
+  it("should get all users with admin role", function(done) {
+    chai.request(server)
+      .get("/api/user")
+      .set("x-access-token", accessTokenAdmin)
+      .send({})
+      .end((err, res) => {
+        if (err) { console.error("Error:", err); done(); }
+        res.should.have.status(200);
+        done();
+      });
+    ;
   });
 
 });

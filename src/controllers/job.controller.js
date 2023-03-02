@@ -858,7 +858,7 @@ const outcomeCheck = async (req, res) => {
       return [null, answer];
     })
     .catch(error => {
-      console.error("error checking outcome:", errorMessage(error));
+      console.error("error checking outcome:", error.message);
       return [error, answer];
     })
   ;

@@ -15,25 +15,37 @@ const {
 } = db.models;
 
 const signup = async(req, res) => {
+  let roleName = "user";
+  let planName = "free";
   let role, plan;
-  // get default role
-  try {
-    role = await Role.findOne({name: "user"});
-  } catch (err) {
-    return res.status(500).json({ message: err });
-  }
-
-  // get default plan
-  try {
-    plan = await Plan.findOne({name: "free"});
-  } catch (err) {
-    return res.status(500).json({ message: err });
-  }
-
+  
   if (!validateEmail.validate(req.body.email)) {
     return res.status(400).json({ message: req.t("Please supply a valid email") });
   }
   const email = normalizeEmail(req.body.email);
+
+  if (process.env.NODE_ENV === "test") { // in test mode we allow role and plan to be forced by client
+    if (req.body.forcerole) {
+      roleName = req.body.forcerole;
+    }
+    if (req.body.forceplan) {
+      planName = req.body.forceplan;
+    }
+  }
+
+  // get the role
+  try {
+    role = await Role.findOne({name: roleName});
+  } catch (err) {
+    return res.status(500).json({ message: err });
+  }
+
+  // get plan
+  try {
+    plan = await Plan.findOne({name: planName});
+  } catch (err) {
+    return res.status(500).json({ message: err });
+  }
 
   user = new User({
     //username: req.body.username,
@@ -48,17 +60,16 @@ const signup = async(req, res) => {
 
   user.save(async(err, user) => {
     if (err) {
-console.error("NEW USER ERR:", err.code, err)
       if (err.code === 11000) { // duplicated user email
         return res.status(400).json({ code: "EmailExistsAlready", message: req.t("Email is already in use") });
       }
+      logger.error("New user creation error:", err);
       return res.status(500).json({ message: err });
     }
 
     // send verification code
     try {
       const signupVerificationCode = user.generateSignupVerificationCode(user._id);
-      
       await signupVerificationCode.save(); // save the verification code
   
       if (process.env.NODE_ENV !== "test") {

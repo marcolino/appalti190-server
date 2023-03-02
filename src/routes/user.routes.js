@@ -12,7 +12,7 @@ module.exports = app => {
   //app.get("/api/test/admin", [authJwt.verifyToken, authJwt.isAdmin], userController.adminBoard);
   app.get("/api/user/getProfile", authJwt.verifyToken, userController.getProfile);
   app.post("/api/user/updateProfile", authJwt.verifyToken, userController.updateProfile);
-  app.post("/api/user/updateUserProperty", [authJwt.verifyToken, authJwt.isAdmin], userController.updateUserProperty);
+  app.post("/api/user/updateUserProperty", [authJwt.verifyToken/*, authJwt.isAdmin*/], userController.updateUserProperty);
   // app.get("/api/user/getPlan", authJwt.verifyToken, userController.getPlan);
   app.get("/api/user/getRoles", [authJwt.verifyToken], userController.getRoles);
   app.post("/api/user/updateRoles", [authJwt.verifyToken, authJwt.isAdmin], userController.updateRoles);
