@@ -15,6 +15,9 @@ Note applicative:
     - Oggetto PEC: "LG190/2012 - comunicazione di avvenuto adempimento - <codice fiscale SA>"
     - Allegati: Modulo PDF per la comunicazione dell'URL di pubblicazione, compilato
 
+Versioning:
+ - Use express-routes-versioning, see in src/routes/user.routes.js
+ 
 Riferimenti:
  - Pagina ufficiale adempimenti:
     https://www.anticorruzione.it/-/adempimenti-legge-190/2012-art.-1-comma-32-7

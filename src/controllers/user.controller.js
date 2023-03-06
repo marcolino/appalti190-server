@@ -2,8 +2,7 @@ const emailValidate = require("email-validator");
 const codiceFiscaleValidate = require("codice-fiscale-js");
 const i18n = require("i18next");
 const db = require("../models");
-const authJwt = require("../middlewares/authJwt");
-const { normalizeEmail, isAdmin } = require("../helpers/misc");
+const { normalizeEmail, isAdmin, objectContains } = require("../helpers/misc");
 
 const {
   user: User,
@@ -12,16 +11,51 @@ const {
   refreshToken: RefreshToken,
 } = db.models;
 
-// const PROPERTY_OK = 0;
-// const PROPERTY_EMAIL_INVALID = 1;
-// const PROPERTY_EMAIL_DUPLICATED = 2;
-// const PROPERTY_FIRSTNAME_EMPTY = 3;
-// const PROPERTY_LASTNAME_EMPTY = 4;
+exports.getUsers = async(req, res) => {
+  filter = req.body.filter ?? {};
+  if (typeof filter !== "object") {
+    return res.status(400).json({ message: req.t("A filter must be an object") });
+  }
+  const users = await User.find(filter)
+    .select(["-password", "-__v"])
+    .populate("roles", "-__v")
+    .populate("plan", "-__v")
+    .lean()
+    .exec()
+  ;
+  res.status(200).json({users});
+};
 
+exports.getPlan = async(req, res) => {
+  let userId = req.userId;
+  if (req.body.userId) { // request to update another user's plan
+    if (!isAdmin(req.body.userId)) { // check if request is from admin
+      return res.status(403).json({ message: req.t("You must have admin role to get another user's plan"), code: "MustBeAdmin", reason: req.t("Admin role required") });
+    } else {
+      userId = req.body.userId; // if admin, accept a specific user id in request
+    }
+  }
+  if (!userId) return res.status(400).json({ message: req.t("User must be authenticated") });
 
+  Plan.find({})
+  .select(["name", "supportTypes", "priceCurrency", "pricePerYear", "cigsCountAllowed", "-_id"])
+  .exec(async(err, plan) => {
+    if (err) return res.status(500).json({ message: req.t("Could not find plan"), reason: err });
+    res.status(200).json(plan);
+  })
+};
 
 exports.getRoles = async(req, res) => {
-console.log("getRoles CALLED");
+  let userId = req.userId;
+  if (req.body.userId) { // request to update another user's role
+    if (!isAdmin(req.body.userId)) { // check if request is from admin
+      return res.status(403).json({ message: req.t("You must have admin role to get another user's roles"), code: "MustBeAdmin", reason: req.t("Admin role required") });
+    } else {
+      userId = req.body.userId; // if admin, accept a specific user id in request
+    }
+  }
+  if (!userId) return res.status(400).json({ message: req.t("User must be authenticated") });
+
   // default role must be the first element in the returned array
   Role.find({})
   .select(["name", "-_id"])
@@ -33,7 +67,15 @@ console.log("ROLES:", roles);
 };
 
 exports.getProfile = async(req, res) => {
-  if (!req.userId) return res.status(400).json({message: req.t("User must be authenticated")});
+  let userId = req.userId;
+  if (req.body.userId) { // request to update another user's profile
+    if (!isAdmin(req.body.userId)) { // check if request is from admin
+      return res.status(403).json({ message: req.t("You must have admin role to update another user's profile"), code: "MustBeAdmin", reason: req.t("Admin role required") });
+    } else {
+      userId = req.body.userId; // if admin, accept a specific user id in request
+    }
+  }
+  if (!userId) return res.status(400).json({ message: req.t("User must be authenticated") });
 
   User.findOne({
     _id: req.userId
@@ -51,21 +93,19 @@ exports.getProfile = async(req, res) => {
  * Update current user's profile
  */
 exports.updateProfile = async(req, res, next) => {
-  if (!req.userId) return res.status(400).json({ message: req.t("User must be authenticated") });
-  //if (!req.body.email) return res.status(400).json({ message: req.t("Email is mandatory") });
-
   let userId = req.userId;
   if (req.body.userId) { // request to update another user's profile
     if (!isAdmin(req.body.userId)) { // check if request is from admin
-      return res.status(403).json({ message: req.t("You must have admin role to update anoter user's profile"), code: "MustBeAdmin", reason: req.t("Admin role required") });
+      return res.status(403).json({ message: req.t("You must have admin role to update another user's profile"), code: "MustBeAdmin", reason: req.t("Admin role required") });
     } else {
       userId = req.body.userId; // if admin, accept a specific user id in request
     }
   }
+  if (!userId) return res.status(400).json({ message: req.t("User must be authenticated") });
 
   User.findOne({ _id: userId }, async (err, user) => {
-    if (err) return res.status(500).json({ message: req.t("Could not find user"), reason: err.message });
-    if (!user) return res.status(400).json({ message: req.t("Could not find this user") });
+    if (err) return res.status(500).json({ message: req.t("Error looking for user"), reason: err.message });
+    if (!user) return res.status(400).json({ message: req.t("User not found") });
 
     // validate and normalize email
     let [error, value] = [null, null];
@@ -112,18 +152,58 @@ exports.updateProfile = async(req, res, next) => {
  * Update a property of any user's profile
  */
 exports.updateUserProperty = async(req, res) => {
-  User.findOne({ _id: req.body.userId }, async (err, user) => {
-    if (err) return res.status(500).json({ message: req.t("Could not find user"), reason: err.message });
-    if (!user) return res.status(400).json({ message: req.t("Could not find this user") });
+  let userId = req.userId;
+  if (req.body.userId) { // request to update another user's profile
+    if (!isAdmin(req.body.userId)) { // check if request is from admin
+      return res.status(403).json({ message: req.t("You must have admin role to update another user's profile"), code: "MustBeAdmin", reason: req.t("Admin role required") });
+    } else {
+      userId = req.body.userId; // if admin, accept a specific user id in request
+    }
+  }
+  if (!userId) return res.status(400).json({ message: req.t("User must be authenticated") });
+
+  //let payload = req.body.payload;
+  User.findOneAndUpdate({ _id: userId }, req.body.payload, {new: true, lean: true}, async (err, data) => {
+    if (err) return res.status(500).json({ message: req.t("Error looking for user"), reason: err.message });
+//console.info("findOneAndUpdate response data:", data);
+//console.info("req.body.payload:", req.body.payload);
+    let ok = objectContains(data, req.body.payload);
+    if (ok === true) {
+      res.status(200).json({ message: req.t("The property has been updated")});
+    } else {
+      res.status(400).json({ message: req.t("Property {{property}} was not updated", {property: ok}) });
+    }
+  });
+
+/*
+  User.findOne({ _id: userId }, async (err, user) => {
+    if (err) return res.status(500).json({ message: req.t("Error looking for user"), reason: err.message });
+    if (!user) return res.status(400).json({ message: req.t("User not found") });
 
     const propertyName = req.body.propertyName;
     const propertyValue = req.body.propertyValue;
     
-    // if (!(req.body.propertyName in user)) {
-    //   return res.status(400).json({ message: `Property ${propertyName} can't be set` });
-    // }
+    if (!(req.body.propertyName.replace(/\..*$/, "") in user)) {
+      return res.status(400).json({ message: `Property ${propertyName} can't be set` });
+    }
+    / * TODO: use checkNestedKeyInObject
+    function checkNested(obj / *, level1, level2, ... levelN * /) {
+      var args = Array.prototype.slice.call(arguments, 1);
+    
+      for (var i = 0; i < args.length; i++) {
+        if (!obj || !obj.hasOwnProperty(args[i])) {
+          return false;
+        }
+        obj = obj[args[i]];
+      }
+      return true;
+    } 
+    var test = {level1:{level2:{level3:'level3'}} };
+    checkNested(test, 'level1', 'level2', 'level3'); // true
+    checkNested(test, 'level1', 'level2', 'foo'); // false
+    * /
 
-    const [error, value] = [null, null];
+    let [error, value] = [null, null];
     switch (propertyName) {
       case "firstName":
         [error, value] = propertyFirstNameValidate(propertyValue, user);
@@ -138,7 +218,6 @@ exports.updateUserProperty = async(req, res) => {
       case "email":
         [error, value] = await propertyEmailValidate(propertyValue, user);
         if (error) return res.status(400).json({ message: error });
-console.log("$$$$", propertyName, value)
         user[propertyName] = value;
       break;
         case "fiscalCode":
@@ -149,7 +228,7 @@ console.log("$$$$", propertyName, value)
       case "businessName":
         user[propertyName] = propertyValue;
         break;
-      case "address_street":
+      case "address.street":
         if (!user.address) user.address = {};
         user.address.street = propertyValue;
         break;
@@ -174,53 +253,84 @@ console.log("$$$$", propertyName, value)
         user.address.country = propertyValue;
         break;
 
-      default: // unforeseen properties here do pass validation
+      default: // unforeseen properties are acceptes as-is
         user[propertyName] = propertyValue;
-        break;
     }
 
-    // verify and save the user
+    // update the user
     user.save((err, user) => {
       if (err) return res.status(500).json({ message: err.message });
-console.log("USER AFTER:", user.address);
-      res.status(200).json({ message: req.t("The property has been updated"), propertyValue: value });
+      res.status(200).json({ message: req.t("The property has been updated") });
     });
   });
+*/
 }
+ 
 
 exports.updateRoles = async(req, res) => {
-  console.log("UpdateRoles, body:", req.body);
-  if (!req.userId) return res.status(400).json({ message: req.t("User must be authenticated") });
+  const callerId = req.userId;
+  const requestedId = req.body.userId;
+  const callerIsAdmin = await isAdmin(callerId);
+  //const requestedIsAdmin = await isAdmin(requestedId);
+  let userId = callerId;
+  if (!callerId) return res.status(400).json({ message: req.t("User must be authenticated") });
+  if (requestedId !== undefined) { // request to update another user's profile
+    if (!callerIsAdmin) { // check if request is from admin
+      return res.status(403).json({ message: req.t("You must have admin role to update another user's profile"), code: "MustBeAdmin", reason: req.t("Admin role required") });
+    } else {
+      userId = requestedId; // if admin, accept a specific user id in request
+    }
+  }
 
-  User.findOne({ _id: req.userId }, async (err, user) => {
-    if (err) return res.status(500).json({ message: req.t("Could not find user"), reason: err.message });
-    if (!user) return res.status(400).json({ message: req.t("Could not find this user") });
+  if (req.body.roles === undefined || typeof req.body.roles !== "object" || req.body.roles.length <= 0) {
+    return res.status(400).json({ message: req.t("Please specify at least one role") });
+  }
+
+  //User.findOne({ _id: userId }, async (err, user) => {
+  User.findOne({ _id: userId })
+  .populate("roles", "-__v")
+  .exec(async(err, user) => {  
+    if (err) return res.status(500).json({ message: req.t("Error looking for user"), reason: err.message });
+    if (!user) return res.status(400).json({ message: req.t("User not found") });
 
     // get roles ids, here we only have the names...
     Role.find({
       "name": { $in: req.body.roles }
     }, (err, docs) => {
       if (err) return res.status(500).json({ message: err.message });
-      console.log("user old roles:", user.roles);
-      console.log("Roles docs:", docs);
+
+      if (!callerIsAdmin) { // caller is not admin: check if requested roles do not require an upgrade, otherwise error out
+        requestedRolesMaxPriority = Math.max(...docs.map(role => role.priority));
+        currentRolesMaxPriority = Math.max(...user.roles.map(role => role.priority));
+        if (requestedRolesMaxPriority > currentRolesMaxPriority) {
+          return res.status(400).json({ message: req.t("Sorry, this user is not allowed elevate roles") });
+        }
+      }
       user.roles = docs.map(doc => doc._id);
-      console.log("user new roles:", user.roles);
 
       // verify and save the user
       user.save(err => {
         if (err) return res.status(500).json({ message: err.message });
-        res.status(200).json({ message: req.t("The profile has been updated") });
+        res.status(200).json({ message: req.t("The roles have been updated") });
       });
     });
   });
 }
   
 exports.updatePlan = async(req, res) => {
-  if (!req.userId) return res.status(400).json({ message: req.t("User must be authenticated") });
+  let userId = req.userId;
+  if (req.body.userId) { // request to update another user's profile
+    if (!isAdmin(req.body.userId)) { // check if request is from admin
+      return res.status(403).json({ message: req.t("You must have admin role to update another user's profile"), code: "MustBeAdmin", reason: req.t("Admin role required") });
+    } else {
+      userId = req.body.userId; // if admin, accept a specific user id in request
+    }
+  }
+  if (!userId) return res.status(400).json({ message: req.t("User must be authenticated") });
   if (!req.body.plan) return res.status(400).json({ message: req.t("Plan is mandatory") });
   // plan value correctness is enforced by database model
 
-  User.findOne({ _id: req.userId }, async (err, user) => {
+  User.findOne({ _id: userId }, async (err, user) => {
     if (err) return res.status(500).json({ message: req.t("Error looking for user"), reason: err.message });
     if (!user) return res.status(400).json({ message: req.t("User not found") });
 
@@ -234,38 +344,29 @@ exports.updatePlan = async(req, res) => {
       // verify and save the user
       user.save(err => {
         if (err) return res.status(500).json({ message: err.message });
-        res.status(200).json({ user });
+        res.status(200).json({ message: req.t("The plan has been updated"), user });
       });
     });
   });
 }
 
-exports.allAccess = (req, res) => {
-  res.status(200).json("Public Content");
-};
-
-exports.userBoard = (req, res) => {
-  res.status(200).json("User Content");
-};
-
-exports.users = async(req, res) => {
-  const users = await User.find()
-    .select(["-password", "-__v"])
-    .populate("roles", "-__v")
-    .populate("plan", "-__v")
-    .lean()
-    .exec()
-  ;
-  res.status(200).json({users});
-};
-
 exports.deleteAll = async(req, res) => {
-  const result = User.deleteMany({}/*, () => {}*/);
-console.log("deleteAll result:", result);
+  if (!req.body.filter) return res.status(400).json({ message: req.t("A filter is mandatory to delete users (use \"*\" for all users)") });
+  if (req.body.filter === "*") { // we require a not null filter to delete all users for added security reasons
+    filter = {};
+  } else {
+    if (typeof filter !== "object") {
+      return res.status(400).json({ message: req.t("A filter must be the string \"*\" or an object") });
+    } else {
+      filter = req.body.filter;
+    }
+  }
+  const result = User.deleteMany(filter);
   res.status(200).json(result);
 };
 
 exports.adminPanel = (req, res) => {
+  // get all users and refresh tokens
   Promise.all([
     User.find()
     .select(["-password", "-__v"])
@@ -296,12 +397,6 @@ exports.adminPanel = (req, res) => {
     console.log("adminPanel error:", err);
   });
 };
-
-exports.adminBoard = (req, res) => {
-  console.log("Admin Board:", req.params, req.body);
-  res.status(200).json("Admin Board");
-};
-
 // user properties validation
 const propertyEmailValidate = async(value, user) => { // validate and normalize email
   if (!emailValidate.validate(value)) {
@@ -340,4 +435,3 @@ const propertyFiscalCodeValidate = (value, user) => { // validate and normalize 
   }
   return [null, value];
 };
-

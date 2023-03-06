@@ -8,7 +8,7 @@ const PlanSchema = mongoose.Schema({
   priceCurrency: String,
   pricePerYear: Number,
   pricePerMonth: Number,
-  cigNumberAllowed: Number,
+  cigsCountAllowed: Number,
   supportTypes: [
     {
       type: String,
@@ -21,8 +21,8 @@ PlanSchema.pre("save", function(next) {
   const plan = this;
 
   // convert -1 ("unlimited") value to a number (MAX_SAFE_INTEGER), to allow easier handling
-  if (plan.cigNumberAllowed === -1) {
-    plan.cigNumberAllowed = Number.MAX_SAFE_INTEGER;
+  if (plan.cigsCountAllowed === -1) {
+    plan.cigsCountAllowed = Number.MAX_SAFE_INTEGER;
   }
   next();
 });

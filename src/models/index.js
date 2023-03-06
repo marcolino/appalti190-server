@@ -16,14 +16,23 @@ db.models = {
   verificationCode: require("./verificationCode.model"),
 };
 
-db.roles = [ "user", "admin" ];
+db.roles = [
+  {
+    name: "user", 
+    priority: 1,
+  }, {
+    name: "admin",
+    priority: 999,
+  }
+];
+
 db.plans = [
   {
     name: "free",
     priceCurrency: config.currency,
     pricePerYear: 0,
     pricePerMonth: undefined,
-    cigNumberAllowed: "10",
+    cigsCountAllowed: "10",
     supportTypes: [ "email" ],
   },
   {
@@ -31,7 +40,7 @@ db.plans = [
     priceCurrency: config.currency,
     pricePerYear: 399,
     pricePerMonth: undefined,
-    cigNumberAllowed: "200",
+    cigsCountAllowed: "200",
     supportTypes: [ "email" ],
   },
   {
@@ -39,7 +48,7 @@ db.plans = [
     priceCurrency: config.currency,
     pricePerYear: 799,
     pricePerMonth: undefined,
-    cigNumberAllowed: -1, // unlimited
+    cigsCountAllowed: -1, // unlimited
     supportTypes: [ "email", "phone" ],
   },
 ];
@@ -56,9 +65,7 @@ db.populate = () => { // first time populate static reference documents
     }
     if (count === 0) { // roles is empty
       db.roles.map(role => {
-        new Role({
-          name: role
-        }).save(err => {
+        new Role(role).save(err => {
           if (err) {
             console.error(`error saving role ${role}: ${err}`);
             process.exit(-1);

@@ -15,7 +15,7 @@ chai.use(chaiHttp); // use chaiHttp to make the actual HTTP requests
 
 let accessTokenUser, accessTokenAdmin, adminUserId;
 
-// TODO: handle i18n with res.body.message, for example
+// TODO: do not check res.body.message, it's localized...
 
 describe("API tests - User routes", function() {
 
@@ -140,7 +140,6 @@ describe("API tests - User routes", function() {
       .end((err, res) => {
         if (err) { console.error("Error:", err); done(); }
         res.should.have.status(200);
-//console.log("BODY:", res.body);
         res.body.should.have.property("user");
         done();
       });
@@ -182,7 +181,6 @@ describe("API tests - User routes", function() {
       })
       .end((err, res) => {
         if (err) { console.error("Error:", err); done(); }
-        if (res.status !== 200) console.error("Unexpected response:", res.error); // TODO: always use this for 200's (?)
         res.should.have.status(200);
         res.body.should.have.property("message");
         done();
@@ -254,14 +252,32 @@ describe("API tests - User routes", function() {
     ;
   });
 
-  it("should update user's own property", function(done) {
+  it("should update user's own property firstName", function(done) {
     chai.request(server)
       .post("/api/user/updateUserProperty")
       .set("x-access-token", accessTokenUser)
       .send({
-        firstName: "updated first name",
-        // lastName: "updated last name",
-        // //fiscalCode: "XXXYYY11A22Z999A",
+        payload: {
+          firstName: "updated first name",
+        }
+      })
+      .end((err, res) => {
+        if (err) { console.error("Error:", err); done(); }
+        res.should.have.status(200);
+        res.body.should.have.property("message");
+        done();
+      });
+    ;
+  });
+
+  it("should update user's own property lastName", function(done) {
+    chai.request(server)
+      .post("/api/user/updateUserProperty")
+      .set("x-access-token", accessTokenUser)
+      .send({
+        payload: {
+          lastName: "updated last name",
+        // fiscalCode: "XXXYYY11A22Z999A",
         // businessName: "test business name",
         // address: {
         //   street: "Solari street",
@@ -272,25 +288,184 @@ describe("API tests - User routes", function() {
         //   country: "Italy",
         // },
         // roles: [ "user" ],
+        }
       })
       .end((err, res) => {
         if (err) { console.error("Error:", err); done(); }
-        if (res.status !== 200) console.error("Unexpected response:", res.error)
         res.should.have.status(200);
         res.body.should.have.property("message");
         done();
       });
     ;
   });
-  
+
+  it("should update user's own property fiscalCode", function(done) {
+    chai.request(server)
+      .post("/api/user/updateUserProperty")
+      .set("x-access-token", accessTokenUser)
+      .send({
+        payload: {
+          fiscalCode: config.user.fiscalCode,
+        }
+      })
+      .end((err, res) => {
+        if (err) { console.error("Error:", err); done(); }
+        res.should.have.status(200);
+        res.body.should.have.property("message");
+        done();
+      });
+    ;
+  });
+
+  it("should update user's own property businessName", function(done) {
+    chai.request(server)
+      .post("/api/user/updateUserProperty")
+      .set("x-access-token", accessTokenUser)
+      .send({
+        payload: {
+          businessName: "test business name",
+        }
+      })
+      .end((err, res) => {
+        if (err) { console.error("Error:", err); done(); }
+        res.should.have.status(200);
+        res.body.should.have.property("message");
+        done();
+      });
+    ;
+  });
+
+  it("should update user's own property address street", function(done) {
+    chai.request(server)
+      .post("/api/user/updateUserProperty")
+      .set("x-access-token", accessTokenUser)
+      .send({
+        payload: {
+          address: { street: config.user.address.street },
+        }
+      })
+      .end((err, res) => {
+        if (err) { console.error("Error:", err); done(); }
+        res.should.have.status(200);
+        res.body.should.have.property("message");
+        done();
+      });
+    ;
+  });
+
+  it("should not update user's own roles as normal user (no roles)", function(done) {
+    chai.request(server)
+      .post("/api/user/updateRoles")
+      .set("x-access-token", accessTokenUser)
+      .send({})
+      .end((err, res) => {
+        if (err) { console.error("Error:", err); done(); }
+        res.should.have.status(400);
+        res.body.should.have.property("message");
+        done();
+      });
+    ;
+  });
+
+  it("should not update user's own roles as normal user (not array roles)", function(done) {
+    chai.request(server)
+      .post("/api/user/updateRoles")
+      .set("x-access-token", accessTokenUser)
+      .send({roles: "user"})
+      .end((err, res) => {
+        if (err) { console.error("Error:", err); done(); }
+        res.should.have.status(400);
+        res.body.should.have.property("message");
+        done();
+      });
+    ;
+  });
+
+  it("should not update user's own roles as normal user (empty array role)", function(done) {
+    chai.request(server)
+      .post("/api/user/updateRoles")
+      .set("x-access-token", accessTokenUser)
+      .send({roles: []})
+      .end((err, res) => {
+        if (err) { console.error("Error:", err); done(); }
+        res.should.have.status(400);
+        res.body.should.have.property("message");
+        done();
+      });
+    ;
+  });
+
+  it("should update user's own roles as normal user (equal or down grade)", function(done) {
+    chai.request(server)
+      .post("/api/user/updateRoles")
+      .set("x-access-token", accessTokenUser)
+      .send({
+        roles: [ "user" ]
+      })
+      .end((err, res) => {
+        if (err) { console.error("Error:", err); done(); }
+        res.should.have.status(200);
+        res.body.should.have.property("message");
+        done();
+      });
+    ;
+  });
+
+  // it("should not update user's own roles as normal user (up grade)", function(done) {
+  //   chai.request(server)
+  //     .post("/api/user/updateRoles")
+  //     .set("x-access-token", accessTokenUser)
+  //     .send({
+  //       roles: [ "admin" ],
+  //     })
+  //     .end((err, res) => {
+  //       if (err) { console.error("Error:", err); done(); }
+  //       res.should.have.status(403);
+  //       res.body.should.have.property("message");
+  //       done();
+  //     });
+  //   ;
+  // });
+
+  it("should update user's own roles as admin user (up grade)", function(done) {
+    chai.request(server)
+      .post("/api/user/updateRoles")
+      .set("x-access-token", accessTokenAdmin)
+      .send({
+        roles: [ "admin" ],
+      })
+      .end((err, res) => {
+        if (err) { console.error("Error:", err); done(); }
+        res.should.have.status(200);
+        res.body.should.have.property("message");
+        done();
+      });
+    ;
+  });
+
+  it("should not get all users with user role", function(done) {
+    chai.request(server)
+      .get("/api/user/getUsers")
+      .set("x-access-token", accessTokenUser)
+      .send({})
+      .end((err, res) => {
+        if (err) { console.error("Error:", err); done(); }
+        res.should.have.status(403);
+        done();
+      });
+    ;
+  });
+
   it("should get all users with admin role", function(done) {
     chai.request(server)
-      .get("/api/user")
+      .get("/api/user/getUsers")
       .set("x-access-token", accessTokenAdmin)
       .send({})
       .end((err, res) => {
         if (err) { console.error("Error:", err); done(); }
         res.should.have.status(200);
+        res.body.should.have.property("users");
+        //console.log("# of users is", res.body.users.length);
         done();
       });
     ;

@@ -6,6 +6,38 @@ const Role = db.models.role;
 
 module.exports = {
 
+  objectContains: (big, small) => {
+    if (big === small) return true; // if both big and small are null or undefined and exactly the same
+  
+    if (!(big instanceof Object) || !(small instanceof Object)) {
+      return "is not an object"; // if they are not strictly equal, they both need to be Objects
+    }
+
+    for (let p in big) {
+      if (!big.hasOwnProperty(p)) continue;
+  
+      if (big[p] === small[p]) continue; // if they have the same strict value or identity then they are equal
+  
+      if (typeof small[p] !== "undefined") {
+        if (! module.exports.objectContains(big[p], small[p])) return p; // Objects and Arrays must be tested recursively
+      }
+    }
+  
+    for (p in small) {
+      if (small.hasOwnProperty(p) && !big.hasOwnProperty(p)) {
+        return p; // allows big[p] to be set to undefined
+      }
+      if (typeof small[p] === "string" || typeof small[p] === "number" || typeof small[p] === "boolean" || typeof small[p] === "undefined") {
+        // a native type
+        if (small[p] !== big[p]) {
+          return p; // compares values
+        }
+      }
+    }
+  
+    return true;
+  },
+
   sanitizeJob: (job) => {
     if (!job?.transform?.xml) {
       return job;
@@ -79,32 +111,21 @@ module.exports = {
   },
 
   isAdmin: async(userId) => {
-    return await User.findById(userId).exec((err, user) => {
+    User.findOne({ _id: userId })
+    .populate("roles", "-__v")
+    .exec(async(err, user) => {
       if (err) {
         return false;
       }
       if (!user) {
         return false;
       }
-  
-      return Role.find(
-        {
-          _id: { $in: user.roles }
-        },
-        (err, roles) => {
-          if (err) {
-            return false;
-          }
-  
-          for (let i = 0; i < roles.length; i++) {
-            if (roles[i].name === "admin") {
-              return true;
-            }
-          }
-  
-          return false;
+      for (let i = 0; i < user.roles.length; i++) {
+        if (user.roles[i].name === "admin") {
+          return true;
         }
-      );
+      }
+      return false;
     });
   },
 
