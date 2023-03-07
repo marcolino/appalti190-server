@@ -10,6 +10,8 @@
 - nella registrazione, in caso di email già presente, controllare se non è verificato, e dire all'utente che si è in attesa di validazione
 - implementare TTL per le collezioni mongodb con scadenza
 - impostare tests con chai
+- logger - accesso utente: no data ma email nel soggetto
+
 
 - TODO completare tests con chai
 - TODO sendemail FROM ...
@@ -17,7 +19,6 @@
 - TODO rimuovere i console. ...
 - TODO tradurre anche middlewares, helpers
 - TODO rivedere /api/user/updateUserProperty (e successive) come /api/user/updateProfile
-- TODO logger - accesso utente: no data ma email nel soggetto
 - TODO: translate notifications and logger messages ?
 - TODO: handle plan downgrade: ask confirmation, and tell about no refunds
 - TODO: add reference year to stripe products
