@@ -17,6 +17,8 @@
 - TODO rimuovere i console. ...
 - TODO tradurre anche middlewares, helpers
 - TODO rivedere /api/user/updateUserProperty (e successive) come /api/user/updateProfile
+- TODO logger - accesso utente: no data ma email nel soggetto
+- TODO: translate notifications?
 
 - NEWFEATURE decidere se acquistare un piano su papertrail per i logs in produzione
 - NEWFEATURE rimuovere gli account non confermati, periodicamente (??)

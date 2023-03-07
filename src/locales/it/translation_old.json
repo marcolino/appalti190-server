@@ -11,7 +11,10 @@
   "Refresh token was expired": "Il token di aggiornamento è scaduto",
   "This user has already been verified": "Questo utente è già stato verificato",
   "to verify your account": "to verify your account",
+  "User {{email} signup completed": "Registrazione utente {{email} signup completed",
+  "User login on {{when}}": "Accesso utente il {{when}}",
   "User not found!": "User not found!",
+  "User signup on {{when}}": "Registrazione utente il {{quando}}",
   "We could not find user": "Impossibile trovare l'utente",
   "We could not get roles": "Impossibile trovare ruoli",
   "We were unable to find this user": "Impossibile trovare questo utente"

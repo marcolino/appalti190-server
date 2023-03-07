@@ -157,7 +157,7 @@ const signupConfirm = async(req, res) => {
         user.save(err => {
           if (err) return res.status(500).json({ message: err.message });
           logger.info(`User signup: ${JSON.stringify(user)}`);
-          notification({subject: req.t("User signup on {{when}}", {when: nowLocaleDateTime()}), html: `${req.t("User")}: ${user.email}, {${req.t("IP")}: ${remoteAddress(req)}`});
+          notification({subject: req.t("User {{email}} signup completed", {email: user.email}), html: `${req.t("User")}: ${user.email}, {${req.t("IP")}: ${remoteAddress(req)}, on ${nowLocaleDateTime()}`});
           res.status(200).json({ message: req.t("The account has been verified, you can now log in") });
         });
       }
@@ -228,9 +228,9 @@ const signin = async(req, res) => {
         roles.push(user.roles[i].name);
       }
 
-      logger.info(`User login: ${user.email}`);
+      logger.info(`User signin: ${user.email}`);
       // notify logins (TODO: see papertrail.com, prefer it, possibly...)
-      notification({subject: req.t("User login on {{when}}", {when: nowLocaleDateTime()}), html: `${req.t("User")}: ${user.email}, {${req.t("IP")}: ${remoteAddress(req)}`});
+      notification({subject: req.t("User {{email}} signin", {email: user.email}), html: `${req.t("User")}: ${user.email}, {${req.t("IP")}: ${remoteAddress(req)}, on ${nowLocaleDateTime()}`});
     
       res.status(200).json({
         id: user._id,
