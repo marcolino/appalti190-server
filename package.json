@@ -18,14 +18,13 @@
     "push": "git push heroku master",
     "i18n": "i18next 'src/**/*.js' --config 'i18next-parser.config.js' --silent",
     "i18n-check": "i18next 'src/**/*.js' --config 'i18next-parser.config.js' --silent --output /tmp/i18n-check-$$.json && cmp --silent /tmp/i18n-check-$$.json src/locales/en/translation.json; test $? = '1' && echo 'Some new texts to be translated!' || echo 'Translations are ok'; rm /tmp/i18n-check-$$.json",
-    "SUSPENDED-predeploy": "yarn test",
+    "predeploy": "yarn test",
     "run-web": "heroku ps:scale web=1 --app appalti190",
     "stop-web": "heroku ps:scale web=0 --app appalti190",
     "logs": "heroku logs --tail",
     "logspt": "heroku addons:open --app appalti190 papertrail",
     "check-unused-dependencies": "depcheck",
-    "list-deadfiles": "npx deadfile ./server.js --dir src",
-    "refresh-client_DO_NOT_USE__CLIENT_WILL_COPY_HERE": "cp -a ../sistemi190-client/build client/"
+    "list-deadfiles": "npx deadfile ./server.js --dir src"
   },
   "keywords": [
     "node.js",

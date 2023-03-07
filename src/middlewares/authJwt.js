@@ -32,7 +32,7 @@ const isAdmin = (req, res, next) => {
       return res.status(500).json({ message: err});
     }
     if (!user) {
-      return res.status(500).json({ message: req.t("User not found!")});
+      return res.status(500).json({ message: req.t("User not found")});
     }
 
     Role.find(

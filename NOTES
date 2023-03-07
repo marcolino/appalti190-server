@@ -52,4 +52,16 @@ Riferimenti:
 
 Servizi:
  - Storage - Cloudinary; marcosolari+1@gmail.com / Las....0! (UNUSED ANYMORE)
- - Logs - Papertrail: https://papertrailapp.com/dashboard 
+ - Logs - Papertrail: https://papertrailapp.com/dashboard
+
+Heroku:
+ - setup:
+   - appalti190
+     - settings
+       - buildpacks:
+         - heroku/jvm
+         - heroku/nodejs
+       - addons:
+         - Papertrail7
+ - to close account:
+   - go to https://dashboard.heroku.com/account, at the bottom: "Close account" button

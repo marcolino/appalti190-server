@@ -1,9 +1,17 @@
 {
+  "Email is mandatory": "L'email è obbligatoria",
   "Errore nell'archiviazione": "Errore nell'archiviazione",
   "hello": "ciao!",
   "hello due": "hello due",
   "per verificare il tuo account": "per verificare il tuo account",
+  "Please click on the following": "Fare clic sul seguente",
+  "Please make a new signin request": "Fai una nuova richiesta di login, per favore",
   "Please provide a valid email": "Si prega di fornsci un'email valida, per favore",
+  "Please verify your email before using it": "Verifica la tua email prima di usarla",
+  "Refresh token was expired": "Il token di aggiornamento è scaduto",
+  "This user has already been verified": "Questo utente è già stato verificato",
+  "to verify your account": "to verify your account",
+  "User not found!": "User not found!",
   "We could not find user": "Impossibile trovare l'utente",
   "We could not get roles": "Impossibile trovare ruoli",
   "We were unable to find this user": "Impossibile trovare questo utente"
