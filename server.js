@@ -114,13 +114,15 @@ require("./src/routes/job.routes")(app);
 require("./src/routes/payment.routes")(app);
 
 // handle not found routes
-app.use((req, res, next) => {
+// app.use((req, res, next) => {
+// });
+app.all("/api/*", (req, res, next) => {
   res.status(404);
   if (req.accepts("json")) {
     return res.json({ error: "Not found" });
   }
   return res.type("txt").send("Not found");
-});
+})
 
 // serve the static files from the client - "client" is a link to the frontend site
 const rootClient = path.join(__dirname, "client", "build");
