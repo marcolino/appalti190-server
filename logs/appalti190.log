@@ -10749,3 +10749,291 @@ info: 2023-03-07 11:15:54: 	User signup: {"roles":["6405b3152c959193b3979dfc"],"
 info: 2023-03-07 11:15:54: 	User login: user@mail.com
 info: 2023-03-07 11:15:54: 	User signup: {"roles":["6405b3152c959193b3979dfd"],"isDeleted":false,"isVerified":true,"_id":"64070eda4883aa5573939f45","email":"admin@mail.com","password":"$2a$10$UZ33eyKgNdXHUxgp0yd0dexo7tFSyfImaqLFikvXj7Jc6m7bN86A2","address":{"_id":"64070eda4883aa5573939f46","city":""},"plan":"63fce828d86497622429a3c6","createdAt":"2023-03-07T10:15:54.684Z","updatedAt":"2023-03-07T10:15:54.878Z","__v":0}
 info: 2023-03-07 11:15:55: 	User login: admin@mail.com
+info: 2023-03-07 11:53:49: 	Activating [43m test [0m environment
+info: 2023-03-07 11:53:50: 	Server is running on port 5000
+info: 2023-03-07 11:53:50: 	Successfully connected to MongoDB
+info: 2023-03-07 11:54:45: 	User signin: marcosolari@gmail.com
+info: 2023-03-07 11:57:24: 	User signin: marcosolari@gmail.com
+info: 2023-03-07 11:58:08: 	User signin: marcosolari@gmail.com
+info: 2023-03-07 12:11:12: 	Payment session created
+info: 2023-03-07 12:13:28: 	User signin: marcosolari@gmail.com
+info: 2023-03-07 12:13:57: 	Payment session created
+info: 2023-03-07 12:18:52: 	User signin: marcosolari@gmail.com
+info: 2023-03-07 12:20:39: 	Payment session created
+info: 2023-03-07 12:30:04: 	Activating [43m test [0m environment
+info: 2023-03-07 12:30:05: 	Server is running on port 5000
+info: 2023-03-07 12:30:05: 	Successfully connected to MongoDB
+error: 2023-03-07 12:30:19: 	Payment error: {"type":"StripeInvalidRequestError","raw":{"code":"url_invalid","doc_url":"https://stripe.com/docs/error-codes/url-invalid","message":"Not a valid URL","param":"success_url","request_log_url":"https://dashboard.stripe.com/test/logs/req_xW3COTyoifYaf7?t=1678188618","type":"invalid_request_error","headers":{"server":"nginx","date":"Tue, 07 Mar 2023 11:30:18 GMT","content-type":"application/json","content-length":"309","connection":"keep-alive","access-control-allow-credentials":"true","access-control-allow-methods":"GET, POST, HEAD, OPTIONS, DELETE","access-control-allow-origin":"*","access-control-expose-headers":"Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required","access-control-max-age":"300","cache-control":"no-cache, no-store","idempotency-key":"1bcc9cc2-8f9b-4ea4-833f-2277c9aa644f","original-request":"req_xW3COTyoifYaf7","request-id":"req_xW3COTyoifYaf7","stripe-version":"2020-08-27","strict-transport-security":"max-age=63072000; includeSubDomains; preload"},"statusCode":400,"requestId":"req_xW3COTyoifYaf7"},"rawType":"invalid_request_error","code":"url_invalid","doc_url":"https://stripe.com/docs/error-codes/url-invalid","param":"success_url","headers":{"server":"nginx","date":"Tue, 07 Mar 2023 11:30:18 GMT","content-type":"application/json","content-length":"309","connection":"keep-alive","access-control-allow-credentials":"true","access-control-allow-methods":"GET, POST, HEAD, OPTIONS, DELETE","access-control-allow-origin":"*","access-control-expose-headers":"Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required","access-control-max-age":"300","cache-control":"no-cache, no-store","idempotency-key":"1bcc9cc2-8f9b-4ea4-833f-2277c9aa644f","original-request":"req_xW3COTyoifYaf7","request-id":"req_xW3COTyoifYaf7","stripe-version":"2020-08-27","strict-transport-security":"max-age=63072000; includeSubDomains; preload"},"requestId":"req_xW3COTyoifYaf7","statusCode":400}
+error: 2023-03-07 12:30:36: 	Payment error: {"type":"StripeInvalidRequestError","raw":{"code":"url_invalid","doc_url":"https://stripe.com/docs/error-codes/url-invalid","message":"Not a valid URL","param":"success_url","request_log_url":"https://dashboard.stripe.com/test/logs/req_Qfn7SuZb0PRt1G?t=1678188636","type":"invalid_request_error","headers":{"server":"nginx","date":"Tue, 07 Mar 2023 11:30:36 GMT","content-type":"application/json","content-length":"309","connection":"keep-alive","access-control-allow-credentials":"true","access-control-allow-methods":"GET, POST, HEAD, OPTIONS, DELETE","access-control-allow-origin":"*","access-control-expose-headers":"Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required","access-control-max-age":"300","cache-control":"no-cache, no-store","idempotency-key":"a15ea9cd-fd62-4b8e-93cd-0f5c4ab94f4d","original-request":"req_Qfn7SuZb0PRt1G","request-id":"req_Qfn7SuZb0PRt1G","stripe-version":"2020-08-27","strict-transport-security":"max-age=63072000; includeSubDomains; preload"},"statusCode":400,"requestId":"req_Qfn7SuZb0PRt1G"},"rawType":"invalid_request_error","code":"url_invalid","doc_url":"https://stripe.com/docs/error-codes/url-invalid","param":"success_url","headers":{"server":"nginx","date":"Tue, 07 Mar 2023 11:30:36 GMT","content-type":"application/json","content-length":"309","connection":"keep-alive","access-control-allow-credentials":"true","access-control-allow-methods":"GET, POST, HEAD, OPTIONS, DELETE","access-control-allow-origin":"*","access-control-expose-headers":"Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required","access-control-max-age":"300","cache-control":"no-cache, no-store","idempotency-key":"a15ea9cd-fd62-4b8e-93cd-0f5c4ab94f4d","original-request":"req_Qfn7SuZb0PRt1G","request-id":"req_Qfn7SuZb0PRt1G","stripe-version":"2020-08-27","strict-transport-security":"max-age=63072000; includeSubDomains; preload"},"requestId":"req_Qfn7SuZb0PRt1G","statusCode":400}
+info: 2023-03-07 12:31:44: 	**************** Payment success
+info: 2023-03-07 12:32:01: 	**************** Payment success
+info: 2023-03-07 12:33:57: 	Activating [43m test [0m environment
+info: 2023-03-07 12:33:58: 	Server is running on port 5000
+info: 2023-03-07 12:33:58: 	Successfully connected to MongoDB
+info: 2023-03-07 12:34:23: 	Activating [43m test [0m environment
+info: 2023-03-07 12:34:23: 	Server is running on port 5000
+info: 2023-03-07 12:34:24: 	Successfully connected to MongoDB
+info: 2023-03-07 12:34:37: 	Activating [43m test [0m environment
+info: 2023-03-07 12:34:38: 	Server is running on port 5000
+info: 2023-03-07 12:34:38: 	Successfully connected to MongoDB
+info: 2023-03-07 12:34:46: 	**************** Payment success
+info: 2023-03-07 12:35:10: 	Activating [43m test [0m environment
+info: 2023-03-07 12:35:10: 	Server is running on port 5000
+info: 2023-03-07 12:35:10: 	Successfully connected to MongoDB
+info: 2023-03-07 12:35:10: 	**************** Payment success
+info: 2023-03-07 12:36:26: 	Activating [43m test [0m environment
+info: 2023-03-07 12:36:27: 	Server is running on port 5000
+info: 2023-03-07 12:36:27: 	Successfully connected to MongoDB
+info: 2023-03-07 12:36:28: 	**************** Payment success
+info: 2023-03-07 12:36:45: 	Payment session created
+info: 2023-03-07 12:36:56: 	**************** Payment success
+info: 2023-03-07 12:38:38: 	Activating [43m test [0m environment
+info: 2023-03-07 12:38:38: 	Server is running on port 5000
+info: 2023-03-07 12:38:38: 	Successfully connected to MongoDB
+info: 2023-03-07 12:40:03: 	Activating [43m test [0m environment
+info: 2023-03-07 12:40:03: 	Server is running on port 5000
+info: 2023-03-07 12:40:03: 	Successfully connected to MongoDB
+info: 2023-03-07 12:40:30: 	Payment session created
+info: 2023-03-07 12:40:44: 	**************** Payment success
+info: 2023-03-07 12:41:40: 	Payment session created
+info: 2023-03-07 12:41:52: 	**************** Payment success
+info: 2023-03-07 12:43:05: 	Activating [43m test [0m environment
+info: 2023-03-07 12:43:06: 	Server is running on port 5000
+info: 2023-03-07 12:43:06: 	Successfully connected to MongoDB
+info: 2023-03-07 12:43:10: 	Activating [43m test [0m environment
+{"date":"Tue Mar 07 2023 12:43:11 GMT+0100 (Central European Standard Time)","error":{"address":"::","code":"EADDRINUSE","errno":-98,"port":5000,"syscall":"listen"},"exception":true,"level":"error","message":"uncaughtException: listen EADDRINUSE: address already in use :::5000\nError: listen EADDRINUSE: address already in use :::5000\n    at Server.setupListenHandle [as _listen2] (net.js:1331:16)\n    at listenInCluster (net.js:1379:12)\n    at Server.listen (net.js:1465:7)\n    at Function.listen (/home/marco/apps/sistemisolari/appalti190-server/node_modules/express/lib/application.js:618:24)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/server.js:136:7)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:75:12)\n    at internal/main/run_main_module.js:17:47","os":{"loadavg":[2.23,2.17,1.88],"uptime":13243.82},"process":{"argv":["/usr/bin/node","/home/marco/apps/sistemisolari/appalti190-server/server.js"],"cwd":"/home/marco/apps/sistemisolari/appalti190-server","execPath":"/usr/bin/node","gid":1000,"memoryUsage":{"arrayBuffers":21985816,"external":23664578,"heapTotal":80543744,"heapUsed":57074512,"rss":112824320},"pid":33582,"uid":1000,"version":"v14.20.1"},"stack":"Error: listen EADDRINUSE: address already in use :::5000\n    at Server.setupListenHandle [as _listen2] (net.js:1331:16)\n    at listenInCluster (net.js:1379:12)\n    at Server.listen (net.js:1465:7)\n    at Function.listen (/home/marco/apps/sistemisolari/appalti190-server/node_modules/express/lib/application.js:618:24)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/server.js:136:7)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:75:12)\n    at internal/main/run_main_module.js:17:47","trace":[{"column":16,"file":"net.js","function":"Server.setupListenHandle [as _listen2]","line":1331,"method":"setupListenHandle [as _listen2]","native":false},{"column":12,"file":"net.js","function":"listenInCluster","line":1379,"method":null,"native":false},{"column":7,"file":"net.js","function":"Server.listen","line":1465,"method":"listen","native":false},{"column":24,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/express/lib/application.js","function":"Function.listen","line":618,"method":"listen","native":false},{"column":7,"file":"/home/marco/apps/sistemisolari/appalti190-server/server.js","function":null,"line":136,"method":null,"native":false},{"column":14,"file":"internal/modules/cjs/loader.js","function":"Module._compile","line":1085,"method":"_compile","native":false},{"column":10,"file":"internal/modules/cjs/loader.js","function":"Module._extensions..js","line":1114,"method":".js","native":false},{"column":32,"file":"internal/modules/cjs/loader.js","function":"Module.load","line":950,"method":"load","native":false},{"column":12,"file":"internal/modules/cjs/loader.js","function":"Module._load","line":790,"method":"_load","native":false},{"column":12,"file":"internal/modules/run_main.js","function":"Function.executeUserEntryPoint [as runMain]","line":75,"method":"executeUserEntryPoint [as runMain]","native":false},{"column":47,"file":"internal/main/run_main_module.js","function":null,"line":17,"method":null,"native":false}]}
+error: 2023-03-07 12:43:11: 	uncaughtException: listen EADDRINUSE: address already in use :::5000
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (net.js:1331:16)
+    at listenInCluster (net.js:1379:12)
+    at Server.listen (net.js:1465:7)
+    at Function.listen (/home/marco/apps/sistemisolari/appalti190-server/node_modules/express/lib/application.js:618:24)
+    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/server.js:136:7)
+    at Module._compile (internal/modules/cjs/loader.js:1085:14)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)
+    at Module.load (internal/modules/cjs/loader.js:950:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:790:12)
+    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:75:12)
+    at internal/main/run_main_module.js:17:47
+info: 2023-03-07 12:43:16: 	Payment session created
+info: 2023-03-07 12:43:28: 	**************** Payment success
+info: 2023-03-07 12:43:54: 	Activating [43m test [0m environment
+{"date":"Tue Mar 07 2023 12:43:54 GMT+0100 (Central European Standard Time)","error":{"address":"::","code":"EADDRINUSE","errno":-98,"port":5000,"syscall":"listen"},"exception":true,"level":"error","message":"uncaughtException: listen EADDRINUSE: address already in use :::5000\nError: listen EADDRINUSE: address already in use :::5000\n    at Server.setupListenHandle [as _listen2] (net.js:1331:16)\n    at listenInCluster (net.js:1379:12)\n    at Server.listen (net.js:1465:7)\n    at Function.listen (/home/marco/apps/sistemisolari/appalti190-server/node_modules/express/lib/application.js:618:24)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/server.js:136:7)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:75:12)\n    at internal/main/run_main_module.js:17:47","os":{"loadavg":[3.04,2.42,1.98],"uptime":13287.07},"process":{"argv":["/usr/bin/node","/home/marco/apps/sistemisolari/appalti190-server/server.js"],"cwd":"/home/marco/apps/sistemisolari/appalti190-server","execPath":"/usr/bin/node","gid":1000,"memoryUsage":{"arrayBuffers":22051875,"external":23730637,"heapTotal":80805888,"heapUsed":57137952,"rss":113184768},"pid":33893,"uid":1000,"version":"v14.20.1"},"stack":"Error: listen EADDRINUSE: address already in use :::5000\n    at Server.setupListenHandle [as _listen2] (net.js:1331:16)\n    at listenInCluster (net.js:1379:12)\n    at Server.listen (net.js:1465:7)\n    at Function.listen (/home/marco/apps/sistemisolari/appalti190-server/node_modules/express/lib/application.js:618:24)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/server.js:136:7)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:75:12)\n    at internal/main/run_main_module.js:17:47","trace":[{"column":16,"file":"net.js","function":"Server.setupListenHandle [as _listen2]","line":1331,"method":"setupListenHandle [as _listen2]","native":false},{"column":12,"file":"net.js","function":"listenInCluster","line":1379,"method":null,"native":false},{"column":7,"file":"net.js","function":"Server.listen","line":1465,"method":"listen","native":false},{"column":24,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/express/lib/application.js","function":"Function.listen","line":618,"method":"listen","native":false},{"column":7,"file":"/home/marco/apps/sistemisolari/appalti190-server/server.js","function":null,"line":136,"method":null,"native":false},{"column":14,"file":"internal/modules/cjs/loader.js","function":"Module._compile","line":1085,"method":"_compile","native":false},{"column":10,"file":"internal/modules/cjs/loader.js","function":"Module._extensions..js","line":1114,"method":".js","native":false},{"column":32,"file":"internal/modules/cjs/loader.js","function":"Module.load","line":950,"method":"load","native":false},{"column":12,"file":"internal/modules/cjs/loader.js","function":"Module._load","line":790,"method":"_load","native":false},{"column":12,"file":"internal/modules/run_main.js","function":"Function.executeUserEntryPoint [as runMain]","line":75,"method":"executeUserEntryPoint [as runMain]","native":false},{"column":47,"file":"internal/main/run_main_module.js","function":null,"line":17,"method":null,"native":false}]}
+error: 2023-03-07 12:43:54: 	uncaughtException: listen EADDRINUSE: address already in use :::5000
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (net.js:1331:16)
+    at listenInCluster (net.js:1379:12)
+    at Server.listen (net.js:1465:7)
+    at Function.listen (/home/marco/apps/sistemisolari/appalti190-server/node_modules/express/lib/application.js:618:24)
+    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/server.js:136:7)
+    at Module._compile (internal/modules/cjs/loader.js:1085:14)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)
+    at Module.load (internal/modules/cjs/loader.js:950:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:790:12)
+    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:75:12)
+    at internal/main/run_main_module.js:17:47
+info: 2023-03-07 12:44:17: 	Activating [43m test [0m environment
+info: 2023-03-07 12:44:18: 	Server is running on port 5000
+info: 2023-03-07 12:44:18: 	Successfully connected to MongoDB
+info: 2023-03-07 14:23:35: 	User signin: marcosolari@gmail.com
+info: 2023-03-07 14:26:23: 	Payment session created
+info: 2023-03-07 14:26:38: 	**************** Payment success
+info: 2023-03-07 14:43:49: 	User signin: marcosolari@gmail.com
+info: 2023-03-07 14:44:06: 	Payment session created
+info: 2023-03-07 14:44:18: 	**************** Payment success
+info: 2023-03-07 14:46:55: 	User signin: marcosolari@gmail.com
+info: 2023-03-07 14:47:07: 	Payment session created
+info: 2023-03-07 14:47:17: 	**************** Payment success
+info: 2023-03-07 14:48:08: 	Payment session created
+info: 2023-03-07 15:21:46: 	Activating [43m test [0m environment
+info: 2023-03-07 15:21:47: 	Server is running on port 5000
+info: 2023-03-07 15:21:47: 	Successfully connected to MongoDB
+info: 2023-03-07 15:21:59: 	Activating [43m test [0m environment
+info: 2023-03-07 15:21:59: 	Server is running on port 5000
+info: 2023-03-07 15:21:59: 	Successfully connected to MongoDB
+info: 2023-03-07 15:22:51: 	Payment session created
+info: 2023-03-07 15:23:05: 	**************** Payment success
+info: 2023-03-07 15:24:27: 	Activating [43m test [0m environment
+info: 2023-03-07 15:24:27: 	Server is running on port 5000
+info: 2023-03-07 15:24:27: 	Successfully connected to MongoDB
+info: 2023-03-07 15:24:46: 	Activating [43m test [0m environment
+info: 2023-03-07 15:24:47: 	Server is running on port 5000
+info: 2023-03-07 15:24:47: 	Successfully connected to MongoDB
+info: 2023-03-07 15:25:24: 	Payment session created
+info: 2023-03-07 15:25:42: 	**************** Payment success
+info: 2023-03-07 15:32:39: 	Payment session created
+info: 2023-03-07 15:32:56: 	**************** Payment success
+info: 2023-03-07 15:34:15: 	Payment session created
+info: 2023-03-07 15:34:29: 	**************** Payment success
+info: 2023-03-07 15:50:43: 	Activating [43m test [0m environment
+{"date":"Tue Mar 07 2023 15:50:44 GMT+0100 (Central European Standard Time)","error":{},"exception":true,"level":"error","message":"uncaughtException: authJwt is not defined\nReferenceError: authJwt is not defined\n    at module.exports (/home/marco/apps/sistemisolari/appalti190-server/src/routes/payment.routes.js:8:33)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/server.js:114:39)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:75:12)\n    at internal/main/run_main_module.js:17:47","os":{"loadavg":[1.46,1.36,1.36],"uptime":1963.24},"process":{"argv":["/usr/bin/node","/home/marco/apps/sistemisolari/appalti190-server/server.js"],"cwd":"/home/marco/apps/sistemisolari/appalti190-server","execPath":"/usr/bin/node","gid":1000,"memoryUsage":{"arrayBuffers":22024194,"external":23684324,"heapTotal":80805888,"heapUsed":57722768,"rss":114212864},"pid":9080,"uid":1000,"version":"v14.20.1"},"stack":"ReferenceError: authJwt is not defined\n    at module.exports (/home/marco/apps/sistemisolari/appalti190-server/src/routes/payment.routes.js:8:33)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/server.js:114:39)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:75:12)\n    at internal/main/run_main_module.js:17:47","trace":[{"column":33,"file":"/home/marco/apps/sistemisolari/appalti190-server/src/routes/payment.routes.js","function":"module.exports","line":8,"method":"exports","native":false},{"column":39,"file":"/home/marco/apps/sistemisolari/appalti190-server/server.js","function":null,"line":114,"method":null,"native":false},{"column":14,"file":"internal/modules/cjs/loader.js","function":"Module._compile","line":1085,"method":"_compile","native":false},{"column":10,"file":"internal/modules/cjs/loader.js","function":"Module._extensions..js","line":1114,"method":".js","native":false},{"column":32,"file":"internal/modules/cjs/loader.js","function":"Module.load","line":950,"method":"load","native":false},{"column":12,"file":"internal/modules/cjs/loader.js","function":"Module._load","line":790,"method":"_load","native":false},{"column":12,"file":"internal/modules/run_main.js","function":"Function.executeUserEntryPoint [as runMain]","line":75,"method":"executeUserEntryPoint [as runMain]","native":false},{"column":47,"file":"internal/main/run_main_module.js","function":null,"line":17,"method":null,"native":false}]}
+error: 2023-03-07 15:50:44: 	uncaughtException: authJwt is not defined
+ReferenceError: authJwt is not defined
+    at module.exports (/home/marco/apps/sistemisolari/appalti190-server/src/routes/payment.routes.js:8:33)
+    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/server.js:114:39)
+    at Module._compile (internal/modules/cjs/loader.js:1085:14)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)
+    at Module.load (internal/modules/cjs/loader.js:950:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:790:12)
+    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:75:12)
+    at internal/main/run_main_module.js:17:47
+info: 2023-03-07 15:51:18: 	Activating [43m test [0m environment
+info: 2023-03-07 15:51:27: 	Server is running on port 5000
+info: 2023-03-07 15:51:27: 	Successfully connected to MongoDB
+info: 2023-03-07 16:02:58: 	Activating [43m test [0m environment
+info: 2023-03-07 16:02:59: 	Server is running on port 5000
+info: 2023-03-07 16:02:59: 	Successfully connected to MongoDB
+info: 2023-03-07 16:03:22: 	User signin: marcosolari@gmail.com
+info: 2023-03-07 16:03:33: 	User signin: marcosolari@gmail.com
+info: 2023-03-07 16:03:52: 	Payment session created
+info: 2023-03-07 16:04:20: 	**************** Payment success
+info: 2023-03-07 16:11:13: 	Activating [43m test [0m environment
+info: 2023-03-07 16:11:13: 	Server is running on port 5000
+info: 2023-03-07 16:11:13: 	Successfully connected to MongoDB
+info: 2023-03-07 16:11:59: 	Payment session created
+info: 2023-03-07 16:15:06: 	User signin: marcosolari@gmail.com
+info: 2023-03-07 16:15:24: 	Payment session created
+info: 2023-03-07 16:16:37: 	Activating [43m test [0m environment
+info: 2023-03-07 16:16:38: 	Server is running on port 5000
+info: 2023-03-07 16:16:38: 	Successfully connected to MongoDB
+info: 2023-03-07 16:17:41: 	User signin: marcosolari@gmail.com
+info: 2023-03-07 16:17:58: 	Payment session created
+info: 2023-03-07 16:19:57: 	Payment session created
+info: 2023-03-07 16:21:40: 	Payment session created
+info: 2023-03-07 16:22:45: 	Payment session created
+info: 2023-03-07 16:23:58: 	Payment session created
+info: 2023-03-07 16:24:20: 	Activating [43m test [0m environment
+info: 2023-03-07 16:24:21: 	Server is running on port 5000
+info: 2023-03-07 16:24:21: 	Successfully connected to MongoDB
+info: 2023-03-07 16:26:07: 	Activating [43m test [0m environment
+info: 2023-03-07 16:26:08: 	Server is running on port 5000
+info: 2023-03-07 16:26:08: 	Successfully connected to MongoDB
+info: 2023-03-07 16:26:21: 	Payment session created
+info: 2023-03-07 16:44:27: 	User signin: marcosolari@gmail.com
+info: 2023-03-07 16:44:37: 	Payment session created
+info: 2023-03-07 16:51:18: 	Activating [43m test [0m environment
+info: 2023-03-07 16:51:19: 	Server is running on port 5000
+info: 2023-03-07 16:51:19: 	Successfully connected to MongoDB
+info: 2023-03-07 16:52:00: 	Payment session created
+info: 2023-03-07 16:57:52: 	Payment session created
+info: 2023-03-07 17:01:27: 	Activating [43m test [0m environment
+info: 2023-03-07 17:01:28: 	Server is running on port 5000
+info: 2023-03-07 17:01:28: 	Successfully connected to MongoDB
+info: 2023-03-07 17:01:37: 	Payment session created
+info: 2023-03-07 17:02:36: 	Payment successful
+info: 2023-03-07 17:03:21: 	Activating [43m test [0m environment
+info: 2023-03-07 17:03:22: 	Server is running on port 5000
+info: 2023-03-07 17:03:22: 	Successfully connected to MongoDB
+info: 2023-03-07 17:03:30: 	Payment session created
+info: 2023-03-07 17:07:10: 	Payment successful
+info: 2023-03-07 17:08:19: 	Payment session created
+info: 2023-03-07 17:08:39: 	Payment successful
+info: 2023-03-07 17:10:23: 	User signin: marcosolari@gmail.com
+info: 2023-03-07 17:10:50: 	Payment session created
+info: 2023-03-07 17:11:17: 	Payment successful
+info: 2023-03-07 17:13:29: 	Payment session created
+info: 2023-03-07 17:14:01: 	Payment successful
+info: 2023-03-07 17:15:31: 	Payment session created
+info: 2023-03-07 17:15:50: 	Payment successful
+info: 2023-03-07 17:19:09: 	Payment session created
+info: 2023-03-07 17:19:28: 	Payment successful
+info: 2023-03-07 17:22:22: 	Payment session created
+info: 2023-03-07 17:26:17: 	Activating [43m test [0m environment
+info: 2023-03-07 17:26:18: 	Server is running on port 5000
+info: 2023-03-07 17:26:18: 	Successfully connected to MongoDB
+info: 2023-03-07 17:26:28: 	Payment successful
+info: 2023-03-07 17:37:00: 	Payment session created
+info: 2023-03-07 17:50:17: 	Activating [43m test [0m environment
+info: 2023-03-07 17:50:17: 	Server is running on port 5000
+info: 2023-03-07 17:50:17: 	Successfully connected to MongoDB
+info: 2023-03-07 17:51:14: 	Payment session created
+info: 2023-03-07 17:51:37: 	Payment successful
+info: 2023-03-07 17:53:11: 	Activating [43m test [0m environment
+info: 2023-03-07 17:53:12: 	Server is running on port 5000
+info: 2023-03-07 17:53:12: 	Successfully connected to MongoDB
+info: 2023-03-07 17:53:59: 	Payment session created
+info: 2023-03-07 17:54:14: 	Payment successful
+info: 2023-03-07 17:55:15: 	Activating [43m test [0m environment
+info: 2023-03-07 17:55:16: 	Server is running on port 5000
+info: 2023-03-07 17:55:16: 	Successfully connected to MongoDB
+info: 2023-03-07 17:55:34: 	Payment session created
+info: 2023-03-07 17:55:49: 	Payment successful
+info: 2023-03-07 17:56:48: 	Payment session created
+info: 2023-03-07 17:57:13: 	Payment successful
+info: 2023-03-07 18:00:10: 	Payment session created
+info: 2023-03-07 18:00:28: 	Payment successful
+info: 2023-03-07 18:01:09: 	Activating [43m test [0m environment
+info: 2023-03-07 18:01:10: 	Server is running on port 5000
+info: 2023-03-07 18:01:10: 	Successfully connected to MongoDB
+info: 2023-03-07 18:02:00: 	Payment session created
+info: 2023-03-07 18:02:22: 	Payment successful
+info: 2023-03-07 18:08:33: 	Activating [43m test [0m environment
+info: 2023-03-07 18:08:34: 	Server is running on port 5000
+info: 2023-03-07 18:08:34: 	Successfully connected to MongoDB
+info: 2023-03-07 18:09:18: 	Activating [43m test [0m environment
+info: 2023-03-07 18:09:19: 	Server is running on port 5000
+info: 2023-03-07 18:09:19: 	Successfully connected to MongoDB
+info: 2023-03-07 18:09:37: 	Payment session created
+info: 2023-03-07 18:09:55: 	Payment successful
+info: 2023-03-07 18:12:18: 	Activating [43m test [0m environment
+{"date":"Tue Mar 07 2023 18:12:19 GMT+0100 (Central European Standard Time)","error":{"address":"::","code":"EADDRINUSE","errno":-98,"port":5000,"syscall":"listen"},"exception":true,"level":"error","message":"uncaughtException: listen EADDRINUSE: address already in use :::5000\nError: listen EADDRINUSE: address already in use :::5000\n    at Server.setupListenHandle [as _listen2] (net.js:1331:16)\n    at listenInCluster (net.js:1379:12)\n    at Server.listen (net.js:1465:7)\n    at Function.listen (/home/marco/apps/sistemisolari/appalti190-server/node_modules/express/lib/application.js:618:24)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/server.js:136:7)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:75:12)\n    at internal/main/run_main_module.js:17:47","os":{"loadavg":[3.31,2.39,2.28],"uptime":1862.14},"process":{"argv":["/usr/bin/node","/home/marco/apps/sistemisolari/appalti190-server/server.js"],"cwd":"/home/marco/apps/sistemisolari/appalti190-server","execPath":"/usr/bin/node","gid":1000,"memoryUsage":{"arrayBuffers":22024194,"external":23702956,"heapTotal":80543744,"heapUsed":57883448,"rss":113127424},"pid":10134,"uid":1000,"version":"v14.20.1"},"stack":"Error: listen EADDRINUSE: address already in use :::5000\n    at Server.setupListenHandle [as _listen2] (net.js:1331:16)\n    at listenInCluster (net.js:1379:12)\n    at Server.listen (net.js:1465:7)\n    at Function.listen (/home/marco/apps/sistemisolari/appalti190-server/node_modules/express/lib/application.js:618:24)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/server.js:136:7)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:75:12)\n    at internal/main/run_main_module.js:17:47","trace":[{"column":16,"file":"net.js","function":"Server.setupListenHandle [as _listen2]","line":1331,"method":"setupListenHandle [as _listen2]","native":false},{"column":12,"file":"net.js","function":"listenInCluster","line":1379,"method":null,"native":false},{"column":7,"file":"net.js","function":"Server.listen","line":1465,"method":"listen","native":false},{"column":24,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/express/lib/application.js","function":"Function.listen","line":618,"method":"listen","native":false},{"column":7,"file":"/home/marco/apps/sistemisolari/appalti190-server/server.js","function":null,"line":136,"method":null,"native":false},{"column":14,"file":"internal/modules/cjs/loader.js","function":"Module._compile","line":1085,"method":"_compile","native":false},{"column":10,"file":"internal/modules/cjs/loader.js","function":"Module._extensions..js","line":1114,"method":".js","native":false},{"column":32,"file":"internal/modules/cjs/loader.js","function":"Module.load","line":950,"method":"load","native":false},{"column":12,"file":"internal/modules/cjs/loader.js","function":"Module._load","line":790,"method":"_load","native":false},{"column":12,"file":"internal/modules/run_main.js","function":"Function.executeUserEntryPoint [as runMain]","line":75,"method":"executeUserEntryPoint [as runMain]","native":false},{"column":47,"file":"internal/main/run_main_module.js","function":null,"line":17,"method":null,"native":false}]}
+error: 2023-03-07 18:12:19: 	uncaughtException: listen EADDRINUSE: address already in use :::5000
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (net.js:1331:16)
+    at listenInCluster (net.js:1379:12)
+    at Server.listen (net.js:1465:7)
+    at Function.listen (/home/marco/apps/sistemisolari/appalti190-server/node_modules/express/lib/application.js:618:24)
+    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/server.js:136:7)
+    at Module._compile (internal/modules/cjs/loader.js:1085:14)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)
+    at Module.load (internal/modules/cjs/loader.js:950:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:790:12)
+    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:75:12)
+    at internal/main/run_main_module.js:17:47
+info: 2023-03-07 18:12:34: 	Activating [43m test [0m environment
+{"date":"Tue Mar 07 2023 18:12:35 GMT+0100 (Central European Standard Time)","error":{"address":"::","code":"EADDRINUSE","errno":-98,"port":5000,"syscall":"listen"},"exception":true,"level":"error","message":"uncaughtException: listen EADDRINUSE: address already in use :::5000\nError: listen EADDRINUSE: address already in use :::5000\n    at Server.setupListenHandle [as _listen2] (net.js:1331:16)\n    at listenInCluster (net.js:1379:12)\n    at Server.listen (net.js:1465:7)\n    at Function.listen (/home/marco/apps/sistemisolari/appalti190-server/node_modules/express/lib/application.js:618:24)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/server.js:136:7)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:75:12)\n    at internal/main/run_main_module.js:17:47","os":{"loadavg":[3.89,2.57,2.34],"uptime":1878.47},"process":{"argv":["/usr/bin/node","/home/marco/apps/sistemisolari/appalti190-server/server.js"],"cwd":"/home/marco/apps/sistemisolari/appalti190-server","execPath":"/usr/bin/node","gid":1000,"memoryUsage":{"arrayBuffers":22000017,"external":23678779,"heapTotal":80805888,"heapUsed":58099848,"rss":113717248},"pid":10318,"uid":1000,"version":"v14.20.1"},"stack":"Error: listen EADDRINUSE: address already in use :::5000\n    at Server.setupListenHandle [as _listen2] (net.js:1331:16)\n    at listenInCluster (net.js:1379:12)\n    at Server.listen (net.js:1465:7)\n    at Function.listen (/home/marco/apps/sistemisolari/appalti190-server/node_modules/express/lib/application.js:618:24)\n    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/server.js:136:7)\n    at Module._compile (internal/modules/cjs/loader.js:1085:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:75:12)\n    at internal/main/run_main_module.js:17:47","trace":[{"column":16,"file":"net.js","function":"Server.setupListenHandle [as _listen2]","line":1331,"method":"setupListenHandle [as _listen2]","native":false},{"column":12,"file":"net.js","function":"listenInCluster","line":1379,"method":null,"native":false},{"column":7,"file":"net.js","function":"Server.listen","line":1465,"method":"listen","native":false},{"column":24,"file":"/home/marco/apps/sistemisolari/appalti190-server/node_modules/express/lib/application.js","function":"Function.listen","line":618,"method":"listen","native":false},{"column":7,"file":"/home/marco/apps/sistemisolari/appalti190-server/server.js","function":null,"line":136,"method":null,"native":false},{"column":14,"file":"internal/modules/cjs/loader.js","function":"Module._compile","line":1085,"method":"_compile","native":false},{"column":10,"file":"internal/modules/cjs/loader.js","function":"Module._extensions..js","line":1114,"method":".js","native":false},{"column":32,"file":"internal/modules/cjs/loader.js","function":"Module.load","line":950,"method":"load","native":false},{"column":12,"file":"internal/modules/cjs/loader.js","function":"Module._load","line":790,"method":"_load","native":false},{"column":12,"file":"internal/modules/run_main.js","function":"Function.executeUserEntryPoint [as runMain]","line":75,"method":"executeUserEntryPoint [as runMain]","native":false},{"column":47,"file":"internal/main/run_main_module.js","function":null,"line":17,"method":null,"native":false}]}
+error: 2023-03-07 18:12:35: 	uncaughtException: listen EADDRINUSE: address already in use :::5000
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (net.js:1331:16)
+    at listenInCluster (net.js:1379:12)
+    at Server.listen (net.js:1465:7)
+    at Function.listen (/home/marco/apps/sistemisolari/appalti190-server/node_modules/express/lib/application.js:618:24)
+    at Object.<anonymous> (/home/marco/apps/sistemisolari/appalti190-server/server.js:136:7)
+    at Module._compile (internal/modules/cjs/loader.js:1085:14)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)
+    at Module.load (internal/modules/cjs/loader.js:950:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:790:12)
+    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:75:12)
+    at internal/main/run_main_module.js:17:47
+info: 2023-03-07 18:12:57: 	Activating [43m test [0m environment
+info: 2023-03-07 18:12:58: 	Server is running on port 5000
+info: 2023-03-07 18:12:58: 	Successfully connected to MongoDB
+info: 2023-03-07 18:15:55: 	User signin: marcosolari@gmail.com
+info: 2023-03-07 18:16:06: 	Payment session created
+info: 2023-03-07 18:18:37: 	Activating [43m test [0m environment
+info: 2023-03-07 18:18:38: 	Server is running on port 5000
+info: 2023-03-07 18:18:38: 	Successfully connected to MongoDB
+info: 2023-03-07 18:18:57: 	Payment session created
+info: 2023-03-07 18:19:26: 	Payment successful
+info: 2023-03-07 18:22:40: 	Activating [43m test [0m environment
+info: 2023-03-07 18:22:40: 	Server is running on port 5000
+info: 2023-03-07 18:22:40: 	Successfully connected to MongoDB
+info: 2023-03-07 18:23:08: 	Payment session created
+info: 2023-03-07 18:24:58: 	Payment session created
+info: 2023-03-07 18:25:16: 	Payment successful
+info: 2023-03-07 18:26:33: 	User signin: marcosolari@gmail.com
+info: 2023-03-07 18:28:20: 	Payment session created
+info: 2023-03-07 18:28:55: 	Payment successful
+info: 2023-03-07 18:30:47: 	Payment session created
+info: 2023-03-07 18:31:13: 	Payment successful
+info: 2023-03-07 18:33:01: 	Payment session created
+info: 2023-03-07 18:33:27: 	Payment successful
+info: 2023-03-07 18:36:30: 	Payment session created
+info: 2023-03-07 18:36:52: 	Payment successful
+info: 2023-03-07 18:38:03: 	Payment session created
+info: 2023-03-07 18:38:40: 	Payment successful
+info: 2023-03-07 18:43:24: 	User signin: marcosolari@gmail.com
+info: 2023-03-07 18:43:34: 	Payment session created
+info: 2023-03-07 18:43:45: 	Payment successful
+info: 2023-03-07 18:45:02: 	Payment session created
+info: 2023-03-07 18:45:14: 	Payment successful

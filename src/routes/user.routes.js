@@ -2,9 +2,6 @@
 const { authJwt } = require("../middlewares");
 const userController = require("../controllers/user.controller");
 
-// handle versioning
-//const versionRoutes = versioning();
-
 module.exports = app => {
   app.get("/api/user/getUsers", [authJwt.verifyToken, authJwt.isAdmin], userController.getUsers);
   app.get("/api/user/getProfile", authJwt.verifyToken, userController.getProfile);
@@ -20,6 +17,9 @@ module.exports = app => {
   /**
    * To use versioning:
    * 
+   * // handle versioning
+   * const versionRoutes = versioning();
+   *
    * app.get("/api/getUsers", [authJwt.verifyToken, authJwt.isAdmin], versionRoutes({
    *   "^1": userController.adminPanel,
    *   "^2": userController.adminPanelV2,

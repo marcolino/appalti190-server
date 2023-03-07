@@ -115,20 +115,19 @@ module.exports = {
   ],
   payment: {
     stripe: {
-      products: (process.env.STRIPE_MODE === "production") ? { // stripe mode is production
+      products: (process.env.STRIPE_MODE === "live") ? { // stripe mode is production
         free: {
-          name: "Appalti190 Gratuito",
+          name: "Appalti190 Gratuito LIVE",
           product_id: "prod_LC4k3rwA64D45l",
           price_id: "price_1KVgafFZEWHriL1u8PFSvxSy",
         },
         standard: {
-          name: "Appalti190 Standard",
+          name: "Appalti190 Standard LIVE",
           product_id: "prod_LC4lYicsBXPmIA",
           price_id: "price_1KVgbfFZEWHriL1uR5BnWO9W",
         },
         unlimited: {
-          name: "Appalti190 Illimitato",
-          product_id: "prod_LC4nzqufqjsKBJ",
+          name: "Appalti190 Illimitato LIVEKBJ",
           price_id: "price_1KVgdSFZEWHriL1udJubMAAn",
         },
       } : { // development
@@ -148,10 +147,12 @@ module.exports = {
           price_id: "price_1KVgfKFZEWHriL1utJyT904c",
         },
       },
-      paymentSuccessUrl: `${clientAppalti190BaseUrl}/payment-success`,
-      paymentCancelUrl: `${clientAppalti190BaseUrl}/payment-cancel`,
-      paymentSuccessUrlClient: `${clientShowcaseBaseUrl}/payment-success`,
-      paymentCancelUrlClient: `${clientShowcaseBaseUrl}/payment-cancel`,
+      paymentSuccessUrl: "http://localhost:5000/api/payment/payment-success",
+      paymentCancelUrl: "http://localhost:5000/api/payment/payment-cancel",
+      paymentSuccessUrlClient: `${clientAppalti190BaseUrl}/payment-success`,
+      paymentCancelUrlClient: `${clientAppalti190BaseUrl}/payment-cancel`,
+      paymentSuccessUrlShowcase: `${clientShowcaseBaseUrl}/payment-success`,
+      paymentCancelUrlShowcase: `${clientShowcaseBaseUrl}/payment-cancel`,
     },
   },
   emailAdministration: {
