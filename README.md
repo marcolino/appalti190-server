@@ -1,5 +1,6 @@
 [![GitHub package.json version](https://img.shields.io/github/package-json/v/marcolino/appalti190-server?style=flat)](version)
 [![GitHub package.json license](https://img.shields.io/github/package-json/license/marcolino/appalti190-server?style=flat)](license)
+[![GitHub release-date](https://img.shields.io/github/package-json/release-date/marcolino/appalti190-server?style=flat)](release-date)
 [![Mocha tests](https://github.com/marcolino/appalti190-server/blob/master/test/badges/mocha.svg)](tests)
 <p align="center">
 <a href="https://Appalti190-server.com/#gh-light-mode-only">
