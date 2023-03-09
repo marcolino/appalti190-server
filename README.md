@@ -1,6 +1,5 @@
 [![GitHub package.json version](https://img.shields.io/github/package-json/v/marcolino/appalti190-server?style=flat)](version)
 [![GitHub package.json license](https://img.shields.io/github/package-json/license/marcolino/appalti190-server?style=flat)](license)
-[![GitHub release-date](https://img.shields.io/github/package-json/release-date/marcolino/appalti190-server?style=flat)](release-date)
 [![Mocha tests](https://github.com/marcolino/appalti190-server/blob/master/test/badges/mocha.svg)](tests)
 <p align="center">
 <a href="https://Appalti190-server.com/#gh-light-mode-only">
@@ -22,7 +21,7 @@
   <a href="https://opensource.org/licenses/Apache-2.0">
     <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License">
   </a>
-  <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/Appalti190-server/Appalti190-server?color=purple"/>
+  <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/marcolino/appalti190-server?color=purple"/>
 </p>
 
 <div align="center">
