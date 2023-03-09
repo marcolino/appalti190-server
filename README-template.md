@@ -1,6 +1,7 @@
 [![GitHub package.json version](https://img.shields.io/github/package-json/v/marcolino/appalti190-server?style=plastic)](version)
+[![Mocha tests](https://github.com/marcolino/appalti190-server/test/badges/mocha-badge.svg)](tests)
 <p align="center">
-s<a href="https://amplication.com/#gh-light-mode-only">
+<a href="https://amplication.com/#gh-light-mode-only">
 <img width="300" src="https://raw.githubusercontent.com/amplication/amplication/master/light.svg#gh-light-mode-only">
 </a>
 <a href="https://amplication.com/#gh-dark-mode-only">
@@ -31,15 +32,15 @@ s<a href="https://amplication.com/#gh-light-mode-only">
   </div>
  
 
-![1  Amplication main](https://user-images.githubusercontent.com/53312820/190913686-02c7deb1-da2f-41b8-aa31-065e00f6155c.png)
+![1 Amplication main](https://user-images.githubusercontent.com/53312820/190913686-02c7deb1-da2f-41b8-aa31-065e00f6155c.png)
 
-[Amplication](https://amplication.com/) is an open‑source development platform. It helps professional Node.js developers build quality Node.js applications without spending time on repetitive coding tasks.
+[appalti190-server](https://github.com/marcolino/appalti190-server/) is an open‑source server side project for a general-purpose web app implementing a generic SAAS.
 
-Amplication auto-generates backend apps built with TypeScript and Node.js, and a client built with React.
+Appalti190-server Amplication auto-generates backend apps built with TypeScript and Node.js, and a client built with React...
 
 # Features
 
-Amplication provides the following features:
+Appalti1190-server provides the following features:
 
 - Production-ready APIs
 - Data Model
