@@ -1,5 +1,5 @@
 <p align="center">
-![GitHub package.json version](https://img.shields.io/github/package-json/v/marcolino/appalti190-server?style=plastic)
+[![GitHub package.json version](https://img.shields.io/github/package-json/v/marcolino/appalti190-server?style=plastic)](version)
 <a href="https://amplication.com/#gh-light-mode-only">
 <img width="300" src="https://raw.githubusercontent.com/amplication/amplication/master/light.svg#gh-light-mode-only">
 </a>
