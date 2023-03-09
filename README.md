@@ -36,7 +36,7 @@
 
 [appalti190-server](https://github.com/marcolino/appalti190-server/) is an open‑source server side project for a general-purpose web app implementing a generic SAAS.
 
-Appalti190-server Appalti190-server auto-generates backend apps built with TypeScript and Node.js, and a client built with React...
+Appalti190-server ...
 
 # Features
 
