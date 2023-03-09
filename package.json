@@ -12,6 +12,7 @@
     "start-dev": "nodemon --ignore client/ -w '.' -w .env server.js",
     "start": "node server.js",
     "test": "mocha --exit --timeout 5000 test",
+    "test-for-badge": "mocha --timeout 5000 --exit --reporter mocha-badge-generator --reporter-option badge_subject=tests,badge_format=svg,badge_output=./test/badges/mocha-badge.svg",
     "testwatch": "nodemon --exec \"mocha --recursive --timeout 10000\"",
     "pub": "git add . && git commit -m \"generic commit\" && git push && yarn push",
     "pub-dev": "yarn pub && yarn logs",
