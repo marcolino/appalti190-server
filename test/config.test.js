@@ -20,6 +20,21 @@ const config = {
       country: "Italy",
     },
   },
+  adminstandard: {
+    name: "Alice",
+    surname: "Azure",
+    email: "admin-standard@mail.com",
+    password: "admin!",
+    fiscalCode: "CGNNMO80A01A001T",
+    address: {
+      street: "Solari street",
+      streetNo: "0",
+      city: "Rivoli",
+      province: "TO",
+      zip: "10100",
+      country: "Italy",
+    },
+  },
   user: {
     name: "Bob",
     surname: "Blue",

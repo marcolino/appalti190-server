@@ -12591,3 +12591,37 @@ info: 2023-03-09 18:55:53: 	User signup: {"roles":["6405b3152c959193b3979dfc"],"
 info: 2023-03-09 18:55:53: 	User signin: user@mail.com
 info: 2023-03-09 18:55:53: 	User signup: {"roles":["6405b3152c959193b3979dfd"],"isDeleted":false,"isVerified":true,"_id":"640a1da9d5201347a623d912","email":"admin@mail.com","password":"$2a$10$dH.4G7yM6p6ixTKoypexk.aZ67QiicXnYPcYkNYXCzL5UvWwu6JF6","address":{"_id":"640a1da9d5201347a623d913","city":""},"plan":"63fce828d86497622429a3c6","createdAt":"2023-03-09T17:55:53.556Z","updatedAt":"2023-03-09T17:55:53.716Z","__v":0}
 info: 2023-03-09 18:55:53: 	User signin: admin@mail.com
+info: 2023-03-09 19:14:52: 	Activating [43m test [0m environment
+info: 2023-03-09 19:14:53: 	Successfully connected to MongoDB
+info: 2023-03-09 19:14:53: 	User signup: {"roles":["6405b3152c959193b3979dfc"],"isDeleted":false,"isVerified":true,"_id":"640a221ddbc6a351aecc5e71","email":"user@mail.com","password":"$2a$10$eLRV4aYezSNPYm/7vKvgTOw0lrhjFnzbbZY6NruSlnK.tXYM9LdYC","address":{"_id":"640a221ddbc6a351aecc5e72","city":""},"plan":"63fce828d86497622429a3c4","createdAt":"2023-03-09T18:14:53.458Z","updatedAt":"2023-03-09T18:14:53.587Z","__v":0}
+info: 2023-03-09 19:14:53: 	User signin: user@mail.com
+info: 2023-03-09 19:14:53: 	User signup: {"roles":["6405b3152c959193b3979dfd"],"isDeleted":false,"isVerified":true,"_id":"640a221ddbc6a351aecc5e83","email":"admin@mail.com","password":"$2a$10$rTo78cFBY/ZkA.r0Z8oHZu/aF5z1AoQH1z43lJUbPuZZNr.lkUhZG","address":{"_id":"640a221ddbc6a351aecc5e84","city":""},"plan":"63fce828d86497622429a3c6","createdAt":"2023-03-09T18:14:53.781Z","updatedAt":"2023-03-09T18:14:53.904Z","__v":0}
+info: 2023-03-09 19:14:54: 	User signin: admin@mail.com
+info: 2023-03-09 19:16:20: 	Activating [43m test [0m environment
+info: 2023-03-09 19:16:21: 	Successfully connected to MongoDB
+info: 2023-03-09 19:16:21: 	User signup: {"roles":["6405b3152c959193b3979dfc"],"isDeleted":false,"isVerified":true,"_id":"640a22757eeb62522250e4e6","email":"user@mail.com","password":"$2a$10$aps9INr0r.z0nrw0uHxRe.NtOSWL2Pe78GKvtebI2vgx.BKH6Pboy","address":{"_id":"640a22757eeb62522250e4e7","city":""},"plan":"63fce828d86497622429a3c4","createdAt":"2023-03-09T18:16:21.160Z","updatedAt":"2023-03-09T18:16:21.293Z","__v":0}
+info: 2023-03-09 19:16:21: 	User signin: user@mail.com
+info: 2023-03-09 19:16:21: 	User signup: {"roles":["6405b3152c959193b3979dfd"],"isDeleted":false,"isVerified":true,"_id":"640a22757eeb62522250e4f8","email":"admin@mail.com","password":"$2a$10$GfLcR6VDCS4uYPnYZseajuyCcK0mL.G80BzqIOx6TGFjS1ox8aXY.","address":{"_id":"640a22757eeb62522250e4f9","city":""},"plan":"63fce828d86497622429a3c6","createdAt":"2023-03-09T18:16:21.463Z","updatedAt":"2023-03-09T18:16:21.589Z","__v":0}
+info: 2023-03-09 19:16:21: 	User signin: admin@mail.com
+info: 2023-03-09 19:17:50: 	Activating [43m test [0m environment
+info: 2023-03-09 19:17:50: 	Successfully connected to MongoDB
+info: 2023-03-09 19:17:50: 	User signup: {"roles":["6405b3152c959193b3979dfc"],"isDeleted":false,"isVerified":true,"_id":"640a22ced15d0252ce9c4845","email":"user@mail.com","password":"$2a$10$Iv3y7S0Qlz11n.QmjbFtyuRu7AQwFkn6fh3E/myCw0cwNVbcuQgoS","address":{"_id":"640a22ced15d0252ce9c4846","city":""},"plan":"63fce828d86497622429a3c4","createdAt":"2023-03-09T18:17:50.628Z","updatedAt":"2023-03-09T18:17:50.758Z","__v":0}
+info: 2023-03-09 19:17:50: 	User signin: user@mail.com
+info: 2023-03-09 19:17:51: 	User signup: {"roles":["6405b3152c959193b3979dfd"],"isDeleted":false,"isVerified":true,"_id":"640a22ced15d0252ce9c4857","email":"admin@mail.com","password":"$2a$10$mnivoNWlge30WTDaF4O3Zu.vojd0/58J3IjwUbFpZWPp/vkf7dKwm","address":{"_id":"640a22ced15d0252ce9c4858","city":""},"plan":"63fce828d86497622429a3c6","createdAt":"2023-03-09T18:17:50.931Z","updatedAt":"2023-03-09T18:17:51.056Z","__v":0}
+info: 2023-03-09 19:17:51: 	User signin: admin@mail.com
+info: 2023-03-09 19:25:37: 	Activating [43m test [0m environment
+info: 2023-03-09 19:25:38: 	Successfully connected to MongoDB
+info: 2023-03-09 19:25:38: 	User signup: {"roles":["6405b3152c959193b3979dfc"],"isDeleted":false,"isVerified":true,"_id":"640a24a28ff9115469a27612","email":"user@mail.com","password":"$2a$10$jlRkVT2XwrB5Zizayjt70ezKP2tPs0xdoVP0KXjsn6SKFTqeMgvby","address":{"_id":"640a24a28ff9115469a27613","city":""},"plan":"63fce828d86497622429a3c4","createdAt":"2023-03-09T18:25:38.078Z","updatedAt":"2023-03-09T18:25:38.233Z","__v":0}
+info: 2023-03-09 19:25:38: 	User signin: user@mail.com
+info: 2023-03-09 19:25:38: 	User signup: {"roles":["6405b3152c959193b3979dfd"],"isDeleted":false,"isVerified":true,"_id":"640a24a28ff9115469a27624","email":"admin@mail.com","password":"$2a$10$ZgiV6HOhvBxSgeXhHu3BLuVEagDoVJDUWJxrU3d6qsSu7m8AbMjK2","address":{"_id":"640a24a28ff9115469a27625","city":""},"plan":"63fce828d86497622429a3c6","createdAt":"2023-03-09T18:25:38.421Z","updatedAt":"2023-03-09T18:25:38.568Z","__v":0}
+info: 2023-03-09 19:25:38: 	User signup: {"roles":["6405b3152c959193b3979dfd"],"isDeleted":false,"isVerified":true,"_id":"640a24a28ff9115469a27630","email":"admin-standard@mail.com","password":"$2a$10$r2gjOp1ZyPEtcVPqec5PA.RM.DfDNIsRmMvQlbFEtw3fWNyq8yebS","address":{"_id":"640a24a28ff9115469a27631","city":""},"plan":"63fce828d86497622429a3c5","createdAt":"2023-03-09T18:25:38.583Z","updatedAt":"2023-03-09T18:25:38.734Z","__v":0}
+info: 2023-03-09 19:25:38: 	User signin: admin@mail.com
+info: 2023-03-09 19:25:39: 	User signin: admin@mail.com
+info: 2023-03-09 19:26:28: 	Activating [43m test [0m environment
+info: 2023-03-09 19:26:28: 	Successfully connected to MongoDB
+info: 2023-03-09 19:26:29: 	User signup: {"roles":["6405b3152c959193b3979dfc"],"isDeleted":false,"isVerified":true,"_id":"640a24d4581c4554cb2500e2","email":"user@mail.com","password":"$2a$10$0SyFVMkWFf7alN0zmjQSBu8NdTTGcydOjxE3ZJLh/K4gPg1NFHl66","address":{"_id":"640a24d4581c4554cb2500e3","city":""},"plan":"63fce828d86497622429a3c4","createdAt":"2023-03-09T18:26:28.894Z","updatedAt":"2023-03-09T18:26:29.044Z","__v":0}
+info: 2023-03-09 19:26:29: 	User signin: user@mail.com
+info: 2023-03-09 19:26:29: 	User signup: {"roles":["6405b3152c959193b3979dfd"],"isDeleted":false,"isVerified":true,"_id":"640a24d5581c4554cb2500f4","email":"admin@mail.com","password":"$2a$10$XlGvkbGmV4I51bjgRF3nH.JDP6LLTywLR2yB8vgGVygDABETf3tZy","address":{"_id":"640a24d5581c4554cb2500f5","city":""},"plan":"63fce828d86497622429a3c6","createdAt":"2023-03-09T18:26:29.237Z","updatedAt":"2023-03-09T18:26:29.388Z","__v":0}
+info: 2023-03-09 19:26:29: 	User signup: {"roles":["6405b3152c959193b3979dfd"],"isDeleted":false,"isVerified":true,"_id":"640a24d5581c4554cb250100","email":"admin-standard@mail.com","password":"$2a$10$cEW827nWFxkdI/oHsjChWO7og9fihR.kXM7L0hloT.YTEKd46QORS","address":{"_id":"640a24d5581c4554cb250101","city":""},"plan":"63fce828d86497622429a3c5","createdAt":"2023-03-09T18:26:29.401Z","updatedAt":"2023-03-09T18:26:29.550Z","__v":0}
+info: 2023-03-09 19:26:29: 	User signin: admin@mail.com
+info: 2023-03-09 19:26:29: 	User signin: admin@mail.com
