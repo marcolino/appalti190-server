@@ -1,6 +1,5 @@
-<!-- for badges, see https://github.com/alexandresanlim/Badges4-README.md-Profile -->
-<!-- for badges HOWTO, see https://css-tricks.com/adding-custom-github-badges-to-your-repo/ -->
 <p align="center">
+![GitHub package.json version](https://img.shields.io/github/package-json/v/marcolino/appalti190-server?style=plastic)
 <a href="https://amplication.com/#gh-light-mode-only">
 <img width="300" src="https://raw.githubusercontent.com/amplication/amplication/master/light.svg#gh-light-mode-only">
 </a>
