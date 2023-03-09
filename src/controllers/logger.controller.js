@@ -69,17 +69,19 @@ try {
     );
   }
 
-  if (process.env.NODE_ENV !== "production" /*&& process.env.NODE_ENV !== "test"*/) { // if we're not in production nor test then also log to the `Console` transport
-    const consoleLogFormat = winston.format.printf(info => {
-      return `${info.timestamp} ${info.level}: ` + info.message;
-    });
-    transports.push(new winston.transports.Console({
-      format: winston.format.combine(winston.format.timestamp(), consoleLogFormat),
-      level: "debug",
-      handleExceptions: true,
-      prettyPrint: true,
-      colorize: true,
-    }));
+  if (process.env.NODE_ENV !== "production") { // if we're not in production then also log to the `Console` transport
+    if ((require.main !== module) || (info.level <= 4)) { // if we are in test skip logging upper than warning levels (notice, info, debug)
+      const consoleLogFormat = winston.format.printf(info => {
+        return `${info.timestamp} ${info.level}: ` + info.message;
+      });
+      transports.push(new winston.transports.Console({
+        format: winston.format.combine(winston.format.timestamp(), consoleLogFormat),
+        level: "debug",
+        handleExceptions: true,
+        prettyPrint: true,
+        colorize: true,
+      }));
+    }
   }
 } catch(err) {
   console.error("Winston transports creation error:", err);
@@ -94,7 +96,5 @@ try {
 } catch(err) {
   console.error("Winston logger creation error:", err);
 }
-
-//let logger = winston.createLogger();
 
 module.exports = { logger, colors };

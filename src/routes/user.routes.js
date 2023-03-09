@@ -1,4 +1,3 @@
-//const versioning = require("express-routes-versioning");
 const { authJwt } = require("../middlewares");
 const userController = require("../controllers/user.controller");
 
@@ -16,6 +15,8 @@ module.exports = app => {
 
   /**
    * To use versioning:
+   * 
+   * const versioning = require("express-routes-versioning");
    * 
    * // handle versioning
    * const versionRoutes = versioning();

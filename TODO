@@ -21,6 +21,7 @@
 - TODO: translate notifications and logger messages ?
 - TODO: handle plan downgrade: ask confirmation, and tell about no refunds
 - TODO: add reference year to stripe products
+- TODO: in controllers, uniform catch return 500.json contents (err? err.message?)
 
 - NEWFEATURE decidere se acquistare un piano su papertrail per i logs in produzione
 - NEWFEATURE rimuovere gli account non confermati, periodicamente (??)

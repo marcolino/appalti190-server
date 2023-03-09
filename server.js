@@ -8,6 +8,7 @@ const { logger, colors } = require("./src/controllers/logger.controller");
 const db = require("./src/models");
 const { assertEnvironment } = require("./src/helpers/environment");
 const { setupEmail, notification } = require("./src/helpers/notification");
+const { nowLocaleDateTime } = require("./src/helpers/misc");
 const config = require("./src/config");
 
 const production = (process.env.NODE_ENV === "production");
@@ -20,7 +21,7 @@ i18next
   .init({
     debug: false,
     backend: {
-      loadPath: __dirname + "/src//locales/{{lng}}/{{ns}}.json"
+      loadPath: __dirname + "/src/locales/{{lng}}/{{ns}}.json"
     },
     fallbackLng: config.languages.default,
     preload: [config.languages.default]
@@ -69,9 +70,6 @@ if (production) { // load environment variables from .env file
 
 // setup email
 setupEmail();
-
-// notify startup of this server app
-notification({subject: "Startup"});
 
 // assert environment to be fully compliant with expectations
 assertEnvironment();
@@ -136,6 +134,7 @@ if (require.main === module) { // avoid listening while testing
   app.listen(PORT, () => {
     //console.log(`Server is running on port ${PORT}`);
     logger.info(`Server is running on port ${PORT}`);
+    notification({subject: "Startup", html: `Server is running on port ${PORT} on ${nowLocaleDateTime()}`});
   });
 } else { // export app for testing
   module.exports = app;

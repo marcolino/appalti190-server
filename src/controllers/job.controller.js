@@ -14,6 +14,7 @@ const config = require("../config");
 
 const zip = new nodeZip();
 
+/*
 const get = async (req, res) => {
 console.log("GET JOB.JOB - REQ.USERID:", req.userId);
   const user = await User.findOne(
@@ -38,36 +39,51 @@ const set = async (req, res) => {
   }
   return [ null, user.job ];
 };
+*/
 
-// multer custom file upload (folder with user name)
-const upload = multer({
-  storage: multer.diskStorage({
-    destination: async(req, file, cb) => {
-      const user = await User.findOne({ _id: req.userId }).exec();
-      //console.log("upload REQ destination user:", user);
-      const folder = path.join(config.job.uploadsBasePath, user.email);
-      fs.mkdir(folder, { recursive: true }, (err) => {
-        if (err) {
-          if (err.code == "EEXIST") {
-            cb(null, folder); // ignore the error if the folder already exists
+exports.upload = (req, res, next) => {
+  // multer custom file upload (folder with user name)
+  const multerUpload = multer({
+    storage: multer.diskStorage({
+      destination: async(req, file, cb) => {
+        const user = await User.findOne({ _id: req.userId }).exec();
+        //console.log("upload REQ destination user:", user);
+        const folder = path.join(config.job.uploadsBasePath, user.email);
+        fs.mkdir(folder, { recursive: true }, (err) => {
+          if (err) {
+            if (err.code == "EEXIST") {
+              cb(null, folder); // ignore the error if the folder already exists
+            } else {
+              cb(err, folder); // something else went wrong
+            }
           } else {
-            cb(err, folder); // something else went wrong
+            cb(null, folder); // successfully created folder
           }
-        } else {
-          cb(null, folder); // successfully created folder
-        }
-      });
+        });
+      },
+      filename: (req, file, cb) => {
+        cb(null, nowLocaleDateTimeFilenameFormat() + path.extname(file?.originalname) ?? "");
+      }
+    }),
+    limits: {
+      fileSize: config.upload.maxFileSize,
     },
-    filename: (req, file, cb) => {
-      cb(null, nowLocaleDateTimeFilenameFormat() + path.extname(file?.originalname) ?? "");
-    }
-  }),
-  limits: {
-    fileSize: config.upload.maxFileSize,
-  },
-});
+  });
 
-const transformXls2Xml = async (req, res) => {
+  multerUpload.single("file")(req, res, err => {
+    if (next instanceof multer.MulterError) {
+      // a Multer error occurred when uploading
+      return res.status(500).json(err);
+    } else if (err) {
+      // an unknown error occurred when uploading
+      return res.status(500).json(err);
+    }
+    // everything was fine
+    return res.status(200).json({ message: "Successfully uploaded file", file: req.file });
+  });
+};
+
+exports.transformXls2Xml = async (req, res) => {
   const retval = {
     code: "OK",
     message: "",
@@ -91,29 +107,39 @@ const transformXls2Xml = async (req, res) => {
   if (!user) {
     retval.message = req.t("The user must be authenticated");
     retval.code = "ABORTED_DUE_TO_MISSING_AUTHENTICATION";
-    return retval;
+    //return retval;
+    return res.status(200).json(retval);
   }
   if (!user.plan) {
     retval.message = req.t("The user must have a plan");
     retval.code = "ABORTED_DUE_TO_MISSING_PLAN";
-    return retval;
+    //return retval;
+    return res.status(200).json(retval);
   }
 
   // read input xls file into workbook
   const input = req.body.filePath;
-  const workbook = xlsx.readFile(input, { cellDates: true });
+  let workbook;
+  try {
+    workbook = xlsx.readFile(input, { cellDates: true });
+  } catch (err) {
+    retval.message = req.t("Error reading input file: {{error}}", {error: err.message});
+    retval.code = "ABORTED_DUE_TO_ERROR_READING_INPUT_FILE";
+    return res.status(200).json(retval);
+  }
 
   // parse the requested sheets
-  const sheetElencoGare = xlsx.utils.sheet_to_json(workbook.Sheets[config.job.sheets.elencoGare], {
-    header: false,
-    blankrows: true,
-  });
-
-  if (!sheetElencoGare.length) {
+  let sheetElencoGare;
+  try {
+    sheetElencoGare = xlsx.utils.sheet_to_json(workbook.Sheets[config.job.sheets.elencoGare], {
+      header: false,
+      blankrows: true,
+    });
+  } catch (err) {
     retval.errors.push(req.t("Sheet {{sheet}} not found", {sheet: config.job.sheets.elencoGare}));
     retval.message = req.t("Input file is corrupted");
     retval.code = "BROKEN_INPUT";
-    return retval;
+    return res.status(200).json(retval);
   }
 
   const sheetMetadati = xlsx.utils.sheet_to_json(workbook.Sheets[config.job.sheets.metadati]);
@@ -121,7 +147,8 @@ const transformXls2Xml = async (req, res) => {
     retval.errors.push(req.t("Sheet {{sheet}} not found", {sheet: config.job.sheets.metadati}));
     retval.message = req.t("Input file is corrupted");
     retval.code = "BROKEN_INPUT";
-    return retval;
+    //return retval;
+    return res.status(200).json(retval);
   }
 
   const metadati = config.job.xmlHeader.metadata;
@@ -538,17 +565,17 @@ console.log("user.plan:", user.plan)
 
   do {
     xml = createXML(xmlObj);
-console.log("xml.length:", xml.length, config.job.datasetMaximumSize);
+// console.log("xml.length:", xml.length, config.job.datasetMaximumSize);
     if (xml.length > config.job.datasetMaximumSize) { // we need a file indice, and split xml
-console.log("lottiSlice1.length:", lottiSlice1.length);
+// console.log("lottiSlice1.length:", lottiSlice1.length);
       divideFactor *= 2;
       sliceSize = Math.ceil(lottiSlice1.length / divideFactor);
-console.log("sliceSize:", sliceSize);
+// console.log("sliceSize:", sliceSize);
       lottiSlice1 = lottiSlice1.slice(0, sliceSize);
-console.log("lottiSlice1.length:", lottiSlice1.length);
+// console.log("lottiSlice1.length:", lottiSlice1.length);
       xmlObj["legge190:pubblicazione"]["data"]["lotto"] = lottiSlice1;
     } else { // xml length is inside the maximum allowed size
-console.log("BREAK");
+// console.log("BREAK");
       break;
     }
   } while (true);
@@ -597,7 +624,8 @@ console.log("SLICESIZE", sliceSize);
       retval.errors.push(result.error);
       retval.message = req.t("Error while archiving");
       retval.code = "ARCHIVE_ERROR";
-      return retval;
+      //return retval;
+      return res.status(200).json(retval);
     }
     retval.xmls = xmls;
     retval.xmlIndice = xmlIndice;
@@ -637,19 +665,20 @@ console.log("SLICESIZE", sliceSize);
     }
   }
 
-  return retval;
+  //return retval;
+  return res.status(200).json(retval);
 };
 
-function createXML(xmlObj) {
+const createXML = (xmlObj) => {
   // create the XML tree
   const root = xmlBuilder.create(xmlObj, { version: config.job.xmlHeader.version, encoding: config.job.xmlHeader.encoding });
 
   // convert the XML tree to string
   return root.end({ pretty: true, allowEmpty: true });
-}
+};
 
 // we need a function to consolidate lotto because it must be called on every new CIG row, AND at the end
-function consolidate(xmlObj, lotto, raggruppamento, partecipanti, aggiudicatarioRaggruppamento, aggiudicatari) {
+const consolidate = (xmlObj, lotto, raggruppamento, partecipanti, aggiudicatarioRaggruppamento, aggiudicatari) => {
   if (lotto) { // consolidate previous lotto
 
     if (raggruppamento !== null) { // if any, push raggruppamento before partecipanti
@@ -672,10 +701,10 @@ function consolidate(xmlObj, lotto, raggruppamento, partecipanti, aggiudicatario
 
     xmlObj["legge190:pubblicazione"]["data"]["lotto"].push(lotto);
   }
-}
+};
 
 // save contents to file on disk
-function save(folder, file, mode, contents) {
+const save = (folder, file, mode, contents) => {
   try {
     if (!fs.existsSync(folder)) { // create folder if not present
       fs.mkdirSync(folder, { recursive: true });
@@ -691,7 +720,7 @@ function save(folder, file, mode, contents) {
 }
 
 // load contents from file on disk
-function load(path) {
+const load = (path) => {
   try {
     const contents = fs.readFileSync(path, config.job.encoding); // read the contents from file
     return contents;
@@ -701,7 +730,7 @@ function load(path) {
 }
 
 // serialize zip archive to disk
-function serializeArchive(outputFolder, outputFile, outputUrlPath, zip) {
+const serializeArchive = (outputFolder, outputFile, outputUrlPath, zip) => {
   let contents = zip.generate({ base64: false, compression: "DEFLATE" });
   //fs.writeFileSync(path.join(zipFolder, zipFile), zipContents, "binary");
   if ((result = save(outputFolder, outputFile, "binary", contents)) !== true) {
@@ -717,7 +746,7 @@ console.log("outputUrlPath:", outputUrlPath);
 }
 
 // serialize xml dataset to disk
-function serializeDataset(outputFolder, outputFile, outputUrlPath, contents) {
+const serializeDataset = (outputFolder, outputFile, outputUrlPath, contents) => {
   if ((result = save(outputFolder, outputFile, /* use default mode*/ "", contents)) !== true) {
     return {
       error: result,
@@ -734,7 +763,7 @@ function serializeDataset(outputFolder, outputFile, outputUrlPath, contents) {
 }
 
 // deserialize xml dataset from disk
-function deserializeDataset(inputFilePath) {
+const deserializeDataset = (inputFilePath) => {
   const contents = load(inputFilePath);
   if (contents instanceof Error) {
     return {
@@ -750,54 +779,67 @@ function deserializeDataset(inputFilePath) {
 }
 
 // check if codice fiscale is "estero"
-function isEstero(codiceFiscale) {
+const isEstero = (codiceFiscale) => {
   return String(codiceFiscale).match(/^[A-Z]{2}\w+$/i) !== null;
 }
 
 // validate XML
-const validateXml = async (req, res) => {
-  if (req.body?.transform?.xmlIndice) { // a zip archive with indice and datasets inside is present
-    const xmlIndice = req.body?.transform?.xmlIndice;
-    const xmls = req.body.transform.xmls;
-    const schemaIndice = path.join(__dirname, "../..", config.job.schemaIndiceFile);
-    const schema = path.join(__dirname, "../..", config.job.schemaFile);
-    const promises = [];
-    
-    promises.push(validate(xmlIndice, schemaIndice));
-    for (let i = 0; i < xmls.length; i++) {
-      promises.push(validate(xmls[i], schema));
+exports.validateXml = async (req, res) => {
+  try {
+    if (req.body?.transform?.xmlIndice) { // a zip archive with indice and datasets inside is present
+      const xmlIndice = req.body?.transform?.xmlIndice;
+      const xmls = req.body.transform.xmls;
+      const schemaIndice = path.join(__dirname, "../..", config.job.schemaIndiceFile);
+      const schema = path.join(__dirname, "../..", config.job.schemaFile);
+      const promises = [];
+      
+      promises.push(validate(xmlIndice, schemaIndice));
+      for (let i = 0; i < xmls.length; i++) {
+        promises.push(validate(xmls[i], schema));
+      }
+      const results = await Promise.all(promises);
+      if (results.filter(result => result.code === "OK").length === results.length) { // all results are OK
+        //return results[0]; // return first result, all are ok
+        return res.status(200).json(results[0]); // return first result, all are ok
+      } else {
+        //return results.find(result => result.code !== "OK");
+        return res.status(200).json(results.find(result => result.code !== "OK"));
+      }
+    } else
+    if (req.body.transform.outputFile) { // a single xml dataset is present
+      const result = deserializeDataset(req.body.transform.outputFile/*xmlFilePath*/);
+      if (result.error) {
+        // return {
+        //   code: "CANNOT_READ_XML",
+        //   message: result.error,
+        // };
+        return res.status(200).json({
+          code: "CANNOT_READ_XML",
+          message: result.error,
+        });
+      }
+      const xml = result.contents;
+      const schema = path.join(__dirname, "../..", config.job.schemaFile);
+  //console.log("XML type:", typeof xml, "len:", xml.length);
+      const validation = await validate(req, res, xml, schema);
+      //return validation;
+      return res.status(200).json(validation);
+    } else { // no other cases allowed
+      // return {
+      //   code: "XML_NOT_FOUND",
+      //   message: req.t("No zip archive nor xml dataset to be validated found"),
+      // };
+      return res.status(200).json({
+        code: "XML_NOT_FOUND",
+        message: req.t("No zip archive nor xml dataset to be validated found"),
+      });
     }
-    const results = await Promise.all(promises);
-    if (results.filter(result => result.code === "OK").length === results.length) { // all results are OK
-      return results[0]; // return first result, all are ok
-    } else {
-      return results.find(result => result.code !== "OK");
-    }
-  } else
-  if (req.body.transform.outputFile) { // a single xml dataset is present
-    const result = deserializeDataset(req.body.transform.outputFile/*xmlFilePath*/);
-    if (result.error) {
-      return {
-        code: "CANNOT_READ_XML",
-        message: result.error,
-      };
-    }
-    const xml = result.contents;
-    const schema = path.join(__dirname, "../..", config.job.schemaFile);
-//console.log("XML type:", typeof xml, "len:", xml.length);
-
-    const validation = await validate(req, res, xml, schema);
-
-    return validation;
-  } else { // no other cases allowed
-    return {
-      code: "XML_NOT_FOUND",
-      message: req.t("No zip archive nor xml dataset to be validated found"),
-    };
-  }
+  } catch (err) {
+    return res.status(500).json(err);
+  };
 };
 
-async function validate(req, res, xml, schema) {
+const validate = async(req, res, xml, schema) => {
   return new Promise((resolve) => {
     xmlvalidator.validateXML(xml, schema, (err, result) => {
       if (err) {
@@ -811,7 +853,7 @@ async function validate(req, res, xml, schema) {
   });
 };
 
-function reclaimValidateMessage(message) {
+const reclaimValidateMessage = (message) => {
   const messages = message.split("\n");
   const pattern = /^\t\[([^\]]+)\]\s*([^:]*):\s*(.*)$/;
   messages.shift(); // first line is a title
@@ -821,7 +863,7 @@ function reclaimValidateMessage(message) {
   return reclaimedMessages;
 }
 
-const outcomeCheck = async (req, res) => {
+exports.outcomeCheck = async (req, res) => {
   const data = {
     anno: req.body.anno + 1,
     codiceFiscaleAmministrazione: req.body.codiceFiscaleAmministrazione,
@@ -842,7 +884,8 @@ const outcomeCheck = async (req, res) => {
           .then(async(responseDetails) => {
             answer.esitoComunicazione = responseDetails?.data?.dati?.esitoComunicazione;
             answer.tentativiAccessoUrl = responseDetails?.data?.dati?.tentativiAccessoUrl;
-            return [null, answer];
+            //return [null, answer];
+            return res.status(200).json(answer);
           })
           .catch(error => {
             answer.esitoComunicazione = {};
@@ -850,33 +893,37 @@ const outcomeCheck = async (req, res) => {
             answer.esitoComunicazione.descrizione = error?.response?.status;
             answer.esitoComunicazione.dettaglio = error?.response?.statusText;
             answer.tentativiAccessoUrl = [];
-            return [null, answer];
+            //return [null, answer];
+            return res.status(200).json(answer);
           })
         ;
       }
-      //console.log("OUTCOMECHECK ANSWER *:", answer);
-      return [null, answer];
+      //return [null, answer];
+      return res.status(200).json(answer);
     })
-    .catch(error => {
-      console.error("error checking outcome:", error.message);
-      return [error, answer];
+    .catch(err => {
+      console.error("error checking outcome:", err.message);
+      //return [err, answer];
+      return res.status(500).json(err);
     })
   ;
 };
 
-const outcomeFailureDetails = async (req, res) => {
+exports.outcomeFailureDetails = async (req, res) => {
   const url = `${config.outcomeFailureDetailsBaseUrl}/${req.params.anno}/${req.params.identificativoPEC}`;
   return await axios.get(url)
     .then(response => {
-      return [null, response.data];
+      //return [null, response.data];
+      return res.status(200).json(response.data);
     })
-    .catch(error => {
-      return error.message;
+    .catch(err => {
+      //return err.message;
+      return res.status(500).json(err.message);
     })
   ;
 };
 
-const urlExistenceAndMatch = async (req, res) => {
+exports.urlExistenceAndMatch = async (req, res) => {
   try {
     // read remote file
     const response = await axios.get(req.body.url);
@@ -891,33 +938,37 @@ const urlExistenceAndMatch = async (req, res) => {
     // compare contents
     const bytesToIgnoreAtTheTopOfTheDatasets = (config.job?.publish?.allowDateChangeInDataset ? 564 : 0);
     if (localContents.slice(localContents.length - bytesToIgnoreAtTheTopOfTheDatasets) !== remoteContents.slice(remoteContents.length - bytesToIgnoreAtTheTopOfTheDatasets) ) {
-      return [null, {published: true, publishedAsIs: false}];
+      //return [null, {published: true, publishedAsIs: false}];
+      return res.status(200).json({published: true, publishedAsIs: false});
     }
-
-    return [null, {published: true, publishedAsIs: true}];
-  } catch (error) {
-    console.log("urlExistenceAndMatch error:", error.message);// .response.status);
-    return [error]; // return false for every status, in case of error...
+    //return [null, {published: true, publishedAsIs: true}];
+    return res.status(200).json({published: true, publishedAsIs: true});
+  } catch (err) {
+    console.log("urlExistenceAndMatch error:", err.message);// .response.status);
+    //return [error]; // return false for every status, in case of error...
+    return res.status(500).json(err);
   }
 };
 
-const getPlans = async (req, res) => {
+exports.getPlans = async (req, res) => {
   try {
     const retval = await Plan.find().sort({pricePerYear: 1}).lean(); // sort by pricePerYear LOW->HIGH
-    return [null, retval];
-  } catch(error) {
-    return [error];
+    //return [null, retval];
+    return res.status(200).json(retval);
+  } catch(err) {
+    //return [error];
+    return res.status(500).json(err);
   }
 };
 
-module.exports = {
-  get,
-  set,
-  upload,
-  transformXls2Xml,
-  validateXml,
-  outcomeCheck,
-  outcomeFailureDetails,
-  urlExistenceAndMatch,
-  getPlans,
-};
+// module.exports = {
+//   // get,
+//   // set,
+//   upload,
+//   transformXls2Xml,
+//   validateXml,
+//   outcomeCheck,
+//   outcomeFailureDetails,
+//   urlExistenceAndMatch,
+//   getPlans,
+// };

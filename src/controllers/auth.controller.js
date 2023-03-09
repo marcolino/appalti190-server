@@ -157,7 +157,7 @@ const signupConfirm = async(req, res) => {
         user.save(err => {
           if (err) return res.status(500).json({ message: err.message });
           logger.info(`User signup: ${JSON.stringify(user)}`);
-          notification({subject: req.t("User {{email}} signup completed", {email: user.email}), html: `${req.t("User")}: ${user.email}, {${req.t("IP")}: ${remoteAddress(req)}, on ${nowLocaleDateTime()}`});
+          notification({subject: `User ${user.email} signup completed`, html: `User: ${user.email}, IP: ${remoteAddress(req)}, on ${nowLocaleDateTime()}`});
           res.status(200).json({ message: req.t("The account has been verified, you can now log in") });
         });
       }
@@ -230,7 +230,7 @@ const signin = async(req, res) => {
 
       logger.info(`User signin: ${user.email}`);
       // notify logins (TODO: see papertrail.com, prefer it, possibly...)
-      notification({subject: req.t("User {{email}} signin", {email: user.email}), html: `${req.t("User")}: ${user.email}, {${req.t("IP")}: ${remoteAddress(req)}, on ${nowLocaleDateTime()}`});
+      notification({subject: `User ${user.email} signin`, html: `User: ${user.email}, IP: ${remoteAddress(req)}, on ${nowLocaleDateTime()}`});
     
       res.status(200).json({
         id: user._id,
@@ -369,22 +369,22 @@ console.log("resendPasswordResetCode error:", error);
 const refreshToken = async(req, res) => {
   const { refreshToken: requestToken } = req.body;
 
-  if (refreshToken === null) {
-    return res.status(403).json({ message: req.t("Refresh token is required") });
+  if (refreshToken === null) { // refresh token is required
+    return res.status(403).json({ message: req.t("Please make a new signin request") });
   }
 
   try {
     let refreshToken = await RefreshToken.findOne({ token: requestToken });
 
-    if (!refreshToken) {
-      return res.status(403).json({ message: req.t("Refresh token was not found") });
+    if (!refreshToken) { // refresh token not found
+      return res.status(403).json({ message: req.t("Session is expired, please make a new signin request") });
     }
 
     if (RefreshToken.verifyExpiration(refreshToken)) {
       RefreshToken.findByIdAndRemove(refreshToken._id, { useFindAndModify: false }).exec();
       
-      return res.status(403).json({
-        message: req.t("Refresh token was expired, please make a new signin request"),
+      return res.status(403).json({ // refresh token is expired
+        message: req.t("Session is expired, please make a new signin request"),
       });
     }
 

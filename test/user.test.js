@@ -15,8 +15,6 @@ chai.use(chaiHttp); // use chaiHttp to make the actual HTTP requests
 
 let accessTokenUser, accessTokenAdmin, adminUserId;
 
-// TODO: do not check res.body.message, it's localized...
-
 describe("API tests - User routes", function() {
 
   before(async() => { // before these tests we empty the database
@@ -28,7 +26,7 @@ describe("API tests - User routes", function() {
     });
   });
 
-  it("register normal user", function(done) {
+  it("should register normal user", function(done) {
     chai.request(server)
       .post("/api/auth/signup")
       .send({
@@ -47,14 +45,13 @@ describe("API tests - User routes", function() {
           if (err) { console.error("Error:", err); done(); }
           res.should.have.status(200);
           res.body.should.have.property("message");
-          expect(res.body.message).to.equal("The account has been verified, you can now log in");
           done();
         });
       })
     ;
   });
 
-  it("login normal user", function(done) {
+  it("should login normal user", function(done) {
     chai.request(server)
       .post("/api/auth/signin")
       .send({
@@ -73,7 +70,7 @@ describe("API tests - User routes", function() {
     ;
   });
 
-  it("register admin user", function(done) {
+  it("should register admin user", function(done) {
     chai.request(server)
       .post("/api/auth/signup")
       .send({
@@ -94,7 +91,6 @@ describe("API tests - User routes", function() {
           if (err) { console.error("Error:", err); done(); }
           res.should.have.status(200);
           res.body.should.have.property("message");
-          expect(res.body.message).to.equal("The account has been verified, you can now log in");
           done();
         });
       })
@@ -209,7 +205,7 @@ describe("API tests - User routes", function() {
       .post("/api/user/updateProfile")
       .set("x-access-token", accessTokenUser)
       .send({
-        userId: "111111111111111111111111",
+        userId: "123456789012345678901234",
         firstName: config.user.name + "-bis",
       })
       .end((err, res) => {

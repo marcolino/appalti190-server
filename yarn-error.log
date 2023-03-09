@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/node /home/marco/.yarn/bin/yarn.js run-web
+  /usr/bin/node /home/marco/.yarn/bin/yarn.js add mocha-badge-generator -D
 
 PATH: 
   /home/marco/.yarn/bin:/home/marco/.config/yarn/global/node_modules/.bin:/home/marco/bin:/home/marco/.yarn/bin:/home/marco/.config/yarn/global/node_modules/.bin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/home/marco/.local/bin:/home/marco/bin:/home/marco/.yarn/bin:/home/marco/.config/yarn/global/node_modules/.bin:/home/marco/bin:/home/marco/.yarn/bin:/home/marco/.config/yarn/global/node_modules/.bin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/home/marco/.local/bin:/home/marco/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/usr/lib/android-sdk/cmdline-tools/tools:/usr/lib/android-sdk/cmdline-tools/tools/bin:/usr/lib/android-sdk/platform-tools:/home/marco/.local/bin:./node_modules/.bin:/usr/lib/android-sdk/cmdline-tools/tools:/usr/lib/android-sdk/cmdline-tools/tools/bin:/usr/lib/android-sdk/platform-tools:/home/marco/.local/bin:./node_modules/.bin
@@ -14,12 +14,8 @@ Platform:
   linux x64
 
 Trace: 
-  SyntaxError: /home/marco/apps/sistemisolari/appalti190-server/package.json: Unexpected token } in JSON at position 1459
-      at JSON.parse (<anonymous>)
-      at /home/marco/.yarn/lib/cli.js:1629:59
-      at Generator.next (<anonymous>)
-      at step (/home/marco/.yarn/lib/cli.js:310:30)
-      at /home/marco/.yarn/lib/cli.js:321:13
+  Error: getaddrinfo EAI_AGAIN registry.yarnpkg.com
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:71:26)
 
 npm manifest: 
   {
@@ -48,7 +44,7 @@ npm manifest:
       "logs": "heroku logs --tail",
       "logspt": "heroku addons:open --app appalti190 papertrail",
       "check-unused-dependencies": "depcheck",
-      "list-deadfiles": "npx deadfile ./server.js --dir src",
+      "list-deadfiles": "npx deadfile ./server.js --dir src"
     },
     "keywords": [
       "node.js",
