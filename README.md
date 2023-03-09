@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <img src="https://github.com/Appalti190-server/Appalti190-server/actions/workflows/ci.yml/badge.svg" alt="Node.js CI">
+  <img src="https://github.com/marcolino/appalti190-server/actions/workflows/ci.yml/badge.svg" alt="Node.js CI">
   <a href="https://Appalti190-server.com/discord">
     <img src="https://img.shields.io/discord/757179260417867879?label=discord" alt="Discord">
   </a>
