@@ -2,16 +2,16 @@
 [![GitHub package.json license](https://img.shields.io/github/package-json/license/marcolino/appalti190-server?style=flat)](license)
 [![Mocha tests](https://github.com/marcolino/appalti190-server/blob/master/test/badges/mocha.svg)](tests)
 <p align="center">
-<a href="https://Appalti190-server.com/#gh-light-mode-only">
-<img width="300" src="https://raw.githubusercontent.com/Appalti190-server/Appalti190-server/master/light.svg#gh-light-mode-only">
+<a href="https://amplication.com/#gh-light-mode-only">
+<img width="300" src="https://raw.githubusercontent.com/amplication/amplication/master/light.svg#gh-light-mode-only">
 </a>
-<a href="https://Appalti190-server.com/#gh-dark-mode-only">
-<img width="300" src="https://raw.githubusercontent.com/Appalti190-server/Appalti190-server/master/dark.svg#gh-dark-mode-only">
+<a href="https://amplication.com/#gh-dark-mode-only">
+<img width="300" src="https://raw.githubusercontent.com/amplication/amplication/master/dark.svg#gh-dark-mode-only">
 </a>
 </p>
 
 <p align="center">
-  <a href="https://Appalti190-server.com/discord">
+  <a href="https://amplication.com/discord">
     <img src="https://img.shields.io/discord/757179260417867879?label=discord" alt="Discord">
   </a>
   <a href="CODE_OF_CONDUCT.md">
