@@ -1,5 +1,5 @@
 [![GitHub package.json version](https://img.shields.io/github/package-json/v/marcolino/appalti190-server?style=plastic)](version)
-[![Mocha tests](https://github.com/marcolino/appalti190-server/test/badges/mocha-badge.svg)](tests)
+[![Mocha tests](https://github.com/marcolino/appalti190-server/blob/master/test/badges/mocha-badge.svg)](tests)
 <p align="center">
 <a href="https://amplication.com/#gh-light-mode-only">
 <img width="300" src="https://raw.githubusercontent.com/amplication/amplication/master/light.svg#gh-light-mode-only">
