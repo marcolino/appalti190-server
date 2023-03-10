@@ -40,7 +40,7 @@ Appalti190-server ...
 
 # Features
 
-Appalti1190-server provides the following features:
+Appalti190-server provides the following features:
 
 - Production-ready APIs
 - Data Model
