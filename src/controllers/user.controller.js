@@ -38,7 +38,7 @@ exports.getPlan = async(req, res) => {
   if (!userId) return res.status(400).json({ message: req.t("User must be authenticated") });
 
   Plan.find({})
-  .select(["name", "supportTypes", "priceCurrency", "pricePerYear", "cigsCountAllowed", "-_id"])
+  .select(["name", "supportTypes", "priceCurrency", "pricePerYear", "cigNumberAllowed", "-_id"])
   .exec(async(err, plan) => {
     if (err) return res.status(500).json({ message: req.t("Could not find plan"), reason: err });
     res.status(200).json(plan);

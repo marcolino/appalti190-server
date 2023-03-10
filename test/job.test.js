@@ -13,7 +13,7 @@ const { config } = require ("./config.test");
 
 chai.use(chaiHttp); // use chaiHttp to make the actual HTTP requests
 
-let accessTokenUser, accessTokenAdmin, accessTokenAdminStabdard;
+let accessTokenUser, accessTokenAdmin, accessTokenadminstandardplan;
 
 // TODO: do not check res.body.message, it's localized...
 
@@ -100,12 +100,30 @@ describe("API tests - Job routes", function() {
     ;
   });
 
+  it("should login as admin user", function(done) {
+    chai.request(server)
+      .post("/api/auth/signin")
+      .send(config.admin)
+      .end((err, res) => {
+        if (err) { console.error("Error:", err); done(); }
+        res.should.have.status(200);
+        res.body.should.have.property("accessToken");
+        res.body.should.have.property("roles");
+        res.body.should.have.property("id");
+        expect(res.body.roles).to.include("admin");
+        accessTokenAdmin = res.body.accessToken;
+        config.admin.id = res.body.id;
+        done();
+      });
+    ;
+  });
+
   it("should register admin user with standard plan", function(done) {
     chai.request(server)
       .post("/api/auth/signup")
       .send({
-        "email": config.adminstandard.email,
-        "password": config.adminstandard.password,
+        "email": config.adminstandardplan.email,
+        "password": config.adminstandardplan.password,
         "forcerole": "admin",
         "forceplan": "standard",
       })
@@ -127,28 +145,10 @@ describe("API tests - Job routes", function() {
     ;
   });
 
-  it("should login as admin user", function(done) {
-    chai.request(server)
-      .post("/api/auth/signin")
-      .send(config.admin)
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
-        res.should.have.status(200);
-        res.body.should.have.property("accessToken");
-        res.body.should.have.property("roles");
-        res.body.should.have.property("id");
-        expect(res.body.roles).to.include("admin");
-        accessTokenAdmin = res.body.accessToken;
-        config.admin.id = res.body.id;
-        done();
-      });
-    ;
-  });
-
   it("should login as admin user with standard plan", function(done) {
     chai.request(server)
       .post("/api/auth/signin")
-      .send(config.admin)
+      .send(config.adminstandardplan)
       .end((err, res) => {
         if (err) { console.error("Error:", err); done(); }
         res.should.have.status(200);
@@ -156,7 +156,7 @@ describe("API tests - Job routes", function() {
         res.body.should.have.property("roles");
         res.body.should.have.property("id");
         expect(res.body.roles).to.include("admin");
-        accessTokenAdminStabdard = res.body.accessToken;
+        accessTokenadminstandardplan = res.body.accessToken;
         config.admin.id = res.body.id;
         done();
       });
@@ -238,7 +238,6 @@ describe("API tests - Job routes", function() {
       .end((err, res) => {
         if (err) { console.error("Error:", err); done(); }
         res.should.have.status(200);
-//console.log("BODY more errors:", res.body);
         res.body.should.have.property("code");
         expect(res.body.code).to.equal("OK"),
         res.body.should.have.property("warnings");
@@ -249,17 +248,19 @@ describe("API tests - Job routes", function() {
     ;
   });
 
-  it("should transform XLS to XML as admin user with standard pla, truncating(good file)", function(done) {
+  it("should transform XLS to XML as admin user with standard plan, truncating (good file)", function(done) {
     chai.request(server)
       .post("/api/job/transformXls2Xml/filePath")
-      .set("x-access-token", accessTokenAdminStabdard)
+      .set("x-access-token", accessTokenadminstandardplan)
       .send({filePath: "test/assets/xls/AVCP 2023 good.xlsx"})
       .end((err, res) => {
         if (err) { console.error("Error:", err); done(); }
-console.log("BODY more errors:", res.body);
         res.should.have.status(200);
         res.body.should.have.property("code");
         expect(res.body.code).to.equal("OK"),
+        res.body.should.have.property("truncatedDueToPlanLimit");
+        expect(res.body.truncatedDueToPlanLimit).to.be.a("boolean");
+        expect(res.body.truncatedDueToPlanLimit).to.equal(true);
         done();
       });
     ;

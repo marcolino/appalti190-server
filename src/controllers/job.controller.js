@@ -292,8 +292,8 @@ exports.transformXls2Xml = async (req, res) => {
       retval.cigCount++;
 
       // check if user's plan allows this many CIGs
-      if (retval.cigCount > user.plan.cigsCountAllowed) {
-//console.log("CIG COUNT CHECK - TRUNCATING - user.plan.cigsCountAllowed:", user.plan.cigsCountAllowed);
+      if (retval.cigCount > user.plan.cigNumberAllowed) {
+        //console.log("CIG COUNT CHECK - TRUNCATING - user.plan.cigNumberAllowed:", user.plan.cigNumberAllowed);
         return; // continue, do not break, to count rows and CIGs
       }
 
@@ -536,16 +536,15 @@ exports.transformXls2Xml = async (req, res) => {
     }
   });
 
-  if (retval.cigCount > user.plan.cigsCountAllowed) {
-    retval.message = `The number of CIGs uploaded exeeds the number allowed by plan ${user.plan.name}, ${user.plan.cigsCountAllowed}.`;
+  if (retval.cigCount > user.plan.cigNumberAllowed) {
+    retval.message = `The number of CIGs uploaded exeeds the number allowed by plan ${user.plan.name}, ${user.plan.cigNumberAllowed}.`;
     //retval.code = "TRUNCATED_DUE_TO_PLAN_LIMIT";
     retval.truncatedDueToPlanLimit = true;
-console.log("user.plan:", user.plan)
     retval.planCurrent = user.plan;
 
     // calculate minimum required plan
     const plans = await Plan.find().lean();
-    retval.planRequired = plans.find(plan => plan.cigsCountAllowed >= retval.cigCount);
+    retval.planRequired = plans.find(plan => plan.cigNumberAllowed >= retval.cigCount);
   }
 
   consolidate(xmlObj, lotto, raggruppamento, partecipanti, aggiudicatarioRaggruppamento, aggiudicatari);

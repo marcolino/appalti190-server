@@ -20,7 +20,7 @@ const config = {
       country: "Italy",
     },
   },
-  adminstandard: {
+  adminstandardplan: {
     name: "Alice",
     surname: "Azure",
     email: "admin-standard@mail.com",

@@ -32,7 +32,7 @@ db.plans = [
     priceCurrency: config.currency,
     pricePerYear: 0,
     pricePerMonth: undefined,
-    cigsCountAllowed: "10",
+    cigNumberAllowed: "10",
     supportTypes: [ "email" ],
   },
   {
@@ -40,7 +40,7 @@ db.plans = [
     priceCurrency: config.currency,
     pricePerYear: 399,
     pricePerMonth: undefined,
-    cigsCountAllowed: "200",
+    cigNumberAllowed: "200",
     supportTypes: [ "email" ],
   },
   {
@@ -48,7 +48,7 @@ db.plans = [
     priceCurrency: config.currency,
     pricePerYear: 799,
     pricePerMonth: undefined,
-    cigsCountAllowed: -1, // unlimited
+    cigNumberAllowed: -1, // unlimited
     supportTypes: [ "email", "phone" ],
   },
 ];
