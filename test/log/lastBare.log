@@ -1,0 +1,93 @@
+2023-03-13T17:12:50.840Z info: Activating  test  environment
+
+
+  API tests - Auth routes
+2023-03-13T17:12:51.291Z info: Successfully connected to MongoDB
+    ✔ should register user (218ms)
+    ✔ should not register user twice
+    ✔ should not login user before confirmation
+2023-03-13T17:12:51.573Z info: User signup: {"roles":["6405b3152c959193b3979dfc"],"isDeleted":false,"isVerified":true,"_id":"640f59939280cfcfbdab0291","email":"user@mail.com","password":"$2a$10$aDA1QTCMiE0hYcmnGAXmUOMpvSHoQXDpsPou1rGNIWMLbbl3Ieb4u","address":{"_id":"640f59939280cfcfbdab0292","city":""},"plan":"63fce828d86497622429a3c4","createdAt":"2023-03-13T17:12:51.378Z","updatedAt":"2023-03-13T17:12:51.566Z","__v":0}
+    ✔ should confirm user (46ms)
+    ✔ should not confirm user twice
+    ✔ should resend signup code
+    ✔ should not resend signup code without email
+    ✔ should not reset password without email
+    ✔ should start reset password
+    ✔ should confirm reset password (204ms)
+    ✔ should resend reset password code
+2023-03-13T17:12:52.054Z info: User signin: user@mail.com
+    ✔ should login user (183ms)
+    ✔ should not refresh token without refresh token
+    ✔ should refresh token
+
+  API tests - Job routes
+2023-03-13T17:12:52.264Z info: User signup: {"roles":["6405b3152c959193b3979dfc"],"isDeleted":false,"isVerified":true,"_id":"640f59949280cfcfbdab02bc","email":"user@mail.com","password":"$2a$10$AArJTmB/Ni7q9ekXCMz1B.Ciw9L8lwLOcXAOD.fBQHNMTx988ReKO","address":{"_id":"640f59949280cfcfbdab02bd","city":""},"plan":"63fce828d86497622429a3c4","createdAt":"2023-03-13T17:12:52.088Z","updatedAt":"2023-03-13T17:12:52.262Z","__v":0}
+    ✔ should register normal user (189ms)
+2023-03-13T17:12:52.451Z info: User signin: user@mail.com
+    ✔ should login normal user (186ms)
+2023-03-13T17:12:52.616Z info: User signup: {"roles":["6405b3152c959193b3979dfd"],"isDeleted":false,"isVerified":true,"_id":"640f59949280cfcfbdab02ce","email":"admin@mail.com","password":"$2a$10$joFwt30gwovZ02T2ypO6s.OYEjSNwUC58psoojk7V5R/9z6m2BRkK","address":{"_id":"640f59949280cfcfbdab02cf","city":""},"plan":"63fce828d86497622429a3c6","createdAt":"2023-03-13T17:12:52.463Z","updatedAt":"2023-03-13T17:12:52.614Z","__v":0}
+    ✔ should register admin user (164ms)
+2023-03-13T17:12:52.788Z info: User signin: admin@mail.com
+    ✔ should login as admin user (173ms)
+2023-03-13T17:12:52.979Z info: User signup: {"roles":["6405b3152c959193b3979dfd"],"isDeleted":false,"isVerified":true,"_id":"640f59949280cfcfbdab02e0","email":"admin-standard@mail.com","password":"$2a$10$Y82lg3vNmkKA2g5UZm7Zz.uYGCvPDhTW1HsHwk51mREqSsk506hLK","address":{"_id":"640f59949280cfcfbdab02e1","city":""},"plan":"63fce828d86497622429a3c5","createdAt":"2023-03-13T17:12:52.803Z","updatedAt":"2023-03-13T17:12:52.977Z","__v":0}
+    ✔ should register admin user with standard plan (190ms)
+2023-03-13T17:12:53.155Z info: User signin: admin-standard@mail.com
+    ✔ should login as admin user with standard plan (175ms)
+    ✔ should not upload a file without authentication
+    ✔ should upload a file as normal user
+    ✔ should not transform XLS to XML without authentication
+    ✔ should not transform XLS to XML as normal user (not existing file)
+    ✔ should transform XLS to XML as normal user (some errors file) (2443ms)
+    ✔ should transform XLS to XML as normal user (more errors file) (2144ms)
+    ✔ should transform XLS to XML as admin user with standard plan, truncating (good file) (1636ms)
+    ✔ should transform XLS to XML as normal user (good file) (1141ms)
+
+  API tests - Payment routes
+2023-03-13T17:13:00.730Z info: User signup: {"roles":["6405b3152c959193b3979dfc"],"isDeleted":false,"isVerified":true,"_id":"640f599c9280cfcfbdab0306","email":"user@mail.com","password":"$2a$10$dsajccSlJ98NacZ3bs3KG.J.2Bzr7j2S6Bv/aAhgLs8Eia1rRq/lC","address":{"_id":"640f599c9280cfcfbdab0307","city":""},"plan":"63fce828d86497622429a3c4","createdAt":"2023-03-13T17:13:00.574Z","updatedAt":"2023-03-13T17:13:00.727Z","__v":0}
+    ✔ should register normal user (179ms)
+2023-03-13T17:13:00.918Z info: User signin: user@mail.com
+    ✔ should login normal user (189ms)
+    ✔ should get payment mode, and it should be in a set of values
+    ✔ should not create a checkout session without authentication
+2023-03-13T17:13:01.910Z error: Payment session creation error: {"type":"StripeInvalidRequestError","raw":{"message":"The Checkout Session's total amount due cannot be zero in `payment` mode. Please see https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts","request_log_url":"https://dashboard.stripe.com/test/logs/req_iDCzaF47u1ZG7r?t=1678727581","type":"invalid_request_error","headers":{"server":"nginx","date":"Mon, 13 Mar 2023 17:13:01 GMT","content-type":"application/json","content-length":"327","connection":"keep-alive","access-control-allow-credentials":"true","access-control-allow-methods":"GET, POST, HEAD, OPTIONS, DELETE","access-control-allow-origin":"*","access-control-expose-headers":"Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required","access-control-max-age":"300","cache-control":"no-cache, no-store","idempotency-key":"08f27e6f-af68-42a4-869d-76b7da0e21bb","original-request":"req_iDCzaF47u1ZG7r","request-id":"req_iDCzaF47u1ZG7r","stripe-should-retry":"false","stripe-version":"2020-08-27","strict-transport-security":"max-age=63072000; includeSubDomains; preload"},"statusCode":400,"requestId":"req_iDCzaF47u1ZG7r"},"rawType":"invalid_request_error","headers":{"server":"nginx","date":"Mon, 13 Mar 2023 17:13:01 GMT","content-type":"application/json","content-length":"327","connection":"keep-alive","access-control-allow-credentials":"true","access-control-allow-methods":"GET, POST, HEAD, OPTIONS, DELETE","access-control-allow-origin":"*","access-control-expose-headers":"Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required","access-control-max-age":"300","cache-control":"no-cache, no-store","idempotency-key":"08f27e6f-af68-42a4-869d-76b7da0e21bb","original-request":"req_iDCzaF47u1ZG7r","request-id":"req_iDCzaF47u1ZG7r","stripe-should-retry":"false","stripe-version":"2020-08-27","strict-transport-security":"max-age=63072000; includeSubDomains; preload"},"requestId":"req_iDCzaF47u1ZG7r","statusCode":400}
+    ✔ should not create a checkout session for a 0 cost product (985ms)
+2023-03-13T17:13:02.636Z info: Payment session created
+    ✔ should create a checkout session for a standard product (721ms)
+2023-03-13T17:13:03.257Z info: Payment successful for product standard
+    ✔ should redirect on a payment success call (624ms)
+2023-03-13T17:13:03.898Z info: Payment canceled for product standard
+    ✔ should redirect on a payment canceled call (634ms)
+
+  API tests - User routes
+2023-03-13T17:13:04.227Z info: User signup: {"roles":["6405b3152c959193b3979dfc"],"isDeleted":false,"isVerified":true,"_id":"640f599f9280cfcfbdab0319","email":"user@mail.com","password":"$2a$10$eO7Q3InRe1VdR86pn49nl.9tKrwiAZpX0HAjiEpjVd5o.f9hDmDT6","address":{"_id":"640f599f9280cfcfbdab031a","city":""},"plan":"63fce828d86497622429a3c4","createdAt":"2023-03-13T17:13:04.000Z","updatedAt":"2023-03-13T17:13:04.226Z","__v":0}
+    ✔ should register normal user (312ms)
+2023-03-13T17:13:04.417Z info: User signin: user@mail.com
+    ✔ should login normal user (189ms)
+2023-03-13T17:13:04.634Z info: User signup: {"roles":["6405b3152c959193b3979dfd"],"isDeleted":false,"isVerified":true,"_id":"640f59a09280cfcfbdab032b","email":"admin@mail.com","password":"$2a$10$8aBBHwvbkQicaD/Vs2moCOddLolhLfHibUKiaMWGlwlpFZ4Ca7u3C","address":{"_id":"640f59a09280cfcfbdab032c","city":""},"plan":"63fce828d86497622429a3c6","createdAt":"2023-03-13T17:13:04.433Z","updatedAt":"2023-03-13T17:13:04.632Z","__v":0}
+    ✔ should register admin user (216ms)
+2023-03-13T17:13:04.828Z info: User signin: admin@mail.com
+    ✔ should login as admin user (193ms)
+    ✔ should not get all users with user role
+    ✔ should get user's profile
+    ✔ should not get user's profile without authentication
+    ✔ should update user's profile
+    ✔ should not update user's profile without autentication
+    ✔ should not update user's profile for a different not existent user - as normal user
+    ✔ should not update user's profile for a different existent user - as normal user
+    ✔ should update user's profile for a different existent user - as admin user
+    ✔ should update user's own property firstName
+    ✔ should update user's own property lastName
+    ✔ should update user's own property fiscalCode
+    ✔ should update user's own property businessName
+    ✔ should update user's own property address street
+    ✔ should not update user's own roles as normal user (no roles)
+    ✔ should not update user's own roles as normal user (not array roles)
+    ✔ should not update user's own roles as normal user (empty array role)
+    ✔ should update user's own roles as normal user (equal or down grade)
+    ✔ should update user's own roles as admin user (up grade)
+    ✔ should not get all users with user role
+    ✔ should get all users with admin role
+
+
+  60 passing (14s)
+

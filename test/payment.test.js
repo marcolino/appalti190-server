@@ -35,21 +35,22 @@ describe("API tests - Payment routes", function() {
         "email": config.user.email,
         "password": config.user.password,
       })
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(201);
         res.body.should.have.property("code");
         signupConfirmCode = res.body.code;
         chai.request(server)
         .post("/api/auth/signupConfirm")
         .send({ code: signupConfirmCode })
-        .end((err, res) => {
-          if (err) { console.error("Error:", err); done(); }
+        .then((res) => {
           res.should.have.status(200);
           res.body.should.have.property("message");
           expect(res.body.message).to.equal("The account has been verified, you can now log in");
           done();
-        });
+        })
+        .catch((err) => {
+          done(err);
+        }) 
       })
     ;
   });
@@ -61,8 +62,7 @@ describe("API tests - Payment routes", function() {
         "email": config.user.email,
         "password": config.user.password,
       })
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(200);
         res.body.should.have.property("accessToken");
         res.body.should.have.property("id");
@@ -70,6 +70,9 @@ describe("API tests - Payment routes", function() {
         config.user.id = res.body.id;
         done();
       })
+      .catch((err) => {
+        done(err);
+      }) 
     ;
   });
 
@@ -78,12 +81,14 @@ describe("API tests - Payment routes", function() {
       .get("/api/payment/mode")
       .set("x-access-token", accessTokenUser)
       .send({})
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(200);
         expect(res.body.mode).to.be.oneOf(["test", "live"]);
         done();
-      });
+      })
+      .catch((err) => {
+        done(err);
+      }) 
     ;
   });
 
@@ -92,11 +97,13 @@ describe("API tests - Payment routes", function() {
       .post("/api/payment/create-checkout-session")
       //.set("x-access-token", accessTokenUser)
       .send({})
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(403);
         done();
-      });
+      })
+      .catch((err) => {
+        done(err);
+      }) 
     ;
   });
 
@@ -105,11 +112,13 @@ describe("API tests - Payment routes", function() {
       .post("/api/payment/create-checkout-session")
       .set("x-access-token", accessTokenUser)
       .send({product: "free"})
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(400);
         done();
-      });
+      })
+      .catch((err) => {
+        done(err);
+      }) 
     ;
   });
 
@@ -118,13 +127,15 @@ describe("API tests - Payment routes", function() {
       .post("/api/payment/create-checkout-session")
       .set("x-access-token", accessTokenUser)
       .send({product: "standard"})
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(200);
         res.body.should.have.property("session");
         stripeSessionId = res.body.session.id;
         done();
-      });
+      })
+      .catch((err) => {
+        done(err);
+      }) 
     ;
   });
 
@@ -133,11 +144,13 @@ describe("API tests - Payment routes", function() {
       .get("/api/payment/payment-success")
       .query({session_id: stripeSessionId})
       .redirects(0)
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(302);
         done();
-      });
+      })
+      .catch((err) => {
+        done(err);
+      }) 
     ;
   });
 
@@ -146,11 +159,13 @@ describe("API tests - Payment routes", function() {
       .get("/api/payment/payment-cancel")
       .query({session_id: stripeSessionId})
       .redirects(0)
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(302);
         done();
-      });
+      })
+      .catch((err) => {
+        done(err);
+      }) 
     ;
   });
     

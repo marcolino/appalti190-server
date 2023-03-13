@@ -33,20 +33,24 @@ describe("API tests - User routes", function() {
         "email": config.user.email,
         "password": config.user.password,
       })
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(201);
         res.body.should.have.property("code");
         signupConfirmCode = res.body.code;
         chai.request(server)
         .post("/api/auth/signupConfirm")
         .send({ code: signupConfirmCode })
-        .end((err, res) => {
-          if (err) { console.error("Error:", err); done(); }
+        .then((res) => {
           res.should.have.status(200);
           res.body.should.have.property("message");
           done();
-        });
+        })
+        .catch((err) => {
+          done(err);
+        })
+      })
+      .catch((err) => {
+        done(err);
       })
     ;
   });
@@ -58,14 +62,16 @@ describe("API tests - User routes", function() {
         "email": config.user.email,
         "password": config.user.password,
       })
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(200);
         res.body.should.have.property("accessToken");
         res.body.should.have.property("id");
         accessTokenUser = res.body.accessToken;
         config.user.id = res.body.id;
         done();
+      })
+      .catch((err) => {
+        done(err);
       })
     ;
   });
@@ -79,20 +85,24 @@ describe("API tests - User routes", function() {
         "forcerole": "admin",
         "forceplan": "unlimited",
       })
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(201);
         res.body.should.have.property("code");
         signupConfirmCode = res.body.code;
         chai.request(server)
         .post("/api/auth/signupConfirm")
         .send({ code: signupConfirmCode })
-        .end((err, res) => {
-          if (err) { console.error("Error:", err); done(); }
+        .then((res) => {
           res.should.have.status(200);
           res.body.should.have.property("message");
           done();
-        });
+        })
+        .catch((err) => {
+          done(err);
+        })  
+      })
+      .catch((err) => {
+        done(err);
       })
     ;
   });
@@ -101,8 +111,7 @@ describe("API tests - User routes", function() {
     chai.request(server)
       .post("/api/auth/signin")
       .send(config.admin)
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(200);
         res.body.should.have.property("accessToken");
         res.body.should.have.property("roles");
@@ -111,7 +120,10 @@ describe("API tests - User routes", function() {
         accessTokenAdmin = res.body.accessToken;
         config.admin.id = res.body.id;
         done();
-      });
+      })
+      .catch((err) => {
+        done(err);
+      })
     ;
   });
 
@@ -120,11 +132,13 @@ describe("API tests - User routes", function() {
       .get("/api/admin/getAdminPanel")
       .set("x-access-token", accessTokenUser)
       .send({})
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(403);
         done();
-      });
+      })
+      .catch((err) => {
+        done(err);
+      })
     ;
   });
 
@@ -133,12 +147,14 @@ describe("API tests - User routes", function() {
       .get("/api/user/getProfile")
       .set("x-access-token", accessTokenUser)
       .send({})
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(200);
         res.body.should.have.property("user");
         done();
-      });
+      })
+      .catch((err) => {
+        done(err);
+      })
     ;
   });
 
@@ -147,11 +163,13 @@ describe("API tests - User routes", function() {
       .get("/api/user/getProfile")
       //.set("x-access-token", accessTokenUser)
       .send({})
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(403);
         done();
-      });
+      })
+      .catch((err) => {
+        done(err);
+      })
     ;
   });
 
@@ -175,12 +193,14 @@ describe("API tests - User routes", function() {
         },
         roles: [ "user" ],
       })
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(200);
         res.body.should.have.property("message");
         done();
-      });
+      })
+      .catch((err) => {
+        done(err);
+      })
     ;
   });
 
@@ -192,11 +212,13 @@ describe("API tests - User routes", function() {
         userId: config.user.id,
         email: config.user.email,
       })
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(403);
         done();
-      });
+      })
+      .catch((err) => {
+        done(err);
+      })
     ;
   });
 
@@ -208,11 +230,13 @@ describe("API tests - User routes", function() {
         userId: "123456789012345678901234",
         firstName: config.user.name + "-bis",
       })
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(400);
         done();
-      });
+      })
+      .catch((err) => {
+        done(err);
+      })
     ;
   });
 
@@ -224,11 +248,13 @@ describe("API tests - User routes", function() {
         userId: config.user.id,
         firstName: config.user.name + "-bis",
       })
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(400);
         done();
-      });
+      })
+      .catch((err) => {
+        done(err);
+      })
     ;
   });
 
@@ -240,11 +266,13 @@ describe("API tests - User routes", function() {
         userId: config.user.id,
         firstName: config.user.name + "-bis",
       })
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(400);
         done();
-      });
+      })
+      .catch((err) => {
+        done(err);
+      })
     ;
   });
 
@@ -257,12 +285,14 @@ describe("API tests - User routes", function() {
           firstName: "updated first name",
         }
       })
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(200);
         res.body.should.have.property("message");
         done();
-      });
+      })
+      .catch((err) => {
+        done(err);
+      })
     ;
   });
 
@@ -286,12 +316,14 @@ describe("API tests - User routes", function() {
         // roles: [ "user" ],
         }
       })
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(200);
         res.body.should.have.property("message");
         done();
-      });
+      })
+      .catch((err) => {
+        done(err);
+      })
     ;
   });
 
@@ -304,12 +336,14 @@ describe("API tests - User routes", function() {
           fiscalCode: config.user.fiscalCode,
         }
       })
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(200);
         res.body.should.have.property("message");
         done();
-      });
+      })
+      .catch((err) => {
+        done(err);
+      })
     ;
   });
 
@@ -322,12 +356,14 @@ describe("API tests - User routes", function() {
           businessName: "test business name",
         }
       })
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(200);
         res.body.should.have.property("message");
         done();
-      });
+      })
+      .catch((err) => {
+        done(err);
+      })
     ;
   });
 
@@ -340,12 +376,14 @@ describe("API tests - User routes", function() {
           address: { street: config.user.address.street },
         }
       })
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(200);
         res.body.should.have.property("message");
         done();
-      });
+      })
+      .catch((err) => {
+        done(err);
+      })
     ;
   });
 
@@ -354,12 +392,14 @@ describe("API tests - User routes", function() {
       .post("/api/user/updateRoles")
       .set("x-access-token", accessTokenUser)
       .send({})
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(400);
         res.body.should.have.property("message");
         done();
-      });
+      })
+      .catch((err) => {
+        done(err);
+      })
     ;
   });
 
@@ -368,12 +408,14 @@ describe("API tests - User routes", function() {
       .post("/api/user/updateRoles")
       .set("x-access-token", accessTokenUser)
       .send({roles: "user"})
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(400);
         res.body.should.have.property("message");
         done();
-      });
+      })
+      .catch((err) => {
+        done(err);
+      })
     ;
   });
 
@@ -382,12 +424,14 @@ describe("API tests - User routes", function() {
       .post("/api/user/updateRoles")
       .set("x-access-token", accessTokenUser)
       .send({roles: []})
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(400);
         res.body.should.have.property("message");
         done();
-      });
+      })
+      .catch((err) => {
+        done(err);
+      })
     ;
   });
 
@@ -398,12 +442,14 @@ describe("API tests - User routes", function() {
       .send({
         roles: [ "user" ]
       })
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(200);
         res.body.should.have.property("message");
         done();
-      });
+      })
+      .catch((err) => {
+        done(err);
+      })
     ;
   });
 
@@ -414,12 +460,14 @@ describe("API tests - User routes", function() {
   //     .send({
   //       roles: [ "admin" ],
   //     })
-  //     .end((err, res) => {
-  //       if (err) { console.error("Error:", err); done(); }
-  //       res.should.have.status(403);
+  //     .then((res) => {
+  //  //       res.should.have.status(403);
   //       res.body.should.have.property("message");
   //       done();
-  //     });
+  //     })
+  //     .catch((err) => {
+  //       done(err);
+  //     })
   //   ;
   // });
 
@@ -430,12 +478,14 @@ describe("API tests - User routes", function() {
       .send({
         roles: [ "admin" ],
       })
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(200);
         res.body.should.have.property("message");
         done();
-      });
+      })
+      .catch((err) => {
+        done(err);
+      })
     ;
   });
 
@@ -444,11 +494,13 @@ describe("API tests - User routes", function() {
       .get("/api/user/getUsers")
       .set("x-access-token", accessTokenUser)
       .send({})
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(403);
         done();
-      });
+      })
+      .catch((err) => {
+        done(err);
+      })
     ;
   });
 
@@ -457,13 +509,15 @@ describe("API tests - User routes", function() {
       .get("/api/user/getUsers")
       .set("x-access-token", accessTokenAdmin)
       .send({})
-      .end((err, res) => {
-        if (err) { console.error("Error:", err); done(); }
+      .then((res) => {
         res.should.have.status(200);
         res.body.should.have.property("users");
         //console.log("# of users is", res.body.users.length);
         done();
-      });
+      })
+      .catch((err) => {
+        done(err);
+      })
     ;
   });
 
