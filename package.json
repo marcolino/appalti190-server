@@ -14,7 +14,6 @@
     "test-debug": "mocha --exit --timeout --debug 5000 test",
     "test": "unbuffer mocha --exit --timeout 5000 test | tee test/log/last.log",
     "posttest": "scripts/test2badge",
-    "NOOOtest-for-badge": "mocha --timeout 5000 --exit --reporter mocha-badge-generator --reporter-option badge_subject=tests,badge_format=svg,badge_output=./test/badges/mocha.svg",
     "testwatch": "nodemon --exec \"mocha --recursive --timeout 10000\"",
     "pub": "git add . && git commit -m \"generic commit\" && git push && yarn push",
     "pub-dev": "yarn pub && yarn logs",
@@ -28,7 +27,6 @@
     "logspt": "heroku addons:open --app appalti190 papertrail",
     "check-unused-dependencies": "depcheck",
     "list-deadfiles": "npx deadfile ./server.js --dir src",
-    "NOOOcompush": "yarn test-for-badge && git add . && git commit -m \"$CM\" && git push",
     "compush": "git add . && git commit -m \"$CM\" && git push"
   },
   "keywords": [

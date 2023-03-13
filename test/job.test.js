@@ -315,4 +315,72 @@ describe("API tests - Job routes", function() {
     ;
   });
   
+/*
+  it("should validate XML (good file)", function(done) {
+    chai.request(server)
+      .post("/api/job/validateXml/transform")
+      .set("x-access-token", accessTokenUser)
+      .send({transform: "..."})
+      .then((res) => {
+        res.should.have.status(200);
+        res.body.should.have.property("code");
+        expect(res.body.code).to.equal("OK"),
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should check outcome", function(done) {
+    chai.request(server)
+      .post("/api/job/outcomeCheck/anno/codiceFiscaleAmministrazione")
+      .set("x-access-token", accessTokenUser)
+      .send({anno: "...", codiceFiscaleAmministrazione: "..."})
+      .then((res) => {
+        res.should.have.status(200);
+        res.body.should.have.property("code");
+        expect(res.body.code).to.equal("OK"),
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should check url existence and match", function(done) {
+    chai.request(server)
+      .post("/api/job/urlExistenceAndMatch/url/fileToMatch")
+      .set("x-access-token", accessTokenUser)
+      .send({url: "...", fileToMatch: "..."})
+      .then((res) => {
+        res.should.have.status(200);
+        res.body.should.have.property("code");
+        expect(res.body.code).to.equal("OK"),
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should validate XML (good file)", function(done) {
+    chai.request(server)
+      .get("/api/job/getPlans")
+      .set("x-access-token", accessTokenUser)
+      .send()
+      .then((res) => {
+        res.should.have.status(200);
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+*/
+
 });
