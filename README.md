@@ -30,7 +30,7 @@
 
 <p align="center">
   <a href="https://marcolino.github.io/appalti190-server/">
-    <img src=https://raw.githubusercontent.com/marcolino/appalti190-server/master/public/images/LogoMain.png" alt="Main logo">
+    <img src="https://raw.githubusercontent.com/marcolino/appalti190-server/master/public/images/LogoMain.png" alt="Main logo">
   </a>
 </p>
 
