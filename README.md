@@ -1,6 +1,8 @@
 [![GitHub package.json version](https://img.shields.io/github/package-json/v/marcolino/appalti190-server?style=flat)](version)
 [![GitHub package.json license](https://img.shields.io/github/package-json/license/marcolino/appalti190-server?style=flat)](license)
 [![Mocha tests ok](https://raw.githubusercontent.com/marcolino/appalti190-server/master/public/badges/mocha.svg)](tests)
+
+<!--
 <p align="center">
 <a href="https://amplication.com/#gh-light-mode-only">
 <img width="300" src="https://raw.githubusercontent.com/amplication/amplication/master/light.svg#gh-light-mode-only">
@@ -9,7 +11,9 @@
 <img width="300" src="https://raw.githubusercontent.com/amplication/amplication/master/dark.svg#gh-dark-mode-only">
 </a>
 </p>
+-->
 
+<!--
 <p align="center">
   <a href="https://amplication.com/discord">
     <img src="https://img.shields.io/discord/757179260417867879?label=discord" alt="Discord">
@@ -22,6 +26,7 @@
   </a>
   <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/marcolino/appalti190-server?color=purple"/>
 </p> 
+-->
 
 <p align="center">
   <a href="https://marcolino.github.io/appalti190-server/">
