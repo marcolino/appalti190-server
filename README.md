@@ -23,9 +23,7 @@
   <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/marcolino/appalti190-server?color=purple"/>
 </p> 
 
-<center>
   ![1 Appalti190-server master](https://raw.githubusercontent.com/marcolino/appalti190-server/master/public/images/LogoMain.png)
-</center> 
 
 [appalti190-server](https://github.com/marcolino/appalti190-server/) is an open‑source server side project for a general-purpose web app implementing a generic SAAS.
 
