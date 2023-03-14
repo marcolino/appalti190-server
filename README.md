@@ -24,7 +24,7 @@
 </p> 
 
 <p align="center">
-  [![1 Appalti190-server master](https://raw.githubusercontent.com/marcolino/appalti190-server/master/public/images/LogoMain.png)](what??)
+  ![1 Appalti190-server master](https://raw.githubusercontent.com/marcolino/appalti190-server/master/public/images/LogoMain.png)
 </p> 
 
 [appalti190-server](https://github.com/marcolino/appalti190-server/) is an open‑source server side project for a general-purpose web app implementing a generic SAAS.
