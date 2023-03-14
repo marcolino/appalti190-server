@@ -11,9 +11,10 @@
   "scripts": {
     "start-dev": "nodemon --ignore client/ -w '.' -w .env server.js",
     "start": "node server.js",
-    "test-debug": "mocha --exit --timeout --debug 5000 test",
-    "test": "unbuffer mocha --exit --timeout 5000 test | tee test/log/last.log",
+    "test": "nyc --reporter=html unbuffer mocha --exit --timeout 5000 test | tee test/log/last.log",
     "posttest": "scripts/test2badge",
+    "test-debug": "mocha --exit --timeout 5000 --debug test",
+    "test-nocoverage": "unbuffer mocha --exit --timeout 5000 test | tee test/log/last.log",
     "testwatch": "nodemon --exec \"mocha --recursive --timeout 10000\"",
     "pub": "git add . && git commit -m \"generic commit\" && git push && yarn push",
     "pub-dev": "yarn pub && yarn logs",
@@ -74,6 +75,7 @@
     "chai-http": "^4.3.0",
     "mocha": "^9.2.2",
     "mocha-badge-generator": "^0.10.6",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "nyc": "^15.1.0"
   }
 }
