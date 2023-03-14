@@ -23,7 +23,6 @@
   <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/marcolino/appalti190-server?color=purple"/>
 </p> 
 
-  [1 Appalti190-server master](https://raw.githubusercontent.com/marcolino/appalti190-server/master/public/images/LogoMain.png)
 <p align="center">
   <a href="https://marcolino.github.io/appalti190-server/">
     <img src=https://raw.githubusercontent.com/marcolino/appalti190-server/master/public/images/LogoMain.png" alt="Main logo">
