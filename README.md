@@ -39,7 +39,7 @@
 Appalti190-server ...
 
 # Tests Coverage
-[Mocha unit + e2e tests coverage](https://github.com/marcolino/appalti190-server/master/coverage/index.html) 
+[Mocha unit + e2e tests coverage](https://raw.githubusercontent.com/marcolino/appalti190-server/master/coverage/index.html) 
 
 # Features
 
