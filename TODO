@@ -12,7 +12,7 @@
 - impostare tests con chai
 - logger - accesso utente: no data ma email nel soggetto
 
-
+- TODO: in test/user.test.js, test updatePlan e updateRoles
 - TODO completare tests con chai
 - TODO sendemail FROM ...
 - TODO logger.error in tutte le catch ...
@@ -22,8 +22,7 @@
 - TODO: translate notifications and logger messages ?
 - TODO: handle plan downgrade: ask confirmation, and tell about no refunds
 - TODO: add reference year to stripe products
-- TODO: in controllers, uniform catch return 500.json contents (err? err.message?)
-- TODO: in test/user.test.js, test updatePlan
+- TODO: in controllers, uniform catch return 500 + json contents (err? err.message?)
 
 - NEWFEATURE decidere se acquistare un piano su papertrail per i logs in produzione
 - NEWFEATURE rimuovere gli account non confermati, periodicamente (??)
