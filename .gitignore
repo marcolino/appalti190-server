@@ -12,4 +12,5 @@ npm-debug.*
 web-build/
 web-report/
 uploads/
+.nyc_output
 **/.env*
