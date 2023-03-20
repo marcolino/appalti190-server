@@ -66,7 +66,7 @@ module.exports = {
     outputDownloads: "/downloads/",
     schemaFile: `./data/${year + 1}/datasetAppaltiL190.xsd`, // the xsd schema file (every new year must be manually downloaded new version from authority, and applied possible changes to code/data)
     schemaIndiceFile: `./data/${year + 1}/datasetIndiceAppaltiL190.xsd`, // the xsd indice schema file (every new year must be manually downloaded new version from authority, and applied possible changes to code/data)
-    datasetMaximumSize: 5 * (1024 * 1024),
+    datasetMaximumSize: /*5*/1 * (1024 * 1024),
     xsi_schemaLocation: "legge190_1_0 datasetAppaltiL190.xsd", // xsi schemaLocation attribute
     xmlns_xsi: "http://www.w3.org/2001/XMLSchema-instance", // xmlns xsi attribute
     xmlns_legge190: "legge190_1_0", // xmlns legge190 attribute

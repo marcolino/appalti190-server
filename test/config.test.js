@@ -49,6 +49,21 @@ const config = {
       zip: "10100",
       country: "Italy",
     },
+  },
+  userInvalidEmail: {
+    name: "Bob",
+    surname: "Blue",
+    email: "invalid-email",
+    password: "user!",
+    fiscalCode: "CGNNMO81A01A001U",
+    address: {
+      street: "Solari street",
+      streetNo: "1",
+      city: "Rivoli",
+      province: "TO",
+      zip: "10100",
+      country: "Italy",
+    },
   }
 };
 

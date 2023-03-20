@@ -787,14 +787,14 @@ exports.validateXml = async (req, res) => {
   try {
     if (req.body?.transform?.xmlIndice) { // a zip archive with indice and datasets inside is present
       const xmlIndice = req.body?.transform?.xmlIndice;
-      const xmls = req.body.transform.xmls;
-      const schemaIndice = path.join(__dirname, "../..", config.job.schemaIndiceFile);
-      const schema = path.join(__dirname, "../..", config.job.schemaFile);
+      const xmls = req.body?.transform?.xmls;
+      const schemaIndice = path.join(__dirname, "../..", config.job?.schemaIndiceFile);
+      const schema = path.join(__dirname, "../..", config.job?.schemaFile);
       const promises = [];
       
-      promises.push(validate(xmlIndice, schemaIndice));
+      promises.push(validate(req, res, xmlIndice, schemaIndice));
       for (let i = 0; i < xmls.length; i++) {
-        promises.push(validate(xmls[i], schema));
+        promises.push(validate(req, res, xmls[i], schema));
       }
       const results = await Promise.all(promises);
       if (results.filter(result => result.code === "OK").length === results.length) { // all results are OK
@@ -805,8 +805,8 @@ exports.validateXml = async (req, res) => {
         return res.status(200).json(results.find(result => result.code !== "OK"));
       }
     } else
-    if (req.body.transform.outputFile) { // a single xml dataset is present
-      const result = deserializeDataset(req.body.transform.outputFile/*xmlFilePath*/);
+    if (req.body?.transform?.outputFile) { // a single xml dataset is present
+      const result = deserializeDataset(req.body?.transform?.outputFile);
       if (result.error) {
         // return {
         //   code: "CANNOT_READ_XML",
@@ -818,16 +818,12 @@ exports.validateXml = async (req, res) => {
         });
       }
       const xml = result.contents;
-      const schema = path.join(__dirname, "../..", config.job.schemaFile);
+      const schema = path.join(__dirname, "../..", config.job?.schemaFile);
   //console.log("XML type:", typeof xml, "len:", xml.length);
       const validation = await validate(req, res, xml, schema);
       //return validation;
       return res.status(200).json(validation);
     } else { // no other cases allowed
-      // return {
-      //   code: "XML_NOT_FOUND",
-      //   message: req.t("No zip archive nor xml dataset to be validated found"),
-      // };
       return res.status(200).json({
         code: "XML_NOT_FOUND",
         message: req.t("No zip archive nor xml dataset to be validated found"),
@@ -840,7 +836,7 @@ exports.validateXml = async (req, res) => {
 
 const validate = async(req, res, xml, schema) => {
   return new Promise((resolve) => {
-    xmlvalidator.validateXML(xml, schema, (err, result) => {
+      xmlvalidator.validateXML(xml, schema, (err, result) => {
       if (err) {
         return resolve({code: "ERROR", message: req.t("Error in XML validation"), errors: reclaimValidateMessage(err.message)});
       }

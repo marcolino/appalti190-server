@@ -13,9 +13,17 @@ const { config } = require ("./config.test");
 
 chai.use(chaiHttp); // use chaiHttp to make the actual HTTP requests
 
-let accessTokenUser, accessTokenAdmin, accessTokenadminstandardplan;
-
-// TODO: do not check res.body.message, it's localized...
+let accessTokenUser, accessTokenadminstandardplan;
+let transformOne = {
+  "xmlIndice": null,
+  "xml": null,
+  "outputFile": "/home/marco/apps/sistemisolari/appalti190-server/public/downloads/marcosolari@gmail.com/dataset-2022.xml",
+};
+let transformOneNoOutputFile = {
+  "xmlIndice": null,
+  "xml": null,
+  "outputFile": "/home/marco/apps/sistemisolari/appalti190-server/public/downloads/marcosolari@gmail.com/dataset-2022.xml-NOTEXISTENT",
+};
 
 describe("API tests - Job routes", function() {
 
@@ -45,7 +53,7 @@ describe("API tests - Job routes", function() {
         .then((res) => {
           res.should.have.status(200);
           res.body.should.have.property("message");
-          expect(res.body.message).to.equal("The account has been verified, you can now log in");
+          //expect(res.body.message).to.equal("The account has been verified, you can now log in");
           done();
         })
         .catch((err) => {
@@ -315,12 +323,26 @@ describe("API tests - Job routes", function() {
     ;
   });
   
-/*
-  it("should validate XML (good file)", function(done) {
+  it("should not validate XML without authentication", function(done) {
+    chai.request(server)
+      .post("/api/job/validateXml/transform")
+      //.set("x-access-token", accessTokenUser)
+      .send({transform: transformOne})
+      .then((res) => {
+        res.should.have.status(403);
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should validate XML (one output file ok)", function(done) {
     chai.request(server)
       .post("/api/job/validateXml/transform")
       .set("x-access-token", accessTokenUser)
-      .send({transform: "..."})
+      .send({transform: transformOne})
       .then((res) => {
         res.should.have.status(200);
         res.body.should.have.property("code");
@@ -333,6 +355,41 @@ describe("API tests - Job routes", function() {
     ;
   });
 
+  it("should not validate XML (one output file, no file)", function(done) {
+    chai.request(server)
+      .post("/api/job/validateXml/transform")
+      .set("x-access-token", accessTokenUser)
+      .send({transform: transformOneNoOutputFile})
+      .then((res) => {
+        res.should.have.status(200);
+        res.body.should.have.property("code");
+        expect(res.body.code).to.equal("CANNOT_READ_XML"),
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should validate XML (index output file ok)", function(done) {
+    chai.request(server)
+      .post("/api/job/validateXml/transform")
+      .set("x-access-token", accessTokenUser)
+      .send({transform: transformOne})
+      .then((res) => {
+        res.should.have.status(200);
+        res.body.should.have.property("code");
+        expect(res.body.code).to.equal("OK"),
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+/*
   it("should check outcome", function(done) {
     chai.request(server)
       .post("/api/job/outcomeCheck/anno/codiceFiscaleAmministrazione")

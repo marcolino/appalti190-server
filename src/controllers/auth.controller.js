@@ -39,12 +39,19 @@ const signup = async(req, res) => {
   } catch (err) {
     return res.status(500).json({ message: err });
   }
+  if (!role) {
+    return res.status(400).json({ message: req.t("Invalid role name {{roleName}}", { roleName })});
+  }
+  
 
   // get plan
   try {
     plan = await Plan.findOne({name: planName});
   } catch (err) {
     return res.status(500).json({ message: err });
+  }
+  if (!plan) {
+    return res.status(400).json({ message: req.t("Invalid plan name {{planName}}", { planName })});
   }
 
   user = new User({
@@ -60,9 +67,12 @@ const signup = async(req, res) => {
 
   user.save(async(err, user) => {
     if (err) {
-      if (err.code === 11000) { // duplicated user email
-        return res.status(400).json({ code: "EmailExistsAlready", message: req.t("Email is already in use") });
-      }
+      /**
+       * this check is done as a route middleware
+      // if (err.code === 11000) { // duplicated user email
+      //   return res.status(400).json({ code: "EmailExistsAlready", message: req.t("Email is already in use") });
+      // }
+      */
       logger.error("New user creation error:", err);
       return res.status(500).json({ message: err });
     }

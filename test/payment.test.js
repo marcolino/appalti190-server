@@ -15,8 +15,6 @@ chai.use(chaiHttp); // use chaiHttp to make the actual HTTP requests
 
 let accessTokenUser, stripeSessionId;
 
-// TODO: do not check res.body.message, it's localized...
-
 describe("API tests - Payment routes", function() {
 
   before(async() => { // before these tests we empty the database
@@ -45,7 +43,7 @@ describe("API tests - Payment routes", function() {
         .then((res) => {
           res.should.have.status(200);
           res.body.should.have.property("message");
-          expect(res.body.message).to.equal("The account has been verified, you can now log in");
+          //expect(res.body.message).to.equal("The account has been verified, you can now log in");
           done();
         })
         .catch((err) => {

@@ -70,7 +70,7 @@ try {
   }
 
   if (process.env.NODE_ENV !== "production") { // if we're not in production then also log to the `Console` transport
-    if ((require.main !== module) || (info.level <= 4)) { // if we are in test skip logging upper than warning levels (notice, info, debug)
+    //if ((require.main !== module) || (info.level <= 4)) { // if we are in test skip logging upper than warning levels (notice, info, debug)
       const consoleLogFormat = winston.format.printf(info => {
         return `${info.timestamp} ${info.level}: ` + info.message;
       });
@@ -81,7 +81,7 @@ try {
         prettyPrint: true,
         colorize: true,
       }));
-    }
+    //}
   }
 } catch(err) {
   console.error("Winston transports creation error:", err);

@@ -47,6 +47,58 @@ describe("API tests - Auth routes", function() {
       .send(config.user)
       .then((res) => {
         res.should.have.status(400);
+        res.body.should.have.property("code");
+        expect(res.body.code).to.equal("EmailExistsAlready");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should not register user with invalid email", function(done) {
+    chai.request(server)
+      .post("/api/auth/signup")
+      .send(config.userInvalidEmail)
+      .then((res) => {
+        res.should.have.status(400);
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should not register user forcing invalid plan", function(done) {
+    chai.request(server)
+      .post("/api/auth/signup")
+      .send({
+        "email": config.admin.email,
+        "password": config.admin.password,
+        "forceplan": "invalidPlan",
+      })
+      .then((res) => {
+        res.should.have.status(400);
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should not register user forcing invalid role", function(done) {
+    chai.request(server)
+      .post("/api/auth/signup")
+      .send({
+        "email": config.admin.email,
+        "password": config.admin.password,
+        "forcerole": "invalidRole",
+      })
+      .then((res) => {
+        res.should.have.status(400);
         done();
       })
       .catch((err) => {

@@ -4,7 +4,7 @@ const cors = require("cors");
 const i18next = require("i18next");
 const backend = require("i18next-node-fs-backend");
 const i18nextMiddleware = require("i18next-http-middleware");
-const { logger, colors } = require("./src/controllers/logger.controller");
+const { logger } = require("./src/controllers/logger.controller");
 const db = require("./src/models");
 const { assertEnvironment } = require("./src/helpers/environment");
 const { setupEmail, notification } = require("./src/helpers/notification");
@@ -60,11 +60,12 @@ app.use((req, res, next) => {
 app.use(i18nextMiddleware.handle(i18next));
 
 // environment configuration
+logger.info("-----");
 if (production) { // load environment variables from .env file
-  logger.info(`Activating ${colors.BgGreen} production ${colors.Reset} environment`);
+  logger.info("Loading production environment");
   require("dotenv").config({ path: path.resolve(__dirname, "./.env") });
 } else { // load environment variables from .env.test file
-  logger.info(`Activating ${colors.BgYellow} test ${colors.Reset} environment`);
+  logger.info("Loading test environment");
   require("dotenv").config({ path: path.resolve(__dirname, "./.env.test") });
 }
 
