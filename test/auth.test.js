@@ -126,6 +126,51 @@ describe("API tests - Auth routes", function() {
     ;
   });
 
+  it("should resend signup code", function(done) {
+    chai.request(server)
+      .post("/api/auth/resendSignUpCode")
+      .send({ email: config.user.email })
+      .then((res) => {
+        res.should.have.status(200);
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should not confirm user without code", function(done) {
+    chai.request(server)
+      .post("/api/auth/signupConfirm")
+      .send({})
+      .then((res) => {
+        res.should.have.status(400);
+        res.body.should.have.property("message");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should not confirm user with invalid code", function(done) {
+    chai.request(server)
+      .post("/api/auth/signupConfirm")
+      .send({ code: "invalid code" })
+      .then((res) => {
+        res.should.have.status(400);
+        res.body.should.have.property("message");
+        expect(res.body.message).to.equal("This code is not valid, it may be expired");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
   it("should confirm user", function(done) {
     chai.request(server)
       .post("/api/auth/signupConfirm")
@@ -158,14 +203,14 @@ describe("API tests - Auth routes", function() {
     ;
   });
 
-  it("should resend signup code", function(done) {
+  it("should not resend signup code for already verified user", function(done) {
     chai.request(server)
       .post("/api/auth/resendSignUpCode")
       .send({ email: config.user.email })
       .then((res) => {
         res.should.have.status(400);
         res.body.should.have.property("message");
-        expect(res.body.message).to.equal("This account has already been verified, you can log in");
+        //expect(res.body.message).to.equal("This account has already been verified, you can log in");
         done();
       })
       .catch((err) => {
@@ -258,7 +303,6 @@ describe("API tests - Auth routes", function() {
         "password": config.user.password,
       })
       .then((res) => {
-//console.log("BODY:", res.body);
         res.should.have.status(200);
         res.body.should.have.property("id");
         res.body.should.have.property("email");

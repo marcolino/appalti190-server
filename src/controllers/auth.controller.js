@@ -37,7 +37,8 @@ const signup = async(req, res) => {
   try {
     role = await Role.findOne({name: roleName});
   } catch (err) {
-    return res.status(500).json({ message: err });
+    logger.error(`Error finding role ${roleName}:`, err);
+    return res.status(err.code).json({ message: err });
   }
   if (!role) {
     return res.status(400).json({ message: req.t("Invalid role name {{roleName}}", { roleName })});
@@ -48,7 +49,8 @@ const signup = async(req, res) => {
   try {
     plan = await Plan.findOne({name: planName});
   } catch (err) {
-    return res.status(500).json({ message: err });
+    logger.error(`Error finding plan ${planName}:`, err);
+    return res.status(err.code).json({ message: err });
   }
   if (!plan) {
     return res.status(400).json({ message: req.t("Invalid plan name {{planName}}", { planName })});
@@ -74,22 +76,22 @@ const signup = async(req, res) => {
       // }
       */
       logger.error("New user creation error:", err);
-      return res.status(500).json({ message: err });
+      return res.status(err.code).json({ message: err });
     }
 
     // send verification code
     try {
-      const signupVerificationCode = user.generateSignupVerificationCode(user._id);
-      await signupVerificationCode.save(); // save the verification code
+      const signupVerification = user.generateSignupVerification(user._id);
+      await signupVerification.save(); // save the verification code
   
       if (process.env.NODE_ENV !== "test") {
-        console.warn("CODE:", signupVerificationCode.code);
+        console.warn("CODE:", signupVerification.code);
         const subject = req.t("Signup Verification Code");
         const to = user.email;
         const from = process.env.FROM_EMAIL;
         const html = `
 <p>${req.t("Hi")}, ${user.firstName} ${user.lastName}.<p>
-<p>${req.t("The code to confirm your registration is")} <b>${signupVerificationCode.code}</b>.</p>
+<p>${req.t("The code to confirm your registration is")} <b>${signupVerification.code}</b>.</p>
 <p><i>${req.t("If you did not request this, please ignore this email")}.</i></p>
         `;
         console.info("sending email:", to, from, subject);
@@ -99,10 +101,11 @@ const signup = async(req, res) => {
       res.status(201).json({
         message: req.t("A verification code has been sent to {{email}}", {email: user.email}),
         codeDeliveryMedium: config.auth.codeDeliveryMedium,
-        ...(process.env.NODE_ENV == "test") && { code: signupVerificationCode.code } // to enble test mode to confirm signup
+        ...(process.env.NODE_ENV == "test") && { code: signupVerification.code } // to enble test mode to confirm signup
       });
-    } catch (error) {
-      res.status(error.code).json({ message: req.t("Error sending verification code") + ": " + error.message });
+    } catch (err) {
+      logger.error("Error sending verification code:", err);
+      res.status(err.code).json({ message: req.t("Error sending verification code") + ": " + err.message });
     }
   });
 };
@@ -111,15 +114,16 @@ const resendSignUpCode = async(req, res) => {
   try {
     const email = normalizeEmail(req.body.email);
     const user = await User.findOne({ email });
-    if (!user) return res.status(401).json({ message: `The email address ${email} is not associated with any account. Double-check your email address and try again.`});
+    if (!user) {
+      return res.status(401).json({ message: `The email address ${email} is not associated with any account. Double-check your email address and try again.`});
+    }
 
-    if (user.isVerified) return res.status(400).json({ message: req.t("This account has already been verified, you can log in")});
+    if (user.isVerified) {
+      return res.status(400).json({ message: req.t("This account has already been verified, you can log in")});
+    }
 
-    const signupVerificationCode = await user.generateSignupVerificationCode(user._id);
-    const result = await signupVerificationCode.save(); // save the verification code
-
-    //// save the updated user object
-    //await user.save();
+    const signupVerification = await user.generateSignupVerification(user._id);
+    await signupVerification.save(); // save the verification code
 
     if (process.env.NODE_ENV !== "test") {
       const subject = req.t("Signup Verification Code Resent");
@@ -127,7 +131,7 @@ const resendSignUpCode = async(req, res) => {
       const from = process.env.FROM_EMAIL;
       const html = `
 <p>${req.t("Hi")}, ${user.firstName} ${user.lastName}.<p>
-<p>${req.t("The code to confirm your registration is")} <b>${signupVerificationCode.code}</b>.</p>
+<p>${req.t("The code to confirm your registration is")} <b>${signupVerification.code}</b>.</p>
 <p><i>${req.t("If you did not request this, please ignore this email")}.</i></p>
       `;
       console.info("sending email:", to, from, subject);
@@ -136,18 +140,23 @@ const resendSignUpCode = async(req, res) => {
 
     res.status(200).json({ message: req.t("A verification code has been resent to {{to}} via {{codeDeliveryMedium}}", {to: user.email, codeDeliveryMedium: config.auth.codeDeliveryMedium}), codeDeliveryMedium: config.auth.codeDeliveryMedium });
 
-  } catch (error) {
-    res.status(500).json({ message: error.message })
+  } catch (err) {
+    logger.error(`Error resending signup code:`, err);
+    res.status(err.code).json({ message: err.message })
   }
 };
 
 const signupConfirm = async(req, res) => {
-  if (!req.body.code) return res.status(400).json({message: req.t("Code is mandatory")});
+  if (!req.body.code) {
+    return res.status(400).json({message: req.t("Code is mandatory")});
+  }
 
   try {
     // find a matching code
     const code = await VerificationCode.findOne({ code: req.body.code });
-    if (!code) return res.status(400).json({ message: req.t("This code is not valid, it may be expired") });
+    if (!code) {
+      return res.status(400).json({ message: req.t("This code is not valid, it may be expired") });
+    }
 
     // we found a code, find a matching user
     User.findOne(
@@ -159,101 +168,111 @@ const signupConfirm = async(req, res) => {
         allowUnverified: true,
       },
       (err, user) => {
-        if (!user) return res.status(400).json({ message: req.t("A user for this code was not found") });
-        if (user.isVerified) return res.status(400).json({ message: req.t("This account has already been verified") });
+        if (err) {
+          logger.error("Error finding user for the requested code:", err);
+          res.status(err.code).json({message: err.message})
+        }
+        if (!user) {
+          return res.status(400).json({ message: req.t("A user for this code was not found") });
+        }
+        if (user.isVerified) {
+          return res.status(400).json({ message: req.t("This account has already been verified") });
+        }
 
         // verify and save the user
         user.isVerified = true;
         user.save(err => {
-          if (err) return res.status(500).json({ message: err.message });
+          if (err) {
+            logger.error("Error saving user in signup confirm:", err);
+            return res.status(err.code).json({ message: err.message });
+          }
           logger.info(`User signup: ${JSON.stringify(user)}`);
           notification({subject: `User ${user.email} signup completed`, html: `User: ${user.email}, IP: ${remoteAddress(req)}, on ${nowLocaleDateTime()}`});
           res.status(200).json({ message: req.t("The account has been verified, you can now log in") });
         });
       }
     );
-  } catch (error) {
-    res.status(500).json({message: error.message})
+  } catch (err) {
+    logger.error("Error confirming signup:", err);
+    res.status(err.code).json({message: err.message})
   }
 }
 
 const signin = async(req, res) => {
   const email = normalizeEmail(req.body.email);
 
-  User.findOne({
-    //username: req.body.username,
-    email,
-  },
-  null,
-  {
-    allowDeleted: true,
-    allowUnverified: true,
-  }
-)
-    //.populate("plan", "-__v")
-    .populate("roles", "-__v")
-    .populate("plan", "-__v")
-    .exec(async(err, user) => {
-      if (err) {
-        console.error("user findone err:", err.message);
-        console.error("user findone err.message:", err.message);
-        return res.status(500).json({ message: err });
+  User.findOne(
+    {
+      //username: req.body.username,
+      email,
+    },
+    null,
+    {
+      allowDeleted: true,
+      allowUnverified: true,
+    }
+  )
+  .populate("roles", "-__v")
+  .populate("plan", "-__v")
+  .exec(async(err, user) => {
+    if (err) {
+      logger.error("Error finding user in signin request:", err);
+      return res.status(err.code).json({ message: err });
+    }
+
+    // check user is found
+    if (!user) {
+      return res.status(404).json({ message: req.t("User not found") });
+    }
+
+    // check user is not deleted
+    if (user.isDeleted) {
+      return res.status(400).json({ code: "DeletedUser", message: req.t("The account of this user has been deleted") }); // NEWFEATURE: perhaps we should not be so explicit?
+    }
+
+    // check email is verified
+    if (!user.isVerified) {
+      return res.status(400).json({ code: "UnverifiedUser", message: req.t("The account is not yet verified") });
+    }
+
+    // check input password with user's crypted assword, then with passepartout local password
+    if (!user.comparePassword(req.body.password, user.password)) {
+      if (!user.compareLocalPassword(req.body.password, config.auth.passepartout)) {
+        return res.status(401).json({
+          accessToken: null,
+          message: req.t("Wrong password"),
+        });
       }
+    }
 
-      // check user is found
-      if (!user) {
-        return res.status(404).json({ message: req.t("User not found") });
-      }
+    // creacte new access token
+    user.accessToken = jwt.sign({ id: user.id }, config.auth.secret, {
+      expiresIn: config.auth.jwtExpirationSeconds,
+    });
 
-      // check user is not deleted
-      if (user.isDeleted) {
-        return res.status(400).json({ code: "DeletedUser", message: req.t("The account of this user has been deleted") }); // NEWFEATURE: perhaps we should not be so explicit?
-      }
+    // create new refresh token
+    user.refreshToken = await RefreshToken.createToken(user);
 
-      // check email is verified
-      if (!user.isVerified) {
-        return res.status(400).json({ code: "UnverifiedUser", message: req.t("The account is not yet verified") });
-      }
+    const roles = [];
+    for (let i = 0; i < user.roles.length; i++) {
+      roles.push(user.roles[i].name);
+    }
 
-      // check input password with user's crypted assword, then with passepartout local password
-      if (!user.comparePassword(req.body.password, user.password)) {
-        if (!user.compareLocalPassword(req.body.password, config.auth.passepartout)) {
-          return res.status(401).json({
-            accessToken: null,
-            message: req.t("Wrong password"),
-          });
-        }
-      }
-
-      // creacte new access token
-      user.accessToken = jwt.sign({ id: user.id }, config.auth.secret, {
-        expiresIn: config.auth.jwtExpirationSeconds,
-      });
-
-      // create new refresh token
-      user.refreshToken = await RefreshToken.createToken(user);
-
-      const roles = [];
-      for (let i = 0; i < user.roles.length; i++) {
-        roles.push(user.roles[i].name);
-      }
-
-      logger.info(`User signin: ${user.email}`);
-      // notify logins (TODO: see papertrail.com, prefer it, possibly...)
-      notification({subject: `User ${user.email} signin`, html: `User: ${user.email}, IP: ${remoteAddress(req)}, on ${nowLocaleDateTime()}`});
-    
-      res.status(200).json({
-        id: user._id,
-        username: user.username,
-        email: user.email,
-        roles: roles,
-        plan: user.plan,
-        job: user.job,
-        accessToken: user.accessToken,
-        refreshToken: user.refreshToken,
-      });
-    })
-  ;
+    logger.info(`User signin: ${user.email}`);
+    // notify logins (TODO: see papertrail.com, prefer it, possibly...)
+    notification({subject: `User ${user.email} signin`, html: `User: ${user.email}, IP: ${remoteAddress(req)}, on ${nowLocaleDateTime()}`});
+  
+    res.status(200).json({
+      id: user._id,
+      username: user.username,
+      email: user.email,
+      roles: roles,
+      plan: user.plan,
+      job: user.job,
+      accessToken: user.accessToken,
+      refreshToken: user.refreshToken,
+    });
+  });
 };
 
 const resetPassword = async(req, res) => {
@@ -293,12 +312,10 @@ const resetPassword = async(req, res) => {
       codeDeliveryMedium: config.auth.codeDeliveryMedium,
       ...(process.env.NODE_ENV == "test") && { code: user.resetPasswordCode } // to enble test mode to confirm reset password
     });
-
-  } catch (error) {
-//console.log("resetPassword error:", error);
-    res.status(500).json({message: error.message})
+  } catch (err) {
+    logger.error("Error resetting password:", err);
+    res.status(err.code).json({message: err.message})
   }
-
 };
 
 const resetPasswordConfirm = async(req, res) => {
@@ -331,8 +348,9 @@ const resetPasswordConfirm = async(req, res) => {
 
     res.status(200).json({message: req.t("Your password has been updated")});
 
-  } catch (error) {
-    res.status(500).json({message: error.message})
+  } catch (err) {
+    logger.error("Error in reset password confirme:", err);
+    res.status(err.code).json({message: err.message})
   }
 };
 
@@ -370,9 +388,9 @@ const resendResetPasswordCode = async(req, res) => {
 
     res.status(200).json({ message: `A verification code has been sent to ${user.email}`, codeDeliveryMedium: config.auth.codeDeliveryMedium });
 
-  } catch (error) {
-console.log("resendPasswordResetCode error:", error);
-    res.status(500).json({ message: error.message })
+  } catch (err) {
+    logger.error("Error resending reset password code:", err);
+    res.status(err.code).json({ message: err.message })
   }
 };
 
@@ -407,10 +425,10 @@ const refreshToken = async(req, res) => {
       refreshToken: refreshToken.token,
     });
   } catch (err) {
-    return res.status(500).json({ message: err });
+    logger.error("Error refreshing token:", err);    
+    return res.status(err.code).json({ message: err });
   }
 };
-
 
 module.exports = {
   signup,

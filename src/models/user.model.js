@@ -126,7 +126,7 @@ UserSchema.methods.generatePasswordResetCode = () => {
   };
 };
 
-UserSchema.methods.generateSignupVerificationCode = (userId) => {
+UserSchema.methods.generateSignupVerification = (userId) => {
   const maxDigits = 6;
 
   let payload = {
@@ -134,7 +134,7 @@ UserSchema.methods.generateSignupVerificationCode = (userId) => {
     //token: crypto.randomBytes(20).toString("hex")
     code: generateRandomCode(maxDigits),
   };
-  //console.info("generateSignupVerificationCode payload:", payload);
+  //console.info("generateSignupVerification payload:", payload);
   return new VerificationCode(payload);
 };
 

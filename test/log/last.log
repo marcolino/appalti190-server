@@ -1,80 +1,83 @@
-2023-03-20T20:07:00.389Z info: -----
-2023-03-20T20:07:00.390Z info: Loading test environment
+2023-03-21T16:45:54.671Z info: -----
+2023-03-21T16:45:54.673Z info: Loading test environment
 
 [0m[0m
 [0m  API tests - Auth routes[0m
-2023-03-20T20:07:01.489Z info: Successfully connected to MongoDB
-  [32m  [32m✔[39m[0m[90m should register user[0m[31m (272ms)[0m
+2023-03-21T16:45:56.795Z info: Successfully connected to MongoDB
+  [32m  [32m✔[39m[0m[90m should register user[0m[31m (322ms)[0m
   [32m  [32m✔[39m[0m[90m should not register user twice[0m
   [32m  [32m✔[39m[0m[90m should not register user with invalid email[0m
   [32m  [32m✔[39m[0m[90m should not register user forcing invalid plan[0m
   [32m  [32m✔[39m[0m[90m should not register user forcing invalid role[0m
   [32m  [32m✔[39m[0m[90m should not login user before confirmation[0m
-2023-03-20T20:07:01.863Z info: User signup: {"roles":["6405b3152c959193b3979dfc"],"isDeleted":false,"isVerified":true,"_id":"6418bce55f4945cd657c6872","email":"user@mail.com","password":"$2a$10$MfPuatqyPr9AR4UcrFuXye6dfK7gciXYlaH4x/cQAbnslzEA4JyJm","address":{"_id":"6418bce55f4945cd657c6873","city":""},"plan":"63fce828d86497622429a3c4","createdAt":"2023-03-20T20:07:01.609Z","updatedAt":"2023-03-20T20:07:01.857Z","__v":0}
+  [32m  [32m✔[39m[0m[90m should resend signup code[0m
+  [32m  [32m✔[39m[0m[90m should not confirm user without code[0m
+  [32m  [32m✔[39m[0m[90m should not confirm user with invalid code[0m
+2023-03-21T16:45:57.251Z info: User signup: {"roles":["6405b3152c959193b3979dfc"],"isDeleted":false,"isVerified":true,"_id":"6419df443de72a906f730908","email":"user@mail.com","password":"$2a$10$ccFFcdWVPDjf0Q.GIsGjbOQgWlpSu0Qs70m/CHgQp97g9AunT3sPi","address":{"_id":"6419df443de72a906f730909","city":""},"plan":"63fce828d86497622429a3c4","createdAt":"2023-03-21T16:45:56.925Z","updatedAt":"2023-03-21T16:45:57.244Z","__v":0}
   [32m  [32m✔[39m[0m[90m should confirm user[0m[33m (47ms)[0m
   [32m  [32m✔[39m[0m[90m should not confirm user twice[0m
-  [32m  [32m✔[39m[0m[90m should resend signup code[0m
+  [32m  [32m✔[39m[0m[90m should not resend signup code for already verified user[0m
   [32m  [32m✔[39m[0m[90m should not resend signup code without email[0m
   [32m  [32m✔[39m[0m[90m should not reset password without email[0m
   [32m  [32m✔[39m[0m[90m should start reset password[0m
-  [32m  [32m✔[39m[0m[90m should confirm reset password[0m[31m (169ms)[0m
+  [32m  [32m✔[39m[0m[90m should confirm reset password[0m[31m (193ms)[0m
   [32m  [32m✔[39m[0m[90m should resend reset password code[0m
-2023-03-20T20:07:02.329Z info: User signin: user@mail.com
-  [32m  [32m✔[39m[0m[90m should login user[0m[31m (183ms)[0m
+2023-03-21T16:45:57.741Z info: User signin: user@mail.com
+  [32m  [32m✔[39m[0m[90m should login user[0m[31m (196ms)[0m
   [32m  [32m✔[39m[0m[90m should not refresh token without refresh token[0m
   [32m  [32m✔[39m[0m[90m should refresh token[0m
 
 [0m  API tests - Job routes[0m
-2023-03-20T20:07:02.515Z info: User signup: {"roles":["6405b3152c959193b3979dfc"],"isDeleted":false,"isVerified":true,"_id":"6418bce65f4945cd657c68a3","email":"user@mail.com","password":"$2a$10$fP7TCzk8kV2Ob1WAzn5x5Ozp04fVLL.2VqSmomj9EhPRb8Vfp5ZvO","address":{"_id":"6418bce65f4945cd657c68a4","city":""},"plan":"63fce828d86497622429a3c4","createdAt":"2023-03-20T20:07:02.367Z","updatedAt":"2023-03-20T20:07:02.513Z","__v":0}
-  [32m  [32m✔[39m[0m[90m should register normal user[0m[31m (162ms)[0m
-2023-03-20T20:07:02.659Z info: User signin: user@mail.com
-  [32m  [32m✔[39m[0m[90m should login normal user[0m[31m (145ms)[0m
-2023-03-20T20:07:02.834Z info: User signup: {"roles":["6405b3152c959193b3979dfd"],"isDeleted":false,"isVerified":true,"_id":"6418bce65f4945cd657c68b5","email":"admin@mail.com","password":"$2a$10$LjUP1CeuaXXgmvmll8riR.HshGj4/OHjoxp8uJLeShxH0nBQXv2dK","address":{"_id":"6418bce65f4945cd657c68b6","city":""},"plan":"63fce828d86497622429a3c6","createdAt":"2023-03-20T20:07:02.678Z","updatedAt":"2023-03-20T20:07:02.832Z","__v":0}
-  [32m  [32m✔[39m[0m[90m should register admin user[0m[31m (173ms)[0m
-2023-03-20T20:07:03.000Z info: User signin: admin@mail.com
-  [32m  [32m✔[39m[0m[90m should login as admin user[0m[31m (166ms)[0m
-2023-03-20T20:07:03.181Z info: User signup: {"roles":["6405b3152c959193b3979dfd"],"isDeleted":false,"isVerified":true,"_id":"6418bce75f4945cd657c68c7","email":"admin-standard@mail.com","password":"$2a$10$3p5s14oOQP8dUcMJhiHGPu.n/ZJYSZ/4OhEjGMRoBMskRTISlirPO","address":{"_id":"6418bce75f4945cd657c68c8","city":""},"plan":"63fce828d86497622429a3c5","createdAt":"2023-03-20T20:07:03.014Z","updatedAt":"2023-03-20T20:07:03.179Z","__v":0}
-  [32m  [32m✔[39m[0m[90m should register admin user with standard plan[0m[31m (179ms)[0m
-2023-03-20T20:07:03.347Z info: User signin: admin-standard@mail.com
-  [32m  [32m✔[39m[0m[90m should login as admin user with standard plan[0m[31m (166ms)[0m
+2023-03-21T16:45:57.965Z info: User signup: {"roles":["6405b3152c959193b3979dfc"],"isDeleted":false,"isVerified":true,"_id":"6419df453de72a906f73093e","email":"user@mail.com","password":"$2a$10$KiVJE5BLJi0jpz7xhXnC7.fCnVnNOYnP6D5SVCUInm7nxaZuimj2y","address":{"_id":"6419df453de72a906f73093f","city":""},"plan":"63fce828d86497622429a3c4","createdAt":"2023-03-21T16:45:57.780Z","updatedAt":"2023-03-21T16:45:57.962Z","__v":0}
+  [32m  [32m✔[39m[0m[90m should register normal user[0m[31m (197ms)[0m
+2023-03-21T16:45:58.187Z info: User signin: user@mail.com
+  [32m  [32m✔[39m[0m[90m should login normal user[0m[31m (223ms)[0m
+2023-03-21T16:45:58.484Z info: User signup: {"roles":["6405b3152c959193b3979dfd"],"isDeleted":false,"isVerified":true,"_id":"6419df463de72a906f730950","email":"admin@mail.com","password":"$2a$10$8uLWoxfMReJsFbfT2k/klegPSyTLz9spN0CzV5SsIz466WeGQMV.y","address":{"_id":"6419df463de72a906f730951","city":""},"plan":"63fce828d86497622429a3c6","createdAt":"2023-03-21T16:45:58.211Z","updatedAt":"2023-03-21T16:45:58.471Z","__v":0}
+  [32m  [32m✔[39m[0m[90m should register admin user[0m[31m (294ms)[0m
+2023-03-21T16:45:58.704Z info: User signin: admin@mail.com
+  [32m  [32m✔[39m[0m[90m should login as admin user[0m[31m (219ms)[0m
+2023-03-21T16:45:58.938Z info: User signup: {"roles":["6405b3152c959193b3979dfd"],"isDeleted":false,"isVerified":true,"_id":"6419df463de72a906f730962","email":"admin-standard@mail.com","password":"$2a$10$PI0FZyEBmgkH4d3soPtB9uha5l7i3d8EngZR8r0O2cfERZEOcWI.6","address":{"_id":"6419df463de72a906f730963","city":""},"plan":"63fce828d86497622429a3c5","createdAt":"2023-03-21T16:45:58.728Z","updatedAt":"2023-03-21T16:45:58.935Z","__v":0}
+  [32m  [32m✔[39m[0m[90m should register admin user with standard plan[0m[31m (231ms)[0m
+2023-03-21T16:45:59.141Z info: User signin: admin-standard@mail.com
+  [32m  [32m✔[39m[0m[90m should login as admin user with standard plan[0m[31m (203ms)[0m
   [32m  [32m✔[39m[0m[90m should not upload a file without authentication[0m
   [32m  [32m✔[39m[0m[90m should upload a file as normal user[0m
   [32m  [32m✔[39m[0m[90m should not transform XLS to XML without authentication[0m
   [32m  [32m✔[39m[0m[90m should not transform XLS to XML as normal user (not existing file)[0m
-  [32m  [32m✔[39m[0m[90m should transform XLS to XML as normal user (some errors file)[0m[31m (2475ms)[0m
-  [32m  [32m✔[39m[0m[90m should transform XLS to XML as normal user (more errors file)[0m[31m (1670ms)[0m
-  [32m  [32m✔[39m[0m[90m should transform XLS to XML as admin user with standard plan, truncating (good file)[0m[31m (1374ms)[0m
-  [32m  [32m✔[39m[0m[90m should transform XLS to XML as normal user (good file)[0m[31m (1259ms)[0m
+  [32m  [32m✔[39m[0m[90m should transform XLS to XML as normal user (some errors file)[0m[31m (3221ms)[0m
+  [32m  [32m✔[39m[0m[90m should transform XLS to XML as normal user (more errors file)[0m[31m (1642ms)[0m
+  [32m  [32m✔[39m[0m[90m should transform XLS to XML as admin user with standard plan, truncating (good file)[0m[31m (1424ms)[0m
+  [32m  [32m✔[39m[0m[90m should transform XLS to XML as normal user (good file)[0m[31m (1223ms)[0m
   [32m  [32m✔[39m[0m[90m should not validate XML without authentication[0m
-  [32m  [32m✔[39m[0m[90m should validate XML (one output file ok)[0m[31m (817ms)[0m
+  [32m  [32m✔[39m[0m[90m should validate XML (one output file ok)[0m[31m (764ms)[0m
   [32m  [32m✔[39m[0m[90m should not validate XML (one output file, no file)[0m
-  [32m  [32m✔[39m[0m[90m should validate XML (index output file ok)[0m[31m (566ms)[0m
+  [32m  [32m✔[39m[0m[90m should validate XML (index output file ok)[0m[31m (705ms)[0m
 
 [0m  API tests - Payment routes[0m
-2023-03-20T20:07:11.730Z info: User signup: {"roles":["6405b3152c959193b3979dfc"],"isDeleted":false,"isVerified":true,"_id":"6418bcef5f4945cd657c68ed","email":"user@mail.com","password":"$2a$10$TGrXANSJJ3dxPsh1tUqT7OJAtJsQd.P2iVmizdNfQgVgHzWY12snK","address":{"_id":"6418bcef5f4945cd657c68ee","city":""},"plan":"63fce828d86497622429a3c4","createdAt":"2023-03-20T20:07:11.588Z","updatedAt":"2023-03-20T20:07:11.727Z","__v":0}
-  [32m  [32m✔[39m[0m[90m should register normal user[0m[31m (155ms)[0m
-2023-03-20T20:07:11.900Z info: User signin: user@mail.com
-  [32m  [32m✔[39m[0m[90m should login normal user[0m[31m (170ms)[0m
+2023-03-21T16:46:08.383Z info: User signup: {"roles":["6405b3152c959193b3979dfc"],"isDeleted":false,"isVerified":true,"_id":"6419df503de72a906f730988","email":"user@mail.com","password":"$2a$10$lTHhYNIJm8D/v90TCD0azeSSoAWllFqQ.FK.Uk0OH3XMrkHhMoJZK","address":{"_id":"6419df503de72a906f730989","city":""},"plan":"63fce828d86497622429a3c4","createdAt":"2023-03-21T16:46:08.194Z","updatedAt":"2023-03-21T16:46:08.381Z","__v":0}
+  [32m  [32m✔[39m[0m[90m should register normal user[0m[31m (202ms)[0m
+2023-03-21T16:46:08.611Z info: User signin: user@mail.com
+  [32m  [32m✔[39m[0m[90m should login normal user[0m[31m (227ms)[0m
   [32m  [32m✔[39m[0m[90m should get payment mode, and it should be in a set of values[0m
   [32m  [32m✔[39m[0m[90m should not create a checkout session without authentication[0m
-2023-03-20T20:07:14.518Z error: Payment session creation error: {"type":"StripeInvalidRequestError","raw":{"message":"The Checkout Session's total amount due cannot be zero in `payment` mode. Please see https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts","request_log_url":"https://dashboard.stripe.com/test/logs/req_TOkyioOObCyTCq?t=1679342833","type":"invalid_request_error","headers":{"server":"nginx","date":"Mon, 20 Mar 2023 20:07:14 GMT","content-type":"application/json","content-length":"327","connection":"keep-alive","access-control-allow-credentials":"true","access-control-allow-methods":"GET, POST, HEAD, OPTIONS, DELETE","access-control-allow-origin":"*","access-control-expose-headers":"Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required","access-control-max-age":"300","cache-control":"no-cache, no-store","idempotency-key":"6fb51102-a2ed-4886-bd58-ae544b7e0b60","original-request":"req_TOkyioOObCyTCq","request-id":"req_TOkyioOObCyTCq","stripe-should-retry":"false","stripe-version":"2020-08-27","strict-transport-security":"max-age=63072000; includeSubDomains; preload"},"statusCode":400,"requestId":"req_TOkyioOObCyTCq"},"rawType":"invalid_request_error","headers":{"server":"nginx","date":"Mon, 20 Mar 2023 20:07:14 GMT","content-type":"application/json","content-length":"327","connection":"keep-alive","access-control-allow-credentials":"true","access-control-allow-methods":"GET, POST, HEAD, OPTIONS, DELETE","access-control-allow-origin":"*","access-control-expose-headers":"Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required","access-control-max-age":"300","cache-control":"no-cache, no-store","idempotency-key":"6fb51102-a2ed-4886-bd58-ae544b7e0b60","original-request":"req_TOkyioOObCyTCq","request-id":"req_TOkyioOObCyTCq","stripe-should-retry":"false","stripe-version":"2020-08-27","strict-transport-security":"max-age=63072000; includeSubDomains; preload"},"requestId":"req_TOkyioOObCyTCq","statusCode":400}
-  [32m  [32m✔[39m[0m[90m should not create a checkout session for a 0 cost product[0m[31m (2610ms)[0m
-2023-03-20T20:07:15.553Z info: Payment session created
-  [32m  [32m✔[39m[0m[90m should create a checkout session for a standard product[0m[31m (1030ms)[0m
-2023-03-20T20:07:16.590Z info: Payment successful for product standard
-  [32m  [32m✔[39m[0m[90m should redirect on a payment success call[0m[31m (1037ms)[0m
-2023-03-20T20:07:17.652Z info: Payment canceled for product standard
-  [32m  [32m✔[39m[0m[90m should redirect on a payment canceled call[0m[31m (1054ms)[0m
+2023-03-21T16:46:09.957Z error: Payment session creation error: {"type":"StripeInvalidRequestError","raw":{"message":"The Checkout Session's total amount due cannot be zero in `payment` mode. Please see https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts","request_log_url":"https://dashboard.stripe.com/test/logs/req_Cy4L213u0sjmEz?t=1679417169","type":"invalid_request_error","headers":{"server":"nginx","date":"Tue, 21 Mar 2023 16:46:09 GMT","content-type":"application/json","content-length":"327","connection":"keep-alive","access-control-allow-credentials":"true","access-control-allow-methods":"GET, POST, HEAD, OPTIONS, DELETE","access-control-allow-origin":"*","access-control-expose-headers":"Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required","access-control-max-age":"300","cache-control":"no-cache, no-store","idempotency-key":"01739b9f-da71-4c66-8e24-3154bc70fa24","original-request":"req_Cy4L213u0sjmEz","request-id":"req_Cy4L213u0sjmEz","stripe-should-retry":"false","stripe-version":"2020-08-27","strict-transport-security":"max-age=63072000; includeSubDomains; preload"},"statusCode":400,"requestId":"req_Cy4L213u0sjmEz"},"rawType":"invalid_request_error","headers":{"server":"nginx","date":"Tue, 21 Mar 2023 16:46:09 GMT","content-type":"application/json","content-length":"327","connection":"keep-alive","access-control-allow-credentials":"true","access-control-allow-methods":"GET, POST, HEAD, OPTIONS, DELETE","access-control-allow-origin":"*","access-control-expose-headers":"Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required","access-control-max-age":"300","cache-control":"no-cache, no-store","idempotency-key":"01739b9f-da71-4c66-8e24-3154bc70fa24","original-request":"req_Cy4L213u0sjmEz","request-id":"req_Cy4L213u0sjmEz","stripe-should-retry":"false","stripe-version":"2020-08-27","strict-transport-security":"max-age=63072000; includeSubDomains; preload"},"requestId":"req_Cy4L213u0sjmEz","statusCode":400}
+  [32m  [32m✔[39m[0m[90m should not create a checkout session for a 0 cost product[0m[31m (1334ms)[0m
+2023-03-21T16:46:10.985Z info: Payment session created
+  [32m  [32m✔[39m[0m[90m should create a checkout session for a standard product[0m[31m (1029ms)[0m
+2023-03-21T16:46:11.814Z info: Payment successful for product standard
+  [32m  [32m✔[39m[0m[90m should redirect on a payment success call[0m[31m (830ms)[0m
+2023-03-21T16:46:12.530Z info: Payment canceled for product standard
+  [32m  [32m✔[39m[0m[90m should redirect on a payment canceled call[0m[31m (708ms)[0m
 
 [0m  API tests - User routes[0m
-2023-03-20T20:07:17.890Z info: User signup: {"roles":["6405b3152c959193b3979dfc"],"isDeleted":false,"isVerified":true,"_id":"6418bcf55f4945cd657c6900","email":"user@mail.com","password":"$2a$10$uAI1l7Mrhm2nL1AXBWx.q.Jum8xvC51fhR3p3e8mgcRtXNcv7vOXO","address":{"_id":"6418bcf55f4945cd657c6901","city":""},"plan":"63fce828d86497622429a3c4","createdAt":"2023-03-20T20:07:17.697Z","updatedAt":"2023-03-20T20:07:17.887Z","__v":0}
-  [32m  [32m✔[39m[0m[90m should register normal user[0m[31m (223ms)[0m
-2023-03-20T20:07:18.080Z info: User signin: user@mail.com
-  [32m  [32m✔[39m[0m[90m should login normal user[0m[31m (190ms)[0m
-2023-03-20T20:07:18.295Z info: User signup: {"roles":["6405b3152c959193b3979dfd"],"isDeleted":false,"isVerified":true,"_id":"6418bcf65f4945cd657c6912","email":"admin@mail.com","password":"$2a$10$pTyYCACR1aYYwp6QTc.ob.RXhj0IizsAXBLbmWVGdsS.l4Ah9.6KS","address":{"_id":"6418bcf65f4945cd657c6913","city":""},"plan":"63fce828d86497622429a3c6","createdAt":"2023-03-20T20:07:18.094Z","updatedAt":"2023-03-20T20:07:18.292Z","__v":0}
-  [32m  [32m✔[39m[0m[90m should register admin user[0m[31m (215ms)[0m
-2023-03-20T20:07:18.447Z info: User signin: admin@mail.com
-  [32m  [32m✔[39m[0m[90m should login as admin user[0m[31m (150ms)[0m
+2023-03-21T16:46:12.794Z info: User signup: {"roles":["6405b3152c959193b3979dfc"],"isDeleted":false,"isVerified":true,"_id":"6419df543de72a906f73099b","email":"user@mail.com","password":"$2a$10$1kwHrPooQp6xCtIkzLh0EekUJyyVKJ.RHxGc4UpFMmbPMZQZcSThy","address":{"_id":"6419df543de72a906f73099c","city":""},"plan":"63fce828d86497622429a3c4","createdAt":"2023-03-21T16:46:12.611Z","updatedAt":"2023-03-21T16:46:12.791Z","__v":0}
+  [32m  [32m✔[39m[0m[90m should register normal user[0m[31m (246ms)[0m
+2023-03-21T16:46:12.997Z info: User signin: user@mail.com
+  [32m  [32m✔[39m[0m[90m should login normal user[0m[31m (202ms)[0m
+2023-03-21T16:46:13.219Z info: User signup: {"roles":["6405b3152c959193b3979dfd"],"isDeleted":false,"isVerified":true,"_id":"6419df553de72a906f7309ad","email":"admin@mail.com","password":"$2a$10$3nIzc3B.Qk/aVfzJmmUk0Oe40lmvNJvDHXDk7sgrwIT4kSbY6sTN.","address":{"_id":"6419df553de72a906f7309ae","city":""},"plan":"63fce828d86497622429a3c6","createdAt":"2023-03-21T16:46:13.011Z","updatedAt":"2023-03-21T16:46:13.217Z","__v":0}
+  [32m  [32m✔[39m[0m[90m should register admin user[0m[31m (221ms)[0m
+2023-03-21T16:46:13.412Z info: User signin: admin@mail.com
+  [32m  [32m✔[39m[0m[90m should login as admin user[0m[31m (194ms)[0m
   [32m  [32m✔[39m[0m[90m should not get all users with user role[0m
   [32m  [32m✔[39m[0m[90m should get user's profile[0m
   [32m  [32m✔[39m[0m[90m should not get user's profile without authentication[0m
@@ -95,7 +98,26 @@
   [32m  [32m✔[39m[0m[90m should update user's own roles as admin user (up grade)[0m
   [32m  [32m✔[39m[0m[90m should not get all users with user role[0m
   [32m  [32m✔[39m[0m[90m should get all users with admin role[0m
+  [32m  [32m✔[39m[0m[90m should not delete user without authentication[0m
+  [32m  [32m✔[39m[0m[90m should not delete user without admin privileges[0m
+  [32m  [32m✔[39m[0m[90m should not delete user with admin privileges using invalid id[0m
+  [32m  [32m✔[39m[0m[90m should delete user with admin privileges using id[0m
+  [32m  [32m✔[39m[0m[90m should delete user with admin privileges using email[0m
+2023-03-21T16:46:13.944Z info: User signup: {"roles":["6405b3152c959193b3979dfc"],"isDeleted":false,"isVerified":true,"_id":"6419df553de72a906f730a0d","email":"user@mail.com","password":"$2a$10$z7DyzSrnG3iyckvBWjlJkuxqAK54CofwibK8EQXYJ/a0UBZPbAUmS","address":{"_id":"6419df553de72a906f730a0e","city":""},"plan":"63fce828d86497622429a3c4","createdAt":"2023-03-21T16:46:13.750Z","updatedAt":"2023-03-21T16:46:13.941Z","__v":0}
+  [32m  [32m✔[39m[0m[90m should register normal user[0m[31m (206ms)[0m
+2023-03-21T16:46:14.151Z info: User signin: user@mail.com
+  [32m  [32m✔[39m[0m[90m should login normal user[0m[31m (205ms)[0m
+2023-03-21T16:46:14.358Z info: User signup: {"roles":["6405b3152c959193b3979dfd"],"isDeleted":false,"isVerified":true,"_id":"6419df563de72a906f730a1f","email":"admin@mail.com","password":"$2a$10$05XV6SDPdBYDH/TfYzLVUen7Guxy4cM.sb6pqsXvOh8DQezjAmLcO","address":{"_id":"6419df563de72a906f730a20","city":""},"plan":"63fce828d86497622429a3c6","createdAt":"2023-03-21T16:46:14.163Z","updatedAt":"2023-03-21T16:46:14.355Z","__v":0}
+  [32m  [32m✔[39m[0m[90m should register admin user[0m[31m (207ms)[0m
+2023-03-21T16:46:14.550Z info: User signin: admin@mail.com
+  [32m  [32m✔[39m[0m[90m should login as admin user[0m[31m (192ms)[0m
+  [32m  [32m✔[39m[0m[90m should not remove user without authentication[0m
+  [32m  [32m✔[39m[0m[90m should not remove user without admin privileges[0m
+  [32m  [32m✔[39m[0m[90m should not remove user with admin privileges using invalid id[0m
+  [32m  [32m✔[39m[0m[90m should remove user with admin privileges using id[0m
+  [32m  [32m✔[39m[0m[90m should remove user with admin privileges using email[0m
+  [32m  [32m✔[39m[0m[90m should remove all users with admin privileges[0m
 
 
-[92m [0m[32m 67 passing[0m[90m (17s)[0m
+[92m [0m[32m 85 passing[0m[90m (18s)[0m
 

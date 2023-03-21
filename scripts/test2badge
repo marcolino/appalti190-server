@@ -18,10 +18,10 @@ failing=`cat "$lastBareLog" | sed -n 's/^\s*\([0-9]*\)\s*failing\s*.*/\1/p'`
 
 if [ -z "$failing" ]; then
   total=$passing
-  curl --silent "https://img.shields.io/badge/${label}-${passing}%2F${total}-${passingColor}" -o test/badges/mocha.svg
+  curl --silent "https://img.shields.io/badge/${label}-${passing}%2F${total}-${passingColor}" -o public/badges/mocha.svg
 else
   total=$(($passing + $failing))
-  curl --silent "https://img.shields.io/badge/${label}-${passing}%2F${total}-${failingColor}" -o test/badges/mocha.svg
+  curl --silent "https://img.shields.io/badge/${label}-${passing}%2F${total}-${failingColor}" -o public/badges/mocha.svg
 fi
 
 #qiv test/badges/mocha.svg
