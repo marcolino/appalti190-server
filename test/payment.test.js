@@ -9,7 +9,7 @@ const server = require("../server");
 const User = require("../src/models/user.model");
 const Role = require("../src/models/role.model");
 const userController = require("../src/controllers/user.controller");
-const { config } = require ("./config.test");
+const { config } = require("./config.test");
 
 chai.use(chaiHttp); // use chaiHttp to make the actual HTTP requests
 
@@ -92,7 +92,7 @@ describe("API tests - Payment routes", function() {
 
   it("should not create a checkout session without authentication", function(done) {
     chai.request(server)
-      .post("/api/payment/create-checkout-session")
+      .post("/api/payment/createCheckoutSession")
       //.set("x-access-token", accessTokenUser)
       .send({})
       .then((res) => {
@@ -107,7 +107,7 @@ describe("API tests - Payment routes", function() {
 
   it("should not create a checkout session for a 0 cost product", function(done) {
     chai.request(server)
-      .post("/api/payment/create-checkout-session")
+      .post("/api/payment/createCheckoutSession")
       .set("x-access-token", accessTokenUser)
       .send({product: "free"})
       .then((res) => {
@@ -120,9 +120,24 @@ describe("API tests - Payment routes", function() {
     ;
   });
 
+  it("should not create a checkout session for a non-existent product", function(done) {
+    chai.request(server)
+      .post("/api/payment/createCheckoutSession")
+      .set("x-access-token", accessTokenUser)
+      .send({product: "not existent"})
+      .then((res) => {
+        res.should.have.status(400);
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      }) 
+    ;
+  });
+
   it("should create a checkout session for a standard product", function(done) {
     chai.request(server)
-      .post("/api/payment/create-checkout-session")
+      .post("/api/payment/createCheckoutSession")
       .set("x-access-token", accessTokenUser)
       .send({product: "standard"})
       .then((res) => {
@@ -139,7 +154,7 @@ describe("API tests - Payment routes", function() {
 
   it("should redirect on a payment success call", function(done) {
     chai.request(server)
-      .get("/api/payment/payment-success")
+      .get("/api/payment/paymentSuccess")
       .query({session_id: stripeSessionId})
       .redirects(0)
       .then((res) => {
@@ -154,7 +169,7 @@ describe("API tests - Payment routes", function() {
 
   it("should redirect on a payment canceled call", function(done) {
     chai.request(server)
-      .get("/api/payment/payment-cancel")
+      .get("/api/payment/paymentCancel")
       .query({session_id: stripeSessionId})
       .redirects(0)
       .then((res) => {

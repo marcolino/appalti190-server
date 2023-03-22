@@ -7,15 +7,15 @@ const should = chai.should();
 const expect = chai.expect;
 const server = require("../server");
 const User = require("../src/models/user.model");
-//const Role = require("../src/models/role.model");
-//const userController = require("../src/controllers/user.controller");
-const { config } = require ("./config.test");
+//const { signupAndSigninAllUsers } = require ("./utils/common.test");
+const { config } = require("./config.test");
 
 chai.use(chaiHttp); // use chaiHttp to make the actual HTTP requests
 
-let accessTokenUser, accessTokenAdmin, adminUserId;
+let accessTokenUser, accessTokenAdmin;
+//let { accessTokenUser, accessTokenAdmin } = require ("./utils/common.test");
 
-describe("API tests - User routes", function() {
+describe("API tests - User routes", async function() {
 
   before(async() => { // before these tests we empty the database
     // clearing user collection from test database
@@ -36,6 +36,81 @@ describe("API tests - User routes", function() {
       .then((res) => {
         res.should.have.status(403);
         done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should get user plan without authentication", function(done) {
+    chai.request(server)
+      .get("/api/user/getPlan")
+      .send({})
+      .then((res) => {
+        res.should.have.status(403);
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+  it("should get same user's plan", function(done) {
+    chai.request(server)
+      .get("/api/user/getPlan")
+      .set("x-access-token", accessTokenUser)
+      .send({})
+      .then((res) => {
+        res.should.have.status(200);
+        res.body.should.be.an("array");
+        res.body.every(i => expect(i).to.have.all.keys("cigNumberAllowed", "name", "priceCurrency", "pricePerYear", "supportTypes"));
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should not get other user's plan as normal user", function(done) {
+    chai.request(server)
+      .get("/api/user/getPlan")
+      .set("x-access-token", accessTokenUser)
+      .send({ userId: "123"})
+      .then((res) => {
+        res.should.have.status(403);
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should get other user's plan as admin user", function(done) {
+    chai.request(server)
+      .post("/api/auth/signin")
+      .send({
+        "email": config.user.email,
+        "password": config.user.password,
+      })
+      .then((res) => {
+        res.should.have.status(200);
+        res.body.should.have.property("id");
+        const userId = res.body.id;
+        chai.request(server)
+          .get("/api/user/getPlan")
+          .set("x-access-token", accessTokenAdmin)
+          .send({ userId })
+          .then((res) => {
+            res.should.have.status(200);
+            done();
+          })
+          .catch((err) => {
+            done(err);
+          })
+        ;
       })
       .catch((err) => {
         done(err);
@@ -132,7 +207,7 @@ describe("API tests - User routes", function() {
         firstName: config.user.name + "-bis",
       })
       .then((res) => {
-        res.should.have.status(400);
+        res.should.have.status(403);
         done();
       })
       .catch((err) => {
@@ -150,7 +225,7 @@ describe("API tests - User routes", function() {
         firstName: config.user.name + "-bis",
       })
       .then((res) => {
-        res.should.have.status(400);
+        res.should.have.status(403);
         done();
       })
       .catch((err) => {
@@ -168,7 +243,7 @@ describe("API tests - User routes", function() {
         firstName: config.user.name + "-bis",
       })
       .then((res) => {
-        res.should.have.status(400);
+        res.should.have.status(403);
         done();
       })
       .catch((err) => {
@@ -405,6 +480,21 @@ describe("API tests - User routes", function() {
     ;
   });
 
+  it("should not get all users with wrong filter", function(done) {
+    chai.request(server)
+      .get("/api/user/getUsers")
+      .set("x-access-token", accessTokenAdmin)
+      .send({ filter: "wrong filter" })
+      .then((res) => {
+        res.should.have.status(400);
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
   it("should get all users with admin role", function(done) {
     chai.request(server)
       .get("/api/user/getUsers")
@@ -502,106 +592,6 @@ describe("API tests - User routes", function() {
   });
 
   signupAndSigninAllUsers();
-  // it("should register normal user", function(done) {
-  //   chai.request(server)
-  //     .post("/api/auth/signup")
-  //     .send({
-  //       "email": config.user.email,
-  //       "password": config.user.password,
-  //     })
-  //     .then((res) => {
-  //       res.should.have.status(201);
-  //       res.body.should.have.property("code");
-  //       signupConfirmCode = res.body.code;
-  //       chai.request(server)
-  //       .post("/api/auth/signupConfirm")
-  //       .send({ code: signupConfirmCode })
-  //       .then((res) => {
-  //         res.should.have.status(200);
-  //         res.body.should.have.property("message");
-  //         done();
-  //       })
-  //       .catch((err) => {
-  //         done(err);
-  //       })
-  //     })
-  //     .catch((err) => {
-  //       done(err);
-  //     })
-  //   ;
-  // });
-
-  // it("should login normal user", function(done) {
-  //   chai.request(server)
-  //     .post("/api/auth/signin")
-  //     .send({
-  //       "email": config.user.email,
-  //       "password": config.user.password,
-  //     })
-  //     .then((res) => {
-  //       res.should.have.status(200);
-  //       res.body.should.have.property("accessToken");
-  //       res.body.should.have.property("id");
-  //       accessTokenUser = res.body.accessToken;
-  //       config.user.id = res.body.id;
-  //       done();
-  //     })
-  //     .catch((err) => {
-  //       done(err);
-  //     })
-  //   ;
-  // });
-
-  // it("should register admin user", function(done) {
-  //   chai.request(server)
-  //     .post("/api/auth/signup")
-  //     .send({
-  //       "email": config.admin.email,
-  //       "password": config.admin.password,
-  //       "forcerole": "admin",
-  //       "forceplan": "unlimited",
-  //     })
-  //     .then((res) => {
-  //       res.should.have.status(201);
-  //       res.body.should.have.property("code");
-  //       signupConfirmCode = res.body.code;
-  //       chai.request(server)
-  //       .post("/api/auth/signupConfirm")
-  //       .send({ code: signupConfirmCode })
-  //       .then((res) => {
-  //         res.should.have.status(200);
-  //         res.body.should.have.property("message");
-  //         done();
-  //       })
-  //       .catch((err) => {
-  //         done(err);
-  //       })  
-  //     })
-  //     .catch((err) => {
-  //       done(err);
-  //     })
-  //   ;
-  // });
-
-  // it("should login as admin user", function(done) {
-  //   chai.request(server)
-  //     .post("/api/auth/signin")
-  //     .send(config.admin)
-  //     .then((res) => {
-  //       res.should.have.status(200);
-  //       res.body.should.have.property("accessToken");
-  //       res.body.should.have.property("roles");
-  //       res.body.should.have.property("id");
-  //       expect(res.body.roles).to.include("admin");
-  //       accessTokenAdmin = res.body.accessToken;
-  //       config.admin.id = res.body.id;
-  //       done();
-  //     })
-  //     .catch((err) => {
-  //       done(err);
-  //     })
-  //   ;
-  // });
 
   it("should not remove user without authentication", function(done) {
     chai.request(server)

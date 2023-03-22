@@ -21,8 +21,8 @@ exports.getMode = async(req, res) => {
 exports.createCheckoutSession = async(req, res) => {
   // TODO: create ../controllers/payment.controller.js ...
   const product = req.body.product;
-  //console.log("create-checkout-session product:", product);
-  //console.log("create-checkout-session product price id:", config.payment.stripe.products[product].price_id);
+  //console.log("createCheckoutSession product:", product);
+  //console.log("createCheckoutSession product price id:", config.payment.stripe.products[product].price_id);
   try {
     const session = await stripe.checkout.sessions.create({
       line_items: [
@@ -36,9 +36,9 @@ exports.createCheckoutSession = async(req, res) => {
       success_url: `${config.payment.stripe.paymentSuccessUrl}?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${config.payment.stripe.paymentCancelUrl}?session_id={CHECKOUT_SESSION_ID}`,
     });
-    //console.log("create-checkout-session session:", session);
+    //console.log("createCheckoutSession session:", session);
     if (!session?.url) { // incomplete response, we miss the redirect url
-      //console.error("create-checkout-session error: no session url");
+      //console.error("createCheckoutSession error: no session url");
       logger.error(`Payment session creation error: no session url`);
       return res.status(400).json({message: "no session url", code: "NO_SESSION_URL"});
     }

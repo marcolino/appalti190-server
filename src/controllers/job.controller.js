@@ -923,14 +923,15 @@ exports.urlExistenceAndMatch = async (req, res) => {
     // read remote file
     const response = await axios.get(req.body.url);
     const remoteContents = response.data;
-    console.log("urlExistenceAndMatch remoteContents length", remoteContents.length, typeof remoteContents);
+    //console.log("urlExistenceAndMatch remoteContents length", remoteContents.length, typeof remoteContents);
 
+    // TODO: make comparison work for zip use case too...
     // read local file to compare
     const buffer = fs.readFileSync(req.body.fileToMatch);
     const localContents = buffer.toString();
-    console.log("urlExistenceAndMatch localContents length", localContents.length, typeof localContents);
+    //console.log("urlExistenceAndMatch localContents length", localContents.length, typeof localContents);
 
-    // compare contents
+    // compare contents (TODO: understand if and why we need config.job.publish.allowDateChangeInDataset ...)
     const bytesToIgnoreAtTheTopOfTheDatasets = (config.job?.publish?.allowDateChangeInDataset ? 564 : 0);
     if (localContents.slice(localContents.length - bytesToIgnoreAtTheTopOfTheDatasets) !== remoteContents.slice(remoteContents.length - bytesToIgnoreAtTheTopOfTheDatasets) ) {
       //return [null, {published: true, publishedAsIs: false}];

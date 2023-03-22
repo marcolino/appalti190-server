@@ -6,6 +6,11 @@ const setupEmail = () => {
 }
 
 const sendemail = (mailOptions) => {
+
+  if (process.env.NODE_ENV === "test") { // in test mode do not send emails
+    return Promise.resolve(true);
+  }
+
   // set defaults
   if (!mailOptions.to) mailOptions.to = process.env.FROM_EMAIL;
   if (!mailOptions.from) mailOptions.from = process.env.FROM_EMAIL;

@@ -27,7 +27,7 @@ module.exports = {
   },
   auth: { // NEWFEATURE: put into environment (?)
     secret: "super-secret-banana-armadillo-666!",
-    jwtExpirationSeconds: 3600, // 1 hour TTL
+    jwtExpirationSeconds: 50, //3600, // 1 hour TTL
     jwtRefreshExpirationSeconds: 3600 * 24 * 30, // 1 month TTL
     verificationCodesExpirySeconds: 60 * 60 * 12, // 12 hours TTL
     codeDeliveryMedium: "email", // "email" / "sms" / ...
@@ -66,7 +66,7 @@ module.exports = {
     outputDownloads: "/downloads/",
     schemaFile: `./data/${year + 1}/datasetAppaltiL190.xsd`, // the xsd schema file (every new year must be manually downloaded new version from authority, and applied possible changes to code/data)
     schemaIndiceFile: `./data/${year + 1}/datasetIndiceAppaltiL190.xsd`, // the xsd indice schema file (every new year must be manually downloaded new version from authority, and applied possible changes to code/data)
-    datasetMaximumSize: /*5*/1 * (1024 * 1024),
+    datasetMaximumSize: 5 * (1024 * 1024),
     xsi_schemaLocation: "legge190_1_0 datasetAppaltiL190.xsd", // xsi schemaLocation attribute
     xmlns_xsi: "http://www.w3.org/2001/XMLSchema-instance", // xmlns xsi attribute
     xmlns_legge190: "legge190_1_0", // xmlns legge190 attribute
@@ -147,8 +147,8 @@ module.exports = {
           price_id: "price_1KVgfKFZEWHriL1utJyT904c",
         },
       },
-      paymentSuccessUrl: "http://localhost:5000/api/payment/payment-success",
-      paymentCancelUrl: "http://localhost:5000/api/payment/payment-cancel",
+      paymentSuccessUrl: "http://localhost:5000/api/payment/paymentSuccess",
+      paymentCancelUrl: "http://localhost:5000/api/payment/paymentCancel",
       paymentSuccessUrlClient: `${clientAppalti190BaseUrl}/payment-success`,
       paymentCancelUrlClient: `${clientAppalti190BaseUrl}/payment-cancel`,
       paymentSuccessUrlShowcase: `${clientShowcaseBaseUrl}/payment-success`,

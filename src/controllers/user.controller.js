@@ -29,13 +29,15 @@ exports.getUsers = async(req, res) => {
 exports.getPlan = async(req, res) => {
   let userId = req.userId;
   if (req.body.userId) { // request to update another user's plan
-    if (!isAdmin(req.body.userId)) { // check if request is from admin
+    if (!await isAdmin(userId)) { // check if request is from admin
       return res.status(403).json({ message: req.t("You must have admin role to get another user's plan"), code: "MustBeAdmin", reason: req.t("Admin role required") });
     } else {
       userId = req.body.userId; // if admin, accept a specific user id in request
     }
   }
-  if (!userId) return res.status(400).json({ message: req.t("User must be authenticated") });
+  if (!userId) {
+    return res.status(400).json({ message: req.t("User must be authenticated") });
+  }
 
   Plan.find({})
   .select(["name", "supportTypes", "priceCurrency", "pricePerYear", "cigNumberAllowed", "-_id"])
@@ -51,7 +53,7 @@ exports.getPlan = async(req, res) => {
 exports.getRoles = async(req, res) => {
   let userId = req.userId;
   if (req.body.userId) { // request to update another user's role
-    if (!isAdmin(req.body.userId)) { // check if request is from admin
+    if (!await isAdmin(req.body.userId)) { // check if request is from admin
       return res.status(403).json({ message: req.t("You must have admin role to get another user's roles"), code: "MustBeAdmin", reason: req.t("Admin role required") });
     } else {
       userId = req.body.userId; // if admin, accept a specific user id in request
@@ -75,7 +77,7 @@ console.log("ROLES:", roles);
 exports.getProfile = async(req, res) => {
   let userId = req.userId;
   if (req.body.userId) { // request to update another user's profile
-    if (!isAdmin(req.body.userId)) { // check if request is from admin
+    if (!await isAdmin(req.body.userId)) { // check if request is from admin
       return res.status(403).json({ message: req.t("You must have admin role to update another user's profile"), code: "MustBeAdmin", reason: req.t("Admin role required") });
     } else {
       userId = req.body.userId; // if admin, accept a specific user id in request
@@ -106,7 +108,7 @@ exports.getProfile = async(req, res) => {
 exports.updateProfile = async(req, res, next) => {
   let userId = req.userId;
   if (req.body.userId) { // request to update another user's profile
-    if (!isAdmin(req.body.userId)) { // check if request is from admin
+    if (!await isAdmin(req.body.userId)) { // check if request is from admin
       return res.status(403).json({ message: req.t("You must have admin role to update another user's profile"), code: "MustBeAdmin", reason: req.t("Admin role required") });
     } else {
       userId = req.body.userId; // if admin, accept a specific user id in request
@@ -170,7 +172,7 @@ exports.updateProfile = async(req, res, next) => {
 exports.updateUserProperty = async(req, res) => {
   let userId = req.userId;
   if (req.body.userId) { // request to update another user's profile
-    if (!isAdmin(req.body.userId)) { // check if request is from admin
+    if (!await isAdmin(req.body.userId)) { // check if request is from admin
       return res.status(403).json({ message: req.t("You must have admin role to update another user's profile"), code: "MustBeAdmin", reason: req.t("Admin role required") });
     } else {
       userId = req.body.userId; // if admin, accept a specific user id in request
@@ -260,7 +262,7 @@ exports.updateRoles = async(req, res) => {
 exports.updatePlan = async(req, res) => {
   let userId = req.userId;
   if (req.body.userId) { // request to update another user's profile
-    if (!isAdmin(req.body.userId)) { // check if request is from admin
+    if (!await isAdmin(req.body.userId)) { // check if request is from admin
       return res.status(403).json({ message: req.t("You must have admin role to update another user's profile"), code: "MustBeAdmin", reason: req.t("Admin role required") });
     } else {
       userId = req.body.userId; // if admin, accept a specific user id in request
@@ -338,7 +340,7 @@ exports.remove = async(req, res) => {
   if (req.body.filter === "*") { // we require a not null filter (string "*") to delete all users for added security reasons
     filter = {};
   } else {
-    if (typeof filter !== "object") {
+    if (typeof req.body.filter !== "object") {
       return res.status(400).json({ message: req.t("A filter must be the string \"*\" or an object") });
     } else {
       filter = req.body.filter;

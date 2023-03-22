@@ -69,12 +69,7 @@ const signup = async(req, res) => {
 
   user.save(async(err, user) => {
     if (err) {
-      /**
-       * this check is done as a route middleware
-      // if (err.code === 11000) { // duplicated user email
-      //   return res.status(400).json({ code: "EmailExistsAlready", message: req.t("Email is already in use") });
-      // }
-      */
+      // we don't check duplicated user email (err.code === 11000) as it is done already as a route middleware
       logger.error("New user creation error:", err);
       return res.status(err.code).json({ message: err });
     }
@@ -84,24 +79,22 @@ const signup = async(req, res) => {
       const signupVerification = user.generateSignupVerification(user._id);
       await signupVerification.save(); // save the verification code
   
-      if (process.env.NODE_ENV !== "test") {
-        console.warn("CODE:", signupVerification.code);
-        const subject = req.t("Signup Verification Code");
-        const to = user.email;
-        const from = process.env.FROM_EMAIL;
-        const html = `
+      //logger.info("VERIFICATION CODE:", signupVerification.code);
+      const subject = req.t("Signup Verification Code");
+      const to = user.email;
+      const from = process.env.FROM_EMAIL;
+      const html = `
 <p>${req.t("Hi")}, ${user.firstName} ${user.lastName}.<p>
 <p>${req.t("The code to confirm your registration is")} <b>${signupVerification.code}</b>.</p>
 <p><i>${req.t("If you did not request this, please ignore this email")}.</i></p>
-        `;
-        console.info("sending email:", to, from, subject);
-        await sendemail({to, from, subject, html});
-      }
+      `;
+      logger.info("sending email:", to, from, subject);
+      await sendemail({to, from, subject, html});
 
       res.status(201).json({
         message: req.t("A verification code has been sent to {{email}}", {email: user.email}),
         codeDeliveryMedium: config.auth.codeDeliveryMedium,
-        ...(process.env.NODE_ENV == "test") && { code: signupVerification.code } // to enble test mode to confirm signup
+        ...(process.env.NODE_ENV === "test") && { code: signupVerification.code } // to enble test mode to confirm signup
       });
     } catch (err) {
       logger.error("Error sending verification code:", err);
@@ -125,18 +118,16 @@ const resendSignUpCode = async(req, res) => {
     const signupVerification = await user.generateSignupVerification(user._id);
     await signupVerification.save(); // save the verification code
 
-    if (process.env.NODE_ENV !== "test") {
-      const subject = req.t("Signup Verification Code Resent");
-      const to = user.email;
-      const from = process.env.FROM_EMAIL;
-      const html = `
+    const subject = req.t("Signup Verification Code Resent");
+    const to = user.email;
+    const from = process.env.FROM_EMAIL;
+    const html = `
 <p>${req.t("Hi")}, ${user.firstName} ${user.lastName}.<p>
 <p>${req.t("The code to confirm your registration is")} <b>${signupVerification.code}</b>.</p>
 <p><i>${req.t("If you did not request this, please ignore this email")}.</i></p>
-      `;
-      console.info("sending email:", to, from, subject);
-      await sendemail({to, from, subject, html});
-    }
+    `;
+    logger.info("sending email:", to, from, subject);
+    await sendemail({to, from, subject, html});
 
     res.status(200).json({ message: req.t("A verification code has been resent to {{to}} via {{codeDeliveryMedium}}", {to: user.email, codeDeliveryMedium: config.auth.codeDeliveryMedium}), codeDeliveryMedium: config.auth.codeDeliveryMedium });
 
@@ -222,7 +213,7 @@ const signin = async(req, res) => {
 
     // check user is found
     if (!user) {
-      return res.status(404).json({ message: req.t("User not found") });
+      return res.status(400).json({ message: req.t("User not found") });
     }
 
     // check user is not deleted
@@ -292,25 +283,23 @@ const resetPassword = async(req, res) => {
     // save the updated user object
     await user.save();
 
-    if (process.env.NODE_ENV !== "test") {
-      // send email
-      const subject = req.t("Password change request");
-      const to = user.email;
-      const from = process.env.FROM_EMAIL;
-      //const link = "//" + req.headers.host + "/api/auth/reset/" + user.resetPasswordCode;
-      const html = `
-  <p>${req.t("Hi")}, ${user.firstName} ${user.lastName}.</p>
-  <p>${req.t("The code to reset your password is")} <b>${user.resetPasswordCode}</b>.</p>
-  <p><i>${req.t("If you did not request this, please ignore this email and your password will remain unchanged")}.</i></p>
-      `;
-      console.info("sending email:", to, from, subject);
-      await sendemail({to, from, subject, html});
-    }
+    // send email
+    const subject = req.t("Password change request");
+    const to = user.email;
+    const from = process.env.FROM_EMAIL;
+    //const link = "//" + req.headers.host + "/api/auth/reset/" + user.resetPasswordCode;
+    const html = `
+<p>${req.t("Hi")}, ${user.firstName} ${user.lastName}.</p>
+<p>${req.t("The code to reset your password is")} <b>${user.resetPasswordCode}</b>.</p>
+<p><i>${req.t("If you did not request this, please ignore this email and your password will remain unchanged")}.</i></p>
+    `;
+    logger.info("sending email:", to, from, subject);
+    await sendemail({to, from, subject, html});
 
     res.status(200).json({
       message: req.t("A reset code has been sent to {{email}} via {{codeDeliveryMedium}}", {email: user.email, codeDeliveryMedium: config.auth.codeDeliveryMedium}),
       codeDeliveryMedium: config.auth.codeDeliveryMedium,
-      ...(process.env.NODE_ENV == "test") && { code: user.resetPasswordCode } // to enble test mode to confirm reset password
+      ...(process.env.NODE_ENV === "test") && { code: user.resetPasswordCode } // to enble test mode to confirm reset password
     });
   } catch (err) {
     logger.error("Error resetting password:", err);
@@ -324,10 +313,14 @@ const resetPasswordConfirm = async(req, res) => {
     const { password } = req.body;
     const { code } = req.body;
 
-    if (!code) return res.status(400).json({message: req.t("Password reset code not found"), code: "code"});
+    if (!code) {
+      return res.status(400).json({message: req.t("Password reset code not found"), code: "code"});
+    }
      // if we want to distinguish among invalid / expired we have to split the following query
     const user = await User.findOne({email, resetPasswordCode: code, resetPasswordExpires: {$gt: Date.now()}});
-    if (!user) return res.status(400).json({message: req.t("Password reset code is invalid or has expired"), code: "code"});
+    if (!user) {
+      return res.status(400).json({message: req.t("Password reset code is invalid or has expired"), code: "code"});
+    }
 
     /*
     // check if requested password is the same as the previous one (unfeasible: same password generate different hashes...)
@@ -373,18 +366,16 @@ const resendResetPasswordCode = async(req, res) => {
     // save the updated user object
     await user.save();
 
-    if (process.env.NODE_ENV !== "test") {
-      const subject = req.t("Reset Password Verification Code");
-      const to = user.email;
-      const from = process.env.FROM_EMAIL;
-      const html = `
+    const subject = req.t("Reset Password Verification Code");
+    const to = user.email;
+    const from = process.env.FROM_EMAIL;
+    const html = `
 <p>Hi, ${user.firstName} ${user.lastName}.<p>
 <p>The code to reset your password is <b>${user.resetPasswordCode}</b>.</p>
 <p><i>If you did not request this, please ignore this email.</i></p>
-      `;
-      console.info("sending email:", to, from, subject);
-      await sendemail({to, from, subject, html});
-    }
+    `;
+    logger.info("sending email:", to, from, subject);
+    await sendemail({to, from, subject, html});
 
     res.status(200).json({ message: `A verification code has been sent to ${user.email}`, codeDeliveryMedium: config.auth.codeDeliveryMedium });
 
@@ -395,34 +386,38 @@ const resendResetPasswordCode = async(req, res) => {
 };
 
 const refreshToken = async(req, res) => {
-  const { refreshToken: requestToken } = req.body;
+  const { refreshToken } = req.body;
 
-  if (refreshToken === null) { // refresh token is required
+  if (!refreshToken) { // refresh token is required
     return res.status(403).json({ message: req.t("Please make a new signin request") });
   }
 
   try {
-    let refreshToken = await RefreshToken.findOne({ token: requestToken });
+    const refreshTokenDoc = await RefreshToken.findOne({ token: refreshToken });
 
-    if (!refreshToken) { // refresh token not found
-      return res.status(403).json({ message: req.t("Session is expired, please make a new signin request") });
-    }
-
-    if (RefreshToken.verifyExpiration(refreshToken)) {
-      RefreshToken.findByIdAndRemove(refreshToken._id, { useFindAndModify: false }).exec();
-      
-      return res.status(403).json({ // refresh token is expired
+    if (!refreshTokenDoc) { // refresh token not found
+      return res.status(403).json({
         message: req.t("Session is expired, please make a new signin request"),
       });
     }
 
-    let newAccessToken = jwt.sign({ id: refreshToken.user._id }, config.auth.secret, {
+    // should never go past this point, since expired tokens are automatically disposed by database 'expiresAfterSeconds' feature
+
+    if (RefreshToken.verifyExpiration(refreshTokenDoc)) {
+      refreshTokenDoc.findByIdAndRemove(refreshTokenDoc._id, { useFindAndModify: false }).exec();
+      
+      return res.status(403).json({ // refresh token is expired
+        message: req.t("Session is just expired, please make a new signin request"),
+      });
+    }
+
+    let newAccessToken = jwt.sign({ id: refreshTokenDoc.user._id }, config.auth.secret, {
       expiresIn: config.auth.jwtExpirationSeconds,
     });
 
     return res.status(200).json({
       accessToken: newAccessToken,
-      refreshToken: refreshToken.token,
+      refreshToken: refreshTokenDoc.token,
     });
   } catch (err) {
     logger.error("Error refreshing token:", err);    

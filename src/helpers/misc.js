@@ -111,22 +111,13 @@ module.exports = {
   },
 
   isAdmin: async(userId) => {
-    User.findOne({ _id: userId })
-    .populate("roles", "-__v")
-    .exec(async(err, user) => {
-      if (err) {
-        return false;
+    const user = await User.findOne({ _id: userId }).populate("roles", "-__v");
+    for (let i = 0; i < user?.roles?.length; i++) {
+      if (user.roles[i].name === "admin") {
+        return true;
       }
-      if (!user) {
-        return false;
-      }
-      for (let i = 0; i < user.roles.length; i++) {
-        if (user.roles[i].name === "admin") {
-          return true;
-        }
-      }
-      return false;
-    });
+    }
+    return false;
   },
 
 };
