@@ -430,7 +430,7 @@ describe("API tests - Job routes", function() {
     ;
   });
 
-  it("should validate XML (index output file ok)", function(done) {
+  it("should validate XML (index output file ok)", function(done) { 
     chai.request(server)
       .post("/api/job/validateXml/transform")
       .set("x-access-token", accessTokenUser)
