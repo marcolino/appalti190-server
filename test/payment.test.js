@@ -33,14 +33,14 @@ describe("API tests - Payment routes", function() {
         "email": config.user.email,
         "password": config.user.password,
       })
-      .then((res) => {
+      .then(res => {
         res.should.have.status(201);
         res.body.should.have.property("code");
         signupConfirmCode = res.body.code;
         chai.request(server)
         .post("/api/auth/signupConfirm")
         .send({ code: signupConfirmCode })
-        .then((res) => {
+        .then(res => {
           res.should.have.status(200);
           res.body.should.have.property("message");
           //expect(res.body.message).to.equal("The account has been verified, you can now log in");
@@ -60,7 +60,7 @@ describe("API tests - Payment routes", function() {
         "email": config.user.email,
         "password": config.user.password,
       })
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("accessToken");
         res.body.should.have.property("id");
@@ -79,7 +79,7 @@ describe("API tests - Payment routes", function() {
       .get("/api/payment/mode")
       .set("x-access-token", accessTokenUser)
       .send({})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         expect(res.body.mode).to.be.oneOf(["test", "live"]);
         done();
@@ -95,7 +95,7 @@ describe("API tests - Payment routes", function() {
       .post("/api/payment/createCheckoutSession")
       //.set("x-access-token", accessTokenUser)
       .send({})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(403);
         done();
       })
@@ -110,7 +110,7 @@ describe("API tests - Payment routes", function() {
       .post("/api/payment/createCheckoutSession")
       .set("x-access-token", accessTokenUser)
       .send({product: "free"})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(400);
         done();
       })
@@ -125,7 +125,7 @@ describe("API tests - Payment routes", function() {
       .post("/api/payment/createCheckoutSession")
       .set("x-access-token", accessTokenUser)
       .send({product: "not existent"})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(400);
         done();
       })
@@ -140,7 +140,7 @@ describe("API tests - Payment routes", function() {
       .post("/api/payment/createCheckoutSession")
       .set("x-access-token", accessTokenUser)
       .send({product: "standard"})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("session");
         stripeSessionId = res.body.session.id;
@@ -157,7 +157,7 @@ describe("API tests - Payment routes", function() {
       .get("/api/payment/paymentSuccess")
       .query({session_id: stripeSessionId})
       .redirects(0)
-      .then((res) => {
+      .then(res => {
         res.should.have.status(302);
         done();
       })
@@ -172,7 +172,7 @@ describe("API tests - Payment routes", function() {
       .get("/api/payment/paymentCancel")
       .query({session_id: stripeSessionId})
       .redirects(0)
-      .then((res) => {
+      .then(res => {
         res.should.have.status(302);
         done();
       })

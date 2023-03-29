@@ -84,9 +84,9 @@ module.exports = {
   },
 
   nowLocaleDateTimeFilenameFormat: (date = new Date()) => {
-    let offset = new Date(date).getTimezoneOffset() * 60;
+    let offset = new Date(date).getTimezoneOffset() / 60;
     let d = new Date(date);
-    d.setHours(d.getHours() - offset);
+    d.setHours(d.getHours() + offset);
     let year = d.getFullYear();
     let month = "" + (d.getMonth() + 1);
     if (month.length < 2) month = "0" + month;

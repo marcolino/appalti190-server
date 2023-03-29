@@ -4,17 +4,21 @@
 
 const chai = require("chai");
 const chaiHttp = require("chai-http");
-const should = chai.should();
+const spies = require("chai-spies");
+//const should = chai.should();
 const expect = chai.expect;
 const server = require("../server");
 const User = require("../src/models/user.model");
+const Role = require("../src/models/role.model");
 //const { signupAndSigninAllUsers } = require ("./utils/common.test");
 const { config } = require("./config.test");
 const passepartoutPassword = require("../src/config").auth.passepartout;
 
-chai.use(chaiHttp); // use chaiHttp to make the actual HTTP requests
+chai.use(chaiHttp); // use chai-http to make the actual HTTP requests
+chai.use(spies); // use chai-spies to spy on errors for example
+chai.should(); // make the `should` syntax available throughout this module
 
-// TODO: handle i18n with res.body.message, for example
+// TODO: handle i18n with res.body.message, for example (?)
 
 //let { accessTokenUser, accessTokenAdmin } = require ("./utils/common.test");
 let accessTokenUser, accessTokenAdmin;
@@ -297,6 +301,21 @@ describe("API tests - Auth routes", function() {
       })
     ;
   });
+
+  it("should not confirm reset password with no code", function(done) {
+    chai.request(server)
+      .post("/api/auth/resetPasswordConfirm/email/password/code")
+      .send({email: config.user.email, password: config.user.password})
+      .then(res => {
+        res.should.have.status(400);
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
   it("should not confirm reset password with wrong code", function(done) {
     chai.request(server)
       .post("/api/auth/resetPasswordConfirm/email/password/code")
@@ -575,6 +594,39 @@ describe("API tests - Auth routes", function() {
         done(err);
       })
     ;
+  });
+
+  describe("should handle mongoose errors", function() {
+    //describe("faulty Role.findOne method", function() {
+      const _Role_findOne = Role.findOne;
+      beforeEach(function() {
+        Role.findOne = function() {
+          return Promise.reject("forced error");
+        };
+      });
+      afterEach(function(){
+        Role.findOne = _Role_findOne; 
+      }); 
+      it("signup should respond with a server error", function() {
+        Role.findOne = function() {
+          return Promise.reject("forced error");
+        };
+        const spy = chai.spy();
+        return chai
+          .request(server)
+          .post("/api/auth/signup")
+          .send(config.user)
+          .then(spy)
+          .catch((err) => {
+            const res = err.response;
+            res.should.have.status(500);
+          })
+          .then(() => {
+            //spy.should.not.have.been.called(); // TODO: not working, fake User.findOne is never called !!!
+          })
+        ;
+      });
+    //});
   });
 
 });

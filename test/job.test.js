@@ -3,15 +3,15 @@
  */
 const chai = require("chai");
 const chaiHttp = require("chai-http");
-const should = chai.should();
 const expect = chai.expect;
+const fs = require("fs");
 const server = require("../server");
 const User = require("../src/models/user.model");
-const Role = require("../src/models/role.model");
-const userController = require("../src/controllers/user.controller");
+const year = require("../src/config").job.year;
 const { config } = require("./config.test");
 
 chai.use(chaiHttp); // use chaiHttp to make the actual HTTP requests
+chai.should(); // make the `should` syntax available throughout this module
 
 let accessTokenUser, accessTokenadminstandardplan;
 let transformOne = {
@@ -36,6 +36,10 @@ describe("API tests - Job routes", function() {
     });
   });
 
+  after(async() => { // after these tests we clean-up temporary artifacts from file system
+    fs.rmSync(`${__dirname}/../uploads/${config.user.email}`, { recursive: true, force: true });
+  });
+
   it("should register normal user", function(done) {
     chai.request(server)
       .post("/api/auth/signup")
@@ -43,14 +47,14 @@ describe("API tests - Job routes", function() {
         "email": config.user.email,
         "password": config.user.password,
       })
-      .then((res) => {
+      .then(res => {
         res.should.have.status(201);
         res.body.should.have.property("code");
         signupConfirmCode = res.body.code;
         chai.request(server)
         .post("/api/auth/signupConfirm")
         .send({ code: signupConfirmCode })
-        .then((res) => {
+        .then(res => {
           res.should.have.status(200);
           res.body.should.have.property("message");
           //expect(res.body.message).to.equal("The account has been verified, you can now log in");
@@ -73,7 +77,7 @@ describe("API tests - Job routes", function() {
         "email": config.user.email,
         "password": config.user.password,
       })
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("accessToken");
         res.body.should.have.property("id");
@@ -96,14 +100,14 @@ describe("API tests - Job routes", function() {
         "forcerole": "admin",
         "forceplan": "unlimited",
       })
-      .then((res) => {
+      .then(res => {
         res.should.have.status(201);
         res.body.should.have.property("code");
         signupConfirmCode = res.body.code;
         chai.request(server)
         .post("/api/auth/signupConfirm")
         .send({ code: signupConfirmCode })
-        .then((res) => {
+        .then(res => {
           res.should.have.status(200);
           res.body.should.have.property("message");
           done();
@@ -122,7 +126,7 @@ describe("API tests - Job routes", function() {
     chai.request(server)
       .post("/api/auth/signin")
       .send(config.admin)
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("accessToken");
         res.body.should.have.property("roles");
@@ -147,14 +151,14 @@ describe("API tests - Job routes", function() {
         "forcerole": "admin",
         "forceplan": "standard",
       })
-      .then((res) => {
+      .then(res => {
         res.should.have.status(201);
         res.body.should.have.property("code");
         signupConfirmCode = res.body.code;
         chai.request(server)
         .post("/api/auth/signupConfirm")
         .send({ code: signupConfirmCode })
-        .then((res) => {
+        .then(res => {
           res.should.have.status(200);
           res.body.should.have.property("message");
           done();
@@ -173,7 +177,7 @@ describe("API tests - Job routes", function() {
     chai.request(server)
       .post("/api/auth/signin")
       .send(config.adminstandardplan)
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("accessToken");
         res.body.should.have.property("roles");
@@ -192,8 +196,58 @@ describe("API tests - Job routes", function() {
   it("should not upload a file without authentication", function(done) {
     chai.request(server)
       .post("/api/job/upload")
-      .then((res) => {
+      .then(res => {
         res.should.have.status(403);
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should not upload a file with no file data", function(done) {
+    chai.request(server)
+      .post("/api/job/upload")
+      .set("x-access-token", accessTokenUser)
+      .then(res => {
+        res.should.have.status(400);
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should not upload a file too big in size", function(done) {
+    chai.request(server)
+      .post("/api/job/upload")
+      .set("x-access-token", accessTokenUser)
+      .set("content-type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+      .field("content-type", "multipart/form-data")
+      .field("name", "test")
+      .attach("file", `${__dirname}/assets/xls/10MB+1 file size (too large).xlsx`)
+      .then(res => {
+        res.should.have.status(400);
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should not upload a file with wrong content-type", function(done) {
+    chai.request(server)
+      .post("/api/job/upload")
+      .set("x-access-token", accessTokenUser)
+      .set("content-type", "image/jpeg")
+      .field("content-type", "multipart/form-data")
+      .field("name", "test")
+      .attach("file", `${__dirname}/assets/wrong-content-type.jpg`)
+      .then(res => {
+        res.should.have.status(400);
         done();
       })
       .catch((err) => {
@@ -206,7 +260,11 @@ describe("API tests - Job routes", function() {
     chai.request(server)
       .post("/api/job/upload")
       .set("x-access-token", accessTokenUser)
-      .then((res) => {
+      .set("content-type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+      .field("content-type", "multipart/form-data")
+      .field("name", "test")
+      .attach("file", `${__dirname}/assets/xls/AVCP 2023 good.xlsx`)
+      .then(res => {
         res.should.have.status(200);
         done();
       })
@@ -219,7 +277,7 @@ describe("API tests - Job routes", function() {
   it("should not transform XLS to XML without authentication", function(done) {
     chai.request(server)
       .post("/api/job/transformXls2Xml/filePath")
-      .then((res) => {
+      .then(res => {
         res.should.have.status(403);
         done();
       })
@@ -234,7 +292,7 @@ describe("API tests - Job routes", function() {
       .post("/api/job/transformXls2Xml/filePath")
       .set("x-access-token", accessTokenUser)
       .send({filePath: "NOT EXISTING FILE"})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("code");
         expect(res.body.code).to.equal("ABORTED_DUE_TO_ERROR_READING_INPUT_FILE"),
@@ -251,7 +309,7 @@ describe("API tests - Job routes", function() {
       .post("/api/job/transformXls2Xml/filePath")
       .set("x-access-token", accessTokenUser)
       .send({filePath: "test/assets/xls/AVCP 2023 some errors.xlsx"})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("code");
         expect(res.body.code).to.equal("OK"),
@@ -271,7 +329,7 @@ describe("API tests - Job routes", function() {
       .post("/api/job/transformXls2Xml/filePath")
       .set("x-access-token", accessTokenUser)
       .send({filePath: "test/assets/xls/AVCP 2023 more errors.xlsx"})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("code");
         expect(res.body.code).to.equal("OK"),
@@ -291,7 +349,7 @@ describe("API tests - Job routes", function() {
       .post("/api/job/transformXls2Xml/filePath")
       .set("x-access-token", accessTokenadminstandardplan)
       .send({filePath: "test/assets/xls/AVCP 2023 good.xlsx"})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("code");
         expect(res.body.code).to.equal("OK"),
@@ -311,7 +369,7 @@ describe("API tests - Job routes", function() {
       .post("/api/job/transformXls2Xml/filePath")
       .set("x-access-token", accessTokenUser)
       .send({filePath: "test/assets/xls/AVCP 2023 good.xlsx"})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("code");
         expect(res.body.code).to.equal("OK"),
@@ -328,7 +386,7 @@ describe("API tests - Job routes", function() {
       .post("/api/job/validateXml/transform")
       //.set("x-access-token", accessTokenUser)
       .send({transform: transformOne})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(403);
         done();
       })
@@ -343,7 +401,7 @@ describe("API tests - Job routes", function() {
       .post("/api/job/validateXml/transform")
       .set("x-access-token", accessTokenUser)
       .send({transform: transformOne})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("code");
         expect(res.body.code).to.equal("OK"),
@@ -360,7 +418,7 @@ describe("API tests - Job routes", function() {
       .post("/api/job/validateXml/transform")
       .set("x-access-token", accessTokenUser)
       .send({transform: transformOneNoOutputFile})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("code");
         expect(res.body.code).to.equal("CANNOT_READ_XML"),
@@ -377,7 +435,7 @@ describe("API tests - Job routes", function() {
       .post("/api/job/validateXml/transform")
       .set("x-access-token", accessTokenUser)
       .send({transform: transformOne})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("code");
         expect(res.body.code).to.equal("OK"),
@@ -389,16 +447,99 @@ describe("API tests - Job routes", function() {
     ;
   });
 
-/*
-  it("should check outcome", function(done) {
+  it("should not check outcome for wrong codiceFiscaleAmministrazione", function(done) {
     chai.request(server)
       .post("/api/job/outcomeCheck/anno/codiceFiscaleAmministrazione")
       .set("x-access-token", accessTokenUser)
-      .send({anno: "...", codiceFiscaleAmministrazione: "..."})
-      .then((res) => {
+      .send({anno: year, codiceFiscaleAmministrazione: "INVALID CODE"})
+      .then(res => {
         res.should.have.status(200);
-        res.body.should.have.property("code");
-        expect(res.body.code).to.equal("OK"),
+        res.body.should.not.have.property("esitoUltimoTentativoAccessoUrl");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should not check outcome for wrong year", function(done) {
+    chai.request(server)
+      .post("/api/job/outcomeCheck/anno/codiceFiscaleAmministrazione")
+      .set("x-access-token", accessTokenUser)
+      .send({anno: -1, codiceFiscaleAmministrazione: "03717710010"})
+      .then(res => {
+        res.should.have.status(400);
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should check outcome for successful upload", function(done) {
+    chai.request(server)
+      .post("/api/job/outcomeCheck/anno/codiceFiscaleAmministrazione")
+      .set("x-access-token", accessTokenUser)
+      .send({anno: year, codiceFiscaleAmministrazione: "03717710010"})
+      .then(res => {
+        res.should.have.status(200);
+        res.body.should.have.property("esitoUltimoTentativoAccessoUrl");
+        expect(res.body.esitoUltimoTentativoAccessoUrl).to.equal("successo"),
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should not check url existence and match for wrong url", function(done) {
+    chai.request(server)
+      .post("/api/job/urlExistenceAndMatch/url/fileToMatch")
+      .set("x-access-token", accessTokenUser)
+      .send({
+        url: `WRONG URL`,
+        fileToMatch: `${__dirname}/../public/downloads/${config.user.email}/dataset-${year}.xml`
+      })
+      .then(res => {
+        res.should.have.status(400);
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should not check url existence and match for wrong fileToMatch", function(done) {
+    chai.request(server)
+      .post("/api/job/urlExistenceAndMatch/url/fileToMatch")
+      .set("x-access-token", accessTokenUser)
+      .send({
+        url: `http://allegati.interportotorino.it/${year}/dataset-${year}.xml`,
+        fileToMatch: `WRONG FILETOMATCH`
+      })
+      .then(res => {
+        res.should.have.status(400);
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should not check url existence and match without authentication", function(done) {
+    chai.request(server)
+      .post("/api/job/urlExistenceAndMatch/url/fileToMatch")
+      .send({
+        url: `http://allegati.interportotorino.it/${year}/dataset-${year}.xml`,
+        fileToMatch: `${__dirname}/../public/downloads/${config.user.email}/dataset-${year}.xml`
+      })
+      .then(res => {
+        res.should.have.status(403);
         done();
       })
       .catch((err) => {
@@ -411,11 +552,14 @@ describe("API tests - Job routes", function() {
     chai.request(server)
       .post("/api/job/urlExistenceAndMatch/url/fileToMatch")
       .set("x-access-token", accessTokenUser)
-      .send({url: "...", fileToMatch: "..."})
-      .then((res) => {
+      .send({
+        url: `http://allegati.interportotorino.it/${year}/dataset-${year}.xml`,
+        fileToMatch: `${__dirname}/../public/downloads/${config.user.email}/dataset-${year}.xml`
+      })
+      .then(res => {
         res.should.have.status(200);
-        res.body.should.have.property("code");
-        expect(res.body.code).to.equal("OK"),
+        res.body.should.have.property("published");
+        expect(res.body.published).to.equal(true),
         done();
       })
       .catch((err) => {
@@ -424,13 +568,14 @@ describe("API tests - Job routes", function() {
     ;
   });
 
-  it("should validate XML (good file)", function(done) {
+  it("should all plans also without authentication", function(done) {
     chai.request(server)
       .get("/api/job/getPlans")
-      .set("x-access-token", accessTokenUser)
       .send()
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
+        res.body.should.be.an("array");
+        res.body.every(i => expect(i).to.contain.keys("name", "supportTypes", "cigNumberAllowed", "priceCurrency", "pricePerYear"));
         done();
       })
       .catch((err) => {
@@ -438,6 +583,22 @@ describe("API tests - Job routes", function() {
       })
     ;
   });
-*/
+
+  it("should get all plans", function(done) {
+    chai.request(server)
+      .get("/api/job/getPlans")
+      .set("x-access-token", accessTokenUser)
+      .send()
+      .then(res => {
+        res.should.have.status(200);
+        res.body.should.be.an("array");
+        res.body.every(i => expect(i).to.contain.keys("name", "supportTypes", "cigNumberAllowed", "priceCurrency", "pricePerYear"));
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
 
 });

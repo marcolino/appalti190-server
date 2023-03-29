@@ -1,7 +1,7 @@
 
 
   API tests - Auth routes
-    ✔ should register user (273ms)
+    ✔ should register user (272ms)
     ✔ should not register user twice
     ✔ should not register user with invalid email
     ✔ should not register user forcing invalid plan
@@ -10,71 +10,74 @@
     ✔ should resend register code
     ✔ should not confirm user without code
     ✔ should not confirm user with invalid code
-    ✔ should confirm user (105ms)
+    ✔ should confirm user (44ms)
     ✔ should not confirm user twice
     ✔ should not resend register code for already verified user
     ✔ should not resend register code without email
     ✔ should not reset password without email
     ✔ should start reset password
-    ✔ should confirm reset password (180ms)
+    ✔ should confirm reset password (222ms)
     ✔ should not confirm reset password with wrong email
+    ✔ should not confirm reset password with no code
     ✔ should not confirm reset password with wrong code
     ✔ should not resend reset password code to invalid email
     ✔ should resend reset password code
     ✔ should not login user with invalid email
     ✔ should not login user with unregistered email
-    ✔ should login user (155ms)
-    ✔ should login user with passepartout password (139ms)
-    ✔ should not login user with invalid password (158ms)
-    ✔ should register admin user (145ms)
+    ✔ should login user (236ms)
+    ✔ should login user with passepartout password (192ms)
+    ✔ should not login user with invalid password (153ms)
+    ✔ should register admin user (175ms)
     ✔ should confirm admin user
-    ✔ should login admin user (180ms)
-    ✔ should not login removed user (39ms)
+    ✔ should login admin user (262ms)
+    ✔ should not login removed user (50ms)
     ✔ should not refresh token without refresh token
     ✔ should not refresh token with invalid refresh token
     ✔ should refresh token
+    should handle mongoose errors
+      ✔ signup should respond with a server error
 
   API tests - Job routes
-    ✔ should register normal user (164ms)
-    ✔ should login normal user (145ms)
-    ✔ should register admin user (151ms)
-    ✔ should login as admin user (138ms)
-    ✔ should register admin user with standard plan (149ms)
-    ✔ should login as admin user with standard plan (141ms)
+    ✔ should register normal user (192ms)
+    ✔ should login normal user (153ms)
+    ✔ should register admin user (176ms)
+    ✔ should login as admin user (152ms)
+    ✔ should register admin user with standard plan (169ms)
+    ✔ should login as admin user with standard plan (158ms)
     ✔ should not upload a file without authentication
     ✔ should upload a file as normal user
     ✔ should not transform XLS to XML without authentication
     ✔ should not transform XLS to XML as normal user (not existing file)
-    ✔ should transform XLS to XML as normal user (some errors file) (3395ms)
-    ✔ should transform XLS to XML as normal user (more errors file) (1689ms)
-    ✔ should transform XLS to XML as admin user with standard plan, truncating (good file) (1344ms)
-    ✔ should transform XLS to XML as normal user (good file) (1225ms)
+    ✔ should transform XLS to XML as normal user (some errors file) (2764ms)
+    ✔ should transform XLS to XML as normal user (more errors file) (1240ms)
+    ✔ should transform XLS to XML as admin user with standard plan, truncating (good file) (1289ms)
+    ✔ should transform XLS to XML as normal user (good file) (1118ms)
     ✔ should not validate XML without authentication
-    ✔ should validate XML (one output file ok) (1570ms)
+    ✔ should validate XML (one output file ok) (711ms)
     ✔ should not validate XML (one output file, no file)
-    ✔ should validate XML (index output file ok) (505ms)
+    ✔ should validate XML (index output file ok) (592ms)
 
   API tests - Payment routes
-    ✔ should register normal user (154ms)
-    ✔ should login normal user (149ms)
+    ✔ should register normal user (174ms)
+    ✔ should login normal user (171ms)
     ✔ should get payment mode, and it should be in a set of values
     ✔ should not create a checkout session without authentication
-    ✔ should not create a checkout session for a 0 cost product (1357ms)
+    ✔ should not create a checkout session for a 0 cost product (1377ms)
     ✔ should not create a checkout session for a non-existent product
-    ✔ should create a checkout session for a standard product (755ms)
-    ✔ should redirect on a payment success call (886ms)
-    ✔ should redirect on a payment canceled call (753ms)
+    ✔ should create a checkout session for a standard product (792ms)
+    ✔ should redirect on a payment success call (818ms)
+    ✔ should redirect on a payment canceled call (815ms)
 
   API tests - User routes
-    ✔ should register normal user (281ms)
-    ✔ should login normal user (152ms)
-    ✔ should register admin user (150ms)
-    ✔ should login as admin user (135ms)
+    ✔ should register normal user (243ms)
+    ✔ should login normal user (172ms)
+    ✔ should register admin user (169ms)
+    ✔ should login as admin user (160ms)
     ✔ should not get all users with user role
     ✔ should get user plan without authentication
     ✔ should get same user's plan
     ✔ should not get other user's plan as normal user
-    ✔ should get other user's plan as admin user (155ms)
+    ✔ should get other user's plan as admin user (186ms)
     ✔ should get user's profile
     ✔ should not get user's profile without authentication
     ✔ should update user's profile
@@ -100,10 +103,10 @@
     ✔ should not delete user with admin privileges using invalid id
     ✔ should delete user with admin privileges using id
     ✔ should delete user with admin privileges using email
-    ✔ should register normal user (180ms)
-    ✔ should login normal user (150ms)
-    ✔ should register admin user (152ms)
-    ✔ should login as admin user (153ms)
+    ✔ should register normal user (218ms)
+    ✔ should login normal user (165ms)
+    ✔ should register admin user (174ms)
+    ✔ should login as admin user (162ms)
     ✔ should not remove user without authentication
     ✔ should not remove user without admin privileges
     ✔ should not remove user with admin privileges using invalid id
@@ -112,5 +115,5 @@
     ✔ should remove all users with admin privileges
 
 
-  103 passing (18s)
+  105 passing (17s)
 

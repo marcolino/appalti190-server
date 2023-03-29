@@ -42,6 +42,9 @@ const set = async (req, res) => {
 */
 
 exports.upload = (req, res, next) => {
+
+  // TODO: test file is present ... Otherwise we succeed also with empty data...
+
   // multer custom file upload (folder with user name)
   const multerUpload = multer({
     storage: multer.diskStorage({
@@ -65,6 +68,22 @@ exports.upload = (req, res, next) => {
         cb(null, nowLocaleDateTimeFilenameFormat() + path.extname(file?.originalname) ?? "");
       }
     }),
+    // fileFilter: (req, file, callback) => {
+    //   const ext = path.extname(file.originalname);
+    //   if (ext !== ".xls"'.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg') {
+    //       return callback(new Error('Only images are allowed'))
+    //   }
+    //   callback(null, true)
+    // },
+    fileFilter: (req, file, cb) => {
+      const acceptedTypes = file.mimetype.split("/");
+      if (acceptedTypes[0] === "application" && acceptedTypes[1].match(/spreadsheet/)) {
+        cb(null, true);
+      } else {
+        //cb(null, false);
+        cb(new Error(req.t("Only spreadsheets allowed")));
+      }
+    },
     limits: {
       fileSize: config.upload.maxFileSize,
     },
@@ -73,11 +92,15 @@ exports.upload = (req, res, next) => {
   multerUpload.single("file")(req, res, err => {
     if (next instanceof multer.MulterError) {
       // a Multer error occurred when uploading
-      return res.status(500).json(err);
+      return res.status(500).json(err.message);
     } else if (err) {
       // an unknown error occurred when uploading
-      return res.status(500).json(err);
+      return res.status(400).json(err.message);
     }
+    if (!req.file) {
+      return res.status(400).json({ message: req.t("Requested file is undefined"), file: req.file });
+    }
+
     // everything was fine
     return res.status(200).json({ message: "Successfully uploaded file", file: req.file });
   });
@@ -897,9 +920,7 @@ exports.outcomeCheck = async (req, res) => {
       return res.status(200).json(answer);
     })
     .catch(err => {
-      console.error("error checking outcome:", err.message);
-      //return [err, answer];
-      return res.status(500).json(err);
+      return res.status(err.response.status).json(err?.response?.data?.message);
     })
   ;
 };
@@ -923,26 +944,24 @@ exports.urlExistenceAndMatch = async (req, res) => {
     // read remote file
     const response = await axios.get(req.body.url);
     const remoteContents = response.data;
-    //console.log("urlExistenceAndMatch remoteContents length", remoteContents.length, typeof remoteContents);
 
-    // TODO: make comparison work for zip use case too...
-    // read local file to compare
-    const buffer = fs.readFileSync(req.body.fileToMatch);
-    const localContents = buffer.toString();
-    //console.log("urlExistenceAndMatch localContents length", localContents.length, typeof localContents);
+    try {
+      // TODO: make comparison work for zip use case too...
+      // read local file to compare
+      const buffer = fs.readFileSync(req.body.fileToMatch);
+      const localContents = buffer.toString();
 
-    // compare contents (TODO: understand if and why we need config.job.publish.allowDateChangeInDataset ...)
-    const bytesToIgnoreAtTheTopOfTheDatasets = (config.job?.publish?.allowDateChangeInDataset ? 564 : 0);
-    if (localContents.slice(localContents.length - bytesToIgnoreAtTheTopOfTheDatasets) !== remoteContents.slice(remoteContents.length - bytesToIgnoreAtTheTopOfTheDatasets) ) {
-      //return [null, {published: true, publishedAsIs: false}];
-      return res.status(200).json({published: true, publishedAsIs: false});
+      // compare contents (TODO: understand if and why we need config.job.publish.allowDateChangeInDataset ...)
+      const bytesToIgnoreAtTheTopOfTheDatasets = (config.job?.publish?.allowDateChangeInDataset ? 564 : 0);
+      if (localContents.slice(localContents.length - bytesToIgnoreAtTheTopOfTheDatasets) !== remoteContents.slice(remoteContents.length - bytesToIgnoreAtTheTopOfTheDatasets) ) {
+        return res.status(200).json({published: true, publishedAsIs: false});
+      }
+      return res.status(200).json({published: true, publishedAsIs: true});
+    } catch (err) {
+      return res.status(400).json(err?.message ?? req.t("Unknown error"));
     }
-    //return [null, {published: true, publishedAsIs: true}];
-    return res.status(200).json({published: true, publishedAsIs: true});
   } catch (err) {
-    console.log("urlExistenceAndMatch error:", err.message);// .response.status);
-    //return [error]; // return false for every status, in case of error...
-    return res.status(500).json(err);
+    return res.status(err?.response?.status ?? 400).json(err?.response?.statusText ?? req.t("Unknown error"));
   }
 };
 

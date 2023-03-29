@@ -2,10 +2,11 @@ const emailValidate = require("email-validator");
 const codiceFiscaleValidate = require("codice-fiscale-js");
 const i18n = require("i18next");
 const db = require("../models");
+const User = require("../models/user.model");
 const { normalizeEmail, isAdmin, objectContains } = require("../helpers/misc");
 
 const {
-  user: User,
+  //user: User,
   plan: Plan,
   role: Role,
   refreshToken: RefreshToken,

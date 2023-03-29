@@ -33,7 +33,7 @@ describe("API tests - User routes", async function() {
       .get("/api/admin/getAdminPanel")
       .set("x-access-token", accessTokenUser)
       .send({})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(403);
         done();
       })
@@ -43,11 +43,11 @@ describe("API tests - User routes", async function() {
     ;
   });
 
-  it("should get user plan without authentication", function(done) {
+  it("should not get user plan without authentication", function(done) {
     chai.request(server)
       .get("/api/user/getPlan")
       .send({})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(403);
         done();
       })
@@ -61,7 +61,7 @@ describe("API tests - User routes", async function() {
       .get("/api/user/getPlan")
       .set("x-access-token", accessTokenUser)
       .send({})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.be.an("array");
         res.body.every(i => expect(i).to.have.all.keys("cigNumberAllowed", "name", "priceCurrency", "pricePerYear", "supportTypes"));
@@ -78,7 +78,7 @@ describe("API tests - User routes", async function() {
       .get("/api/user/getPlan")
       .set("x-access-token", accessTokenUser)
       .send({ userId: "123"})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(403);
         done();
       })
@@ -95,7 +95,7 @@ describe("API tests - User routes", async function() {
         "email": config.user.email,
         "password": config.user.password,
       })
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("id");
         const userId = res.body.id;
@@ -103,7 +103,7 @@ describe("API tests - User routes", async function() {
           .get("/api/user/getPlan")
           .set("x-access-token", accessTokenAdmin)
           .send({ userId })
-          .then((res) => {
+          .then(res => {
             res.should.have.status(200);
             done();
           })
@@ -123,7 +123,7 @@ describe("API tests - User routes", async function() {
       .get("/api/user/getProfile")
       .set("x-access-token", accessTokenUser)
       .send({})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("user");
         done();
@@ -139,7 +139,7 @@ describe("API tests - User routes", async function() {
       .get("/api/user/getProfile")
       //.set("x-access-token", accessTokenUser)
       .send({})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(403);
         done();
       })
@@ -169,7 +169,7 @@ describe("API tests - User routes", async function() {
         },
         roles: [ "user" ],
       })
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("message");
         done();
@@ -188,7 +188,7 @@ describe("API tests - User routes", async function() {
         userId: config.user.id,
         email: config.user.email,
       })
-      .then((res) => {
+      .then(res => {
         res.should.have.status(403);
         done();
       })
@@ -206,7 +206,7 @@ describe("API tests - User routes", async function() {
         userId: "123456789012345678901234",
         firstName: config.user.name + "-bis",
       })
-      .then((res) => {
+      .then(res => {
         res.should.have.status(403);
         done();
       })
@@ -224,7 +224,7 @@ describe("API tests - User routes", async function() {
         userId: config.user.id,
         firstName: config.user.name + "-bis",
       })
-      .then((res) => {
+      .then(res => {
         res.should.have.status(403);
         done();
       })
@@ -242,7 +242,7 @@ describe("API tests - User routes", async function() {
         userId: config.user.id,
         firstName: config.user.name + "-bis",
       })
-      .then((res) => {
+      .then(res => {
         res.should.have.status(403);
         done();
       })
@@ -261,7 +261,7 @@ describe("API tests - User routes", async function() {
           firstName: "updated first name",
         }
       })
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("message");
         done();
@@ -292,7 +292,7 @@ describe("API tests - User routes", async function() {
         // roles: [ "user" ],
         }
       })
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("message");
         done();
@@ -312,7 +312,7 @@ describe("API tests - User routes", async function() {
           fiscalCode: config.user.fiscalCode,
         }
       })
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("message");
         done();
@@ -332,7 +332,7 @@ describe("API tests - User routes", async function() {
           businessName: "test business name",
         }
       })
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("message");
         done();
@@ -352,7 +352,7 @@ describe("API tests - User routes", async function() {
           address: { street: config.user.address.street },
         }
       })
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("message");
         done();
@@ -368,7 +368,7 @@ describe("API tests - User routes", async function() {
       .post("/api/user/updateRoles")
       .set("x-access-token", accessTokenUser)
       .send({})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(400);
         res.body.should.have.property("message");
         done();
@@ -384,7 +384,7 @@ describe("API tests - User routes", async function() {
       .post("/api/user/updateRoles")
       .set("x-access-token", accessTokenUser)
       .send({roles: "user"})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(400);
         res.body.should.have.property("message");
         done();
@@ -400,7 +400,7 @@ describe("API tests - User routes", async function() {
       .post("/api/user/updateRoles")
       .set("x-access-token", accessTokenUser)
       .send({roles: []})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(400);
         res.body.should.have.property("message");
         done();
@@ -418,7 +418,7 @@ describe("API tests - User routes", async function() {
       .send({
         roles: [ "user" ]
       })
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("message");
         done();
@@ -436,7 +436,7 @@ describe("API tests - User routes", async function() {
   //     .send({
   //       roles: [ "admin" ],
   //     })
-  //     .then((res) => {
+  //     .then(res => {
   //  //       res.should.have.status(403);
   //       res.body.should.have.property("message");
   //       done();
@@ -454,7 +454,7 @@ describe("API tests - User routes", async function() {
       .send({
         roles: [ "admin" ],
       })
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("message");
         done();
@@ -470,7 +470,7 @@ describe("API tests - User routes", async function() {
       .get("/api/user/getUsers")
       .set("x-access-token", accessTokenUser)
       .send({})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(403);
         done();
       })
@@ -485,7 +485,7 @@ describe("API tests - User routes", async function() {
       .get("/api/user/getUsers")
       .set("x-access-token", accessTokenAdmin)
       .send({ filter: "wrong filter" })
-      .then((res) => {
+      .then(res => {
         res.should.have.status(400);
         done();
       })
@@ -500,7 +500,7 @@ describe("API tests - User routes", async function() {
       .get("/api/user/getUsers")
       .set("x-access-token", accessTokenAdmin)
       .send({})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("users");
         //console.log("# of users is", res.body.users.length);
@@ -516,7 +516,7 @@ describe("API tests - User routes", async function() {
     chai.request(server)
       .post("/api/user/delete")
       .send({})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(403);
         done();
       })
@@ -531,7 +531,7 @@ describe("API tests - User routes", async function() {
       .post("/api/user/delete")
       .set("x-access-token", accessTokenUser)
       .send({})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(403);
         done();
       })
@@ -546,7 +546,7 @@ describe("API tests - User routes", async function() {
       .post("/api/user/delete")
       .set("x-access-token", accessTokenAdmin)
       .send({ filter: {id: "invalid user id"} })
-      .then((res) => {
+      .then(res => {
         res.should.have.status(400);
         done();
       })
@@ -561,7 +561,7 @@ describe("API tests - User routes", async function() {
       .post("/api/user/delete")
       .set("x-access-token", accessTokenAdmin)
       .send({ filter: { _id: config.user.id } })
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("count");
         expect(res.body.count).to.equal(1);
@@ -579,7 +579,7 @@ describe("API tests - User routes", async function() {
       .set("x-access-token", accessTokenAdmin)
       .send({ filter: { email: config.admin.email } })
       .send({})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("count");
         expect(res.body.count).to.equal(1);
@@ -597,7 +597,7 @@ describe("API tests - User routes", async function() {
     chai.request(server)
       .post("/api/user/remove")
       .send({})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(403);
         done();
       })
@@ -612,7 +612,7 @@ describe("API tests - User routes", async function() {
       .post("/api/user/remove")
       .set("x-access-token", accessTokenUser)
       .send({})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(403);
         done();
       })
@@ -627,7 +627,7 @@ describe("API tests - User routes", async function() {
       .post("/api/user/remove")
       .set("x-access-token", accessTokenAdmin)
       .send({ filter: {id: "invalid user id"} })
-      .then((res) => {
+      .then(res => {
         res.should.have.status(400);
         done();
       })
@@ -642,7 +642,7 @@ describe("API tests - User routes", async function() {
       .post("/api/user/remove")
       .set("x-access-token", accessTokenAdmin)
       .send({ filter: { _id: config.user.id } })
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("count");
         expect(res.body.count).to.equal(1);
@@ -660,7 +660,7 @@ describe("API tests - User routes", async function() {
       .set("x-access-token", accessTokenAdmin)
       .send({ filter: { email: config.admin.email } })
       .send({})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("count");
         expect(res.body.count).to.equal(1);
@@ -678,7 +678,7 @@ describe("API tests - User routes", async function() {
       .set("x-access-token", accessTokenAdmin)
       .send({ filter: "*" })
       .send({})
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("count");
         expect(res.body.count).to.be.at.least(1);
@@ -700,14 +700,14 @@ function signupAndSigninAllUsers() {
         "email": config.user.email,
         "password": config.user.password,
       })
-      .then((res) => {
+      .then(res => {
         res.should.have.status(201);
         res.body.should.have.property("code");
         signupConfirmCode = res.body.code;
         chai.request(server)
         .post("/api/auth/signupConfirm")
         .send({ code: signupConfirmCode })
-        .then((res) => {
+        .then(res => {
           res.should.have.status(200);
           res.body.should.have.property("message");
           done();
@@ -729,7 +729,7 @@ function signupAndSigninAllUsers() {
         "email": config.user.email,
         "password": config.user.password,
       })
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("accessToken");
         res.body.should.have.property("id");
@@ -752,14 +752,14 @@ function signupAndSigninAllUsers() {
         "forcerole": "admin",
         "forceplan": "unlimited",
       })
-      .then((res) => {
+      .then(res => {
         res.should.have.status(201);
         res.body.should.have.property("code");
         signupConfirmCode = res.body.code;
         chai.request(server)
         .post("/api/auth/signupConfirm")
         .send({ code: signupConfirmCode })
-        .then((res) => {
+        .then(res => {
           res.should.have.status(200);
           res.body.should.have.property("message");
           done();
@@ -778,7 +778,7 @@ function signupAndSigninAllUsers() {
     chai.request(server)
       .post("/api/auth/signin")
       .send(config.admin)
-      .then((res) => {
+      .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("accessToken");
         res.body.should.have.property("roles");
