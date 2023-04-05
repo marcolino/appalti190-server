@@ -14,4 +14,4 @@ web-report/
 uploads/
 .nyc_output
 **/.env*
-coverage/
+NOcoverage/
