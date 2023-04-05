@@ -5,11 +5,11 @@ const chai = require("chai");
 const chaiHttp = require("chai-http");
 const should = chai.should();
 const expect = chai.expect;
-const server = require("../server");
-const User = require("../src/models/user.model");
-const Role = require("../src/models/role.model");
-const userController = require("../src/controllers/user.controller");
-const { config } = require("./config.test");
+const server = require("../../server");
+const User = require("../../src/models/user.model");
+const Role = require("../../src/models/role.model");
+const userController = require("../../src/controllers/user.controller");
+const { config } = require("../config.test");
 
 chai.use(chaiHttp); // use chaiHttp to make the actual HTTP requests
 

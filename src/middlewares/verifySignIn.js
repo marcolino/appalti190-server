@@ -2,7 +2,7 @@ const emailValidator = require("email-validator");
 
 const checkValidEmail = (req, res, next) => {
   if (!emailValidator.validate(req.body.email)) {
-    return res.status(400).json({ message: "Email is not valid" });
+    return res.status(400).json({ message: req.t("Email is not valid") });
   }
   next();
 };

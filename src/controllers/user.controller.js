@@ -1,78 +1,103 @@
 const emailValidate = require("email-validator");
 const codiceFiscaleValidate = require("codice-fiscale-js");
 const i18n = require("i18next");
-const db = require("../models");
+const { logger } = require("./logger.controller");
 const User = require("../models/user.model");
+const Plan = require("../models/plan.model");
+const Role = require("../models/role.model");
+const RefreshToken = require("../models/refreshToken.model");
 const { normalizeEmail, isAdmin, objectContains } = require("../helpers/misc");
 
-const {
-  //user: User,
-  plan: Plan,
-  role: Role,
-  refreshToken: RefreshToken,
-} = db.models;
-
-exports.getUsers = async(req, res) => {
-  filter = req.body.filter ?? {};
-  if (typeof filter !== "object") {
-    return res.status(400).json({ message: req.t("A filter must be an object") });
-  }
-  const users = await User.find(filter)
+exports.getAllUsersWithFullInfo = (req, res) => {
+  // get all users and refresh tokens
+  Promise.all([
+    User.find()
     .select(["-password", "-__v"])
     .populate("roles", "-__v")
     .populate("plan", "-__v")
     .lean()
+    .exec(),
+    RefreshToken.find({
+      expiryDate: {
+        $gte: new Date(), 
+      }
+    })
+    .select("token user expiryDate -_id")
+    .lean()
     .exec()
-  ;
-  res.status(200).json({users});
+  ]).then(([users, refreshTokens]) => {
+    for (let i = 0; i < users.length; i++) {
+      const user = users[i];
+      for (let j = 0; j < refreshTokens.length; j++) {
+        const refreshToken = refreshTokens[j];
+        if ((String(refreshToken.user) === String(user._id)) && (!user.refreshToken || user.refreshToken?.expiryDate < refreshToken?.expiryDate.toISOString())) {
+          user.refreshToken = (({ token, expiryDate }) => ({ token, expiryDate }))(refreshToken);
+        }
+      }
+    }
+    res.status(200).json({users});
+  }).catch(err => {
+    logger.error("Error getting all users with full info:", err.message);
+    return res.status(500).json({err: err.message});
+  });
 };
 
-exports.getPlan = async(req, res) => {
-  let userId = req.userId;
-  if (req.body.userId) { // request to update another user's plan
-    if (!await isAdmin(userId)) { // check if request is from admin
-      return res.status(403).json({ message: req.t("You must have admin role to get another user's plan"), code: "MustBeAdmin", reason: req.t("Admin role required") });
-    } else {
-      userId = req.body.userId; // if admin, accept a specific user id in request
+exports.getAllUsers = async(req, res) => {
+  try {
+    filter = req.body.filter ?? {};
+    if (typeof filter !== "object") {
+      return res.status(400).json({ message: req.t("A filter must be an object") });
     }
-  }
-  if (!userId) {
-    return res.status(400).json({ message: req.t("User must be authenticated") });
-  }
-
-  Plan.find({})
-  .select(["name", "supportTypes", "priceCurrency", "pricePerYear", "cigNumberAllowed", "-_id"])
-  .exec(async(err, plan) => {
-    if (err) {
-      logger.error("Error finding plan:", err);
-      return res.status(err.code).json({ message: req.t("Could not find plan"), reason: err.message });
-    }
-    res.status(200).json(plan);
-  })
+    const users = await User.find(filter)
+      .select(["-password", "-__v"])
+      .populate("roles", "-__v")
+      .populate("plan", "-__v")
+      .lean()
+      .exec()
+    ;
+    res.status(200).json({users});
+  } catch(err) {
+    logger.error("Error getting all users with:", err.message);
+    return res.status(500).json({err: err.message});
+  };
 };
 
-exports.getRoles = async(req, res) => {
-  let userId = req.userId;
-  if (req.body.userId) { // request to update another user's role
-    if (!await isAdmin(req.body.userId)) { // check if request is from admin
-      return res.status(403).json({ message: req.t("You must have admin role to get another user's roles"), code: "MustBeAdmin", reason: req.t("Admin role required") });
-    } else {
-      userId = req.body.userId; // if admin, accept a specific user id in request
-    }
+// get all plans
+exports.getAllPlans = async(req, res) => {
+  try {
+    Plan.find({})
+    .select(["name", "supportTypes", "priceCurrency", "pricePerYear", "cigNumberAllowed", "-_id"])
+    .sort({pricePerYear: 1})
+    .exec(async(err, plan) => {
+      if (err) {
+        logger.error("Error getting plans:", err);
+        return res.status(err.code).json({ message: req.t("Could not get plans"), reason: err.message });
+      }
+      res.status(200).json(plan);
+    });
+  } catch(err) {
+    logger.error("Error getting all plans:", err.message);
+    res.status(500).json({ message: req.t("Error getting all plans"), reason: err.message });
   }
-  if (!userId) return res.status(400).json({ message: req.t("User must be authenticated") });
+};
 
-  // default role must be the first element in the returned array
-  Role.find({})
-  .select(["name", "-_id"])
-  .exec(async(err, roles) => {
-    if (err) {
-      logger.error("Error finding roles:", err);
-      return res.status(err.code).json({ message: req.t("Could not find roles"), reason: err.message });
-    }
-console.log("ROLES:", roles);
-    res.status(200).json(roles);
-  })
+// get all roles
+exports.getAllRoles = async(req, res) => {
+  try {
+    // the first element in the returned array is the "default" role
+    Role.find({})
+    .select(["name", "-_id"])
+    .exec(async(err, roles) => {
+      if (err) {
+        logger.error("Error getting roles:", err);
+        return res.status(err.code).json({ message: req.t("Could not get roles"), reason: err.message });
+      }
+      res.status(200).json(roles);
+    })
+  } catch(err) {
+    logger.error("Error getting roles:", err);
+    res.status(500).json({ message: req.t("Error getting roles"), reason: err.message });
+  }
 };
 
 exports.getProfile = async(req, res) => {
@@ -109,7 +134,7 @@ exports.getProfile = async(req, res) => {
 exports.updateProfile = async(req, res, next) => {
   let userId = req.userId;
   if (req.body.userId) { // request to update another user's profile
-    if (!await isAdmin(req.body.userId)) { // check if request is from admin
+    if (!await isAdmin(/*req.body.*/userId)) { // check if request is from admin
       return res.status(403).json({ message: req.t("You must have admin role to update another user's profile"), code: "MustBeAdmin", reason: req.t("Admin role required") });
     } else {
       userId = req.body.userId; // if admin, accept a specific user id in request
@@ -129,9 +154,11 @@ exports.updateProfile = async(req, res, next) => {
     // validate and normalize email
     let [message, value] = [null, null];
 
-    [message, value] = await propertyEmailValidate(req.body.email, user);
-    if (message) return res.status(400).json({ message });
-    user.email = value;
+    if (req.body.email) {
+      [message, value] = await propertyEmailValidate(req.body.email, user);
+      if (message) return res.status(400).json({ message });
+      user.email = value;
+    }
 
     if (req.body.firstName) {
       [message, value] = user.firstName = propertyFirstNameValidate(req.body.firstName, user);
@@ -161,7 +188,7 @@ exports.updateProfile = async(req, res, next) => {
 
     // verify and save the user
     user.save(err => {
-      if (err) return res.status(errocode).json({ message: err.message });
+      if (err) return res.status(err.code).json({ message: err.message });
       res.status(200).json({ message: req.t("The profile has been updated")});
     });
   });
@@ -327,7 +354,7 @@ exports.delete = async(req, res) => {
     } else {
       res.status(400).json({ message: req.t("No user have been deleted") });
     }
-  } catch (err) {
+  } catch(err) {
     res.status(err.code).json({ message: req.t("Could not delete user(s)"), reason: err.message });
   }
 };
@@ -365,38 +392,6 @@ exports.remove = async(req, res) => {
   // res.status(200).json(result);
 };
 
-exports.adminPanel = (req, res) => { // TODO: rename as getAllUsersWithFullInfo
-  // get all users and refresh tokens
-  Promise.all([
-    User.find()
-    .select(["-password", "-__v"])
-    .populate("roles", "-__v")
-    .populate("plan", "-__v")
-    .lean()
-    .exec(),
-    RefreshToken.find({
-      expiryDate: {
-        $gte: new Date(), 
-      }
-    })
-    .select("token user expiryDate -_id")
-    .lean()
-    .exec()
-  ]).then(([users, refreshTokens]) => {
-    for (let i = 0; i < users.length; i++) {
-      const user = users[i];
-      for (let j = 0; j < refreshTokens.length; j++) {
-        const refreshToken = refreshTokens[j];
-        if ((String(refreshToken.user) === String(user._id)) && (!user.refreshToken || user.refreshToken?.expiryDate < refreshToken?.expiryDate.toISOString())) {
-          user.refreshToken = (({ token, expiryDate }) => ({ token, expiryDate }))(refreshToken);
-        }
-      }
-    }
-    res.status(200).json({users});
-  }).catch(function(err){
-    console.log("adminPanel error:", err);
-  });
-};
 // user properties validation
 const propertyEmailValidate = async(value, user) => { // validate and normalize email
   if (!emailValidate.validate(value)) {

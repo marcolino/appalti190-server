@@ -1,4 +1,6 @@
 {
+  "Could not find plan": "Could not find plan",
+  "Could not find roles": "Could not find roles",
   "Email is mandatory": "Email is mandatory",
   "Errore nell'archiviazione": "Errore nell'archiviazione",
   "hello": "hello!",
@@ -21,5 +23,7 @@
   "User signup on {{when}}": "User signup on {{when}}",
   "We could not find user": "We could not find user",
   "We could not get roles": "We could not get roles",
-  "We were unable to find this user": "We were unable to find this user"
+  "We were unable to find this user": "We were unable to find this user",
+  "You must have admin role to get another user's plan": "You must have admin role to get another user's plan",
+  "You must have admin role to get another user's roles": "You must have admin role to get another user's roles"
 }

@@ -1,8 +1,7 @@
 const url = require("url");
 const config = require("../config");
-const db = require("../models");
-const User = db.models.user;
-const Role = db.models.role;
+const User = require("../models/user.model");
+//const Role = require("../models/role.model");
 
 module.exports = {
 
@@ -111,13 +110,18 @@ module.exports = {
   },
 
   isAdmin: async(userId) => {
-    const user = await User.findOne({ _id: userId }).populate("roles", "-__v");
-    for (let i = 0; i < user?.roles?.length; i++) {
-      if (user.roles[i].name === "admin") {
-        return true;
+    try {
+      const user = await User.findOne({ _id: userId }).populate("roles", "-__v");
+      for (let i = 0; i < user?.roles?.length; i++) {
+        if (user.roles[i].name === "admin") {
+          return true;
+        }
       }
+      return false;
+    } catch(err) {
+      logger.error(`Cannot find user by id ${userId}`)
+      return false;
     }
-    return false;
   },
 
 };

@@ -5,10 +5,10 @@ const chai = require("chai");
 const chaiHttp = require("chai-http");
 const expect = chai.expect;
 const fs = require("fs");
-const server = require("../server");
-const User = require("../src/models/user.model");
-const year = require("../src/config").job.year;
-const { config } = require("./config.test");
+const server = require("../../server");
+const User = require("../../src/models/user.model");
+const year = require("../../src/config").job.year;
+const { config } = require("../config.test");
 
 chai.use(chaiHttp); // use chaiHttp to make the actual HTTP requests
 chai.should(); // make the `should` syntax available throughout this module
@@ -221,13 +221,13 @@ describe("API tests - Job routes", function() {
   });
 
   it("should not upload a file too big in size", function(done) {
-    chai.request(server)
+        chai.request(server)
       .post("/api/job/upload")
       .set("x-access-token", accessTokenUser)
       .set("content-type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
       .field("content-type", "multipart/form-data")
       .field("name", "test")
-      .attach("file", `${__dirname}/assets/xls/10MB+1 file size (too large).xlsx`)
+      .attach("file", `${__dirname}/../assets/xls/10MB+1 file size (too large).xlsx`)
       .then(res => {
         res.should.have.status(400);
         done();
@@ -245,7 +245,7 @@ describe("API tests - Job routes", function() {
       .set("content-type", "image/jpeg")
       .field("content-type", "multipart/form-data")
       .field("name", "test")
-      .attach("file", `${__dirname}/assets/wrong-content-type.jpg`)
+      .attach("file", `${__dirname}/../assets/wrong-content-type.jpg`)
       .then(res => {
         res.should.have.status(400);
         done();
@@ -263,7 +263,7 @@ describe("API tests - Job routes", function() {
       .set("content-type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
       .field("content-type", "multipart/form-data")
       .field("name", "test")
-      .attach("file", `${__dirname}/assets/xls/AVCP 2023 good.xlsx`)
+      .attach("file", `${__dirname}/../assets/xls/AVCP 2023 good.xlsx`)
       .then(res => {
         res.should.have.status(200);
         done();
@@ -429,7 +429,6 @@ describe("API tests - Job routes", function() {
       })
     ;
   });
-
   it("should validate XML (index output file ok)", function(done) { 
     chai.request(server)
       .post("/api/job/validateXml/transform")
@@ -504,7 +503,7 @@ describe("API tests - Job routes", function() {
         fileToMatch: `${__dirname}/../public/downloads/${config.user.email}/dataset-${year}.xml`
       })
       .then(res => {
-        res.should.have.status(400);
+        res.should.have.status(404);
         done();
       })
       .catch((err) => {
@@ -554,45 +553,12 @@ describe("API tests - Job routes", function() {
       .set("x-access-token", accessTokenUser)
       .send({
         url: `http://allegati.interportotorino.it/${year}/dataset-${year}.xml`,
-        fileToMatch: `${__dirname}/../public/downloads/${config.user.email}/dataset-${year}.xml`
+        fileToMatch: `${__dirname}/../../public/downloads/${config.user.email}/dataset-${year}.xml`
       })
       .then(res => {
         res.should.have.status(200);
         res.body.should.have.property("published");
         expect(res.body.published).to.equal(true),
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      })
-    ;
-  });
-
-  it("should all plans also without authentication", function(done) {
-    chai.request(server)
-      .get("/api/job/getPlans")
-      .send()
-      .then(res => {
-        res.should.have.status(200);
-        res.body.should.be.an("array");
-        res.body.every(i => expect(i).to.contain.keys("name", "supportTypes", "cigNumberAllowed", "priceCurrency", "pricePerYear"));
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      })
-    ;
-  });
-
-  it("should get all plans", function(done) {
-    chai.request(server)
-      .get("/api/job/getPlans")
-      .set("x-access-token", accessTokenUser)
-      .send()
-      .then(res => {
-        res.should.have.status(200);
-        res.body.should.be.an("array");
-        res.body.every(i => expect(i).to.contain.keys("name", "supportTypes", "cigNumberAllowed", "priceCurrency", "pricePerYear"));
         done();
       })
       .catch((err) => {

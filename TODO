@@ -3,7 +3,7 @@
 - res.status().send -> res.status().json
 - cambiare "we" in una forma impersonale
 - usare req.t("text") per tutti i testi
-- tradurre tutto in locales/*/*
+- tradurre tutto in locales/**
 - capire come salvare i files xls caricati dagli utenti (salvati in /uploads/USER_EMAIL/YYYY-MM-DD_hh:mm:ss.xls)
 - usare winston logger come da v1
 - data del file xls: ora locale
@@ -11,18 +11,20 @@
 - implementare TTL per le collezioni mongodb con scadenza
 - impostare tests con chai
 - logger - accesso utente: no data ma email nel soggetto
+- in test/user.test.js, test updatePlan e updateRoles
+- completare tests con chai
+- rivedere /api/user/updateUserProperty (e successive) come /api/user/updateProfile
+- tradurre le notifiche e i messaggi logger (NO)
+- tradurre anche middlewares, helpers
+- rimuovere i console.* ...
+- cd logger.error in tutte le catch ...
 
-- TODO: in test/user.test.js, test updatePlan e updateRoles
-- TODO completare tests con chai
+- TODO testare sempre le interazioni col database (i.e.: user.save(err => { ...}))
 - TODO sendemail FROM ...
-- TODO logger.error in tutte le catch ...
-- TODO rimuovere i console. ...
-- TODO tradurre anche middlewares, helpers
-- TODO rivedere /api/user/updateUserProperty (e successive) come /api/user/updateProfile
-- TODO: translate notifications and logger messages ?
-- TODO: handle plan downgrade: ask confirmation, and tell about no refunds
-- TODO: add reference year to stripe products
-- TODO: in controllers, uniform catch return 500 + json contents (err? err.message?)
+- TODO gestire il downgrade del piano: chiedere conferma, e specificare che non i saranno rimborsi
+- TODO nei controllers, uniformare catch return 500 + json (err? err.message?)
+- TODO completare il file README.md
 
-- NEWFEATURE decidere se acquistare un piano su papertrail per i logs in produzione
+- NEWFEATURE decidere se acquistare un piano su papertrail.com per le notifiche in produzione
 - NEWFEATURE rimuovere gli account non confermati, periodicamente (??)
+- NEWFEATURE aggiungere l'anno di riferimento ai prodotti stripe

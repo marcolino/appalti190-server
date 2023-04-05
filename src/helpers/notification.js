@@ -5,8 +5,7 @@ const setupEmail = () => {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 }
 
-const sendemail = (mailOptions) => {
-
+const sendEmail = (mailOptions) => {
   if (process.env.NODE_ENV === "test") { // in test mode do not send emails
     return Promise.resolve(true);
   }
@@ -24,36 +23,27 @@ const sendemail = (mailOptions) => {
   });
 };
 
-const assertionsCheckFailure = async (body) => {
-  const subject = `Controllo asserzione fallito`;
-  const to = config.emailAdministration.to;
-  const from = config.emailAdministration.from;
-  const html = body;
-  console.log(`sending email to: ${to} from: ${from}, subject: ${subject}, body: ${html}`);
-  try {
-    console.info("sending email:", to, from, subject);
-    await sendemail({to, from, subject, html});
-  } catch(error) {
-    console.error("Error sending email:", error, error.response.body.errors);
+const notification = async ({subject, html}) => {
+  if (process.env.NODE_ENV === "production") { // notify only in production
+    html = html ? html : subject;
+    const to = config.emailAdministration.to;
+    const from = config.emailAdministration.from;
+    try {
+      return await sendEmail({to, from, subject, html});
+    } catch(err) {
+      logger.error("Error sending email:", err.response?.body?.errors, err);
+    }
   }
+  return null;
 };
 
-const notification = async ({subject, html}) => {
-  if (process.env.NODE_ENV !== "production") return; // notify only in production
-  html = html ? html : subject;
-  const to = config.emailAdministration.to;
-  const from = config.emailAdministration.from;
-  try {
-    await sendemail({to, from, subject, html});
-  } catch(error) {
-    console.error("Error sending email:", error, error.response.body.errors);
-  }
+const assertionsCheckFailure = async (html) => {
+  return notification({subject: "Assertion check failed", html});
 };
 
 module.exports = {
   setupEmail,
-  sendemail,
-  assertionsCheckFailure,
+  sendEmail,
   notification,
+  assertionsCheckFailure,
 };
-

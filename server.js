@@ -98,10 +98,15 @@ db.mongoose
   })
   .then(() => {
     logger.info("Successfully connected to MongoDB");
-    db.populate(); // populate database with initial contents if first time
+    try {
+      db.populate(); // populate database with initial contents if first time
+    } catch(err) {
+      logger.error("Database populate error:", err.message);
+      process.exit(-1);
+    }
   })
   .catch(err => {
-    console.error(`MongoDB connection error: ${err}`);
+    logger.error(`MongoDB connection error: ${err}`);
     process.exit(-1);
   })
 ;
@@ -133,7 +138,6 @@ app.use(express.static(rootServer));
 if (require.main === module) { // avoid listening while testing
   const PORT = process.env.PORT || config.api.port;
   app.listen(PORT, () => {
-    //console.log(`Server is running on port ${PORT}`);
     logger.info(`Server is running on port ${PORT}`);
     notification({subject: "Startup", html: `Server is running on port ${PORT} on ${nowLocaleDateTime()}`});
   });

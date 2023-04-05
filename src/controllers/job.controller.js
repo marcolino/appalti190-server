@@ -6,51 +6,23 @@ const xmlBuilder = require("xmlbuilder");
 const nodeZip = require("node-zip");
 const xmlvalidator = require("xsd-schema-validator");
 const axios = require("axios");
-const db = require("../models");
+const { logger } = require("./logger.controller");
 const { nowLocaleDateTimeFilenameFormat } = require("../helpers/misc");
-const User = db.models.user;
-const Plan = db.models.plan;
+const User = require("../models/user.model");
+const Plan = require("../models/plan.model");
 const config = require("../config");
 
 const zip = new nodeZip();
 
-/*
-const get = async (req, res) => {
-console.log("GET JOB.JOB - REQ.USERID:", req.userId);
-  const user = await User.findOne(
-    { _id: req.userId } // req.userId is from auth
-  );
-  if (!user) {
-    return [ null, { tabId: 0 } ]; // only navigation;
-  }
-console.log("GET JOB.JOB - USER.JOB:", user.job);
-  return [ null, user.job ];
-};
-
-const set = async (req, res) => {
-//console.log("**** SET JOB - REQ.JOB:", req.body.job);
-  const user = await User.findByIdAndUpdate(
-    req.userId,
-    { job: req.body.job },
-  );
-//console.log("SET JOB - USER:", user);
-  if (!user) {
-    return [ null, { tabId: 0 } ]; // only navigation;
-  }
-  return [ null, user.job ];
-};
-*/
-
 exports.upload = (req, res, next) => {
 
-  // TODO: test file is present ... Otherwise we succeed also with empty data...
+  // TODO: check test file to be present ... Otherwise we succeed also with empty data...
 
   // multer custom file upload (folder with user name)
   const multerUpload = multer({
     storage: multer.diskStorage({
       destination: async(req, file, cb) => {
         const user = await User.findOne({ _id: req.userId }).exec();
-        //console.log("upload REQ destination user:", user);
         const folder = path.join(config.job.uploadsBasePath, user.email);
         fs.mkdir(folder, { recursive: true }, (err) => {
           if (err) {
@@ -145,7 +117,7 @@ exports.transformXls2Xml = async (req, res) => {
   let workbook;
   try {
     workbook = xlsx.readFile(input, { cellDates: true });
-  } catch (err) {
+  } catch(err) {
     retval.message = req.t("Error reading input file: {{error}}", {error: err.message});
     retval.code = "ABORTED_DUE_TO_ERROR_READING_INPUT_FILE";
     return res.status(200).json(retval);
@@ -158,7 +130,7 @@ exports.transformXls2Xml = async (req, res) => {
       header: false,
       blankrows: true,
     });
-  } catch (err) {
+  } catch(err) {
     retval.errors.push(req.t("Sheet {{sheet}} not found", {sheet: config.job.sheets.elencoGare}));
     retval.message = req.t("Input file is corrupted");
     retval.code = "BROKEN_INPUT";
@@ -200,7 +172,7 @@ exports.transformXls2Xml = async (req, res) => {
   try {
     const stats = fs.statSync(input);
     const date = new Date(stats.mtime); metadati.dataUltimoAggiornamentoDataset = date.toISOString().split("T")[0];
-  } catch (err) {
+  } catch(err) {
     retval.errors.push(req.t("Can't read last modification date of input file {{input}}", {input}) + ": " + err.message);
     metadati.dataUltimoAggiornamentoDataset = today;
   }
@@ -316,7 +288,6 @@ exports.transformXls2Xml = async (req, res) => {
 
       // check if user's plan allows this many CIGs
       if (retval.cigCount > user.plan.cigNumberAllowed) {
-        //console.log("CIG COUNT CHECK - TRUNCATING - user.plan.cigNumberAllowed:", user.plan.cigNumberAllowed);
         return; // continue, do not break, to count rows and CIGs
       }
 
@@ -587,24 +558,18 @@ exports.transformXls2Xml = async (req, res) => {
 
   do {
     xml = createXML(xmlObj);
-// console.log("xml.length:", xml.length, config.job.datasetMaximumSize);
     if (xml.length > config.job.datasetMaximumSize) { // we need a file indice, and split xml
-// console.log("lottiSlice1.length:", lottiSlice1.length);
       divideFactor *= 2;
       sliceSize = Math.ceil(lottiSlice1.length / divideFactor);
-// console.log("sliceSize:", sliceSize);
       lottiSlice1 = lottiSlice1.slice(0, sliceSize);
-// console.log("lottiSlice1.length:", lottiSlice1.length);
       xmlObj["legge190:pubblicazione"]["data"]["lotto"] = lottiSlice1;
     } else { // xml length is inside the maximum allowed size
-// console.log("BREAK");
       break;
     }
   } while (true);
 
   //xmls.push(xml); // the first xml is done already
   if (sliceSize > 0) { // we have to build xmls for all slices
-console.log("SLICESIZE", sliceSize);
     xmls.push(xml);
     for (let dataset = 0; dataset < divideFactor; dataset++) {
       if (dataset >= 1) {
@@ -736,7 +701,7 @@ const save = (folder, file, mode, contents) => {
     }
     fs.writeFileSync(path.join(folder, file), contents, mode); // write the contents to file
     return true;
-  } catch (err) {
+  } catch(err) {
     return err;
   }
 }
@@ -746,7 +711,7 @@ const load = (path) => {
   try {
     const contents = fs.readFileSync(path, config.job.encoding); // read the contents from file
     return contents;
-  } catch (err) {
+  } catch(err) {
     return err;
   }
 }
@@ -758,8 +723,6 @@ const serializeArchive = (outputFolder, outputFile, outputUrlPath, zip) => {
   if ((result = save(outputFolder, outputFile, "binary", contents)) !== true) {
     return `${result}`;
   }
-console.log("config.serverDomain:", config.serverDomain);
-console.log("outputUrlPath:", outputUrlPath);
   return {
     error: null,
     outputFile: path.join(outputFolder, outputFile), //.replace(/^.*\/public\//, "")
@@ -842,9 +805,7 @@ exports.validateXml = async (req, res) => {
       }
       const xml = result.contents;
       const schema = path.join(__dirname, "../..", config.job?.schemaFile);
-  //console.log("XML type:", typeof xml, "len:", xml.length);
       const validation = await validate(req, res, xml, schema);
-      //return validation;
       return res.status(200).json(validation);
     } else { // no other cases allowed
       return res.status(200).json({
@@ -852,7 +813,7 @@ exports.validateXml = async (req, res) => {
         message: req.t("No zip archive nor xml dataset to be validated found"),
       });
     }
-  } catch (err) {
+  } catch(err) {
     return res.status(500).json(err);
   };
 };
@@ -905,11 +866,11 @@ exports.outcomeCheck = async (req, res) => {
             //return [null, answer];
             return res.status(200).json(answer);
           })
-          .catch(error => {
+          .catch(err => {
             answer.esitoComunicazione = {};
             answer.esitoComunicazione.codice = "?";
-            answer.esitoComunicazione.descrizione = error?.response?.status;
-            answer.esitoComunicazione.dettaglio = error?.response?.statusText;
+            answer.esitoComunicazione.descrizione = err?.response?.status;
+            answer.esitoComunicazione.dettaglio = err?.response?.statusText;
             answer.tentativiAccessoUrl = [];
             //return [null, answer];
             return res.status(200).json(answer);
@@ -920,7 +881,8 @@ exports.outcomeCheck = async (req, res) => {
       return res.status(200).json(answer);
     })
     .catch(err => {
-      return res.status(err.response.status).json(err?.response?.data?.message);
+      logger.error(`Error checking outcome url ${config.job.outcomeUrl}:`, err?.message ?? err);
+      return res.status(err.response?.status ?? 400).json(err?.message ?? err);
     })
   ;
 };
@@ -933,8 +895,8 @@ exports.outcomeFailureDetails = async (req, res) => {
       return res.status(200).json(response.data);
     })
     .catch(err => {
-      //return err.message;
-      return res.status(500).json(err.message);
+      logger.error(req.t("Error checking outcome details from url {{url}}", {url: config.job.outcomeFailureDetailsBaseUrl}) + ":", err?.response?.message ?? err?.request);
+      return res.status(err.response?.status ?? 400).json(err?.response?.message ?? err?.request);
     })
   ;
 };
@@ -957,33 +919,10 @@ exports.urlExistenceAndMatch = async (req, res) => {
         return res.status(200).json({published: true, publishedAsIs: false});
       }
       return res.status(200).json({published: true, publishedAsIs: true});
-    } catch (err) {
-      return res.status(400).json(err?.message ?? req.t("Unknown error"));
+    } catch(err) {
+      return res.status(err.status ?? 400).json(err.message ?? req.t("Unknown error"));
     }
-  } catch (err) {
-    return res.status(err?.response?.status ?? 400).json(err?.response?.statusText ?? req.t("Unknown error"));
-  }
-};
-
-exports.getPlans = async (req, res) => {
-  try {
-    const retval = await Plan.find().sort({pricePerYear: 1}).lean(); // sort by pricePerYear LOW->HIGH
-    //return [null, retval];
-    return res.status(200).json(retval);
   } catch(err) {
-    //return [error];
-    return res.status(500).json(err);
+    return res.status(err.response?.status ?? 400).json(err.response?.statusText ?? req.t("Unknown error"));
   }
 };
-
-// module.exports = {
-//   // get,
-//   // set,
-//   upload,
-//   transformXls2Xml,
-//   validateXml,
-//   outcomeCheck,
-//   outcomeFailureDetails,
-//   urlExistenceAndMatch,
-//   getPlans,
-// };

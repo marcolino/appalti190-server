@@ -1,11 +1,7 @@
 const winston = require("winston");
-//const { createLogger, format, transports } = require("winston");
-require("winston-syslog");
-//const Mail = require("winston-mail").Mail;
-//const AwsCloudWatch = require("winston-aws-cloudwatch");
-//const i18n = require("i18next");
-
+const util = require("util");
 const config = require("../config");
+require("winston-syslog");
 
 const localhost = require("os").hostname;
 const test = (require.main === module);
@@ -42,8 +38,18 @@ try {
       filename: config.logs.file,
       format: winston.format.combine(
         winston.format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
-        winston.format.align(),
-        winston.format.printf(info => `${info.level}: ${[info.timestamp]}: ${info.message}`),
+        winston.format.printf(info => {
+          const timestamp = info.timestamp.trim();
+          const level = info.level;
+          const message = (info.message || "").trim();
+          const args = info[Symbol.for("splat")];
+          const strArgs = (args || []).map(arg => {
+            return util.inspect(arg, {
+              colors: true
+            });
+          });
+          return `${level}: ${timestamp} ${message} ${strArgs}`;
+        }),
       ),
       timestamp: true,
       colorize: true,
@@ -71,11 +77,22 @@ try {
   }
 
   if (process.env.NODE_ENV !== "production") { // if we're not in production then also log to the `Console` transport
-    const consoleLogFormat = winston.format.printf(info => {
-      return `${info.timestamp} ${info.level}: ` + info.message;
-    });
     transports.push(new winston.transports.Console({
-      format: winston.format.combine(winston.format.timestamp(), consoleLogFormat),
+      format: winston.format.combine(
+        winston.format.timestamp(),
+        winston.format.printf(info => {
+          const timestamp = info.timestamp.trim();
+          const level = info.level;
+          const message = (info.message || "").trim();
+          const args = info[Symbol.for("splat")];
+          const strArgs = (args || []).map(arg => {
+            return util.inspect(arg, {
+              colors: true
+            });
+          }).join(" ");
+          return `${level}: ${timestamp} ${message} ${strArgs}`;
+        })
+      ),
       level: test ? "debug" : "warning", // if we are in test skip logging upper than warning levels (notice, info, debug)
       handleExceptions: true,
       prettyPrint: true,
@@ -83,7 +100,7 @@ try {
     }));
   }
 } catch(err) {
-  console.error("Winston transports creation error:", err);
+  console.error("Winston transports creation error:", err); // nothing better to do on errors while setting up logger...
   throw(err);
 }
 
@@ -93,7 +110,7 @@ try {
     exceptionHandlers
   });
 } catch(err) {
-  console.error("Winston logger creation error:", err);
+  console.error("Winston logger creation error:", err); // nothing better to do on errors while setting up logger...
 }
 
 module.exports = { logger, colors };

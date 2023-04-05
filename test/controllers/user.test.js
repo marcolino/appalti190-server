@@ -5,13 +5,14 @@ const chai = require("chai");
 const chaiHttp = require("chai-http");
 const should = chai.should();
 const expect = chai.expect;
-const server = require("../server");
-const User = require("../src/models/user.model");
-//const { signupAndSigninAllUsers } = require ("./utils/common.test");
-const { config } = require("./config.test");
+const server = require("../../server");
+const User = require("../../src/models/user.model");
+//const { signupAndSigninAllUsers } = require ("../utils/common.test");
+const { config } = require("../config.test");
 
 chai.use(chaiHttp); // use chaiHttp to make the actual HTTP requests
 
+const validFiscalCode = "RSSMRA74D22A001Q";
 let accessTokenUser, accessTokenAdmin;
 //let { accessTokenUser, accessTokenAdmin } = require ("./utils/common.test");
 
@@ -28,9 +29,9 @@ describe("API tests - User routes", async function() {
 
   signupAndSigninAllUsers();
 
-  it("should not get all users with user role", function(done) {
+  it("should not get all users with full info with user role", function(done) {
     chai.request(server)
-      .get("/api/admin/getAdminPanel")
+      .get("/api/user/getAllUsersWithFullInfo")
       .set("x-access-token", accessTokenUser)
       .send({})
       .then(res => {
@@ -43,9 +44,9 @@ describe("API tests - User routes", async function() {
     ;
   });
 
-  it("should not get user plan without authentication", function(done) {
+  it("should not get all roles without authentication", function(done) {
     chai.request(server)
-      .get("/api/user/getPlan")
+      .get("/api/user/getAllRoles")
       .send({})
       .then(res => {
         res.should.have.status(403);
@@ -56,15 +57,15 @@ describe("API tests - User routes", async function() {
       })
     ;
   });
-  it("should get same user's plan", function(done) {
+
+  it("should get all roles", function(done) {
     chai.request(server)
-      .get("/api/user/getPlan")
+      .get("/api/user/getAllRoles")
       .set("x-access-token", accessTokenUser)
       .send({})
       .then(res => {
         res.should.have.status(200);
-        res.body.should.be.an("array");
-        res.body.every(i => expect(i).to.have.all.keys("cigNumberAllowed", "name", "priceCurrency", "pricePerYear", "supportTypes"));
+        expect(res.body).to.be.an("array");
         done();
       })
       .catch((err) => {
@@ -73,11 +74,10 @@ describe("API tests - User routes", async function() {
     ;
   });
 
-  it("should not get other user's plan as normal user", function(done) {
+  it("should not get alls plans without authentication", function(done) {
     chai.request(server)
-      .get("/api/user/getPlan")
-      .set("x-access-token", accessTokenUser)
-      .send({ userId: "123"})
+      .get("/api/user/getAllPlans")
+      .send({})
       .then(res => {
         res.should.have.status(403);
         done();
@@ -88,29 +88,15 @@ describe("API tests - User routes", async function() {
     ;
   });
 
-  it("should get other user's plan as admin user", function(done) {
+  it("should get all plans", function(done) {
     chai.request(server)
-      .post("/api/auth/signin")
-      .send({
-        "email": config.user.email,
-        "password": config.user.password,
-      })
+      .get("/api/user/getAllPlans")
+      .set("x-access-token", accessTokenUser)
+      .send({})
       .then(res => {
         res.should.have.status(200);
-        res.body.should.have.property("id");
-        const userId = res.body.id;
-        chai.request(server)
-          .get("/api/user/getPlan")
-          .set("x-access-token", accessTokenAdmin)
-          .send({ userId })
-          .then(res => {
-            res.should.have.status(200);
-            done();
-          })
-          .catch((err) => {
-            done(err);
-          })
-        ;
+        expect(res.body).to.be.an("array");
+        done();
       })
       .catch((err) => {
         done(err);
@@ -157,7 +143,7 @@ describe("API tests - User routes", async function() {
         email: config.user.email,
         firstName: "updated first name",
         lastName: "updated last name",
-        //fiscalCode: "XXXYYY11A22Z999A",
+        fiscalCode: validFiscalCode,
         businessName: "test business name",
         address: {
           street: "Solari street",
@@ -168,6 +154,25 @@ describe("API tests - User routes", async function() {
           country: "Italy",
         },
         roles: [ "user" ],
+      })
+      .then(res => {
+        res.should.have.status(200);
+        res.body.should.have.property("message");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should update user's profile with fiscal code", function(done) {
+    chai.request(server)
+      .post("/api/user/updateProfile")
+      .set("x-access-token", accessTokenUser)
+      .send({
+        email: config.user.email,
+        fiscalCode: validFiscalCode,
       })
       .then(res => {
         res.should.have.status(200);
@@ -243,7 +248,7 @@ describe("API tests - User routes", async function() {
         firstName: config.user.name + "-bis",
       })
       .then(res => {
-        res.should.have.status(403);
+        res.should.have.status(200);
         done();
       })
       .catch((err) => {
@@ -279,17 +284,6 @@ describe("API tests - User routes", async function() {
       .send({
         payload: {
           lastName: "updated last name",
-        // fiscalCode: "XXXYYY11A22Z999A",
-        // businessName: "test business name",
-        // address: {
-        //   street: "Solari street",
-        //   streetNo: "0",
-        //   city: "Rivoli",
-        //   province: "TO",
-        //   zip: "10100",
-        //   country: "Italy",
-        // },
-        // roles: [ "user" ],
         }
       })
       .then(res => {
@@ -467,7 +461,7 @@ describe("API tests - User routes", async function() {
 
   it("should not get all users with user role", function(done) {
     chai.request(server)
-      .get("/api/user/getUsers")
+      .get("/api/user/getAllUsers")
       .set("x-access-token", accessTokenUser)
       .send({})
       .then(res => {
@@ -482,7 +476,7 @@ describe("API tests - User routes", async function() {
 
   it("should not get all users with wrong filter", function(done) {
     chai.request(server)
-      .get("/api/user/getUsers")
+      .get("/api/user/getAllUsers")
       .set("x-access-token", accessTokenAdmin)
       .send({ filter: "wrong filter" })
       .then(res => {
@@ -497,7 +491,7 @@ describe("API tests - User routes", async function() {
 
   it("should get all users with admin role", function(done) {
     chai.request(server)
-      .get("/api/user/getUsers")
+      .get("/api/user/getAllUsers")
       .set("x-access-token", accessTokenAdmin)
       .send({})
       .then(res => {

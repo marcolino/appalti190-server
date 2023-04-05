@@ -1,5 +1,4 @@
-const db = require("../models");
-const User = db.models.user;
+const User = require("../models/user.model");
 
 const checkDuplicateUsername = (req, res, next) => {
   User.findOne({
@@ -9,7 +8,7 @@ const checkDuplicateUsername = (req, res, next) => {
       return res.status(500).json({ message: err });
     }
     if (user) {
-      return res.status(400).json({ message: "Username is already in use" });
+      return res.status(400).json({ message: req.t("Username is already in use") });
     }
     next();
   });
@@ -24,7 +23,7 @@ const checkDuplicateEmail = (req, res, next) => {
     }
     if (user) {
       return res.status(400).json({
-        message: "Email is already in use",
+        message: req.t("Email is already in use"),
         code: "EmailExistsAlready",
       });
     }
@@ -38,7 +37,7 @@ const checkRolesExisted = (req, res, next) => {
       const role = req.body.roles[i];
       if (!db.roles.map(role => role.name).includes(role)) {
         return res.status(400).json({
-          message: `Role ${role} does not exist`
+          message: req.t("Role {{role}} does not exist", { role })
         });
       }
     }

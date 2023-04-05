@@ -14,10 +14,6 @@ const clientShowcaseBaseUrl = `${process.env.NODE_ENV === "production" ?
   "https://appalti190-showcase.herokuapp.com" :
   "http://localhost:8080"
 }`;
-// const stripeMode = process.env.STRIPE_MODE;
-// console.log("STRIPEMODE:", stripeMode);
-// console.log("serverBaseUrl:", serverBaseUrl);
-// console.log("process.env.NODE_ENV:", process.env.NODE_ENV); 
 
 module.exports = {
   api: {
@@ -156,32 +152,32 @@ module.exports = {
     },
   },
   emailAdministration: {
-    //from: "marcosolari@gmail.com",
-    from: "appalti190@arsistemi.it", // TODO: check if this works and avoid SPAM marks by gmail...
+    from: "marcosolari@gmail.com",
+    //from: "appalti190@arsistemi.it", // this does not avoid SPAM marks by gmail...
     to: "marcosolari@gmail.com",
   },
-  envRequiredVariables: [ // TODO: clean up unused variables
-    // "JWT_ACCESS_TOKEN_SECRET",
-    // "JWT_REFRESH_TOKEN_SECRET",
-    // "JWT_ACCESS_TOKEN_EXPIRY",
-    // "JWT_REFRESH_TOKEN_EXPIRY",
+  defaultUsers: {
+    admin: {
+      email: "marcosolari@gmail.com",
+      password: "SuperSecret!123",
+      firstName: "admin name",
+      lastName: "admin surname",
+    },
+  },
+  envRequiredVariables: [
     "MONGO_SCHEME",
     "MONGO_URL",
     "MONGO_DB",
     "MONGO_USER",
     "MONGO_PASS",
     "FROM_EMAIL",
-    // "GOOGLE_OAUTH_CLIENT_ID",
-    // "GOOGLE_OAUTH_CLIENT_SECRET",
-    // "FACEBOOK_OAUTH_CLIENT_ID",
-    // "FACEBOOK_OAUTH_SECRET_KEY",
     "SENDGRID_API_KEY",
     "STRIPE_MODE",
     "STRIPE_API_KEY_TEST",
     "STRIPE_API_KEY_LIVE",
-    // "AWS_BUCKET_NAME",
-    // "AWS_REGION",
-    // "AWS_ACCESS_KEY_ID",
-    // "AWS_SECRET_ACCESS_KEY",
+  //"GOOGLE_OAUTH_CLIENT_ID",
+  //"GOOGLE_OAUTH_CLIENT_SECRET",
+  //"FACEBOOK_OAUTH_CLIENT_ID",
+  //"FACEBOOK_OAUTH_SECRET_KEY",
   ],
 };

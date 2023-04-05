@@ -1,18 +1,15 @@
 const jwt = require("jsonwebtoken");
 const validateEmail = require("email-validator");
-const { sendemail, notification } = require("../helpers/notification");
+const { sendEmail, notification } = require("../helpers/notification");
 const { normalizeEmail, nowLocaleDateTime, remoteAddress } = require("../helpers/misc");
 const { logger } = require("./logger.controller");
-const db = require("../models");
-const config = require("../config");
+const User = require("../models/user.model");
+const Role = require("../models/role.model");
+const Plan = require("../models/plan.model");
+const RefreshToken = require("../models/refreshToken.model");
+const VerificationCode = require("../models/verificationCode.model");
 
-const {
-  user: User,
-  role: Role,
-  plan: Plan,
-  refreshToken: RefreshToken,
-  verificationCode: VerificationCode,
-} = db.models;
+const config = require("../config");
 
 const signup = async(req, res) => {
   let roleName = "user";
@@ -36,7 +33,7 @@ const signup = async(req, res) => {
   // get the role
   try {
     role = await Role.findOne({name: roleName});
-  } catch (err) {
+  } catch(err) {
     logger.error(`Error finding role ${roleName}:`, err);
     return res.status(err.code).json({ message: err });
   }
@@ -48,7 +45,7 @@ const signup = async(req, res) => {
   // get plan
   try {
     plan = await Plan.findOne({name: planName});
-  } catch (err) {
+  } catch(err) {
     logger.error(`Error finding plan ${planName}:`, err);
     return res.status(err.code).json({ message: err });
   }
@@ -89,14 +86,14 @@ const signup = async(req, res) => {
 <p><i>${req.t("If you did not request this, please ignore this email")}.</i></p>
       `;
       logger.info("sending email:", to, from, subject);
-      await sendemail({to, from, subject, html});
+      await sendEmail({to, from, subject, html});
 
       res.status(201).json({
         message: req.t("A verification code has been sent to {{email}}", {email: user.email}),
         codeDeliveryMedium: config.auth.codeDeliveryMedium,
         ...(process.env.NODE_ENV === "test") && { code: signupVerification.code } // to enble test mode to confirm signup
       });
-    } catch (err) {
+    } catch(err) {
       logger.error("Error sending verification code:", err);
       res.status(err.code).json({ message: req.t("Error sending verification code") + ": " + err.message });
     }
@@ -127,13 +124,13 @@ const resendSignUpCode = async(req, res) => {
 <p><i>${req.t("If you did not request this, please ignore this email")}.</i></p>
     `;
     logger.info("sending email:", to, from, subject);
-    await sendemail({to, from, subject, html});
+    await sendEmail({to, from, subject, html});
 
     res.status(200).json({ message: req.t("A verification code has been resent to {{to}} via {{codeDeliveryMedium}}", {to: user.email, codeDeliveryMedium: config.auth.codeDeliveryMedium}), codeDeliveryMedium: config.auth.codeDeliveryMedium });
 
-  } catch (err) {
-    logger.error(`Error resending signup code:`, err);
-    res.status(err.code).json({ message: err.message })
+  } catch(err) {
+    logger.error("Error resending signup code:", err);
+    res.status(err.code).json({ message: req.t("Error resending signup code") + ": " + err.message });
   }
 };
 
@@ -172,7 +169,7 @@ const signupConfirm = async(req, res) => {
 
         // verify and save the user
         user.isVerified = true;
-        user.save(err => {
+        user.save(async(err, user) => {
           if (err) {
             logger.error("Error saving user in signup confirm:", err);
             return res.status(err.code).json({ message: err.message });
@@ -183,7 +180,7 @@ const signupConfirm = async(req, res) => {
         });
       }
     );
-  } catch (err) {
+  } catch(err) {
     logger.error("Error confirming signup:", err);
     res.status(err.code).json({message: err.message})
   }
@@ -250,7 +247,7 @@ const signin = async(req, res) => {
     }
 
     logger.info(`User signin: ${user.email}`);
-    // notify logins (TODO: see papertrail.com, prefer it, possibly...)
+    // notify administration about logins
     notification({subject: `User ${user.email} signin`, html: `User: ${user.email}, IP: ${remoteAddress(req)}, on ${nowLocaleDateTime()}`});
   
     res.status(200).json({
@@ -267,17 +264,14 @@ const signin = async(req, res) => {
 };
 
 const resetPassword = async(req, res) => {
-//console.log("resetPassword");
   try {
     const { email } = req.body;
-//console.log("resetPassword email:", email);
     const user = await User.findOne({ email });
     if (!user) return res.status(400).json({ message: req.t("The email address {{email}} is not associated with any account: double-check your email address and try again", {email: email})});
 
     // generate and set password reset code
     const resetPassword = user.generatePasswordResetCode();
     user.resetPasswordCode = resetPassword.code;
-//console.info("resetPassword.code:", resetPassword.code);
     user.resetPasswordExpires = resetPassword.expires;
 
     // save the updated user object
@@ -294,14 +288,14 @@ const resetPassword = async(req, res) => {
 <p><i>${req.t("If you did not request this, please ignore this email and your password will remain unchanged")}.</i></p>
     `;
     logger.info("sending email:", to, from, subject);
-    await sendemail({to, from, subject, html});
+    await sendEmail({to, from, subject, html});
 
     res.status(200).json({
       message: req.t("A reset code has been sent to {{email}} via {{codeDeliveryMedium}}", {email: user.email, codeDeliveryMedium: config.auth.codeDeliveryMedium}),
       codeDeliveryMedium: config.auth.codeDeliveryMedium,
       ...(process.env.NODE_ENV === "test") && { code: user.resetPasswordCode } // to enble test mode to confirm reset password
     });
-  } catch (err) {
+  } catch(err) {
     logger.error("Error resetting password:", err);
     res.status(err.code).json({message: err.message})
   }
@@ -341,7 +335,7 @@ const resetPasswordConfirm = async(req, res) => {
 
     res.status(200).json({message: req.t("Your password has been updated")});
 
-  } catch (err) {
+  } catch(err) {
     logger.error("Error in reset password confirme:", err);
     res.status(err.code).json({message: err.message})
   }
@@ -375,11 +369,11 @@ const resendResetPasswordCode = async(req, res) => {
 <p><i>If you did not request this, please ignore this email.</i></p>
     `;
     logger.info("sending email:", to, from, subject);
-    await sendemail({to, from, subject, html});
+    await sendEmail({to, from, subject, html});
 
     res.status(200).json({ message: `A verification code has been sent to ${user.email}`, codeDeliveryMedium: config.auth.codeDeliveryMedium });
 
-  } catch (err) {
+  } catch(err) {
     logger.error("Error resending reset password code:", err);
     res.status(err.code).json({ message: err.message })
   }
@@ -419,7 +413,7 @@ const refreshToken = async(req, res) => {
       accessToken: newAccessToken,
       refreshToken: refreshTokenDoc.token,
     });
-  } catch (err) {
+  } catch(err) {
     logger.error("Error refreshing token:", err);    
     return res.status(err.code).json({ message: err });
   }

@@ -36,7 +36,7 @@ RefreshTokenSchema.statics.createToken = async function (user) {
 
   const refreshToken = await object.save();
 
-  return refreshToken.token;
+  return refreshToken?.token;
 };
 
 RefreshTokenSchema.statics.verifyExpiration = (token) => {
