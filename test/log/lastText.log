@@ -1,7 +1,7 @@
 
 
   API tests - Auth routes
-    ✔ should register user (250ms)
+    ✔ should register user (271ms)
     ✔ should not register user twice
     ✔ should not register user with invalid email
     ✔ should not register user forcing invalid plan
@@ -10,13 +10,13 @@
     ✔ should resend register code
     ✔ should not confirm user without code
     ✔ should not confirm user with invalid code
-    ✔ should confirm user (41ms)
+    ✔ should confirm user (43ms)
     ✔ should not confirm user twice
     ✔ should not resend register code for already verified user
     ✔ should not resend register code without email
     ✔ should not reset password without email
     ✔ should start reset password
-    ✔ should confirm reset password (149ms)
+    ✔ should confirm reset password (184ms)
     ✔ should not confirm reset password with wrong email
     ✔ should not confirm reset password with no code
     ✔ should not confirm reset password with wrong code
@@ -24,12 +24,12 @@
     ✔ should resend reset password code
     ✔ should not login user with invalid email
     ✔ should not login user with unregistered email
-    ✔ should login user (157ms)
-    ✔ should login user with passepartout password (137ms)
-    ✔ should not login user with invalid password (136ms)
-    ✔ should register admin user (148ms)
+    ✔ should login user (153ms)
+    ✔ should login user with passepartout password (140ms)
+    ✔ should not login user with invalid password (142ms)
+    ✔ should register admin user (142ms)
     ✔ should confirm admin user
-    ✔ should login admin user (154ms)
+    ✔ should login admin user (150ms)
     ✔ should not login removed user
     ✔ should not refresh token without refresh token
     ✔ should not refresh token with invalid refresh token
@@ -37,52 +37,52 @@
 
   API tests - Job routes
     ✔ should register normal user (168ms)
-    ✔ should login normal user (143ms)
-    ✔ should register admin user (149ms)
-    ✔ should login as admin user (138ms)
-    ✔ should register admin user with standard plan (154ms)
-    ✔ should login as admin user with standard plan (138ms)
+    ✔ should login normal user (132ms)
+    ✔ should register admin user (146ms)
+    ✔ should login as admin user (143ms)
+    ✔ should register admin user with standard plan (151ms)
+    ✔ should login as admin user with standard plan (136ms)
     ✔ should not upload a file without authentication
     ✔ should not upload a file with no file data
-    ✔ should not upload a file too big in size (134ms)
+    ✔ should not upload a file too big in size (117ms)
     ✔ should not upload a file with wrong content-type
     ✔ should upload a file as normal user
     ✔ should not transform XLS to XML without authentication
     ✔ should not transform XLS to XML as normal user (not existing file)
-    ✔ should transform XLS to XML as normal user (some errors file) (2716ms)
+    ✔ should transform XLS to XML as normal user (some errors file) (2876ms)
     ✔ should transform XLS to XML as normal user (more errors file) (1412ms)
-    ✔ should transform XLS to XML as admin user with standard plan, truncating (good file) (1232ms)
-    ✔ should transform XLS to XML as normal user (good file) (1318ms)
+    ✔ should transform XLS to XML as admin user with standard plan, truncating (good file) (1226ms)
+    ✔ should transform XLS to XML as normal user (good file) (1309ms)
     ✔ should not validate XML without authentication
-    ✔ should validate XML (one output file ok) (510ms)
+    ✔ should validate XML (one output file ok) (575ms)
     ✔ should not validate XML (one output file, no file)
-    ✔ should validate XML (index output file ok) (520ms)
-    ✔ should not check outcome for wrong codiceFiscaleAmministrazione (614ms)
-    ✔ should not check outcome for wrong year (489ms)
-    ✔ should check outcome for successful upload (729ms)
+    ✔ should validate XML (index output file ok) (562ms)
+    ✔ should not check outcome for wrong codiceFiscaleAmministrazione (969ms)
+    ✔ should not check outcome for wrong year (609ms)
+    ✔ should check outcome for successful upload (580ms)
     ✔ should not check url existence and match for wrong url
-    ✔ should not check url existence and match for wrong fileToMatch (1122ms)
+    ✔ should not check url existence and match for wrong fileToMatch (3362ms)
     ✔ should not check url existence and match without authentication
-    ✔ should check url existence and match (1545ms)
+    ✔ should check url existence and match (2050ms)
 
   API tests - Payment routes
-    ✔ should register normal user (191ms)
-    ✔ should login normal user (141ms)
+    ✔ should register normal user (177ms)
+    ✔ should login normal user (143ms)
     ✔ should get payment mode, and it should be in a set of values
     ✔ should not create a checkout session without authentication
-    ✔ should not create a checkout session for a 0 cost product (1273ms)
+    ✔ should not create a checkout session for a 0 cost product (1529ms)
     ✔ should not create a checkout session for a non-existent product
-    ✔ should create a checkout session for a standard product (801ms)
-    ✔ should redirect on a payment success call (739ms)
-    ✔ should redirect on a payment canceled call (783ms)
+    ✔ should create a checkout session for a standard product (819ms)
+    ✔ should redirect on a payment success call (677ms)
+    ✔ should redirect on a payment canceled call (815ms)
 
   API tests - User routes
-    ✔ should register normal user (183ms)
-    ✔ should login normal user (140ms)
-    ✔ should register admin user (163ms)
-    ✔ should login as admin user (173ms)
+    ✔ should register normal user (264ms)
+    ✔ should login normal user (144ms)
+    ✔ should register admin user (148ms)
+    ✔ should login as admin user (138ms)
     ✔ should not get all users with full info with user role
-    ✔ should get all users with full info with admin role (118ms)
+    ✔ should get all users with full info with admin role (104ms)
     ✔ should not get all roles without authentication
     ✔ should get all roles
     ✔ should not get alls plans without authentication
@@ -104,7 +104,7 @@
     ✔ should not update user's profile for a different existent user - without admin access
     ✔ should update user's profile for a different existent user - as admin user
     ✔ should not update another user's own property without admin access
-    ✔ should update another user's property with admin access
+    ✔ should update another user's property with admin access (42ms)
     ✔ should not update user's property with an unexpected payload
     ✔ should update user's own property firstName
     ✔ should update user's own property email
@@ -137,10 +137,10 @@
     ✔ should not delete user with admin privileges using invalid id
     ✔ should delete user with admin privileges using id
     ✔ should delete user with admin privileges using email
-    ✔ should register normal user (186ms)
-    ✔ should login normal user (147ms)
-    ✔ should register admin user (153ms)
-    ✔ should login as admin user (140ms)
+    ✔ should register normal user (181ms)
+    ✔ should login normal user (142ms)
+    ✔ should register admin user (168ms)
+    ✔ should login as admin user (144ms)
     ✔ should not remove user without authentication
     ✔ should not remove user without admin privileges
     ✔ should not remove user with admin privileges using invalid id
@@ -157,17 +157,17 @@
     ✔ should populate database if empty
 
   API tests - Plan model
-    ✔ should register normal user (153ms)
-    ✔ should login normal user (145ms)
-    ✔ should register admin user (156ms)
+    ✔ should register normal user (161ms)
+    ✔ should login normal user (149ms)
+    ✔ should register admin user (153ms)
     ✔ should login as admin user (137ms)
     ✔ plan model should accept any value different by -1 ("unlimited")
     ✔ plan model should convert -1 ("unlimited") value to a number (MAX_SAFE_INTEGER)
 
   API tests - User model
-    ✔ should register normal user (170ms)
-    ✔ should login normal user (146ms)
-    ✔ should register admin user (155ms)
+    ✔ should register normal user (161ms)
+    ✔ should login normal user (143ms)
+    ✔ should register admin user (144ms)
     ✔ should login as admin user (137ms)
     ✔ user model should not save user with wrong type password
     ✔ user model should handle options set as true
@@ -178,5 +178,5 @@
     ✔ should correctly handle not found route
 
 
-  159 passing (22s)
+  159 passing (26s)
 
