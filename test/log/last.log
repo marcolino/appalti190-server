@@ -1,7 +1,7 @@
 
 [0m[0m
 [0m  API tests - Auth routes[0m
-  [32m  [32m✔[39m[0m[90m should register user[0m[31m (291ms)[0m
+  [32m  [32m✔[39m[0m[90m should register user[0m[31m (250ms)[0m
   [32m  [32m✔[39m[0m[90m should not register user twice[0m
   [32m  [32m✔[39m[0m[90m should not register user with invalid email[0m
   [32m  [32m✔[39m[0m[90m should not register user forcing invalid plan[0m
@@ -10,13 +10,13 @@
   [32m  [32m✔[39m[0m[90m should resend register code[0m
   [32m  [32m✔[39m[0m[90m should not confirm user without code[0m
   [32m  [32m✔[39m[0m[90m should not confirm user with invalid code[0m
-  [32m  [32m✔[39m[0m[90m should confirm user[0m[33m (53ms)[0m
+  [32m  [32m✔[39m[0m[90m should confirm user[0m[33m (41ms)[0m
   [32m  [32m✔[39m[0m[90m should not confirm user twice[0m
   [32m  [32m✔[39m[0m[90m should not resend register code for already verified user[0m
   [32m  [32m✔[39m[0m[90m should not resend register code without email[0m
   [32m  [32m✔[39m[0m[90m should not reset password without email[0m
   [32m  [32m✔[39m[0m[90m should start reset password[0m
-  [32m  [32m✔[39m[0m[90m should confirm reset password[0m[31m (189ms)[0m
+  [32m  [32m✔[39m[0m[90m should confirm reset password[0m[31m (149ms)[0m
   [32m  [32m✔[39m[0m[90m should not confirm reset password with wrong email[0m
   [32m  [32m✔[39m[0m[90m should not confirm reset password with no code[0m
   [32m  [32m✔[39m[0m[90m should not confirm reset password with wrong code[0m
@@ -24,86 +24,111 @@
   [32m  [32m✔[39m[0m[90m should resend reset password code[0m
   [32m  [32m✔[39m[0m[90m should not login user with invalid email[0m
   [32m  [32m✔[39m[0m[90m should not login user with unregistered email[0m
-  [32m  [32m✔[39m[0m[90m should login user[0m[31m (278ms)[0m
-  [32m  [32m✔[39m[0m[90m should login user with passepartout password[0m[31m (205ms)[0m
-  [32m  [32m✔[39m[0m[90m should not login user with invalid password[0m[31m (181ms)[0m
-  [32m  [32m✔[39m[0m[90m should register admin user[0m[31m (204ms)[0m
+  [32m  [32m✔[39m[0m[90m should login user[0m[31m (157ms)[0m
+  [32m  [32m✔[39m[0m[90m should login user with passepartout password[0m[31m (137ms)[0m
+  [32m  [32m✔[39m[0m[90m should not login user with invalid password[0m[31m (136ms)[0m
+  [32m  [32m✔[39m[0m[90m should register admin user[0m[31m (148ms)[0m
   [32m  [32m✔[39m[0m[90m should confirm admin user[0m
-  [32m  [32m✔[39m[0m[90m should login admin user[0m[31m (194ms)[0m
+  [32m  [32m✔[39m[0m[90m should login admin user[0m[31m (154ms)[0m
   [32m  [32m✔[39m[0m[90m should not login removed user[0m
   [32m  [32m✔[39m[0m[90m should not refresh token without refresh token[0m
   [32m  [32m✔[39m[0m[90m should not refresh token with invalid refresh token[0m
   [32m  [32m✔[39m[0m[90m should refresh token[0m
 
 [0m  API tests - Job routes[0m
-  [32m  [32m✔[39m[0m[90m should register normal user[0m[31m (240ms)[0m
-  [32m  [32m✔[39m[0m[90m should login normal user[0m[31m (196ms)[0m
-  [32m  [32m✔[39m[0m[90m should register admin user[0m[31m (201ms)[0m
-  [32m  [32m✔[39m[0m[90m should login as admin user[0m[31m (178ms)[0m
-  [32m  [32m✔[39m[0m[90m should register admin user with standard plan[0m[31m (312ms)[0m
-  [32m  [32m✔[39m[0m[90m should login as admin user with standard plan[0m[31m (183ms)[0m
+  [32m  [32m✔[39m[0m[90m should register normal user[0m[31m (168ms)[0m
+  [32m  [32m✔[39m[0m[90m should login normal user[0m[31m (143ms)[0m
+  [32m  [32m✔[39m[0m[90m should register admin user[0m[31m (149ms)[0m
+  [32m  [32m✔[39m[0m[90m should login as admin user[0m[31m (138ms)[0m
+  [32m  [32m✔[39m[0m[90m should register admin user with standard plan[0m[31m (154ms)[0m
+  [32m  [32m✔[39m[0m[90m should login as admin user with standard plan[0m[31m (138ms)[0m
   [32m  [32m✔[39m[0m[90m should not upload a file without authentication[0m
   [32m  [32m✔[39m[0m[90m should not upload a file with no file data[0m
-  [32m  [32m✔[39m[0m[90m should not upload a file too big in size[0m[31m (123ms)[0m
+  [32m  [32m✔[39m[0m[90m should not upload a file too big in size[0m[31m (134ms)[0m
   [32m  [32m✔[39m[0m[90m should not upload a file with wrong content-type[0m
   [32m  [32m✔[39m[0m[90m should upload a file as normal user[0m
   [32m  [32m✔[39m[0m[90m should not transform XLS to XML without authentication[0m
   [32m  [32m✔[39m[0m[90m should not transform XLS to XML as normal user (not existing file)[0m
-  [32m  [32m✔[39m[0m[90m should transform XLS to XML as normal user (some errors file)[0m[31m (2754ms)[0m
-  [32m  [32m✔[39m[0m[90m should transform XLS to XML as normal user (more errors file)[0m[31m (1413ms)[0m
-  [32m  [32m✔[39m[0m[90m should transform XLS to XML as admin user with standard plan, truncating (good file)[0m[31m (1222ms)[0m
-  [32m  [32m✔[39m[0m[90m should transform XLS to XML as normal user (good file)[0m[31m (1308ms)[0m
+  [32m  [32m✔[39m[0m[90m should transform XLS to XML as normal user (some errors file)[0m[31m (2716ms)[0m
+  [32m  [32m✔[39m[0m[90m should transform XLS to XML as normal user (more errors file)[0m[31m (1412ms)[0m
+  [32m  [32m✔[39m[0m[90m should transform XLS to XML as admin user with standard plan, truncating (good file)[0m[31m (1232ms)[0m
+  [32m  [32m✔[39m[0m[90m should transform XLS to XML as normal user (good file)[0m[31m (1318ms)[0m
   [32m  [32m✔[39m[0m[90m should not validate XML without authentication[0m
-  [32m  [32m✔[39m[0m[90m should validate XML (one output file ok)[0m[31m (671ms)[0m
+  [32m  [32m✔[39m[0m[90m should validate XML (one output file ok)[0m[31m (510ms)[0m
   [32m  [32m✔[39m[0m[90m should not validate XML (one output file, no file)[0m
-  [32m  [32m✔[39m[0m[90m should validate XML (index output file ok)[0m[31m (658ms)[0m
-  [32m  [32m✔[39m[0m[90m should not check outcome for wrong codiceFiscaleAmministrazione[0m[31m (455ms)[0m
-  [32m  [32m✔[39m[0m[90m should not check outcome for wrong year[0m[31m (389ms)[0m
-  [32m  [32m✔[39m[0m[90m should check outcome for successful upload[0m[31m (440ms)[0m
+  [32m  [32m✔[39m[0m[90m should validate XML (index output file ok)[0m[31m (520ms)[0m
+  [32m  [32m✔[39m[0m[90m should not check outcome for wrong codiceFiscaleAmministrazione[0m[31m (614ms)[0m
+  [32m  [32m✔[39m[0m[90m should not check outcome for wrong year[0m[31m (489ms)[0m
+  [32m  [32m✔[39m[0m[90m should check outcome for successful upload[0m[31m (729ms)[0m
   [32m  [32m✔[39m[0m[90m should not check url existence and match for wrong url[0m
-  [32m  [32m✔[39m[0m[90m should not check url existence and match for wrong fileToMatch[0m[31m (1654ms)[0m
+  [32m  [32m✔[39m[0m[90m should not check url existence and match for wrong fileToMatch[0m[31m (1122ms)[0m
   [32m  [32m✔[39m[0m[90m should not check url existence and match without authentication[0m
-  [32m  [32m✔[39m[0m[90m should check url existence and match[0m[31m (1184ms)[0m
+  [32m  [32m✔[39m[0m[90m should check url existence and match[0m[31m (1545ms)[0m
 
 [0m  API tests - Payment routes[0m
-  [32m  [32m✔[39m[0m[90m should register normal user[0m[31m (218ms)[0m
-  [32m  [32m✔[39m[0m[90m should login normal user[0m[31m (207ms)[0m
+  [32m  [32m✔[39m[0m[90m should register normal user[0m[31m (191ms)[0m
+  [32m  [32m✔[39m[0m[90m should login normal user[0m[31m (141ms)[0m
   [32m  [32m✔[39m[0m[90m should get payment mode, and it should be in a set of values[0m
   [32m  [32m✔[39m[0m[90m should not create a checkout session without authentication[0m
-  [32m  [32m✔[39m[0m[90m should not create a checkout session for a 0 cost product[0m[31m (1411ms)[0m
+  [32m  [32m✔[39m[0m[90m should not create a checkout session for a 0 cost product[0m[31m (1273ms)[0m
   [32m  [32m✔[39m[0m[90m should not create a checkout session for a non-existent product[0m
-  [32m  [32m✔[39m[0m[90m should create a checkout session for a standard product[0m[31m (896ms)[0m
-  [32m  [32m✔[39m[0m[90m should redirect on a payment success call[0m[31m (813ms)[0m
-  [32m  [32m✔[39m[0m[90m should redirect on a payment canceled call[0m[31m (814ms)[0m
+  [32m  [32m✔[39m[0m[90m should create a checkout session for a standard product[0m[31m (801ms)[0m
+  [32m  [32m✔[39m[0m[90m should redirect on a payment success call[0m[31m (739ms)[0m
+  [32m  [32m✔[39m[0m[90m should redirect on a payment canceled call[0m[31m (783ms)[0m
 
 [0m  API tests - User routes[0m
-  [32m  [32m✔[39m[0m[90m should register normal user[0m[31m (201ms)[0m
-  [32m  [32m✔[39m[0m[90m should login normal user[0m[31m (200ms)[0m
-  [32m  [32m✔[39m[0m[90m should register admin user[0m[31m (309ms)[0m
-  [32m  [32m✔[39m[0m[90m should login as admin user[0m[31m (187ms)[0m
+  [32m  [32m✔[39m[0m[90m should register normal user[0m[31m (183ms)[0m
+  [32m  [32m✔[39m[0m[90m should login normal user[0m[31m (140ms)[0m
+  [32m  [32m✔[39m[0m[90m should register admin user[0m[31m (163ms)[0m
+  [32m  [32m✔[39m[0m[90m should login as admin user[0m[31m (173ms)[0m
   [32m  [32m✔[39m[0m[90m should not get all users with full info with user role[0m
+  [32m  [32m✔[39m[0m[90m should get all users with full info with admin role[0m[31m (118ms)[0m
   [32m  [32m✔[39m[0m[90m should not get all roles without authentication[0m
   [32m  [32m✔[39m[0m[90m should get all roles[0m
   [32m  [32m✔[39m[0m[90m should not get alls plans without authentication[0m
   [32m  [32m✔[39m[0m[90m should get all plans[0m
   [32m  [32m✔[39m[0m[90m should get user's profile[0m
   [32m  [32m✔[39m[0m[90m should not get user's profile without authentication[0m
+  [32m  [32m✔[39m[0m[90m should not get another user's profile without admin access[0m
+  [32m  [32m✔[39m[0m[90m should get another user's profile with admin access[0m
   [32m  [32m✔[39m[0m[90m should update user's profile[0m
-  [32m  [32m✔[39m[0m[90m should update user's profile with fiscal code[0m
+  [32m  [32m✔[39m[0m[90m should not update user's profile with invalid email[0m
+  [32m  [32m✔[39m[0m[90m should not update user's profile with already taken email[0m
+  [32m  [32m✔[39m[0m[90m should update user's profile with new email[0m
+  [32m  [32m✔[39m[0m[90m should reset user's profile with email[0m
+  [32m  [32m✔[39m[0m[90m should not update user's profile with invalid firstName[0m
+  [32m  [32m✔[39m[0m[90m should not update user's profile with invalid lastName[0m
+  [32m  [32m✔[39m[0m[90m should not update user's profile with invalid fiscalCode[0m
   [32m  [32m✔[39m[0m[90m should not update user's profile without autentication[0m
-  [32m  [32m✔[39m[0m[90m should not update user's profile for a different not existent user - as normal user[0m
-  [32m  [32m✔[39m[0m[90m should not update user's profile for a different existent user - as normal user[0m
+  [32m  [32m✔[39m[0m[90m should not update user's profile for a different not existent user - without admin access[0m
+  [32m  [32m✔[39m[0m[90m should not update user's profile for a different existent user - without admin access[0m
   [32m  [32m✔[39m[0m[90m should update user's profile for a different existent user - as admin user[0m
+  [32m  [32m✔[39m[0m[90m should not update another user's own property without admin access[0m
+  [32m  [32m✔[39m[0m[90m should update another user's property with admin access[0m
+  [32m  [32m✔[39m[0m[90m should not update user's property with an unexpected payload[0m
   [32m  [32m✔[39m[0m[90m should update user's own property firstName[0m
+  [32m  [32m✔[39m[0m[90m should update user's own property email[0m
   [32m  [32m✔[39m[0m[90m should update user's own property lastName[0m
   [32m  [32m✔[39m[0m[90m should update user's own property fiscalCode[0m
   [32m  [32m✔[39m[0m[90m should update user's own property businessName[0m
   [32m  [32m✔[39m[0m[90m should update user's own property address street[0m
-  [32m  [32m✔[39m[0m[90m should not update user's own roles as normal user (no roles)[0m
-  [32m  [32m✔[39m[0m[90m should not update user's own roles as normal user (not array roles)[0m
-  [32m  [32m✔[39m[0m[90m should not update user's own roles as normal user (empty array role)[0m
-  [32m  [32m✔[39m[0m[90m should update user's own roles as normal user (equal or down grade)[0m
+  [32m  [32m✔[39m[0m[90m should not update user's own roles without admin access[0m
+  [32m  [32m✔[39m[0m[90m should not update user's own roles with not array roles[0m
+  [32m  [32m✔[39m[0m[90m should not update user's own roles with empty array roles[0m
+  [32m  [32m✔[39m[0m[90m should update user's own roles without admin access (equal or down grade)[0m
+  [32m  [32m✔[39m[0m[90m should not update user's own roles without admin access (up grade)[0m
   [32m  [32m✔[39m[0m[90m should update user's own roles as admin user (up grade)[0m
+  [32m  [32m✔[39m[0m[90m should not update another user's roles without admin access[0m
+  [32m  [32m✔[39m[0m[90m should update another user's roles with admin access[0m
+  [32m  [32m✔[39m[0m[90m should not update user's own plan without admin access[0m
+  [32m  [32m✔[39m[0m[90m should not update user's own plan with no plan[0m
+  [32m  [32m✔[39m[0m[90m should not update user's own plan with empty plan[0m
+  [32m  [32m✔[39m[0m[90m should update user's own plan (equal or down grade)[0m
+  [32m  [32m✔[39m[0m[90m should update another user's plan with admin access[0m
+  [32m  [32m✔[39m[0m[90m should not update user's own plan without admin access (up grade)[0m
+  [32m  [32m✔[39m[0m[90m should update user's own plan as admin user (up grade)[0m
+  [32m  [32m✔[39m[0m[90m should not update another user's plan without admin access[0m
+  [32m  [32m✔[39m[0m[90m should update another user's plan with admin access[0m
   [32m  [32m✔[39m[0m[90m should not get all users with user role[0m
   [32m  [32m✔[39m[0m[90m should not get all users with wrong filter[0m
   [32m  [32m✔[39m[0m[90m should get all users with admin role[0m
@@ -112,10 +137,10 @@
   [32m  [32m✔[39m[0m[90m should not delete user with admin privileges using invalid id[0m
   [32m  [32m✔[39m[0m[90m should delete user with admin privileges using id[0m
   [32m  [32m✔[39m[0m[90m should delete user with admin privileges using email[0m
-  [32m  [32m✔[39m[0m[90m should register normal user[0m[31m (239ms)[0m
-  [32m  [32m✔[39m[0m[90m should login normal user[0m[31m (188ms)[0m
-  [32m  [32m✔[39m[0m[90m should register admin user[0m[31m (207ms)[0m
-  [32m  [32m✔[39m[0m[90m should login as admin user[0m[31m (207ms)[0m
+  [32m  [32m✔[39m[0m[90m should register normal user[0m[31m (186ms)[0m
+  [32m  [32m✔[39m[0m[90m should login normal user[0m[31m (147ms)[0m
+  [32m  [32m✔[39m[0m[90m should register admin user[0m[31m (153ms)[0m
+  [32m  [32m✔[39m[0m[90m should login as admin user[0m[31m (140ms)[0m
   [32m  [32m✔[39m[0m[90m should not remove user without authentication[0m
   [32m  [32m✔[39m[0m[90m should not remove user without admin privileges[0m
   [32m  [32m✔[39m[0m[90m should not remove user with admin privileges using invalid id[0m
@@ -123,22 +148,27 @@
   [32m  [32m✔[39m[0m[90m should remove user with admin privileges using email[0m
   [32m  [32m✔[39m[0m[90m should remove all users with admin privileges[0m
 
+[0m  API tests - Helpers - Environment[0m
+  [32m  [32m✔[39m[0m[90m should not assert environment with no environment[0m
+  [32m  [32m✔[39m[0m[90m should not assert environment with missing required variable[0m
+  [32m  [32m✔[39m[0m[90m should assert environment with default environment[0m
+
 [0m  API tests - Index of models[0m
   [32m  [32m✔[39m[0m[90m should populate database if empty[0m
 
 [0m  API tests - Plan model[0m
-  [32m  [32m✔[39m[0m[90m should register normal user[0m[31m (255ms)[0m
-  [32m  [32m✔[39m[0m[90m should login normal user[0m[31m (226ms)[0m
-  [32m  [32m✔[39m[0m[90m should register admin user[0m[31m (190ms)[0m
-  [32m  [32m✔[39m[0m[90m should login as admin user[0m[31m (195ms)[0m
+  [32m  [32m✔[39m[0m[90m should register normal user[0m[31m (153ms)[0m
+  [32m  [32m✔[39m[0m[90m should login normal user[0m[31m (145ms)[0m
+  [32m  [32m✔[39m[0m[90m should register admin user[0m[31m (156ms)[0m
+  [32m  [32m✔[39m[0m[90m should login as admin user[0m[31m (137ms)[0m
   [32m  [32m✔[39m[0m[90m plan model should accept any value different by -1 ("unlimited")[0m
   [32m  [32m✔[39m[0m[90m plan model should convert -1 ("unlimited") value to a number (MAX_SAFE_INTEGER)[0m
 
 [0m  API tests - User model[0m
-  [32m  [32m✔[39m[0m[90m should register normal user[0m[31m (209ms)[0m
-  [32m  [32m✔[39m[0m[90m should login normal user[0m[31m (192ms)[0m
-  [32m  [32m✔[39m[0m[90m should register admin user[0m[31m (196ms)[0m
-  [32m  [32m✔[39m[0m[90m should login as admin user[0m[31m (247ms)[0m
+  [32m  [32m✔[39m[0m[90m should register normal user[0m[31m (170ms)[0m
+  [32m  [32m✔[39m[0m[90m should login normal user[0m[31m (146ms)[0m
+  [32m  [32m✔[39m[0m[90m should register admin user[0m[31m (155ms)[0m
+  [32m  [32m✔[39m[0m[90m should login as admin user[0m[31m (137ms)[0m
   [32m  [32m✔[39m[0m[90m user model should not save user with wrong type password[0m
   [32m  [32m✔[39m[0m[90m user model should handle options set as true[0m
   [32m  [32m✔[39m[0m[90m user model should handle options set as false[0m
@@ -148,5 +178,5 @@
   [32m  [32m✔[39m[0m[90m should correctly handle not found route[0m
 
 
-[92m [0m[32m 131 passing[0m[90m (24s)[0m
+[92m [0m[32m 159 passing[0m[90m (22s)[0m
 

@@ -23,7 +23,7 @@ const sendEmail = (mailOptions) => {
   });
 };
 
-const notification = async ({subject, html}) => {
+const notification = async({subject, html}) => {
   if (process.env.NODE_ENV === "production") { // notify only in production
     html = html ? html : subject;
     const to = config.emailAdministration.to;
@@ -37,7 +37,7 @@ const notification = async ({subject, html}) => {
   return null;
 };
 
-const assertionsCheckFailure = async (html) => {
+const assertionsCheckFailure = async(html) => {
   return notification({subject: "Assertion check failed", html});
 };
 

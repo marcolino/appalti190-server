@@ -11,10 +11,10 @@
   "scripts": {
     "start-dev": "nodemon --ignore client/ -w '.' -w .env server.js",
     "start": "node server.js",
-    "test": "nyc --reporter=html unbuffer mocha --exit --timeout 5000 --recursive test | tee test/log/last.log",
+    "test": "nyc --reporter=html unbuffer mocha --exit --timeout 10000 --recursive test | tee test/log/last.log",
     "posttest": "scripts/test2badge",
-    "test-debug": "mocha --exit --timeout 5000 --debug --recursive test",
-    "test-nocoverage": "unbuffer mocha --exit --timeout 5000 --recursive test | tee test/log/last.log",
+    "test-debug": "mocha --exit --timeout 10000 --debug --recursive test",
+    "test-nocoverage": "unbuffer mocha --exit --timeout 10000 --recursive test | tee test/log/last.log",
     "testwatch": "nodemon --exec \"mocha --recursive --timeout 10000\"",
     "prepub": "yarn test",
     "pub": "git add . && git commit -m \"$CM\" && git push && yarn push",

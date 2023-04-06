@@ -32,6 +32,7 @@ const colors = {
 };
 
 let logger, transports, exceptionHandlers = null;
+const colorize = false;
 try {
   transports = [
     new winston.transports.File({
@@ -44,15 +45,13 @@ try {
           const message = (info.message || "").trim();
           const args = info[Symbol.for("splat")];
           const strArgs = (args || []).map(arg => {
-            return util.inspect(arg, {
-              colors: true
-            });
+            return util.inspect(arg, { colors: colorize });
           });
           return `${level}: ${timestamp} ${message} ${strArgs}`;
         }),
       ),
       timestamp: true,
-      colorize: true,
+      colorize: colorize,
       handleExceptions: true,
       humanReadableUnhandledException: true,
       prettyPrint: true,
@@ -85,18 +84,17 @@ try {
           const level = info.level;
           const message = (info.message || "").trim();
           const args = info[Symbol.for("splat")];
-          const strArgs = (args || []).map(arg => {
-            return util.inspect(arg, {
-              colors: true
-            });
-          }).join(" ");
+          // const strArgs = (args || []).map(arg => {
+          //   return util.inspect(arg, { colors: colorize });
+          // }).join(" ");
+          const strArgs = (args || []).map(arg => arg).join(" ");
           return `${level}: ${timestamp} ${message} ${strArgs}`;
         })
       ),
       level: test ? "debug" : "warning", // if we are in test skip logging upper than warning levels (notice, info, debug)
       handleExceptions: true,
       prettyPrint: true,
-      colorize: true,
+      colorize: colorize,
     }));
   }
 } catch(err) {

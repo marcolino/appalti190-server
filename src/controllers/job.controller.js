@@ -15,9 +15,6 @@ const config = require("../config");
 const zip = new nodeZip();
 
 exports.upload = (req, res, next) => {
-
-  // TODO: check test file to be present ... Otherwise we succeed also with empty data...
-
   // multer custom file upload (folder with user name)
   const multerUpload = multer({
     storage: multer.diskStorage({
@@ -78,7 +75,7 @@ exports.upload = (req, res, next) => {
   });
 };
 
-exports.transformXls2Xml = async (req, res) => {
+exports.transformXls2Xml = async(req, res) => {
   const retval = {
     code: "OK",
     message: "",
@@ -769,7 +766,7 @@ const isEstero = (codiceFiscale) => {
 }
 
 // validate XML
-exports.validateXml = async (req, res) => {
+exports.validateXml = async(req, res) => {
   try {
     if (req.body?.transform?.xmlIndice) { // a zip archive with indice and datasets inside is present
       const xmlIndice = req.body?.transform?.xmlIndice;
@@ -842,7 +839,7 @@ const reclaimValidateMessage = (message) => {
   return reclaimedMessages;
 }
 
-exports.outcomeCheck = async (req, res) => {
+exports.outcomeCheck = async(req, res) => {
   const data = {
     anno: req.body.anno + 1,
     codiceFiscaleAmministrazione: req.body.codiceFiscaleAmministrazione,
@@ -887,7 +884,7 @@ exports.outcomeCheck = async (req, res) => {
   ;
 };
 
-exports.outcomeFailureDetails = async (req, res) => {
+exports.outcomeFailureDetails = async(req, res) => {
   const url = `${config.outcomeFailureDetailsBaseUrl}/${req.params.anno}/${req.params.identificativoPEC}`;
   return await axios.get(url)
     .then(response => {
@@ -901,7 +898,7 @@ exports.outcomeFailureDetails = async (req, res) => {
   ;
 };
 
-exports.urlExistenceAndMatch = async (req, res) => {
+exports.urlExistenceAndMatch = async(req, res) => {
   try {
     // read remote file
     const response = await axios.get(req.body.url);

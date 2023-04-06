@@ -77,6 +77,7 @@ const signup = async(req, res) => {
       await signupVerification.save(); // save the verification code
   
       //logger.info("VERIFICATION CODE:", signupVerification.code);
+      
       const subject = req.t("Signup Verification Code");
       const to = user.email;
       const from = process.env.FROM_EMAIL;
@@ -85,7 +86,7 @@ const signup = async(req, res) => {
 <p>${req.t("The code to confirm your registration is")} <b>${signupVerification.code}</b>.</p>
 <p><i>${req.t("If you did not request this, please ignore this email")}.</i></p>
       `;
-      logger.info("sending email:", to, from, subject);
+      logger.info("Sending email:", to, from, subject);
       await sendEmail({to, from, subject, html});
 
       res.status(201).json({
@@ -123,7 +124,7 @@ const resendSignUpCode = async(req, res) => {
 <p>${req.t("The code to confirm your registration is")} <b>${signupVerification.code}</b>.</p>
 <p><i>${req.t("If you did not request this, please ignore this email")}.</i></p>
     `;
-    logger.info("sending email:", to, from, subject);
+    logger.info("Sending email:", to, from, subject);
     await sendEmail({to, from, subject, html});
 
     res.status(200).json({ message: req.t("A verification code has been resent to {{to}} via {{codeDeliveryMedium}}", {to: user.email, codeDeliveryMedium: config.auth.codeDeliveryMedium}), codeDeliveryMedium: config.auth.codeDeliveryMedium });
@@ -287,7 +288,7 @@ const resetPassword = async(req, res) => {
 <p>${req.t("The code to reset your password is")} <b>${user.resetPasswordCode}</b>.</p>
 <p><i>${req.t("If you did not request this, please ignore this email and your password will remain unchanged")}.</i></p>
     `;
-    logger.info("sending email:", to, from, subject);
+    logger.info("Sending email:", to, from, subject);
     await sendEmail({to, from, subject, html});
 
     res.status(200).json({
@@ -368,7 +369,7 @@ const resendResetPasswordCode = async(req, res) => {
 <p>The code to reset your password is <b>${user.resetPasswordCode}</b>.</p>
 <p><i>If you did not request this, please ignore this email.</i></p>
     `;
-    logger.info("sending email:", to, from, subject);
+    logger.info("Sending email:", to, from, subject);
     await sendEmail({to, from, subject, html});
 
     res.status(200).json({ message: `A verification code has been sent to ${user.email}`, codeDeliveryMedium: config.auth.codeDeliveryMedium });

@@ -37,7 +37,7 @@ describe("API tests - Job routes", function() {
   });
 
   after(async() => { // after these tests we clean-up temporary artifacts from file system
-    fs.rmSync(`${__dirname}/../uploads/${config.user.email}`, { recursive: true, force: true });
+    fs.rmSync(`${__dirname}/../../uploads/${config.user.email}`, { recursive: true, force: true });
   });
 
   it("should register normal user", function(done) {

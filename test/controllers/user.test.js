@@ -44,6 +44,21 @@ describe("API tests - User routes", async function() {
     ;
   });
 
+  it("should get all users with full info with admin role", function(done) {
+    chai.request(server)
+      .get("/api/user/getAllUsersWithFullInfo")
+      .set("x-access-token", accessTokenAdmin)
+      .send({})
+      .then(res => {
+        res.should.have.status(200);
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
   it("should not get all roles without authentication", function(done) {
     chai.request(server)
       .get("/api/user/getAllRoles")
@@ -135,6 +150,36 @@ describe("API tests - User routes", async function() {
     ;
   });
 
+  it("should not get another user's profile without admin access", function(done) {
+    chai.request(server)
+      .get("/api/user/getProfile")
+      .set("x-access-token", accessTokenUser)
+      .send({userId: config.admin.id})
+      .then(res => {
+        res.should.have.status(403);
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should get another user's profile with admin access", function(done) {
+    chai.request(server)
+      .get("/api/user/getProfile")
+      .set("x-access-token", accessTokenAdmin)
+      .send({userId: config.admin.id})
+      .then(res => {
+        res.should.have.status(200);
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
   it("should update user's profile", function(done) {
     chai.request(server)
       .post("/api/user/updateProfile")
@@ -166,16 +211,130 @@ describe("API tests - User routes", async function() {
     ;
   });
 
-  it("should update user's profile with fiscal code", function(done) {
+  it("should not update user's profile with invalid email", function(done) {
     chai.request(server)
       .post("/api/user/updateProfile")
-      .set("x-access-token", accessTokenUser)
+      .set("x-access-token", accessTokenAdmin)
       .send({
+        userId: config.admin.id,
+        email: "invalid email",
+      })
+      .then(res => {
+        res.should.have.status(400);
+        res.body.should.have.property("message");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should not update user's profile with already taken email", function(done) {
+    chai.request(server)
+      .post("/api/user/updateProfile")
+      .set("x-access-token", accessTokenAdmin)
+      .send({
+        userId: config.admin.id,
         email: config.user.email,
-        fiscalCode: validFiscalCode,
+      })
+      .then(res => {
+        res.should.have.status(400);
+        res.body.should.have.property("message");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should update user's profile with new email", function(done) {
+    chai.request(server)
+      .post("/api/user/updateProfile")
+      .set("x-access-token", accessTokenAdmin)
+      .send({
+        userId: config.admin.id,
+        email: config.admin.email + ".new",
       })
       .then(res => {
         res.should.have.status(200);
+        res.body.should.have.property("message");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should reset user's profile with email", function(done) {
+    chai.request(server)
+      .post("/api/user/updateProfile")
+      .set("x-access-token", accessTokenAdmin)
+      .send({
+        userId: config.admin.id,
+        email: config.admin.email,
+      })
+      .then(res => {
+        res.should.have.status(200);
+        res.body.should.have.property("message");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should not update user's profile with invalid firstName", function(done) {
+    chai.request(server)
+      .post("/api/user/updateProfile")
+      .set("x-access-token", accessTokenAdmin)
+      .send({
+        userId: config.admin.id,
+        firstName: "",
+      })
+      .then(res => {
+        res.should.have.status(400);
+        res.body.should.have.property("message");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should not update user's profile with invalid lastName", function(done) {
+    chai.request(server)
+      .post("/api/user/updateProfile")
+      .set("x-access-token", accessTokenAdmin)
+      .send({
+        userId: config.admin.id,
+        lastName: "",
+      })
+      .then(res => {
+        res.should.have.status(400);
+        res.body.should.have.property("message");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should not update user's profile with invalid fiscalCode", function(done) {
+    chai.request(server)
+      .post("/api/user/updateProfile")
+      .set("x-access-token", accessTokenAdmin)
+      .send({
+        userId: config.admin.id,
+        fiscalCode: "",
+      })
+      .then(res => {
+        res.should.have.status(400);
         res.body.should.have.property("message");
         done();
       })
@@ -203,7 +362,7 @@ describe("API tests - User routes", async function() {
     ;
   });
 
-  it("should not update user's profile for a different not existent user - as normal user", function(done) {
+  it("should not update user's profile for a different not existent user - without admin access", function(done) {
     chai.request(server)
       .post("/api/user/updateProfile")
       .set("x-access-token", accessTokenUser)
@@ -221,7 +380,7 @@ describe("API tests - User routes", async function() {
     ;
   });
 
-  it("should not update user's profile for a different existent user - as normal user", function(done) {
+  it("should not update user's profile for a different existent user - without admin access", function(done) {
     chai.request(server)
       .post("/api/user/updateProfile")
       .set("x-access-token", accessTokenUser)
@@ -257,6 +416,68 @@ describe("API tests - User routes", async function() {
     ;
   });
 
+  it("should not update another user's own property without admin access", function(done) {
+    chai.request(server)
+      .post("/api/user/updateUserProperty")
+      .set("x-access-token", accessTokenUser)
+      .send({
+        userId: config.user.id,
+        payload: {
+          firstName: "updated first name",
+        }
+      })
+      .then(res => {
+        res.should.have.status(403);
+        res.body.should.have.property("message");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should update another user's property with admin access", function(done) {
+    chai.request(server)
+      .post("/api/user/updateUserProperty")
+      .set("x-access-token", accessTokenAdmin)
+      .send({
+        userId: config.user.id,
+        payload: {
+          firstName: "updated first name",
+        }
+      })
+      .then(res => {
+        res.should.have.status(200);
+        res.body.should.have.property("message");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should not update user's property with an unexpected payload", function(done) {
+    chai.request(server)
+      .post("/api/user/updateUserProperty")
+      .set("x-access-token", accessTokenAdmin)
+      .send({
+        payload: {
+          unexpected: "abc",
+        }
+      })
+      .then(res => {
+        res.should.have.status(400);
+        res.body.should.have.property("message");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
   it("should update user's own property firstName", function(done) {
     chai.request(server)
       .post("/api/user/updateUserProperty")
@@ -264,6 +485,26 @@ describe("API tests - User routes", async function() {
       .send({
         payload: {
           firstName: "updated first name",
+        }
+      })
+      .then(res => {
+        res.should.have.status(200);
+        res.body.should.have.property("message");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should update user's own property email", function(done) {
+    chai.request(server)
+      .post("/api/user/updateUserProperty")
+      .set("x-access-token", accessTokenUser)
+      .send({
+        payload: {
+          email: config.user.email,
         }
       })
       .then(res => {
@@ -357,7 +598,7 @@ describe("API tests - User routes", async function() {
     ;
   });
 
-  it("should not update user's own roles as normal user (no roles)", function(done) {
+  it("should not update user's own roles without admin access", function(done) {
     chai.request(server)
       .post("/api/user/updateRoles")
       .set("x-access-token", accessTokenUser)
@@ -373,7 +614,7 @@ describe("API tests - User routes", async function() {
     ;
   });
 
-  it("should not update user's own roles as normal user (not array roles)", function(done) {
+  it("should not update user's own roles with not array roles", function(done) {
     chai.request(server)
       .post("/api/user/updateRoles")
       .set("x-access-token", accessTokenUser)
@@ -389,7 +630,7 @@ describe("API tests - User routes", async function() {
     ;
   });
 
-  it("should not update user's own roles as normal user (empty array role)", function(done) {
+  it("should not update user's own roles with empty array roles", function(done) {
     chai.request(server)
       .post("/api/user/updateRoles")
       .set("x-access-token", accessTokenUser)
@@ -405,7 +646,7 @@ describe("API tests - User routes", async function() {
     ;
   });
 
-  it("should update user's own roles as normal user (equal or down grade)", function(done) {
+  it("should update user's own roles without admin access (equal or down grade)", function(done) {
     chai.request(server)
       .post("/api/user/updateRoles")
       .set("x-access-token", accessTokenUser)
@@ -423,23 +664,23 @@ describe("API tests - User routes", async function() {
     ;
   });
 
-  // it("should not update user's own roles as normal user (up grade)", function(done) {
-  //   chai.request(server)
-  //     .post("/api/user/updateRoles")
-  //     .set("x-access-token", accessTokenUser)
-  //     .send({
-  //       roles: [ "admin" ],
-  //     })
-  //     .then(res => {
-  //  //       res.should.have.status(403);
-  //       res.body.should.have.property("message");
-  //       done();
-  //     })
-  //     .catch((err) => {
-  //       done(err);
-  //     })
-  //   ;
-  // });
+  it("should not update user's own roles without admin access (up grade)", function(done) {
+    chai.request(server)
+      .post("/api/user/updateRoles")
+      .set("x-access-token", accessTokenUser)
+      .send({
+        roles: [ "admin" ],
+      })
+      .then(res => {
+        res.should.have.status(403);
+        res.body.should.have.property("message");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
 
   it("should update user's own roles as admin user (up grade)", function(done) {
     chai.request(server)
@@ -459,7 +700,207 @@ describe("API tests - User routes", async function() {
     ;
   });
 
-  it("should not get all users with user role", function(done) {
+  it("should not update another user's roles without admin access", function(done) {
+    chai.request(server)
+      .post("/api/user/updateRoles")
+      .set("x-access-token", accessTokenUser)
+      .send({
+        userId: config.admin.id,
+      })
+      .then(res => {
+        res.should.have.status(403);
+        res.body.should.have.property("message");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should update another user's roles with admin access", function(done) {
+    chai.request(server)
+      .post("/api/user/updateRoles")
+      .set("x-access-token", accessTokenAdmin)
+      .send({
+        userId: config.admin.id,
+        roles: [ "admin" ],
+      })
+      .then(res => {
+        res.should.have.status(200);
+        res.body.should.have.property("message");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  ////////////////////////// START
+  it("should not update user's own plan without admin access", function(done) {
+    chai.request(server)
+      .post("/api/user/updatePlan")
+      .set("x-access-token", accessTokenUser)
+      .send({})
+      .then(res => {
+        res.should.have.status(400);
+        res.body.should.have.property("message");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should not update user's own plan with no plan", function(done) {
+    chai.request(server)
+      .post("/api/user/updatePlan")
+      .set("x-access-token", accessTokenUser)
+      .send({
+        noPlan: "wrong plan"
+      })
+      .then(res => {
+        res.should.have.status(400);
+        res.body.should.have.property("message");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should not update user's own plan with empty plan", function(done) {
+    chai.request(server)
+      .post("/api/user/updatePlan")
+      .set("x-access-token", accessTokenUser)
+      .send({
+        plan: ""
+      })
+      .then(res => {
+        res.should.have.status(400);
+        res.body.should.have.property("message");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should update user's own plan (equal or down grade)", function(done) {
+    chai.request(server)
+      .post("/api/user/updatePlan")
+      .set("x-access-token", accessTokenUser)
+      .send({
+        plan: [ "free" ]
+      })
+      .then(res => {
+        res.should.have.status(200);
+        res.body.should.have.property("message");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should update another user's plan with admin access", function(done) {
+    chai.request(server)
+      .post("/api/user/updatePlan")
+      .set("x-access-token", accessTokenAdmin)
+      .send({
+        userId: config.user.id,
+        plan: "standard",
+      })
+      .then(res => {
+        res.should.have.status(200);
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+  it("should not update user's own plan without admin access (up grade)", function(done) {
+    chai.request(server)
+      .post("/api/user/updatePlan")
+      .set("x-access-token", accessTokenUser)
+      .send({
+        plan: "unlimited",
+      })
+      .then(res => {
+        res.should.have.status(403);
+        res.body.should.have.property("message");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should update user's own plan as admin user (up grade)", function(done) {
+    chai.request(server)
+      .post("/api/user/updatePlan")
+      .set("x-access-token", accessTokenAdmin)
+      .send({
+        plan: "unlimited",
+      })
+      .then(res => {
+        res.should.have.status(200);
+        res.body.should.have.property("message");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should not update another user's plan without admin access", function(done) {
+    chai.request(server)
+      .post("/api/user/updatePlan")
+      .set("x-access-token", accessTokenUser)
+      .send({
+        userId: config.admin.id,
+      })
+      .then(res => {
+        res.should.have.status(403);
+        res.body.should.have.property("message");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  it("should update another user's plan with admin access", function(done) {
+    chai.request(server)
+      .post("/api/user/updatePlan")
+      .set("x-access-token", accessTokenAdmin)
+      .send({
+        userId: config.admin.id,
+        plan: "unlimited",
+      })
+      .then(res => {
+        res.should.have.status(200);
+        res.body.should.have.property("message");
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      })
+    ;
+  });
+
+  ////////////////////////// END
+
+it("should not get all users with user role", function(done) {
     chai.request(server)
       .get("/api/user/getAllUsers")
       .set("x-access-token", accessTokenUser)
