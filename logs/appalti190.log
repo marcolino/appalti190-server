@@ -8548,3 +8548,71 @@ info: 2023-04-11 15:37:21 User signin: user@mail.com
 info: 2023-04-11 15:37:21 Sending email: 'admin@mail.com','marcosolari@gmail.com','Signup Verification Code'
 info: 2023-04-11 15:37:21 User signup: {"roles":["6435628f7d86c8d24a5c64df"],"isDeleted":false,"isVerified":true,"_id":"643562917d86c8d24a5c6528","email":"admin@mail.com","password":"$2a$10$RUUZPbg9A/8Y.jhmYBiq8emi6L.k4fZbW8eB090Do1CJ/BoJ/iNC6","address":{"_id":"643562917d86c8d24a5c6529","city":""},"plan":"6435628f7d86c8d24a5c64e4","createdAt":"2023-04-11T13:37:21.186Z","updatedAt":"2023-04-11T13:37:21.358Z","__v":0} 
 info: 2023-04-11 15:37:21 User signin: admin@mail.com 
+info: 2023-04-11 15:42:49 ----- 
+info: 2023-04-11 15:42:49 Loading test environment 
+info: 2023-04-11 15:42:50 Successfully connected to MongoDB 
+info: 2023-04-11 15:42:50 Sending email: 'user@mail.com','marcosolari@gmail.com','Signup Verification Code'
+info: 2023-04-11 15:42:50 Sending email: 'user@mail.com','marcosolari@gmail.com','Signup Verification Code Resent'
+info: 2023-04-11 15:42:50 User signup: {"roles":["6435628f7d86c8d24a5c64de"],"isDeleted":false,"isVerified":true,"_id":"643563dac8219dd707c9d606","email":"user@mail.com","password":"$2a$10$XYiUgnYbSEgHelwkgUhYru5pFcRSkvhZc/UUVn3pHNOTWVIoWbLNm","address":{"_id":"643563dac8219dd707c9d607","city":""},"plan":"6435628f7d86c8d24a5c64e2","createdAt":"2023-04-11T13:42:50.216Z","updatedAt":"2023-04-11T13:42:50.616Z","__v":0} 
+info: 2023-04-11 15:42:50 Sending email: 'user@mail.com','marcosolari@gmail.com','Password change request'
+info: 2023-04-11 15:42:50 Sending email: 'user@mail.com','marcosolari@gmail.com','Reset Password Verification Code'
+info: 2023-04-11 15:42:51 User signin: user@mail.com 
+info: 2023-04-11 15:42:51 User signin: user@mail.com 
+info: 2023-04-11 15:42:51 Sending email: 'admin@mail.com','marcosolari@gmail.com','Signup Verification Code'
+info: 2023-04-11 15:42:51 User signup: {"roles":["6435628f7d86c8d24a5c64df"],"isDeleted":false,"isVerified":true,"_id":"643563dbc8219dd707c9d647","email":"admin@mail.com","password":"$2a$10$.nwpZFduUh065eXOEENS..7cM1H49cAT/osLuk5ZyQaZ659.aD9Qy","address":{"_id":"643563dbc8219dd707c9d648","city":""},"plan":"6435628f7d86c8d24a5c64e2","createdAt":"2023-04-11T13:42:51.458Z","updatedAt":"2023-04-11T13:42:51.665Z","__v":0} 
+info: 2023-04-11 15:42:51 User signin: admin@mail.com 
+info: 2023-04-11 15:42:52 Sending email: 'user@mail.com','marcosolari@gmail.com','Signup Verification Code'
+info: 2023-04-11 15:42:52 User signup: {"roles":["6435628f7d86c8d24a5c64de"],"isDeleted":false,"isVerified":true,"_id":"643563dbc8219dd707c9d664","email":"user@mail.com","password":"$2a$10$PO39h8vam53bzH7/kByZlOLwOWntQUwp3eCB6IWwhnJo93jERDgBu","address":{"_id":"643563dbc8219dd707c9d665","city":""},"plan":"6435628f7d86c8d24a5c64e2","createdAt":"2023-04-11T13:42:51.954Z","updatedAt":"2023-04-11T13:42:52.122Z","__v":0} 
+info: 2023-04-11 15:42:52 User signin: user@mail.com 
+info: 2023-04-11 15:42:52 Sending email: 'admin@mail.com','marcosolari@gmail.com','Signup Verification Code'
+info: 2023-04-11 15:42:52 User signup: {"roles":["6435628f7d86c8d24a5c64df"],"isDeleted":false,"isVerified":true,"_id":"643563dcc8219dd707c9d676","email":"admin@mail.com","password":"$2a$10$CDnXVv7o1hXY/xqslekOb.7KBM8mQecSRtU8MEWFEDu8NjLZFX6H6","address":{"_id":"643563dcc8219dd707c9d677","city":""},"plan":"6435628f7d86c8d24a5c64e4","createdAt":"2023-04-11T13:42:52.287Z","updatedAt":"2023-04-11T13:42:52.503Z","__v":0} 
+info: 2023-04-11 15:42:52 User signin: admin@mail.com 
+info: 2023-04-11 15:42:52 Sending email: 'admin-standard@mail.com','marcosolari@gmail.com','Signup Verification Code'
+info: 2023-04-11 15:42:52 User signup: {"roles":["6435628f7d86c8d24a5c64df"],"isDeleted":false,"isVerified":true,"_id":"643563dcc8219dd707c9d688","email":"admin-standard@mail.com","password":"$2a$10$XtkJqBekYkwENH/fakvYeeLLKhI/IcmWU37X0WsQZcfL36eePBv2y","address":{"_id":"643563dcc8219dd707c9d689","city":""},"plan":"6435628f7d86c8d24a5c64e3","createdAt":"2023-04-11T13:42:52.662Z","updatedAt":"2023-04-11T13:42:52.805Z","__v":0} 
+info: 2023-04-11 15:42:52 User signin: admin-standard@mail.com 
+error: 2023-04-11 15:43:02 Error checking outcome url https://dati.anticorruzione.it/rest/legge190/ricerca?max=20&start=0: 'Request failed with status code 400'
+info: 2023-04-11 15:43:06 Sending email: 'user@mail.com','marcosolari@gmail.com','Signup Verification Code'
+info: 2023-04-11 15:43:06 User signup: {"roles":["6435628f7d86c8d24a5c64de"],"isDeleted":false,"isVerified":true,"_id":"643563eac8219dd707c9d6af","email":"user@mail.com","password":"$2a$10$5MTm/epTodawDG.KVcA1YuKRlJ38l/F1qz0bD7/Ouyup5sb5uJcOq","address":{"_id":"643563eac8219dd707c9d6b0","city":""},"plan":"6435628f7d86c8d24a5c64e2","createdAt":"2023-04-11T13:43:06.315Z","updatedAt":"2023-04-11T13:43:06.489Z","__v":0} 
+info: 2023-04-11 15:43:06 User signin: user@mail.com 
+error: 2023-04-11 15:43:07 Payment session creation error: "The Checkout Session's total amount due cannot be zero in `payment` mode. Please see https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts"
+error: 2023-04-11 15:43:07 Payment session creation error: "Cannot read properties of undefined (reading 'price_id')"
+info: 2023-04-11 15:43:08 Payment session created 
+info: 2023-04-11 15:43:09 Payment successful for product standard 
+info: 2023-04-11 15:43:10 Payment canceled for product standard 
+info: 2023-04-11 15:43:10 Sending email: 'user@mail.com','marcosolari@gmail.com','Signup Verification Code'
+info: 2023-04-11 15:43:10 User signup: {"roles":["6435628f7d86c8d24a5c64de"],"isDeleted":false,"isVerified":true,"_id":"643563eec8219dd707c9d6c2","email":"user@mail.com","password":"$2a$10$l9MLpyDg6QwrkHgy/Z9GdebE56.IYIA/s8GCKKJhtDm7UOq00joRG","address":{"_id":"643563eec8219dd707c9d6c3","city":""},"plan":"6435628f7d86c8d24a5c64e2","createdAt":"2023-04-11T13:43:10.340Z","updatedAt":"2023-04-11T13:43:10.535Z","__v":0} 
+info: 2023-04-11 15:43:10 User signin: user@mail.com 
+info: 2023-04-11 15:43:10 Sending email: 'admin@mail.com','marcosolari@gmail.com','Signup Verification Code'
+info: 2023-04-11 15:43:10 User signup: {"roles":["6435628f7d86c8d24a5c64df"],"isDeleted":false,"isVerified":true,"_id":"643563eec8219dd707c9d6d4","email":"admin@mail.com","password":"$2a$10$rbHALUoRaYXstbLB2J85K.bqplswJnCA7bfs0JetU71Q9R/twxELa","address":{"_id":"643563eec8219dd707c9d6d5","city":""},"plan":"6435628f7d86c8d24a5c64e4","createdAt":"2023-04-11T13:43:10.702Z","updatedAt":"2023-04-11T13:43:10.860Z","__v":0} 
+info: 2023-04-11 15:43:11 User signin: admin@mail.com 
+info: 2023-04-11 15:43:12 Sending email: 'user@mail.com','marcosolari@gmail.com','Signup Verification Code'
+info: 2023-04-11 15:43:12 User signup: {"roles":["6435628f7d86c8d24a5c64de"],"isDeleted":false,"isVerified":true,"_id":"643563f0c8219dd707c9d7b8","email":"user@mail.com","password":"$2a$10$GQUpUNaFvK8bzsNs29sW1eDQqW9bSkI3OG6KKdrfrNMd.vUbnEjDe","address":{"_id":"643563f0c8219dd707c9d7b9","city":""},"plan":"6435628f7d86c8d24a5c64e2","createdAt":"2023-04-11T13:43:12.020Z","updatedAt":"2023-04-11T13:43:12.193Z","__v":0} 
+info: 2023-04-11 15:43:12 User signin: user@mail.com 
+info: 2023-04-11 15:43:12 Sending email: 'admin@mail.com','marcosolari@gmail.com','Signup Verification Code'
+info: 2023-04-11 15:43:12 User signup: {"roles":["6435628f7d86c8d24a5c64df"],"isDeleted":false,"isVerified":true,"_id":"643563f0c8219dd707c9d7ca","email":"admin@mail.com","password":"$2a$10$QxHwXz8XlS4ib3F7Gq0.AOQUA0a8dB2pmjs3QJ.4./XZepcUUIQ4O","address":{"_id":"643563f0c8219dd707c9d7cb","city":""},"plan":"6435628f7d86c8d24a5c64e4","createdAt":"2023-04-11T13:43:12.369Z","updatedAt":"2023-04-11T13:43:12.534Z","__v":0} 
+info: 2023-04-11 15:43:12 User signin: admin@mail.com 
+error: 2023-04-11 15:43:12 Missing env! 
+error: 2023-04-11 15:43:12 Missing in env: [
+  'MONGO_SCHEME',
+  'MONGO_URL',
+  'MONGO_DB',
+  'MONGO_USER',
+  'MONGO_PASS',
+  'FROM_EMAIL',
+  'SENDGRID_API_KEY',
+  'STRIPE_MODE',
+  'STRIPE_API_KEY_TEST',
+  'STRIPE_API_KEY_LIVE'
+]
+info: 2023-04-11 15:43:13 Sending email: 'user@mail.com','marcosolari@gmail.com','Signup Verification Code'
+info: 2023-04-11 15:43:13 User signup: {"roles":["643563f0c8219dd707c9d7f3"],"isDeleted":false,"isVerified":true,"_id":"643563f0c8219dd707c9d802","email":"user@mail.com","password":"$2a$10$WXDTT35iV7shFmWECJ/0oOwU2Tcj3piY5oPm4osRN7GEN506gizuy","address":{"_id":"643563f0c8219dd707c9d803","city":""},"plan":"643563f0c8219dd707c9d7f7","createdAt":"2023-04-11T13:43:12.983Z","updatedAt":"2023-04-11T13:43:13.202Z","__v":0} 
+info: 2023-04-11 15:43:13 User signin: user@mail.com 
+info: 2023-04-11 15:43:13 Sending email: 'admin@mail.com','marcosolari@gmail.com','Signup Verification Code'
+info: 2023-04-11 15:43:13 User signup: {"roles":["643563f0c8219dd707c9d7f4"],"isDeleted":false,"isVerified":true,"_id":"643563f1c8219dd707c9d814","email":"admin@mail.com","password":"$2a$10$NeNkgUL2WvnLhLvnK2y0E.NhbeK5Q/Z/2bljTICJ6KFkL5QQT5diq","address":{"_id":"643563f1c8219dd707c9d815","city":""},"plan":"643563f0c8219dd707c9d7f9","createdAt":"2023-04-11T13:43:13.364Z","updatedAt":"2023-04-11T13:43:13.518Z","__v":0} 
+info: 2023-04-11 15:43:13 User signin: admin@mail.com 
+info: 2023-04-11 15:43:13 Sending email: 'user@mail.com','marcosolari@gmail.com','Signup Verification Code'
+info: 2023-04-11 15:43:13 User signup: {"roles":["643563f0c8219dd707c9d7f3"],"isDeleted":false,"isVerified":true,"_id":"643563f1c8219dd707c9d82b","email":"user@mail.com","password":"$2a$10$ezZAY7rR.w83R.H8Ou5wHOQikkp34p/UWgN1Mi3DByUWK8k4aAc1y","address":{"_id":"643563f1c8219dd707c9d82c","city":""},"plan":"643563f0c8219dd707c9d7f7","createdAt":"2023-04-11T13:43:13.727Z","updatedAt":"2023-04-11T13:43:13.918Z","__v":0} 
+info: 2023-04-11 15:43:14 User signin: user@mail.com 
+info: 2023-04-11 15:43:14 Sending email: 'admin@mail.com','marcosolari@gmail.com','Signup Verification Code'
+info: 2023-04-11 15:43:14 User signup: {"roles":["643563f0c8219dd707c9d7f4"],"isDeleted":false,"isVerified":true,"_id":"643563f2c8219dd707c9d83d","email":"admin@mail.com","password":"$2a$10$9OK/7l6KZi8C5LJ.OdKo3OevWzcKYRwR6lrGUBzCjefKagTcRiMhC","address":{"_id":"643563f2c8219dd707c9d83e","city":""},"plan":"643563f0c8219dd707c9d7f9","createdAt":"2023-04-11T13:43:14.158Z","updatedAt":"2023-04-11T13:43:14.317Z","__v":0} 
+info: 2023-04-11 15:43:14 User signin: admin@mail.com 
