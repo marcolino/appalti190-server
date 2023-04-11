@@ -24,6 +24,7 @@
 - TODO gestire il downgrade del piano: chiedere conferma, e specificare che non i saranno rimborsi
 - TODO nei controllers, uniformare catch return 500 + json (err? err.message?)
 - TODO completare il file README.md
+- TODO aggiungere "Please contact support at {{email}}" ai messaggi di errore bloccanti
 
 - NEWFEATURE decidere se acquistare un piano su papertrail.com per le notifiche in produzione
 - NEWFEATURE rimuovere gli account non confermati, periodicamente (??)

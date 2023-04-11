@@ -499,11 +499,11 @@ describe("API tests - Job routes", function() {
       .post("/api/job/urlExistenceAndMatch/url/fileToMatch")
       .set("x-access-token", accessTokenUser)
       .send({
-        url: `WRONG URL`,
+        url: `https://WRONG_URL`,
         fileToMatch: `${__dirname}/../public/downloads/${config.user.email}/dataset-${year}.xml`
       })
       .then(res => {
-        res.should.have.status(404);
+        res.should.have.status(400);
         done();
       })
       .catch((err) => {

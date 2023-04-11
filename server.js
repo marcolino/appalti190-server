@@ -64,9 +64,9 @@ logger.info("-----");
 if (production) { // load environment variables from .env file
   logger.info("Loading production environment");
   require("dotenv").config({ path: path.resolve(__dirname, "./.env") });
-} else { // load environment variables from .env.test file
+} else { // load environment variables from .env.dev file
   logger.info("Loading test environment");
-  require("dotenv").config({ path: path.resolve(__dirname, "./.env.test") });
+  require("dotenv").config({ path: path.resolve(__dirname, "./.env.dev") });
 }
 
 // setup email

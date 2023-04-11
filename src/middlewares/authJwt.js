@@ -17,7 +17,7 @@ const verifyToken = (req, res, next) => {
       if (err instanceof TokenExpiredError) {
         return res.status(401).json({ message: req.t("Access token expired"), code: "AuthorizationExpired", reason: req.t("Authorization was expired, please repeat login!") });
       }
-      return res.status(401).json({ message: req.t("You must be authorized to access this page"), code: "NoAuthorization", reason: req.t("Unauthorized!") });
+      return res.status(401).json({ message: req.t("You must be authorized to access this page"), code: "NoAuthorization", reason: req.t("Unauthorized") });
     }
 //console.log("TOKEN DECODED:", decoded);
     req.userId = decoded.id;

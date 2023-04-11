@@ -156,6 +156,9 @@ module.exports = {
     //from: "appalti190@arsistemi.it", // this does not avoid SPAM marks by gmail...
     to: "marcosolari@gmail.com",
   },
+  emailSupport: {
+    to: "marcosolari@gmail.com",
+  },
   defaultUsers: {
     admin: {
       email: "marcosolari@gmail.com",

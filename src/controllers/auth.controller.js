@@ -95,8 +95,8 @@ const signup = async(req, res) => {
         ...(process.env.NODE_ENV === "test") && { code: signupVerification.code } // to enble test mode to confirm signup
       });
     } catch(err) {
-      logger.error("Error sending verification code:", err);
-      res.status(err.code).json({ message: req.t("Error sending verification code") + ": " + err.message });
+      logger.error(`Error sending verification code via ${config.auth.codeDeliveryMedium}:`, err);
+      res.status(err.code).json({ message: req.t("Error sending verification code") + ": " + req.t(err.message) + ".\n" + req.t("Please contact support at {{email}}", {email: config.emailSupport.to})});
     }
   });
 };
