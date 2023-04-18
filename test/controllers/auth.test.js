@@ -7,6 +7,7 @@ const chaiHttp = require("chai-http");
 const spies = require("chai-spies");
 //const should = chai.should();
 const expect = chai.expect;
+const sinon = require("sinon");
 const server = require("../../server");
 const User = require("../../src/models/user.model");
 const Role = require("../../src/models/role.model");
@@ -596,36 +597,25 @@ describe("API tests - Auth routes", function() {
 
 /*
   describe("should handle database errors", function() {
-    //describe("faulty Role.findOne method", function() {
-      const _Role_findOne = Role.findOne;
-      beforeEach(function() {
-        Role.findOne = function() {
-          return Promise.reject("forced error");
-        };
-      });
-      afterEach(function(){
-        Role.findOne = _Role_findOne; 
-      }); 
-      it("signup should respond with a server error", function() {
-        Role.findOne = function() {
-          return Promise.reject("forced error");
-        };
-        const spy = chai.spy();
-        return chai
-          .request(server)
-          .post("/api/auth/signup")
-          .send(config.user)
-          .then(spy)
-          .catch((err) => {
-            const res = err.response;
-            res.should.have.status(500);
-          })
-          .then(() => {
-            //spy.should.not.have.been.called(); // TODO: not working, fake User.findOne is never called! (see https://stackoverflow.com/q/75868199/709439)
-          })
-        ;
-      });
-    //});
+    it("signup should respond with a server error", function() {
+      const stub = sinon.stub(User, "findOne").rejects(new Error("Simulated database error"));
+      const spy = chai.spy();
+      return chai
+        .request(server)
+        .post("/api/auth/signup")
+        .send(config.user)
+        .then(spy)
+        .catch((err) => {
+          const res = err.response;
+          res.should.have.status(500);
+          stub.restore();
+        })
+        .then(() => {
+          spy.should.not.have.been.called();
+        })
+      ;
+    });
   });
 */
+
 });
