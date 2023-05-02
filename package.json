@@ -22,6 +22,7 @@
     "push": "git push heroku master",
     "i18n": "i18next 'src/**/*.js' --config 'i18next-parser.config.js' --silent",
     "i18n-check": "i18next 'src/**/*.js' --config 'i18next-parser.config.js' --silent --output /tmp/i18n-check-$$.json && cmp --silent /tmp/i18n-check-$$.json src/locales/en/translation.json; test $? = '1' && echo 'Some new texts to be translated!' || echo 'Translations are ok'; rm /tmp/i18n-check-$$.json",
+    "i18n-auto": "scripts/auto-translate.js src/locales/*/translation.json",
     "run-web": "heroku ps:scale web=1 --app appalti190",
     "stop-web": "heroku ps:scale web=0 --app appalti190",
     "logs": "heroku logs --tail",
