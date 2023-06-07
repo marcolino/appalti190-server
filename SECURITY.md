@@ -2,8 +2,8 @@
 
 ## Supported Versions
 
-While on beta (versions 0.x.x) we will not support security updates.
-The version 1.0.0 and followng we will support security updates.
+While on beta (versions 0.x.x) we will not support security updates.  
+Since version 1.0.0 we will support security updates.
 
 | Version | Supported          |
 | ------- | ------------------ |
